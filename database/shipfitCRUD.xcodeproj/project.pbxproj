@@ -397,8 +397,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "shipfitCRUD/shipfitCRUD-Prefix.pch";
 				INFOPLIST_FILE = "shipfitCRUD/shipfitCRUD-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -411,8 +412,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "shipfitCRUD/shipfitCRUD-Prefix.pch";
 				INFOPLIST_FILE = "shipfitCRUD/shipfitCRUD-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -478,6 +480,7 @@
 				03827A0A1813598E00A583E2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		03827A0B1813598E00A583E2 /* Build configuration list for PBXNativeTarget "shipfitCRUDTests" */ = {
 			isa = XCConfigurationList;
@@ -486,6 +489,7 @@
 				03827A0D1813598E00A583E2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
