@@ -41,6 +41,8 @@
 
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    
     if ([[segue identifier]isEqualToString:@"addArticle"]) {
         AddViewController *acvc = (AddViewController *)[segue destinationViewController];
         acvc.delegate = self;
@@ -48,6 +50,20 @@
         ARTICLE *newArticle = (ARTICLE *)[NSEntityDescription insertNewObjectForEntityForName:@"ARTICLE" inManagedObjectContext:[self myManageObjectContext]];
         
         acvc.currentArticle = newArticle;
+    }
+    
+    else if ([[segue identifier]isEqualToString:@"segueArticleToView"]) {
+        ViewArticleViewController *dest = (ViewArticleViewController *)[segue destinationViewController];
+        //dest.delegate = self;
+        
+        //get idex of selected row
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        
+        //fetech the article object
+        ARTICLE *newArticle = (ARTICLE *)[self.fetchedResultsController objectAtIndexPath:indexPath];
+        
+        
+        dest.currentArticle = newArticle;
     }
 }
 

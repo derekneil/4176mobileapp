@@ -26,6 +26,7 @@
 		03827A1218135B1400A583E2 /* mainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03827A1118135B1400A583E2 /* mainStoryboard.storyboard */; };
 		03827A1518135CBF00A583E2 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03827A1418135CBF00A583E2 /* MainViewController.m */; };
 		03827A181813772400A583E2 /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03827A171813772400A583E2 /* AddViewController.m */; };
+		03C0D6C2181F42510046E68B /* ViewArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C0D6C1181F42510046E68B /* ViewArticleViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,8 @@
 		03827A1418135CBF00A583E2 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		03827A161813772400A583E2 /* AddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewController.h; sourceTree = "<group>"; };
 		03827A171813772400A583E2 /* AddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddViewController.m; sourceTree = "<group>"; };
+		03C0D6C0181F42510046E68B /* ViewArticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewArticleViewController.h; sourceTree = "<group>"; };
+		03C0D6C1181F42510046E68B /* ViewArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewArticleViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +99,8 @@
 			isa = PBXGroup;
 			children = (
 				03827A1118135B1400A583E2 /* mainStoryboard.storyboard */,
+				03C0D6C0181F42510046E68B /* ViewArticleViewController.h */,
+				03C0D6C1181F42510046E68B /* ViewArticleViewController.m */,
 				03827A161813772400A583E2 /* AddViewController.h */,
 				03827A171813772400A583E2 /* AddViewController.m */,
 				038279E11813598E00A583E2 /* shipfitCRUD */,
@@ -269,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03827A1018135AE100A583E2 /* ARTICLE.m in Sources */,
+				03C0D6C2181F42510046E68B /* ViewArticleViewController.m in Sources */,
 				038279EF1813598E00A583E2 /* shipfitCRUD.xcdatamodeld in Sources */,
 				03827A181813772400A583E2 /* AddViewController.m in Sources */,
 				038279E81813598E00A583E2 /* main.m in Sources */,
