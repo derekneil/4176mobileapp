@@ -42,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		030EFF551821C8E30049C126 /* bct.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bct.png; path = ../../../Desktop/bct.png; sourceTree = "<group>"; };
+		030EFF581821D0D80049C126 /* shipfitCRUD 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "shipfitCRUD 2.xcdatamodel"; sourceTree = "<group>"; };
 		038279D61813598E00A583E2 /* shipfitCRUD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shipfitCRUD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		038279D91813598E00A583E2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		038279DB1813598E00A583E2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -524,9 +525,10 @@
 		038279ED1813598E00A583E2 /* shipfitCRUD.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				030EFF581821D0D80049C126 /* shipfitCRUD 2.xcdatamodel */,
 				038279EE1813598E00A583E2 /* shipfitCRUD.xcdatamodel */,
 			);
-			currentVersion = 038279EE1813598E00A583E2 /* shipfitCRUD.xcdatamodel */;
+			currentVersion = 030EFF581821D0D80049C126 /* shipfitCRUD 2.xcdatamodel */;
 			path = shipfitCRUD.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
