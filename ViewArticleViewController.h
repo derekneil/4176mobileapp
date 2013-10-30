@@ -12,7 +12,10 @@
 
 @interface ViewArticleViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITextField *txtTitle;
-@property (weak, nonatomic) IBOutlet UITextView *txtMainArticle;
+//@property (weak, nonatomic) IBOutlet UITextView *txtMainArticle;
+
+@property (weak, nonatomic) IBOutlet UIWebView *wvMainText;
+
 @property(nonatomic, strong) ARTICLE *currentArticle;
 
 @end

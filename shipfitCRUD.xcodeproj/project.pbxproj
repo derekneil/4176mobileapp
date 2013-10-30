@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		030EFF561821C8E30049C126 /* bct.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF551821C8E30049C126 /* bct.png */; };
 		038279DA1813598E00A583E2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038279D91813598E00A583E2 /* Foundation.framework */; };
 		038279DC1813598E00A583E2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038279DB1813598E00A583E2 /* CoreGraphics.framework */; };
 		038279DE1813598E00A583E2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038279DD1813598E00A583E2 /* UIKit.framework */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		030EFF551821C8E30049C126 /* bct.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bct.png; path = ../../../Desktop/bct.png; sourceTree = "<group>"; };
 		038279D61813598E00A583E2 /* shipfitCRUD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shipfitCRUD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		038279D91813598E00A583E2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		038279DB1813598E00A583E2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -95,9 +97,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		030EFF571821CBDA0049C126 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				030EFF551821C8E30049C126 /* bct.png */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
 		038279CD1813598E00A583E2 = {
 			isa = PBXGroup;
 			children = (
+				030EFF571821CBDA0049C126 /* images */,
 				038279E11813598E00A583E2 /* shipfitCRUD */,
 				038279FE1813598E00A583E2 /* shipfitCRUDTests */,
 				038279D81813598E00A583E2 /* Frameworks */,
@@ -264,6 +275,7 @@
 				038279E61813598E00A583E2 /* InfoPlist.strings in Resources */,
 				038279F11813598E00A583E2 /* Images.xcassets in Resources */,
 				03827A1218135B1400A583E2 /* mainStoryboard.storyboard in Resources */,
+				030EFF561821C8E30049C126 /* bct.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

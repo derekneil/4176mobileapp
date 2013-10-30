@@ -29,9 +29,13 @@
 	// Do any additional setup after loading the view.
     
     
-    
     _txtTitle.text = _currentArticle.title;
-    _txtMainArticle.text = _currentArticle.mainText;
+    //_txtMainArticle.text = _currentArticle.mainText;
+    
+    NSString *path = [[NSBundle mainBundle] bundlePath];
+    NSURL *baseURL = [NSURL fileURLWithPath:path];
+    [_wvMainText loadHTMLString:_currentArticle.mainText baseURL:baseURL];
+    
 }
 
 - (void)didReceiveMemoryWarning
