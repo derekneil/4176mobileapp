@@ -14,4 +14,5 @@
 @dynamic mainText;
 @dynamic title;
 
+
 @end
