@@ -8,6 +8,8 @@
 
 #import "MapViewController.h"
 
+#define METERS_PER_MILE 1609.344
+
 @interface MapViewController ()
 
 @end
@@ -24,6 +26,21 @@
     }
     return self;
 }
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    //source http://www.raywenderlich.com/21365/
+    // 1
+    CLLocationCoordinate2D zoomLocation;
+    zoomLocation.latitude = 39.281516;
+    zoomLocation.longitude= -76.580806;
+    // 2
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
+    // 3
+    [mapView setRegion:viewRegion animated:YES];
+    
+}
+
 
 - (void)viewDidLoad
 {
@@ -47,8 +64,8 @@
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
     //set default view scale around user on load
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
-    [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
+//    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
+//    [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
 }
 
 @end
