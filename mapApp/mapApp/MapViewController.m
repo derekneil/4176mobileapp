@@ -29,6 +29,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    //source http://www.appcoda.com/ios-programming-101-drop-a-pin-on-map-with-mapkit-api/
     self.mapView.delegate = self;
 }
 
@@ -40,9 +42,10 @@
 
 
 //MKMapView protocol
+
+//source http://www.appcoda.com/ios-programming-101-drop-a-pin-on-map-with-mapkit-api/
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
-    
     //set default view scale around user on load
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
     [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
