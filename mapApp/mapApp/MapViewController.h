@@ -11,5 +11,14 @@
 
 @interface MapViewController : UIViewController
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) IBOutlet UILabel *latLabel;
+@property (weak, nonatomic) IBOutlet UILabel *longLabel;
+@property (weak, nonatomic) IBOutlet UILabel *speedLabel;
+- (IBAction)zoomToMe:(id)sender;
+- (IBAction)toggleLocationOnMap:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *zoomOutButton;
+@property (weak, nonatomic) IBOutlet UIButton *zoomInButton;
+- (IBAction)zoomChange:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *testLabel;
 
 @end

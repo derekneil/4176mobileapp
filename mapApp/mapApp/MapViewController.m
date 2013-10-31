@@ -8,6 +8,7 @@
 
 #import "MapViewController.h"
 
+//sample junk
 #define METERS_PER_MILE 1609.344
 
 @interface MapViewController ()
@@ -29,15 +30,18 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     
+    
     //source http://www.raywenderlich.com/21365/
-    // 1
-    CLLocationCoordinate2D zoomLocation;
-    zoomLocation.latitude = 39.281516;
-    zoomLocation.longitude= -76.580806;
-    // 2
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
-    // 3
-    [mapView setRegion:viewRegion animated:YES];
+//    // 1 specify location
+//    CLLocationCoordinate2D zoomLocation;
+//    zoomLocation.latitude = 39.281516;
+//    zoomLocation.longitude= -76.580806;
+//    // 2 create the viewRegion with location as argument
+//    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation,
+//                                                                       0.5*METERS_PER_MILE,  // also needs
+//                                                                       0.5*METERS_PER_MILE); // display region
+//    // 3 
+//    [mapView setRegion:viewRegion animated:YES];
     
 }
 
@@ -58,14 +62,44 @@
 }
 
 
-//MKMapView protocol
-
-//source http://www.appcoda.com/ios-programming-101-drop-a-pin-on-map-with-mapkit-api/
+//MKMapView protocol----------
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
+    //source http://www.appcoda.com/ios-programming-101-drop-a-pin-on-map-with-mapkit-api/
     //set default view scale around user on load
 //    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
 //    [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
+    
+    _speedLabel.text = [NSString stringWithFormat:@"%f", userLocation.location.speed];
+    _latLabel.text = [NSString stringWithFormat:@"%f", userLocation.location.coordinate.latitude];
+    _longLabel.text = [NSString stringWithFormat:@"%f", userLocation.location.coordinate.longitude];
 }
 
+//END MKMapView protocol-------
+
+- (IBAction)zoomToMe:(id)sender {
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(mapView.userLocation.coordinate, 1000, 1000);
+    [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
+}
+
+- (IBAction)toggleLocationOnMap:(id)sender {
+    mapView.showsUserLocation = !mapView.showsUserLocation;
+}
+
+- (IBAction)zoomChange:(id)sender {
+    
+    //starting source https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/LocationAwarenessPG/MapKit/MapKit.html#//apple_ref/doc/uid/TP40009497-CH3-SW1
+    MKCoordinateRegion theRegion = mapView.region;
+    
+    //get user change
+    double change = 1.5; //assume zooming in
+    if(sender == _zoomInButton){
+        change = 0.5;
+    }
+    //change region view on map
+    theRegion.span.longitudeDelta *= change;
+    theRegion.span.latitudeDelta *= change;
+    [mapView setRegion:theRegion animated:YES];
+
+}
 @end
