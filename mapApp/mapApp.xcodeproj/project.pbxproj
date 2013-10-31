@@ -17,7 +17,6 @@
 		65A655021821EFBF00122C1A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65A655011821EFBF00122C1A /* Default@2x.png */; };
 		65A655041821EFBF00122C1A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65A655031821EFBF00122C1A /* Default-568h@2x.png */; };
 		65A655071821EFBF00122C1A /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65A655051821EFBF00122C1A /* MainStoryboard.storyboard */; };
-		65A6550A1821EFBF00122C1A /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A655091821EFBF00122C1A /* FirstViewController.m */; };
 		65A6550C1821EFBF00122C1A /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 65A6550B1821EFBF00122C1A /* first.png */; };
 		65A6550E1821EFBF00122C1A /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65A6550D1821EFBF00122C1A /* first@2x.png */; };
 		65A655111821EFBF00122C1A /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A655101821EFBF00122C1A /* SecondViewController.m */; };
@@ -25,6 +24,7 @@
 		65A655151821EFC000122C1A /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65A655141821EFC000122C1A /* second@2x.png */; };
 		65A6551C1821F0C400122C1A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A6551B1821F0C400122C1A /* MapKit.framework */; };
 		65A6551E1821F0DE00122C1A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A6551D1821F0DE00122C1A /* CoreLocation.framework */; };
+		65A655211821F1E300122C1A /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A655201821F1E200122C1A /* MapViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,8 +42,6 @@
 		65A655011821EFBF00122C1A /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		65A655031821EFBF00122C1A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		65A655061821EFBF00122C1A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		65A655081821EFBF00122C1A /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		65A655091821EFBF00122C1A /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		65A6550B1821EFBF00122C1A /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		65A6550D1821EFBF00122C1A /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
 		65A6550F1821EFBF00122C1A /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
@@ -52,6 +50,8 @@
 		65A655141821EFC000122C1A /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		65A6551B1821F0C400122C1A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		65A6551D1821F0DE00122C1A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		65A6551F1821F1E200122C1A /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		65A655201821F1E200122C1A /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,8 +105,8 @@
 				65A654FC1821EFBF00122C1A /* AppDelegate.h */,
 				65A654FD1821EFBF00122C1A /* AppDelegate.m */,
 				65A655051821EFBF00122C1A /* MainStoryboard.storyboard */,
-				65A655081821EFBF00122C1A /* FirstViewController.h */,
-				65A655091821EFBF00122C1A /* FirstViewController.m */,
+				65A6551F1821F1E200122C1A /* MapViewController.h */,
+				65A655201821F1E200122C1A /* MapViewController.m */,
 				65A6550B1821EFBF00122C1A /* first.png */,
 				65A6550D1821EFBF00122C1A /* first@2x.png */,
 				65A6550F1821EFBF00122C1A /* SecondViewController.h */,
@@ -204,8 +204,8 @@
 			files = (
 				65A654FA1821EFBF00122C1A /* main.m in Sources */,
 				65A654FE1821EFBF00122C1A /* AppDelegate.m in Sources */,
-				65A6550A1821EFBF00122C1A /* FirstViewController.m in Sources */,
 				65A655111821EFBF00122C1A /* SecondViewController.m in Sources */,
+				65A655211821F1E300122C1A /* MapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
