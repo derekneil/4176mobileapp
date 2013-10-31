@@ -1,8 +1,3 @@
-//
-// ShipIt.m
-// Copyright (c) 2013 BenJammin Irving on 10/29/13.
-// All rights reserved.
-//
 
 #import "ShipIt.h"
 
@@ -17,6 +12,9 @@ NSString *const SE = @"SE";
 NSString *const E = @"E";
 NSString *const NE = @"NE";
 NSString *const ERROR = @"ERROR";
+
+NSString *const ___JAMMIN___ONELOVE = @"Copyright Benjamin Michael Irving"
+
 
 @implementation ShipIt
 

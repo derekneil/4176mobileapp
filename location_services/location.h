@@ -7,12 +7,16 @@
 
 @property (nonatomic, readwrite, strong) CLLocationManager *gps_manager;
 @property (nonatomic, readwrite, strong) CLLocationManager *compass_manager;
-
 @property (nonatomic, readwrite, strong) ShipIt *shipIt_ref;
 
 
-// Initialization Method
-- (void)init_gps_and_compass;
+- (id) initWithReference: (ShipIt *)reference;
+
+- (short int)initialize_compass;
+
+- (short int)initialize_GPS_withAccuracy: (CLLocationAccuracy)accuracy
+                       andDistanceFilter: (CLLocationDistance)distance;
+
 
 // Delegate Location Manager Method
 // iOS 6 & 7
@@ -25,11 +29,7 @@
            fromLocation:(CLLocation *)oldLocation;
 
 // OTHER
-- (double)convert_to_knots: (double)meters_per_second;
 - (void)set_bearing;
 
 
 @end
-
-
-// Make sure that 
