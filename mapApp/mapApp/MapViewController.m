@@ -28,7 +28,6 @@
     if (self) {
         // Custom initialization
         
-        pathTraveled = [NSMutableArray alloc];
     }
     return self;
 }
@@ -78,8 +77,14 @@
     _speedLabel.text = [NSString stringWithFormat:@"%f", userLocation.location.speed];
     _latLabel.text = [NSString stringWithFormat:@"%f", userLocation.location.coordinate.latitude];
     _longLabel.text = [NSString stringWithFormat:@"%f", userLocation.location.coordinate.longitude];
-    CLLocation *loc = userLocation.location;
-    [pathTraveled addObject:loc];
+    
+    //update pathTraveled to draw on screen
+    CLLocation *location = [[CLLocation alloc] initWithLatitude: userLocation.coordinate.latitude
+                                                      longitude: userLocation.coordinate.longitude];
+    if(pathTraveled==Nil){
+        pathTraveled = [[NSMutableArray alloc] initWithObjects:location, nil];
+    }
+    [pathTraveled addObject:location];
     
     [self updatePathOverlay];
     
@@ -121,16 +126,15 @@
 }
 
 -(void) updatePathOverlay{
-    int pathpoints = [pathTraveled count];
-    CLLocationCoordinate2D coordArray[pathpoints];
+    int pathpointcount = [pathTraveled count];
+    CLLocationCoordinate2D coordArray[pathpointcount];
     
     //TODO: get pathTraveled into coordArray
-    for(int i=0; i<pathpoints; i++){
-        CLLocation* loc = [pathTraveled objectAtIndex:i];
-        coordArray[i] = loc.coordinate;
+    for(int i=0; i<pathpointcount; i++){
+        coordArray[i] = [[pathTraveled objectAtIndex:i] coordinate];
     }
     
-    path = [MKPolyline polylineWithCoordinates:coordArray count:pathpoints];
+    path = [MKPolyline polylineWithCoordinates:coordArray count:pathpointcount];
     [self.mapView addOverlay:path];
     
 }
