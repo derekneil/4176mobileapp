@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AddViewController.h"
-
+#import "ViewArticleViewController.h"
 
 @interface MainViewController : UITableViewController <AddDelegate>
 

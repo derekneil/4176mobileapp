@@ -16,6 +16,8 @@
 
 @implementation MainViewController
 
+
+//used synthesize here because of the custome accessor method for fetchedResultsController
 @synthesize fetchedResultsController = _fetchedResultsController;
 
 
@@ -41,6 +43,8 @@
 
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    
     if ([[segue identifier]isEqualToString:@"addArticle"]) {
         AddViewController *acvc = (AddViewController *)[segue destinationViewController];
         acvc.delegate = self;
@@ -48,6 +52,20 @@
         ARTICLE *newArticle = (ARTICLE *)[NSEntityDescription insertNewObjectForEntityForName:@"ARTICLE" inManagedObjectContext:[self myManageObjectContext]];
         
         acvc.currentArticle = newArticle;
+    }
+    
+    else if ([[segue identifier]isEqualToString:@"segueArticleToView"]) {
+        ViewArticleViewController *dest = (ViewArticleViewController *)[segue destinationViewController];
+        //dest.delegate = self;
+        
+        //get idex of selected row
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        
+        //fetech the article object
+        ARTICLE *newArticle = (ARTICLE *)[self.fetchedResultsController objectAtIndexPath:indexPath];
+        
+        
+        dest.currentArticle = newArticle;
     }
 }
 
@@ -71,12 +89,7 @@
         abort();
     }
     
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -85,7 +98,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
+
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -100,27 +114,34 @@
     return [sectInfo numberOfObjects];
 }
 
-//------
+
+//------ custome accessor method -----------------
 -(NSFetchedResultsController *) fetchedResultsController{
     if(_fetchedResultsController !=nil){
         return _fetchedResultsController;
     }
+    
+    //create a fetch request
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"ARTICLE"
     inManagedObjectContext:[self myManageObjectContext]];
     [fetchRequest setEntity:entity];
 
+    //how artcles are sorted
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"title"
     ascending:YES];
+    
+    
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
     [fetchRequest setSortDescriptors:sortDescriptors];
 
+    
+    //use fetchedResultsController to display the result in a table view
     _fetchedResultsController = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:[self myManageObjectContext] sectionNameKeyPath:@"title" cacheName:Nil];
     
     _fetchedResultsController.delegate = self;
     
     return _fetchedResultsController;
-                                 
 }
 
 

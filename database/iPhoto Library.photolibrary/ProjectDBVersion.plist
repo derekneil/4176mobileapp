@@ -2,7 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>_XCCurrentVersionName</key>
-	<string>shipfitCRUD 2.xcdatamodel</string>
+	<key>MajorVersion</key>
+	<integer>1</integer>
+	<key>MinorVersion</key>
+	<integer>27</integer>
+	<key>createDate</key>
+	<date>2013-10-03T00:13:48Z</date>
 </dict>
 </plist>

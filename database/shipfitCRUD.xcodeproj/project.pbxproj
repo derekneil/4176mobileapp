@@ -7,6 +7,42 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		030EFF5D1821EFA80049C126 /* bcl.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF5C1821EFA80049C126 /* bcl.png */; };
+		030EFF5E1821EFA80049C126 /* bcl.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF5C1821EFA80049C126 /* bcl.png */; };
+		030EFF641821EFFF0049C126 /* boat.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF5F1821EFFF0049C126 /* boat.png */; };
+		030EFF651821EFFF0049C126 /* boat.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF5F1821EFFF0049C126 /* boat.png */; };
+		030EFF661821EFFF0049C126 /* compass.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF601821EFFF0049C126 /* compass.png */; };
+		030EFF671821EFFF0049C126 /* compass.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF601821EFFF0049C126 /* compass.png */; };
+		030EFF681821EFFF0049C126 /* iPhoto Library.photolibrary in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF611821EFFF0049C126 /* iPhoto Library.photolibrary */; };
+		030EFF691821EFFF0049C126 /* iPhoto Library.photolibrary in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF611821EFFF0049C126 /* iPhoto Library.photolibrary */; };
+		030EFF6A1821EFFF0049C126 /* life-jacket.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF621821EFFF0049C126 /* life-jacket.png */; };
+		030EFF6B1821EFFF0049C126 /* life-jacket.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF621821EFFF0049C126 /* life-jacket.png */; };
+		030EFF6C1821EFFF0049C126 /* sober.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF631821EFFF0049C126 /* sober.png */; };
+		030EFF6D1821EFFF0049C126 /* sober.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF631821EFFF0049C126 /* sober.png */; };
+		030EFF781821F2540049C126 /* boat-front.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF6E1821F2540049C126 /* boat-front.png */; };
+		030EFF791821F2540049C126 /* boat-front.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF6E1821F2540049C126 /* boat-front.png */; };
+		030EFF7A1821F2540049C126 /* ComplianceNotice.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF6F1821F2540049C126 /* ComplianceNotice.png */; };
+		030EFF7B1821F2540049C126 /* ComplianceNotice.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF6F1821F2540049C126 /* ComplianceNotice.png */; };
+		030EFF7C1821F2540049C126 /* DeepVHull.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF701821F2540049C126 /* DeepVHull.png */; };
+		030EFF7D1821F2540049C126 /* DeepVHull.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF701821F2540049C126 /* DeepVHull.png */; };
+		030EFF7E1821F2540049C126 /* Display your Licence Number.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF711821F2540049C126 /* Display your Licence Number.png */; };
+		030EFF7F1821F2540049C126 /* Display your Licence Number.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF711821F2540049C126 /* Display your Licence Number.png */; };
+		030EFF801821F2540049C126 /* Enginetypes.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF721821F2540049C126 /* Enginetypes.png */; };
+		030EFF811821F2540049C126 /* Enginetypes.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF721821F2540049C126 /* Enginetypes.png */; };
+		030EFF821821F2540049C126 /* FlatBottomHulls.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF731821F2540049C126 /* FlatBottomHulls.png */; };
+		030EFF831821F2540049C126 /* FlatBottomHulls.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF731821F2540049C126 /* FlatBottomHulls.png */; };
+		030EFF841821F2540049C126 /* Hull Identification.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF741821F2540049C126 /* Hull Identification.png */; };
+		030EFF851821F2540049C126 /* Hull Identification.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF741821F2540049C126 /* Hull Identification.png */; };
+		030EFF861821F2540049C126 /* Multi-hull.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF751821F2540049C126 /* Multi-hull.png */; };
+		030EFF871821F2540049C126 /* Multi-hull.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF751821F2540049C126 /* Multi-hull.png */; };
+		030EFF881821F2540049C126 /* RoundBottom.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF761821F2540049C126 /* RoundBottom.png */; };
+		030EFF891821F2540049C126 /* RoundBottom.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF761821F2540049C126 /* RoundBottom.png */; };
+		030EFF8A1821F2540049C126 /* Untitled.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF771821F2540049C126 /* Untitled.png */; };
+		030EFF8B1821F2540049C126 /* Untitled.png in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF771821F2540049C126 /* Untitled.png */; };
+		030EFF8D1821F2DF0049C126 /* mystyle.css in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF8C1821F2DF0049C126 /* mystyle.css */; };
+		030EFF8E1821F2DF0049C126 /* mystyle.css in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF8C1821F2DF0049C126 /* mystyle.css */; };
+		030EFF931821F85E0049C126 /* shipfitMainDatabase.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF921821F85E0049C126 /* shipfitMainDatabase.sqlite */; };
+		030EFF941821F85E0049C126 /* shipfitMainDatabase.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF921821F85E0049C126 /* shipfitMainDatabase.sqlite */; };
 		038279DA1813598E00A583E2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038279D91813598E00A583E2 /* Foundation.framework */; };
 		038279DC1813598E00A583E2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038279DB1813598E00A583E2 /* CoreGraphics.framework */; };
 		038279DE1813598E00A583E2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038279DD1813598E00A583E2 /* UIKit.framework */; };
@@ -26,6 +62,7 @@
 		03827A1218135B1400A583E2 /* mainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03827A1118135B1400A583E2 /* mainStoryboard.storyboard */; };
 		03827A1518135CBF00A583E2 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03827A1418135CBF00A583E2 /* MainViewController.m */; };
 		03827A181813772400A583E2 /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03827A171813772400A583E2 /* AddViewController.m */; };
+		03C0D6C2181F42510046E68B /* ViewArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C0D6C1181F42510046E68B /* ViewArticleViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +76,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		030EFF581821D0D80049C126 /* shipfitCRUD 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "shipfitCRUD 2.xcdatamodel"; sourceTree = "<group>"; };
+		030EFF5C1821EFA80049C126 /* bcl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bcl.png; sourceTree = "<group>"; };
+		030EFF5F1821EFFF0049C126 /* boat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boat.png; sourceTree = "<group>"; };
+		030EFF601821EFFF0049C126 /* compass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compass.png; sourceTree = "<group>"; };
+		030EFF611821EFFF0049C126 /* iPhoto Library.photolibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "iPhoto Library.photolibrary"; sourceTree = "<group>"; };
+		030EFF621821EFFF0049C126 /* life-jacket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "life-jacket.png"; sourceTree = "<group>"; };
+		030EFF631821EFFF0049C126 /* sober.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sober.png; sourceTree = "<group>"; };
+		030EFF6E1821F2540049C126 /* boat-front.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boat-front.png"; sourceTree = "<group>"; };
+		030EFF6F1821F2540049C126 /* ComplianceNotice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ComplianceNotice.png; sourceTree = "<group>"; };
+		030EFF701821F2540049C126 /* DeepVHull.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DeepVHull.png; sourceTree = "<group>"; };
+		030EFF711821F2540049C126 /* Display your Licence Number.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Display your Licence Number.png"; sourceTree = "<group>"; };
+		030EFF721821F2540049C126 /* Enginetypes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Enginetypes.png; sourceTree = "<group>"; };
+		030EFF731821F2540049C126 /* FlatBottomHulls.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FlatBottomHulls.png; sourceTree = "<group>"; };
+		030EFF741821F2540049C126 /* Hull Identification.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Hull Identification.png"; sourceTree = "<group>"; };
+		030EFF751821F2540049C126 /* Multi-hull.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Multi-hull.png"; sourceTree = "<group>"; };
+		030EFF761821F2540049C126 /* RoundBottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RoundBottom.png; sourceTree = "<group>"; };
+		030EFF771821F2540049C126 /* Untitled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Untitled.png; sourceTree = "<group>"; };
+		030EFF8C1821F2DF0049C126 /* mystyle.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = mystyle.css; sourceTree = "<group>"; };
+		030EFF921821F85E0049C126 /* shipfitMainDatabase.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = shipfitMainDatabase.sqlite; sourceTree = "<group>"; };
 		038279D61813598E00A583E2 /* shipfitCRUD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shipfitCRUD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		038279D91813598E00A583E2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		038279DB1813598E00A583E2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -60,10 +116,12 @@
 		03827A0E18135AE100A583E2 /* ARTICLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARTICLE.h; sourceTree = "<group>"; };
 		03827A0F18135AE100A583E2 /* ARTICLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARTICLE.m; sourceTree = "<group>"; };
 		03827A1118135B1400A583E2 /* mainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = mainStoryboard.storyboard; sourceTree = "<group>"; };
-		03827A1318135CBF00A583E2 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		03827A1418135CBF00A583E2 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		03827A1318135CBF00A583E2 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = shipfitCRUD/MainViewController.h; sourceTree = "<group>"; };
+		03827A1418135CBF00A583E2 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = shipfitCRUD/MainViewController.m; sourceTree = "<group>"; };
 		03827A161813772400A583E2 /* AddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewController.h; sourceTree = "<group>"; };
 		03827A171813772400A583E2 /* AddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddViewController.m; sourceTree = "<group>"; };
+		03C0D6C0181F42510046E68B /* ViewArticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewArticleViewController.h; sourceTree = "<group>"; };
+		03C0D6C1181F42510046E68B /* ViewArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewArticleViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,12 +150,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		030EFF571821CBDA0049C126 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				030EFF6E1821F2540049C126 /* boat-front.png */,
+				030EFF6F1821F2540049C126 /* ComplianceNotice.png */,
+				030EFF701821F2540049C126 /* DeepVHull.png */,
+				030EFF711821F2540049C126 /* Display your Licence Number.png */,
+				030EFF721821F2540049C126 /* Enginetypes.png */,
+				030EFF731821F2540049C126 /* FlatBottomHulls.png */,
+				030EFF741821F2540049C126 /* Hull Identification.png */,
+				030EFF751821F2540049C126 /* Multi-hull.png */,
+				030EFF761821F2540049C126 /* RoundBottom.png */,
+				030EFF771821F2540049C126 /* Untitled.png */,
+				030EFF5F1821EFFF0049C126 /* boat.png */,
+				030EFF601821EFFF0049C126 /* compass.png */,
+				030EFF611821EFFF0049C126 /* iPhoto Library.photolibrary */,
+				030EFF621821EFFF0049C126 /* life-jacket.png */,
+				030EFF631821EFFF0049C126 /* sober.png */,
+				030EFF5C1821EFA80049C126 /* bcl.png */,
+				030EFF8C1821F2DF0049C126 /* mystyle.css */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
 		038279CD1813598E00A583E2 = {
 			isa = PBXGroup;
 			children = (
-				03827A1118135B1400A583E2 /* mainStoryboard.storyboard */,
-				03827A161813772400A583E2 /* AddViewController.h */,
-				03827A171813772400A583E2 /* AddViewController.m */,
+				030EFF571821CBDA0049C126 /* images */,
 				038279E11813598E00A583E2 /* shipfitCRUD */,
 				038279FE1813598E00A583E2 /* shipfitCRUDTests */,
 				038279D81813598E00A583E2 /* Frameworks */,
@@ -129,10 +209,7 @@
 		038279E11813598E00A583E2 /* shipfitCRUD */ = {
 			isa = PBXGroup;
 			children = (
-				038279EA1813598E00A583E2 /* SFAppDelegate.h */,
-				038279EB1813598E00A583E2 /* SFAppDelegate.m */,
-				03827A1318135CBF00A583E2 /* MainViewController.h */,
-				03827A1418135CBF00A583E2 /* MainViewController.m */,
+				03BE8F2D181F5931002A23A9 /* ViewControllers */,
 				038279F01813598E00A583E2 /* Images.xcassets */,
 				038279ED1813598E00A583E2 /* shipfitCRUD.xcdatamodeld */,
 				03827A0E18135AE100A583E2 /* ARTICLE.h */,
@@ -145,6 +222,9 @@
 		038279E21813598E00A583E2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				030EFF921821F85E0049C126 /* shipfitMainDatabase.sqlite */,
+				038279EA1813598E00A583E2 /* SFAppDelegate.h */,
+				038279EB1813598E00A583E2 /* SFAppDelegate.m */,
 				038279E31813598E00A583E2 /* shipfitCRUD-Info.plist */,
 				038279E41813598E00A583E2 /* InfoPlist.strings */,
 				038279E71813598E00A583E2 /* main.m */,
@@ -169,6 +249,21 @@
 				03827A011813598E00A583E2 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		03BE8F2D181F5931002A23A9 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				03827A1318135CBF00A583E2 /* MainViewController.h */,
+				03827A1418135CBF00A583E2 /* MainViewController.m */,
+				03827A1118135B1400A583E2 /* mainStoryboard.storyboard */,
+				03C0D6C0181F42510046E68B /* ViewArticleViewController.h */,
+				03C0D6C1181F42510046E68B /* ViewArticleViewController.m */,
+				03827A161813772400A583E2 /* AddViewController.h */,
+				03827A171813772400A583E2 /* AddViewController.m */,
+			);
+			name = ViewControllers;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,9 +342,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				030EFF6A1821EFFF0049C126 /* life-jacket.png in Resources */,
+				030EFF6C1821EFFF0049C126 /* sober.png in Resources */,
+				030EFF681821EFFF0049C126 /* iPhoto Library.photolibrary in Resources */,
+				030EFF931821F85E0049C126 /* shipfitMainDatabase.sqlite in Resources */,
+				030EFF7E1821F2540049C126 /* Display your Licence Number.png in Resources */,
+				030EFF781821F2540049C126 /* boat-front.png in Resources */,
+				030EFF7C1821F2540049C126 /* DeepVHull.png in Resources */,
 				038279E61813598E00A583E2 /* InfoPlist.strings in Resources */,
+				030EFF8D1821F2DF0049C126 /* mystyle.css in Resources */,
+				030EFF8A1821F2540049C126 /* Untitled.png in Resources */,
 				038279F11813598E00A583E2 /* Images.xcassets in Resources */,
+				030EFF5D1821EFA80049C126 /* bcl.png in Resources */,
+				030EFF881821F2540049C126 /* RoundBottom.png in Resources */,
+				030EFF821821F2540049C126 /* FlatBottomHulls.png in Resources */,
+				030EFF7A1821F2540049C126 /* ComplianceNotice.png in Resources */,
+				030EFF661821EFFF0049C126 /* compass.png in Resources */,
+				030EFF841821F2540049C126 /* Hull Identification.png in Resources */,
 				03827A1218135B1400A583E2 /* mainStoryboard.storyboard in Resources */,
+				030EFF801821F2540049C126 /* Enginetypes.png in Resources */,
+				030EFF861821F2540049C126 /* Multi-hull.png in Resources */,
+				030EFF641821EFFF0049C126 /* boat.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,7 +370,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				030EFF831821F2540049C126 /* FlatBottomHulls.png in Resources */,
+				030EFF5E1821EFA80049C126 /* bcl.png in Resources */,
+				030EFF851821F2540049C126 /* Hull Identification.png in Resources */,
+				030EFF791821F2540049C126 /* boat-front.png in Resources */,
+				030EFF811821F2540049C126 /* Enginetypes.png in Resources */,
+				030EFF8E1821F2DF0049C126 /* mystyle.css in Resources */,
+				030EFF941821F85E0049C126 /* shipfitMainDatabase.sqlite in Resources */,
+				030EFF651821EFFF0049C126 /* boat.png in Resources */,
+				030EFF691821EFFF0049C126 /* iPhoto Library.photolibrary in Resources */,
+				030EFF7B1821F2540049C126 /* ComplianceNotice.png in Resources */,
+				030EFF8B1821F2540049C126 /* Untitled.png in Resources */,
+				030EFF6B1821EFFF0049C126 /* life-jacket.png in Resources */,
 				03827A031813598E00A583E2 /* InfoPlist.strings in Resources */,
+				030EFF7F1821F2540049C126 /* Display your Licence Number.png in Resources */,
+				030EFF671821EFFF0049C126 /* compass.png in Resources */,
+				030EFF891821F2540049C126 /* RoundBottom.png in Resources */,
+				030EFF6D1821EFFF0049C126 /* sober.png in Resources */,
+				030EFF871821F2540049C126 /* Multi-hull.png in Resources */,
+				030EFF7D1821F2540049C126 /* DeepVHull.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +400,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03827A1018135AE100A583E2 /* ARTICLE.m in Sources */,
+				03C0D6C2181F42510046E68B /* ViewArticleViewController.m in Sources */,
 				038279EF1813598E00A583E2 /* shipfitCRUD.xcdatamodeld in Sources */,
 				03827A181813772400A583E2 /* AddViewController.m in Sources */,
 				038279E81813598E00A583E2 /* main.m in Sources */,
@@ -348,7 +480,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -382,7 +514,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -397,7 +529,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "shipfitCRUD/shipfitCRUD-Prefix.pch";
 				INFOPLIST_FILE = "shipfitCRUD/shipfitCRUD-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -412,7 +544,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "shipfitCRUD/shipfitCRUD-Prefix.pch";
 				INFOPLIST_FILE = "shipfitCRUD/shipfitCRUD-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -497,9 +629,10 @@
 		038279ED1813598E00A583E2 /* shipfitCRUD.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				030EFF581821D0D80049C126 /* shipfitCRUD 2.xcdatamodel */,
 				038279EE1813598E00A583E2 /* shipfitCRUD.xcdatamodel */,
 			);
-			currentVersion = 038279EE1813598E00A583E2 /* shipfitCRUD.xcdatamodel */;
+			currentVersion = 030EFF581821D0D80049C126 /* shipfitCRUD 2.xcdatamodel */;
 			path = shipfitCRUD.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
