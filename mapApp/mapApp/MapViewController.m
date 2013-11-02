@@ -15,7 +15,10 @@
 
 @end
 
-@implementation MapViewController
+@implementation MapViewController {
+    NSMutableArray* pathTraveled;
+    MKPolyline* path;
+}
 
 @synthesize mapView;
 
@@ -24,6 +27,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
+        pathTraveled = [NSMutableArray alloc];
     }
     return self;
 }
@@ -73,6 +78,9 @@
     _speedLabel.text = [NSString stringWithFormat:@"%f", userLocation.location.speed];
     _latLabel.text = [NSString stringWithFormat:@"%f", userLocation.location.coordinate.latitude];
     _longLabel.text = [NSString stringWithFormat:@"%f", userLocation.location.coordinate.longitude];
+    
+//    [pathTraveled addObject:[MKUserLocation userLocation]];
+    
 }
 
 //END MKMapView protocol-------
@@ -102,4 +110,23 @@
     [mapView setRegion:theRegion animated:YES];
 
 }
+
+-(void) updatePathOverlay{
+    int pathpoints = [pathTraveled count];
+    CLLocationCoordinate2D coordArray[pathpoints];
+    
+    //TODO: get pathTraveled into coordArray
+    for(int i=0; i<pathpoints; i++){
+        
+    }
+    
+    path = [MKPolyline polylineWithCoordinates:coordArray count:pathpoints];
+    [self.mapView addOverlay:path];
+    
+}
+
+- (void) removePathOverlay{
+    [self.mapView removeOverlay:path];
+}
+
 @end
