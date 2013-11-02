@@ -78,9 +78,18 @@
     _speedLabel.text = [NSString stringWithFormat:@"%f", userLocation.location.speed];
     _latLabel.text = [NSString stringWithFormat:@"%f", userLocation.location.coordinate.latitude];
     _longLabel.text = [NSString stringWithFormat:@"%f", userLocation.location.coordinate.longitude];
+    CLLocation *loc = userLocation.location;
+    [pathTraveled addObject:loc];
     
-//    [pathTraveled addObject:[MKUserLocation userLocation]];
+    [self updatePathOverlay];
     
+}
+
+- (MKOverlayView *) mapView:(MKMapView*)delMapView viewForOverlay:(id)overlay{
+    MKPolylineView* polyLineView = [[MKPolylineView alloc] initWithOverlay:overlay];
+    polyLineView.strokeColor = [UIColor blueColor];
+    polyLineView.lineWidth = 3.0;
+    return polyLineView;
 }
 
 //END MKMapView protocol-------
@@ -117,7 +126,8 @@
     
     //TODO: get pathTraveled into coordArray
     for(int i=0; i<pathpoints; i++){
-        
+        CLLocation* loc = [pathTraveled objectAtIndex:i];
+        coordArray[i] = loc.coordinate;
     }
     
     path = [MKPolyline polylineWithCoordinates:coordArray count:pathpoints];

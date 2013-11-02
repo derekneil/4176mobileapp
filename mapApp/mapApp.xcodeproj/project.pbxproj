@@ -73,8 +73,6 @@
 		65A654E11821EFBE00122C1A = {
 			isa = PBXGroup;
 			children = (
-				65A6551D1821F0DE00122C1A /* CoreLocation.framework */,
-				65A6551B1821F0C400122C1A /* MapKit.framework */,
 				65A654F31821EFBF00122C1A /* mapApp */,
 				65A654EC1821EFBE00122C1A /* Frameworks */,
 				65A654EB1821EFBE00122C1A /* Products */,
@@ -92,6 +90,8 @@
 		65A654EC1821EFBE00122C1A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				65A6551D1821F0DE00122C1A /* CoreLocation.framework */,
+				65A6551B1821F0C400122C1A /* MapKit.framework */,
 				65A654ED1821EFBE00122C1A /* UIKit.framework */,
 				65A654EF1821EFBF00122C1A /* Foundation.framework */,
 				65A654F11821EFBF00122C1A /* CoreGraphics.framework */,
