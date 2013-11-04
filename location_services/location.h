@@ -1,16 +1,18 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
-@class ShipIt;
+@class ShipFit;
+@class MKMapView;
 
-@interface location : NSObject <CLLocationManagerDelegate>
+@interface location : NSObject <CLLocationManagerDelegate, MKMapViewDelegate>
 
-@property (nonatomic, readwrite, strong) CLLocationManager *gps_manager;
-@property (nonatomic, readwrite, strong) CLLocationManager *compass_manager;
-@property (nonatomic, readwrite, strong) ShipIt *shipIt_ref;
+//properties
+@property (nonatomic, readwrite, strong) ShipFit *shipIt_ref;
+@property (nonatomic, readwrite, strong) MKMapView *map_ref;
 
 
-- (id) initWithReference: (ShipIt *)reference;
+
+- (id) initWithShipFitReference: (ShipFit *)reference andMKMapReference: (MKMapView *)map;
 
 - (short int)initialize_compass;
 
@@ -33,3 +35,10 @@
 
 
 @end
+
+#if 0 
+
+@property (nonatomic, readwrite, strong) CLLocationManager *gps_manager;
+@property (nonatomic, readwrite, strong) CLLocationManager *compass_manager;
+
+#endif
