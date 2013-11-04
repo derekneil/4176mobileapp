@@ -14,7 +14,6 @@
     return self;
 }
 
-// COMPASS
 // Initiazes a gps_manager with the accuracy and distance setting.
 // Controlling these settings is at the whim of the ShipIt.h class
 // Which contains the majority of functions that we need.
@@ -68,6 +67,9 @@
             self.shipIt_ref.longitude = newLocation.coordinate.longitude;
             self.shipIt_ref.knots = ( (newLocation.speed) * 1.94384 );
             NSLog( @"LAT: %f\nLONG: %f\nKNOTS:%f" , self.shipIt_ref.latitude , self.shipIt_ref.longitude , self.shipIt_ref.knots);
+
+            // This is where we need to update and recenter the map
+            // Not exactly sure how to code this. 
         }
         else
         {
@@ -108,6 +110,7 @@
     if( [ CLLocationManager headingAvailable ] ){
         self.compass_manager = [ [CLLocationManager alloc] init ];
         [ self.compass_manager startUpdatingHeading ];
+        
         returncode = 1;
     }
     else{
@@ -169,7 +172,11 @@
 // error and keeps trying. This can be ingnored. However, a kCLErrorDenied is
 // received if the User denies LS. A kCLErrorHeadingFailure is due to interference.
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
-    NSLog(@"Location Manager Error");
+    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied){
+        NSLog(@"User has denied location services");
+    } else {
+        NSLog(@"Location manager did fail with error: %@", error.localizedFailureReason);
+    }
 }
 
 @end
