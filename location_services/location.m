@@ -1,14 +1,15 @@
 #import "location.h"
-#import "ShipIt.h"
+#import "ShipFit.h"
 
 @implementation location
 
 // Custom initializer
-- (id) initWithReference: (ShipIt *)reference
+- (id) initWithReference: (ShipFit *)reference 
 {
     self = [super init];
     if ( self ){
-        _shipIt_ref = reference;
+        _shipFit_ref = reference;
+        _map_ref = 
     }
     return self;
 }
@@ -100,7 +101,7 @@
 // Returns
 // 1 on success
 // -1 on failure
-- (short int)initialize_compass
+- (short int)initializeAvailability_compass
 {
     short int returncode;   
     

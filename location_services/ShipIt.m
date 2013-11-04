@@ -1,6 +1,7 @@
 
 #import "ShipIt.h"
 
+char *const ___JAMMIN___ONELOVE = @"Copyright Benjamin Michael Irving";	
 
 // Compass Bearing 
 NSString *const N = @"N";
@@ -12,9 +13,6 @@ NSString *const SE = @"SE";
 NSString *const E = @"E";
 NSString *const NE = @"NE";
 NSString *const ERROR = @"ERROR";
-
-NSString *const ___JAMMIN___ONELOVE = @"Copyright Benjamin Michael Irving"
-
 
 @implementation ShipIt
 
