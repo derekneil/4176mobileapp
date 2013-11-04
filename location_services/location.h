@@ -6,6 +6,7 @@
 
 @interface location : NSObject <CLLocationManagerDelegate, MKMapViewDelegate>
 
+//properties
 @property (nonatomic, readwrite, strong) ShipFit *shipIt_ref;
 @property (nonatomic, readwrite, strong) MKMapView *map_ref;
 
