@@ -4,25 +4,27 @@
 @class ShipFit;
 @class MKMapView;
 
-@interface location : NSObject <CLLocationManagerDelegate, MKMapViewDelegate>
+@interface location : NSObject <CLLocationManagerDelegate>
 
-//properties
+
 @property (nonatomic, readwrite, strong) ShipFit *shipIt_ref;
-@property (nonatomic, readwrite, strong) MKMapView *map_ref;
+@property (nonatomic, readwrite, strong) CLLocationManager *gps_manager;
+@property (nonatomic, readwrite, strong) CLLocationManager *compass_manager;
 
 
+/* Function Declarations */
+- (id) initWith_Reference: (ShipFit *)reference;
 
-- (id) initWithShipFitReference: (ShipFit *)reference andMKMapReference: (MKMapView *)map;
+- (short int)run_compass;
 
-- (short int)initialize_compass;
-
-- (short int)initialize_GPS_withAccuracy: (CLLocationAccuracy)accuracy
-                       andDistanceFilter: (CLLocationDistance)distance;
+- (short int)run_GPS_withAccuracy: (CLLocationAccuracy)accuracy
+                andDistanceFilter: (CLLocationDistance)distance;
 
 
 // Delegate Location Manager Method
 // iOS 6 & 7
-- (void)locationManager: (CLLocationManager *)manager didUpdateLocations:(NSArray *)locations;
+- (void)locationManager: (CLLocationManager *)manager 
+     didUpdateLocations:(NSArray *)locations;
 
 // Delegate Location Manager Method
 // iOS 5
@@ -30,15 +32,8 @@
     didUpdateToLocation:(CLLocation *)newLocation
            fromLocation:(CLLocation *)oldLocation;
 
-// OTHER
 - (void)set_bearing;
-
 
 @end
 
-#if 0 
 
-@property (nonatomic, readwrite, strong) CLLocationManager *gps_manager;
-@property (nonatomic, readwrite, strong) CLLocationManager *compass_manager;
-
-#endif

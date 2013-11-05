@@ -19,8 +19,8 @@
 // Which contains the majority of functions that we need.
 // RETURNS -1 Location Services Not Available 0 Location Services Not Determined Yet
 // 1 If the GPS is Authorized and Running (ONE IS GOOD) (NEGATIVE ONE BAD)
-- (short int)initialize_GPS_withAccuracy: (CLLocationAccuracy)accuracy
-                          andDistanceFilter: (CLLocationDistance)distance {
+- (short int)start_GPS_withAccuracy: (CLLocationAccuracy)accuracy
+                andDistanceFilter: (CLLocationDistance)distance {
     
     short int returncode = 0;
     
@@ -32,7 +32,7 @@
     }
     
     // The application has full permission to access the location services
-    if (  [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized ){
+    else if (  [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized ){
         self.gps_manager = [ [CLLocationManager alloc] init ];
         self.gps_manager.delegate = self;
         self.gps_manager.distanceFilter = distance;
@@ -48,28 +48,39 @@
     return returncode;
 }
 
+- (void)stop_GPS
+{
+    [ self.gps_manager stopUpdatingLocation ];
+}
+
+- (short int)log_GPS
+{
+    short int returncode;
+
+}
+
 // iOS 5
 // Depracated in iOS 6 and 7. I want to test/run the app on the first GEN iPAD
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
+- (void)locationManager:(CLLocationManager *)manager 
+    didUpdateToLocation:(CLLocation *)newLocation 
+           fromLocation:(CLLocation *)oldLocation{
     
     // GPS MANAGER
     if ( manager == self.gps_manager ){
-
-        // What kind of time time interval are we expecting. 
-        // Make sure the time stamp is relevant. 
-        // If the update is within the last minute update the property
-        // Leaving the quite wide not sure exactly
-        // UNIX time since 1970 (UNIX EPOCHE)
-        // Set the speed, latitude and longitude at the front end. 
+ 
+        // Make sure the time stamp is relevant.  
         if ( ( [ [ NSDate date ]  timeIntervalSince1970 ] - [newLocation.timestamp timeIntervalSince1970 ] ) < 60 )
         { 
+            /* Set the new lat and long values */
             self.shipIt_ref.latitude = newLocation.coordinate.latitude;
             self.shipIt_ref.longitude = newLocation.coordinate.longitude;
-            self.shipIt_ref.knots = ( (newLocation.speed) * 1.94384 );
-            NSLog( @"LAT: %f\nLONG: %f\nKNOTS:%f" , self.shipIt_ref.latitude , self.shipIt_ref.longitude , self.shipIt_ref.knots);
 
-            // This is where we need to update and recenter the map
-            // Not exactly sure how to code this. 
+
+            self.shipIt_ref.knots = ( (newLocation.speed) * 1.94384 );
+              
+#if 1
+            NSLog( @"LAT: %f\nLONG: %f\nKNOTS:%f" , self.shipIt_ref.latitude , self.shipIt_ref.longitude , self.shipIt_ref.knots);
+#endif
         }
         else
         {
@@ -80,7 +91,9 @@
 
 
 // iOS 6 & 7
-- (void)locationManager: (CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+- (void)locationManager: (CLLocationManager *)manager 
+     didUpdateLocations:(NSArray *)locations
+{    
     
     if ( manager == self.gps_manager )
     {
@@ -103,7 +116,7 @@
 // Returns
 // 1 on success
 // -1 on failure
-- (short int)initializeAvailability_compass
+- (short int)run_compass
 {
     short int returncode;   
     
