@@ -14,7 +14,7 @@ NSString *const ERROR = @"ERROR";
 
 
 // Shared Logic Between the UI and the back-end. 
-// Lets try and keep this code very concise
+// Lets try and keep this code very concis
 @implementation ShipIt
 
 // What type of return do you want?
