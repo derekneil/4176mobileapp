@@ -30,6 +30,6 @@ extern NSString *const ERROR;
 @property (nonatomic, readwrite, assign) double knots;
 
 /* Functions */
-(unsigned short int)initialize_modules;
+- (short int)initialize_modules;
 
 @end

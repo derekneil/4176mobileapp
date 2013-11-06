@@ -1,5 +1,5 @@
 
-#import "ShipIt.h"
+#import "ShipFit.h"
 
 // Compass Bearing 
 NSString *const N = @"N";
@@ -15,7 +15,7 @@ NSString *const ERROR = @"ERROR";
 // Shared Logic Between the UI and the back-end. 
 // Lets try and keep this code very concise
 
-@implementation ShipIt
+@implementation ShipFit
 
 // What type of return do you want?
 // We will start with a simple integer
@@ -25,8 +25,6 @@ NSString *const ERROR = @"ERROR";
 	unsigned short int returncode;
 
 	// Init location modules
-	location *loc = [ [location alloc] initWithReference: self ];
-	[loc run]
 }
 
 
