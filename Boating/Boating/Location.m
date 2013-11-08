@@ -2,6 +2,11 @@
 #import "ShipFit.h"
 
 @implementation Location
+{
+    CLLocationCoordinate2D *_head;
+    CLLocationCoordinate2D *_tail;
+    CLLocationCoordinate2D *_base;
+}
 
 // Error Handling
 - (void)locationManager:(CLLocationManager *)manager
@@ -11,22 +16,18 @@
     NSLog(@"%@", error);
 #endif
     
-    
-    
     if ( manager == self.gps_manager )
     {
-        //
+            
     }
     
     if ( manager == self.compass_manager )
     {
-        //
+            
     }
     
     
 }
-
-
 
 - (unsigned short int)init_GPS
 {
@@ -50,8 +51,14 @@
     
     if ( returncode == kCLAuthorizationStatusAuthorized )
     {
+        /* Create the Location Manager object for the GPS */
         self.gps_manager = [ [CLLocationManager alloc] init];
         self.gps_manager.delegate = self;
+
+        /* Create the Database for the logs */
+        _base = (CLLocationCoordinate2D *)malloc( 20000 * sizeof(CLLocationCoordinate2D) );
+        _tail = _base;
+        _head = _base + 1;
     }
     
     return returncode;
@@ -81,10 +88,38 @@
     [ self.gps_manager stopUpdatingLocation ];
 }
 
+// head & tail
+// head starts one ahead of tail
+// if head catches up to tail you have to move tail
+// to traverse all elements of the log you start from the tail and go to the head.
+// once the array wraps around the valid entries range from the tail to the head
+// to traverse: if the head == tail just start from head + 1 and go till you hit head again
+// if head != tail. then go from tail + 1 to head - 1
 - (void)log_latitude: (CLLocationDegrees)lat
            longitude: (CLLocationDegrees)lon
 {
-    // to do
+    /* Update the tail pointer */
+    if ( _head == _tail ) 
+    {
+        if( _tail == (_base + 20000) ){
+            _tail = _base;
+        }
+        else{
+            _tail++;
+        }
+    }
+
+    /* Add the new entry */
+    _head->latitude = lat;
+    _head->longitude = lon;
+
+    /* Update the head pointer */
+    if( _head == (base + 20000) ){
+        _head = _base;
+    }
+    else{
+        _head++;
+    }
 }
 
 // iOS 5 location manager delegate method
@@ -95,8 +130,7 @@
     
     // GPS MANAGER
     if ( manager == self.gps_manager )
-    {
-        
+    {        
         /* Make sure the time stamp is relevant */
         if ( ( [ [ NSDate date ]  timeIntervalSince1970 ] - [newLocation.timestamp timeIntervalSince1970 ] ) < 60 )
         {
@@ -152,19 +186,14 @@
 #endif
         }
         
-        
+        /* Log each entry */
         for (l = 0 ; l < [locations count] ; l++)
         {
             current_location = [locations objectAtIndex:l ];
             [self log_latitude:current_location.coordinate.latitude
                      longitude:current_location.coordinate.longitude ];
         }
-        
-    }
-    
-    
-    
-    
+    }  
 }
 
 
@@ -214,6 +243,7 @@
 {
     if ( self.compass_manager == manager && [CLLocationManager headingAvailable] )
     {
+        /* Make sure the reading is recent */
         if ( ( [ [ NSDate date ]  timeIntervalSince1970 ] - [newHeading.timestamp timeIntervalSince1970 ] ) < 5 )
         {
             self.shipFit_ref.magnetic_north = newHeading.magneticHeading;
