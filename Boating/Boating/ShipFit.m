@@ -13,18 +13,18 @@ NSString *const NE = @"NE";
 NSString *const ERROR = @"ERROR";
 
 
-
-
-
 @implementation ShipFit
+
 
 
 - (void)init_and_run_application
 {
 	
-    
-    // about to run the app
-    
+    Location *location = [ [Location alloc] initWithReference:self ];
+    [location init_GPS];
+    [location init_compass];
+    [location runGPS_withAccuracy:100 andDistanceFilter:100]
+    [location run_compass_withFilter: 1];
     
     
     

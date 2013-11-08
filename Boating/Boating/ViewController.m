@@ -19,7 +19,6 @@
     _shipfit = [ [ShipFit alloc] init ];
     
     
-    
     // set up your observers
     
     [_shipfit addObserver:self
@@ -57,7 +56,8 @@
                   options:NSKeyValueObservingOptionNew
                   context:nil ];
 
-    
+    /* Run the Application */
+    [ _shipfit init_and_run_application ];
     
     
     
@@ -68,11 +68,13 @@
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-    if ( [keyPath isEqualToString:@"latitude" ] ){
+    if ( [keyPath isEqualToString:@"latitude" ] )
+    {
         // to do
     }
     
-    if ( [keyPath isEqualToString:@"longitude" ] ){
+    if ( [keyPath isEqualToString:@"longitude" ] )
+    {
         // to do
     }
     
