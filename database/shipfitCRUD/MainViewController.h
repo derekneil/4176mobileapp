@@ -10,6 +10,9 @@
 #import "AddViewController.h"
 #import "ViewArticleViewController.h"
 
+#import "FMDatabaseQueue.h"
+#import "FMDatabase.h"
+
 @interface MainViewController : UITableViewController <AddDelegate>
 
 

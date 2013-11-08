@@ -89,8 +89,27 @@
         abort();
     }
     
-
+    [self createDatabase];
 }
+
+
+-(void)createDatabase{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+    
+    
+    //http://www.adevelopingstory.com/blog/2013/04/adding-full-text-search-to-core-data.html
+    //NSString *dbPath = [NSSearchPathForDirectoriesInDomains(NSApplicationDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    basePath = [basePath stringByAppendingPathComponent:@"shipfit_Index.sqlite"];
+    
+    // Using the FMDatabaseQueue ensures that we don't accidentally talk to our database concurrently from two different threads
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:basePath];
+    [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
+        [db executeUpdate:@"CREATE VIRTUAL TABLE IF NOT EXISTS docs USING fts4(name, contents);"];
+    }];
+    
+}
+
 
 - (void)didReceiveMemoryWarning
 {
