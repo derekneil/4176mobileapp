@@ -21,10 +21,17 @@ NSString *const ERROR = @"ERROR";
 {
 	
     Location *location = [ [Location alloc] initWithReference:self ];
-    [location init_GPS];
-    [location init_compass];
-    [location runGPS_withAccuracy:100 andDistanceFilter:100]
-    [location run_compass_withFilter: 1];
+    
+    if ( [location init_compass] ){
+    	[location run_compass_withFilter: 1];	
+    }
+
+    if ( [location init_GPS] == kCLAuthorizationStatusAuthorized ){
+    	[location runGPS_withAccuracy:100 andDistanceFilter:100];	
+    }
+    
+    
+    
     
     
     
