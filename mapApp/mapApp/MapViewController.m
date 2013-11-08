@@ -57,6 +57,16 @@
     
     //source http://www.appcoda.com/ios-programming-101-drop-a-pin-on-map-with-mapkit-api/
     self.mapView.delegate = self;
+    
+    //check for bottom layout guide and adjust up the bottom alignment
+    
+    //create ios 5 ipad layout with no autolayout
+    
+    //outlet collections, or just name them the same
+    
+    //use AFNetworking APHTTPequestOperationManager to get navionics (serverside api calls) instead of using NSURL directly
+    
+    
 }
 
 - (void)didReceiveMemoryWarning

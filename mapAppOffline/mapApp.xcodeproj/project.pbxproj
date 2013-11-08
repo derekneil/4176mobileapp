@@ -57,7 +57,6 @@
 		65A6550D1821EFBF00122C1A /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
 		65A655121821EFBF00122C1A /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		65A655141821EFC000122C1A /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
-		65A6551B1821F0C400122C1A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		65A6551D1821F0DE00122C1A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		65A6551F1821F1E200122C1A /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		65A655201821F1E200122C1A /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
@@ -108,7 +107,6 @@
 				658DA57D182D376A003B6952 /* QuartzCore.framework */,
 				658DA57B182D369C003B6952 /* MapBox.framework */,
 				65A6551D1821F0DE00122C1A /* CoreLocation.framework */,
-				65A6551B1821F0C400122C1A /* MapKit.framework */,
 				65A654ED1821EFBE00122C1A /* UIKit.framework */,
 				65A654EF1821EFBF00122C1A /* Foundation.framework */,
 				65A654F11821EFBF00122C1A /* CoreGraphics.framework */,
