@@ -9,18 +9,17 @@
     self = [super init];
     if ( self ){
         _shipFit_ref = reference;
-        _map_ref = 
     }
     return self;
 }
 
 // Initiazes a gps_manager with the accuracy and distance setting.
-// Controlling these settings is at the whim of the ShipIt.h class
+// Controlling these settings is at the whim of the ShipFit.h class
 // Which contains the majority of functions that we need.
 // RETURNS -1 Location Services Not Available 0 Location Services Not Determined Yet
 // 1 If the GPS is Authorized and Running (ONE IS GOOD) (NEGATIVE ONE BAD)
-- (short int)initialize_GPS_withAccuracy: (CLLocationAccuracy)accuracy
-                          andDistanceFilter: (CLLocationDistance)distance {
+- (short int)run_GPS_withAccuracy: (CLLocationAccuracy)accuracy
+                andDistanceFilter: (CLLocationDistance)distance {
     
     short int returncode = 0;
     
@@ -32,9 +31,7 @@
     }
     
     // The application has full permission to access the location services
-    if (  [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized ){
-        self.gps_manager = [ [CLLocationManager alloc] init ];
-        self.gps_manager.delegate = self;
+    else if (  [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized ){
         self.gps_manager.distanceFilter = distance;
         self.gps_manager.desiredAccuracy = accuracy;
         returncode = 1;
@@ -48,54 +45,85 @@
     return returncode;
 }
 
+- (void)halt_GPS
+{
+    [ self.gps_manager stopUpdatingLocation ];
+}
+
+- (short int)log_GPS
+{
+    short int returncode = 1;
+    return returncode;
+}
+
 // iOS 5
 // Depracated in iOS 6 and 7. I want to test/run the app on the first GEN iPAD
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
+- (void)locationManager:(CLLocationManager *)manager 
+    didUpdateToLocation:(CLLocation *)newLocation 
+           fromLocation:(CLLocation *)oldLocation{
     
     // GPS MANAGER
     if ( manager == self.gps_manager ){
-
-        // What kind of time time interval are we expecting. 
-        // Make sure the time stamp is relevant. 
-        // If the update is within the last minute update the property
-        // Leaving the quite wide not sure exactly
-        // UNIX time since 1970 (UNIX EPOCHE)
-        // Set the speed, latitude and longitude at the front end. 
+ 
+        /* Make sure the time stamp is relevant. */ 
         if ( ( [ [ NSDate date ]  timeIntervalSince1970 ] - [newLocation.timestamp timeIntervalSince1970 ] ) < 60 )
         { 
+            /* Set the new lat and long values */
             self.shipIt_ref.latitude = newLocation.coordinate.latitude;
             self.shipIt_ref.longitude = newLocation.coordinate.longitude;
-            self.shipIt_ref.knots = ( (newLocation.speed) * 1.94384 );
-            NSLog( @"LAT: %f\nLONG: %f\nKNOTS:%f" , self.shipIt_ref.latitude , self.shipIt_ref.longitude , self.shipIt_ref.knots);
 
-            // This is where we need to update and recenter the map
-            // Not exactly sure how to code this. 
+
+            self.shipIt_ref.knots = ( (newLocation.speed) * 1.94384 );
+#if 1
+            NSLog( @"LAT: %f\nLONG: %f\nKNOTS:%f" , self.shipIt_ref.latitude , self.shipIt_ref.longitude , self.shipIt_ref.knots);
+#endif
         }
         else
         {
+#if 1
             NSLog("Entry is over 1 minute old.....");
+#endif
         }
     }
 }
 
-
 // iOS 6 & 7
-- (void)locationManager: (CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
-    
+- (void)locationManager: (CLLocationManager *)manager 
+     didUpdateLocations:(NSArray *)locations
+{    
     if ( manager == self.gps_manager )
     {
-
+       // Update the location
         CLLocation *current_location = [ locations lastObject ];
-
         if ( ( [ [ NSDate date ]  timeIntervalSince1970 ] - [newLocation.timestamp timeIntervalSince1970 ] ) < 60 )
         {
+            /* Set the new lat/long */
             self.shipIt_ref.latitude = current_location.coordinate.latitude;
             self.shipIt_ref.longitude = current_location.coordinate.longitude;
+
             self.shipIt_ref.speed_in_knots = ( current_location.speed * 1.94384 );
-            NSLog( @"LAT: %f\nLONG: %f\nKNOTS:%f" , self.shipIt_ref.latitude , self.shipIt_ref.longitude , self.shipIt_ref.knots);       
+#if 1
+            NSLog( @"LAT: %f\nLONG: %f\nKNOTS:%f" , self.shipIt_ref.latitude , self.shipIt_ref.longitude , self.shipIt_ref.knots);  
+#endif     
         }
         else{
+#if 1
             NSLog("Entry is over 1 minute old......");
+#endif
+        }
+
+
+        // cycle through and log the elements. 
+        unsigned short int l = 0;
+        for ( l ; l < [locations count] ; l++)
+        {
+            // log each element in the array. 
+            // maybe have to do some checking on the size of the logs
+            // also what is the most efficient way that we can
+            // how many reading do you think we need.
+            // how many does derek need to draw his line?
+            // it should be as spread out as possible. 
+            // don't ya think!! 
         }
     } 
 }
@@ -103,7 +131,7 @@
 // Returns
 // 1 on success
 // -1 on failure
-- (short int)initializeAvailability_compass
+- (short int)run_compass
 {
     short int returncode;   
     
@@ -114,15 +142,23 @@
         returncode = 1;
     }
     else{
+#if 1
         NSLog(@"Compass Not Available");
+#endif 
         returncode = -1;
     }
     
     return returncode;
 }
 
+- (void)halt_compass
+{
+    [ self.compass_manager stopUpdatingHeading ];
+}
+
 // Delegate Method for Compass Events 
-- (void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading
+- (void)locationManager:(CLLocationManager *)manager 
+       didUpdateHeading:(CLHeading *)newHeading
 {
     if ( self.compass_manager == manager ){
         
@@ -171,7 +207,8 @@
 // unable to get a location error right away it reports a kCLErrorLocationUnkown
 // error and keeps trying. This can be ingnored. However, a kCLErrorDenied is
 // received if the User denies LS. A kCLErrorHeadingFailure is due to interference.
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
+- (void)locationManager:(CLLocationManager *)manager 
+       didFailWithError:(NSError *)error{
     if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied){
         NSLog(@"User has denied location services");
     } else {

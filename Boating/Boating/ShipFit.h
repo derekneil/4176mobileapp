@@ -15,12 +15,9 @@ extern NSString *const ERROR;
 @interface ShipFit : NSObject
 //@property (nonatomic, readwrite, assign) MKMapView *map_view_ref;
 
-/* 
-	Properties for the UI to Observer:
-	LOCATION LATITUDE & LONGITUDE
-	SPEED 
-	BEARING  
-*/
+/*
+ Properties for the UI to Observe..... Do with them what you please. 
+ */
 @property (nonatomic, readwrite, assign) CLLocationDegrees latitude;
 @property (nonatomic, readwrite, assign) CLLocationDegrees longitude;
 @property (nonatomic, readwrite, assign) CLLocationDirection magnetic_north;
@@ -28,8 +25,9 @@ extern NSString *const ERROR;
 @property (nonatomic, readwrite, assign) CLLocationDirection true_north;
 @property (nonatomic, readwrite, strong) NSString *true_north_bearing;
 @property (nonatomic, readwrite, assign) double knots;
+@proptery (nonatomic, readwrite, strong) CLLocationDegrees
 
 /* Functions */
-- (short int)initialize_modules;
+- (void)init_and_run_application;
 
 @end
