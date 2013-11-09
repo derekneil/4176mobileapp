@@ -42,8 +42,8 @@
 
 
 
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    
     
     if ([[segue identifier]isEqualToString:@"addArticle"]) {
         AddViewController *acvc = (AddViewController *)[segue destinationViewController];
@@ -89,26 +89,10 @@
         abort();
     }
     
-    [self createDatabase];
+    //[self createDatabase];
 }
 
 
--(void)createDatabase{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
-    
-    
-    //http://www.adevelopingstory.com/blog/2013/04/adding-full-text-search-to-core-data.html
-    //NSString *dbPath = [NSSearchPathForDirectoriesInDomains(NSApplicationDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    basePath = [basePath stringByAppendingPathComponent:@"shipfit_Index.sqlite"];
-    
-    // Using the FMDatabaseQueue ensures that we don't accidentally talk to our database concurrently from two different threads
-    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:basePath];
-    [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
-        [db executeUpdate:@"CREATE VIRTUAL TABLE IF NOT EXISTS docs USING fts4(name, contents);"];
-    }];
-    
-}
 
 
 - (void)didReceiveMemoryWarning
@@ -162,6 +146,32 @@
     
     return _fetchedResultsController;
 }
+
+- (IBAction)btnTest:(id)sender {
+    [self testSearch];
+}
+
+
+-(void)testSearch{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath = [paths objectAtIndex:0];
+    NSString *path = [docsPath stringByAppendingPathComponent:@"shipfit_Index.sqlite"];
+    
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:path];
+    
+    
+
+    __block NSMutableArray *matches = [NSMutableArray array];
+    [queue inDatabase:^(FMDatabase *db) {
+        FMResultSet *resultSet = [db executeQuery:@"SELECT name FROM docs WHERE docs MATCH ?", @"thi*"];
+        while ([resultSet next]) {
+            [matches addObject:[resultSet stringForColumn:@"name"]];
+        }
+    }];
+    
+    NSLog(@"array: %@", matches);
+}
+
 
 
 -(void) controllerWillChangeContent:(NSFetchedResultsController *)controller {
@@ -238,6 +248,34 @@
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     return [[[self.fetchedResultsController sections]objectAtIndex:section]name];
 }
+
+
+
+//run only once. create the index for the database
+-(void)createDatabase{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+    
+    
+    //http://www.adevelopingstory.com/blog/2013/04/adding-full-text-search-to-core-data.html
+    //NSString *dbPath = [NSSearchPathForDirectoriesInDomains(NSApplicationDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    basePath = [basePath stringByAppendingPathComponent:@"shipfit_Index.sqlite"];
+    
+    // Using the FMDatabaseQueue ensures that we don't accidentally talk to our database concurrently from two different threads
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:basePath];
+    [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
+        [db executeUpdate:@"CREATE VIRTUAL TABLE IF NOT EXISTS docs USING fts4(name, contents);"];
+    }];
+    
+}
+
+
+
+
+
+
+
+
 
 /*
 // Override to support conditional editing of the table view.

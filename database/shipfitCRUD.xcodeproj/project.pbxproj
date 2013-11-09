@@ -107,6 +107,7 @@
 		030EFF771821F2540049C126 /* Untitled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Untitled.png; sourceTree = "<group>"; };
 		030EFF8C1821F2DF0049C126 /* mystyle.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = mystyle.css; sourceTree = "<group>"; };
 		030EFF921821F85E0049C126 /* shipfitMainDatabase.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = shipfitMainDatabase.sqlite; sourceTree = "<group>"; };
+		03172372182EB54700B2E114 /* shipfitCRUD 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "shipfitCRUD 3.xcdatamodel"; sourceTree = "<group>"; };
 		038279D61813598E00A583E2 /* shipfitCRUD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shipfitCRUD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		038279D91813598E00A583E2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		038279DB1813598E00A583E2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -587,6 +588,8 @@
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
 					"DEBUG=1",
 					"$(inherited)",
+					SQLITE_ENABLE_FTS3,
+					SQLITE_ENABLE_FTS3_PARENTHESIS,
 				);
 				INFOPLIST_FILE = "shipfitCRUD/shipfitCRUD-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
@@ -694,9 +697,10 @@
 			isa = XCVersionGroup;
 			children = (
 				030EFF581821D0D80049C126 /* shipfitCRUD 2.xcdatamodel */,
+				03172372182EB54700B2E114 /* shipfitCRUD 3.xcdatamodel */,
 				038279EE1813598E00A583E2 /* shipfitCRUD.xcdatamodel */,
 			);
-			currentVersion = 030EFF581821D0D80049C126 /* shipfitCRUD 2.xcdatamodel */;
+			currentVersion = 03172372182EB54700B2E114 /* shipfitCRUD 3.xcdatamodel */;
 			path = shipfitCRUD.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

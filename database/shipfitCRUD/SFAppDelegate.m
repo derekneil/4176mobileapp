@@ -104,20 +104,22 @@
     }
     
     //added---------------------------
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"shipfitMainDatabase.sqlite"];
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"shipfitMainDatabasev1.sqlite"];
     
+    /*
     //does the file exists
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if (![fileManager fileExistsAtPath:[storeURL path]]) {
         
         //file doesnt exist, its the first time that the app is running
-        NSURL *defaultStoreURL = [[NSBundle mainBundle] URLForResource:@"shipfitMainDatabase" withExtension:@"sqlite"];
+        NSURL *defaultStoreURL = [[NSBundle mainBundle] URLForResource:@"shipfitMainDatabasev1" withExtension:@"sqlite"];
         
         //the default store file doesnt exists copy it on the device from the resources
         if (defaultStoreURL) {
             [fileManager copyItemAtURL:defaultStoreURL toURL:storeURL error:NULL];
         }
     }
+     */
     //--------------------------------
     //NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"shipfitCRUD.sqlite"];
     

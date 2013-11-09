@@ -15,10 +15,10 @@
 
 @interface MainViewController : UITableViewController <AddDelegate>
 
-
 @property(nonatomic, strong) NSManagedObjectContext *myManageObjectContext;
 
 @property(nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
+- (IBAction)btnTest:(id)sender;
 
 @end

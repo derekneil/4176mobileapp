@@ -34,6 +34,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Articles" id="VV2-v3-5Rx">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="bgi-ut-yM6">
+                            <connections>
+                                <action selector="btnTest:" destination="aph-7K-6FK" id="xEf-gp-npy"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Vfy-nd-fpA">
                             <connections>
                                 <segue destination="LwT-7p-13w" kind="modal" identifier="addArticle" id="ylm-RZ-HDY"/>
