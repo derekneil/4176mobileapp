@@ -271,8 +271,70 @@
 
 
 
+//this method is run once
+-(void)fillDatabaseFromXMLFile{
+    
 
+    
+	// find "sample.xml" in our bundle resources
+	NSString *sampleXML = [[NSBundle mainBundle] pathForResource:@"sample2" ofType:@"xml"];
+	NSData *data = [NSData dataWithContentsOfFile:sampleXML];
+	
+	// create a new SMXMLDocument with the contents of sample.xml
+    NSError *error;
+	SMXMLDocument *document = [SMXMLDocument documentWithData:data error:&error];
+    
+    
+    
+    for (SMXMLElement *rows in [document.root childrenNamed:@"Row"]) {
+        NSArray *cell = [rows childrenNamed:(@"Cell")];
+        
+        int i=0;
+        for (SMXMLElement *c in cell) {
+            
+            ARTICLE *newArticle = (ARTICLE *)[NSEntityDescription insertNewObjectForEntityForName:@"ARTICLE" inManagedObjectContext:[self myManageObjectContext]];
+            
+            NSArray *arr = [c children];
+            NSString *str = [(SMXMLElement *)[arr objectAtIndex:(0)] value];
+            NSLog(@"%@", str);
+            
+            
+            //title
+            if(i==0){
+                newArticle.title = str;
+            }
+            
+            
+            //maintext
+            else if (i==1){
+                newArticle.mainText = str;
+            }
+            
+            else if (i==2){
+                
+            }
+            
+            i++;
+            
+            //save the new article to the database
+            NSManagedObjectContext *context = self.myManageObjectContext;
+            if(![context save:&error]){
+                NSLog(@"error %@", error);
+            }
+            
+        }
+        
+    }
+    
+    // check for errors
+    if (error) {
+        NSLog(@"Error while parsing the document: %@", error);
+        return;
+    }
+    
 
+    
+}
 
 
 

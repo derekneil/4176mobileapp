@@ -12,6 +12,8 @@
 
 #import "FMDatabaseQueue.h"
 #import "FMDatabase.h"
+#import "SMXMLDocument.h"
+
 
 @interface MainViewController : UITableViewController <AddDelegate>
 

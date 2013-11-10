@@ -43,6 +43,10 @@
 		030EFF8E1821F2DF0049C126 /* mystyle.css in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF8C1821F2DF0049C126 /* mystyle.css */; };
 		030EFF931821F85E0049C126 /* shipfitMainDatabase.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF921821F85E0049C126 /* shipfitMainDatabase.sqlite */; };
 		030EFF941821F85E0049C126 /* shipfitMainDatabase.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 030EFF921821F85E0049C126 /* shipfitMainDatabase.sqlite */; };
+		033418FA183005A700EA931C /* SMXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 033418F9183005A700EA931C /* SMXMLDocument.m */; };
+		033418FB183005A700EA931C /* SMXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 033418F9183005A700EA931C /* SMXMLDocument.m */; };
+		033418FD183008D000EA931C /* sample2.xml in Resources */ = {isa = PBXBuildFile; fileRef = 033418FC183008D000EA931C /* sample2.xml */; };
+		033418FE183008D000EA931C /* sample2.xml in Resources */ = {isa = PBXBuildFile; fileRef = 033418FC183008D000EA931C /* sample2.xml */; };
 		038279DA1813598E00A583E2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038279D91813598E00A583E2 /* Foundation.framework */; };
 		038279DC1813598E00A583E2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038279DB1813598E00A583E2 /* CoreGraphics.framework */; };
 		038279DE1813598E00A583E2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038279DD1813598E00A583E2 /* UIKit.framework */; };
@@ -107,7 +111,10 @@
 		030EFF771821F2540049C126 /* Untitled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Untitled.png; sourceTree = "<group>"; };
 		030EFF8C1821F2DF0049C126 /* mystyle.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = mystyle.css; sourceTree = "<group>"; };
 		030EFF921821F85E0049C126 /* shipfitMainDatabase.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = shipfitMainDatabase.sqlite; sourceTree = "<group>"; };
-		03172372182EB54700B2E114 /* shipfitCRUD 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "shipfitCRUD 3.xcdatamodel"; sourceTree = "<group>"; };
+		03172372182EB54700B2E114 /* shipfitCRUD 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "shipfitCRUD 3.xcdatamodel"; sourceTree = "<group>"; };
+		033418F8183005A700EA931C /* SMXMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMXMLDocument.h; sourceTree = "<group>"; };
+		033418F9183005A700EA931C /* SMXMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMXMLDocument.m; sourceTree = "<group>"; };
+		033418FC183008D000EA931C /* sample2.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = sample2.xml; sourceTree = "<group>"; };
 		038279D61813598E00A583E2 /* shipfitCRUD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shipfitCRUD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		038279D91813598E00A583E2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		038279DB1813598E00A583E2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -202,6 +209,8 @@
 		038279CD1813598E00A583E2 = {
 			isa = PBXGroup;
 			children = (
+				033418F8183005A700EA931C /* SMXMLDocument.h */,
+				033418F9183005A700EA931C /* SMXMLDocument.m */,
 				03E7BF48182DA6DB00A66B06 /* fmdb */,
 				03E7BF44182DA5CF00A66B06 /* sqlite3.c */,
 				03E7BF45182DA5CF00A66B06 /* sqlite3.h */,
@@ -250,6 +259,7 @@
 		038279E21813598E00A583E2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				033418FC183008D000EA931C /* sample2.xml */,
 				030EFF921821F85E0049C126 /* shipfitMainDatabase.sqlite */,
 				038279EA1813598E00A583E2 /* SFAppDelegate.h */,
 				038279EB1813598E00A583E2 /* SFAppDelegate.m */,
@@ -391,6 +401,7 @@
 				030EFF6C1821EFFF0049C126 /* sober.png in Resources */,
 				030EFF681821EFFF0049C126 /* iPhoto Library.photolibrary in Resources */,
 				030EFF931821F85E0049C126 /* shipfitMainDatabase.sqlite in Resources */,
+				033418FD183008D000EA931C /* sample2.xml in Resources */,
 				030EFF7E1821F2540049C126 /* Display your Licence Number.png in Resources */,
 				030EFF781821F2540049C126 /* boat-front.png in Resources */,
 				030EFF7C1821F2540049C126 /* DeepVHull.png in Resources */,
@@ -417,6 +428,7 @@
 			files = (
 				030EFF831821F2540049C126 /* FlatBottomHulls.png in Resources */,
 				030EFF5E1821EFA80049C126 /* bcl.png in Resources */,
+				033418FE183008D000EA931C /* sample2.xml in Resources */,
 				030EFF851821F2540049C126 /* Hull Identification.png in Resources */,
 				030EFF791821F2540049C126 /* boat-front.png in Resources */,
 				030EFF811821F2540049C126 /* Enginetypes.png in Resources */,
@@ -450,6 +462,7 @@
 				03E7BF53182DA6DB00A66B06 /* FMDatabase.m in Sources */,
 				03827A181813772400A583E2 /* AddViewController.m in Sources */,
 				03E7BF59182DA6DB00A66B06 /* FMDatabaseQueue.m in Sources */,
+				033418FA183005A700EA931C /* SMXMLDocument.m in Sources */,
 				03E7BF5B182DA6DB00A66B06 /* FMResultSet.m in Sources */,
 				03E7BF57182DA6DB00A66B06 /* FMDatabasePool.m in Sources */,
 				038279E81813598E00A583E2 /* main.m in Sources */,
@@ -466,6 +479,7 @@
 			files = (
 				03E7BF54182DA6DB00A66B06 /* FMDatabase.m in Sources */,
 				03827A051813598E00A583E2 /* shipfitCRUDTests.m in Sources */,
+				033418FB183005A700EA931C /* SMXMLDocument.m in Sources */,
 				03E7BF5C182DA6DB00A66B06 /* FMResultSet.m in Sources */,
 				03E7BF58182DA6DB00A66B06 /* FMDatabasePool.m in Sources */,
 				03E7BF47182DA5CF00A66B06 /* sqlite3.c in Sources */,
