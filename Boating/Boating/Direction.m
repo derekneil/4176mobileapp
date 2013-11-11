@@ -43,7 +43,9 @@
 - (void)locationManager:(CLLocationManager *)manager
        didUpdateHeading:(CLHeading *)newHeading
 {
-    if ( ( [ [ NSDate date ]  timeIntervalSince1970 ] - [newHeading.timestamp timeIntervalSince1970 ] ) < 5 )
+    NSLog(@"Compass!!\n%@\n", newHeading);
+    
+    if ( ( [ [ NSDate date ]  timeIntervalSince1970 ] - [newHeading.timestamp timeIntervalSince1970 ] ) < 60 )
     {
         self.shipFit_ref.magnetic_north = newHeading.magneticHeading;
         self.shipFit_ref.true_north = newHeading.trueHeading;

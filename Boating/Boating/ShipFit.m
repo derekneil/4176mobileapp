@@ -34,7 +34,7 @@ NSString *const ERROR = @"ERROR";
                  andDistanceFilter:kCLDistanceFilterNone ];
     
     NSLog(@"initializing compass");
-    _direction = [ [Direction alloc] init ];
+    _direction = [ [Direction alloc] initWithReference:self ];
     [ _direction init_logs_and_manager ];
     [ _direction run_compass_withFilter:10 ];
     

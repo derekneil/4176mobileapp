@@ -45,7 +45,7 @@
 {
     printf("%d\n", [CLLocationManager authorizationStatus] );
     
-    if ( [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized )
+    if ( [CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied )
     {
         _locationManager.distanceFilter = distance;
         _locationManager.desiredAccuracy = accuracy;
