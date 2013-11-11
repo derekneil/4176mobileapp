@@ -1,5 +1,7 @@
 
 #import "ShipFit.h"
+#import "Location.h"
+#import "Direction.h"
 
 // Compass Bearing
 NSString *const N = @"N";
@@ -13,36 +15,30 @@ NSString *const NE = @"NE";
 NSString *const ERROR = @"ERROR";
 
 
+
+
 @implementation ShipFit
+{
+    Location *_location;
+    Direction *_direction;
+}
 
 
 
 - (void)init_and_run_application
 {
-	
-    Location *location = [ [Location alloc] initWithReference:self ];
+    NSLog(@"initializing GPS");
+    _location = [ [Location alloc] initWithReference:self ];
+    [_location init_logs_and_manager];
+    [_location run_GPS_withAccuracy:kCLLocationAccuracyBest
+                 andDistanceFilter:kCLDistanceFilterNone ];
     
-    if ( [location init_compass] ){
-    	[location run_compass_withFilter: 1];	
-    }
+    NSLog(@"initializing compass");
+    _direction = [ [Direction alloc] init ];
+    [ _direction init_logs_and_manager ];
+    [ _direction run_compass_withFilter:10 ];
+    
 
-    if ( [location init_GPS] == kCLAuthorizationStatusAuthorized ){
-    	[location runGPS_withAccuracy:100 andDistanceFilter:100];	
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
 
 
@@ -54,10 +50,7 @@ NSString *const ERROR = @"ERROR";
 
 @end
 
+// Reminder: declare and use macros to define the granularity of GPS and Compass
+// Perhaps have a power saver mode.
 
-// How and where do we want to store data
-// What is the most efficient way that we can log the GPS...
-// Hmm Ns.array class is way too much overhead.
-// Structs !!?
-// more ideas
-//
+

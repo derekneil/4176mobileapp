@@ -25,7 +25,7 @@ extern NSString *const ERROR;
 @property (nonatomic, readwrite, assign) CLLocationDirection true_north;
 @property (nonatomic, readwrite, strong) NSString *true_north_bearing;
 @property (nonatomic, readwrite, assign) double knots;
-@proptery (nonatomic, readwrite, strong) CLLocationDegrees
+
 
 /* Functions */
 - (void)init_and_run_application;
