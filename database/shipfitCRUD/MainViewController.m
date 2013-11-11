@@ -90,6 +90,7 @@
     }
     
     //[self createDatabase];
+    //[self fillDatabaseFromXMLFile];
 }
 
 
@@ -163,7 +164,7 @@
 
     __block NSMutableArray *matches = [NSMutableArray array];
     [queue inDatabase:^(FMDatabase *db) {
-        FMResultSet *resultSet = [db executeQuery:@"SELECT name FROM docs WHERE docs MATCH ?", @"thi*"];
+        FMResultSet *resultSet = [db executeQuery:@"SELECT name FROM docs WHERE docs MATCH ?", @"canada*"];
         while ([resultSet next]) {
             [matches addObject:[resultSet stringForColumn:@"name"]];
         }
@@ -274,25 +275,35 @@
 //this method is run once
 -(void)fillDatabaseFromXMLFile{
     
-
+    NSString * resourcePath = [[NSBundle mainBundle] resourcePath] ;
+    NSString * sampleXML = [resourcePath stringByAppendingPathComponent:@"sample4.xml"];
+    NSError * error;
     
 	// find "sample.xml" in our bundle resources
-	NSString *sampleXML = [[NSBundle mainBundle] pathForResource:@"sample2" ofType:@"xml"];
+	//NSString *sampleXML = [pathForResource:@"sample2" ofType:@"xml"];
+    
+    
 	NSData *data = [NSData dataWithContentsOfFile:sampleXML];
 	
 	// create a new SMXMLDocument with the contents of sample.xml
-    NSError *error;
+    //NSError *error;
 	SMXMLDocument *document = [SMXMLDocument documentWithData:data error:&error];
     
+    // check for errors
+    if (error) {
+        NSLog(@"Error while parsing the document: %@", error);
+        return;
+    }
     
     
     for (SMXMLElement *rows in [document.root childrenNamed:@"Row"]) {
         NSArray *cell = [rows childrenNamed:(@"Cell")];
         
         int i=0;
+        ARTICLE *newArticle = (ARTICLE *)[NSEntityDescription insertNewObjectForEntityForName:@"ARTICLE" inManagedObjectContext:[self myManageObjectContext]];
+        
+        
         for (SMXMLElement *c in cell) {
-            
-            ARTICLE *newArticle = (ARTICLE *)[NSEntityDescription insertNewObjectForEntityForName:@"ARTICLE" inManagedObjectContext:[self myManageObjectContext]];
             
             NSArray *arr = [c children];
             NSString *str = [(SMXMLElement *)[arr objectAtIndex:(0)] value];
@@ -311,27 +322,32 @@
             }
             
             else if (i==2){
-                
+                //if string is not empty add img tag
+                if ([str length] != 0){
+                    NSString *styleTag = @"<head><link rel='stylesheet' type='text/css' href='mystyle.css'></head>";
+                    
+                    
+                    NSString *imgTag = [NSString stringWithFormat:@"<img src='%@%@", str, @"'>"];
+                    //newArticle.mainText = [newArticle.mainText stringByAppendingString:(imgTag)]; //cancatinate
+                    
+                    newArticle.mainText = [[styleTag stringByAppendingString:(newArticle.mainText)]
+                                           stringByAppendingString:(imgTag)];
+                    
+                }
             }
             
             i++;
-            
-            //save the new article to the database
-            NSManagedObjectContext *context = self.myManageObjectContext;
-            if(![context save:&error]){
-                NSLog(@"error %@", error);
-            }
-            
+        }
+        
+        //save the new article to the database
+        NSManagedObjectContext *context = self.myManageObjectContext;
+        if(![context save:&error]){
+            NSLog(@"error %@", error);
         }
         
     }
     
-    // check for errors
-    if (error) {
-        NSLog(@"Error while parsing the document: %@", error);
-        return;
-    }
-    
+
 
     
 }

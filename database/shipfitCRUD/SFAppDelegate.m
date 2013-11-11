@@ -106,7 +106,7 @@
     //added---------------------------
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"shipfitMainDatabasev1.sqlite"];
     
-    /*
+    
     //does the file exists
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if (![fileManager fileExistsAtPath:[storeURL path]]) {
@@ -119,7 +119,7 @@
             [fileManager copyItemAtURL:defaultStoreURL toURL:storeURL error:NULL];
         }
     }
-     */
+    
     //--------------------------------
     //NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"shipfitCRUD.sqlite"];
     
@@ -167,5 +167,12 @@
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
+
+
+
+
+
+
+
 
 @end

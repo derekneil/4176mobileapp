@@ -66,6 +66,10 @@
 		03827A1218135B1400A583E2 /* mainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03827A1118135B1400A583E2 /* mainStoryboard.storyboard */; };
 		03827A1518135CBF00A583E2 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03827A1418135CBF00A583E2 /* MainViewController.m */; };
 		03827A181813772400A583E2 /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03827A171813772400A583E2 /* AddViewController.m */; };
+		03BB421B1830B1D9001ED4BA /* sample3.xml in Resources */ = {isa = PBXBuildFile; fileRef = 03BB421A1830B1D9001ED4BA /* sample3.xml */; };
+		03BB421C1830B1D9001ED4BA /* sample3.xml in Resources */ = {isa = PBXBuildFile; fileRef = 03BB421A1830B1D9001ED4BA /* sample3.xml */; };
+		03BB421E1830BEFC001ED4BA /* sample4.xml in Resources */ = {isa = PBXBuildFile; fileRef = 03BB421D1830BEFC001ED4BA /* sample4.xml */; };
+		03BB421F1830BEFC001ED4BA /* sample4.xml in Resources */ = {isa = PBXBuildFile; fileRef = 03BB421D1830BEFC001ED4BA /* sample4.xml */; };
 		03C0D6C2181F42510046E68B /* ViewArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C0D6C1181F42510046E68B /* ViewArticleViewController.m */; };
 		03E7BF46182DA5CF00A66B06 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 03E7BF44182DA5CF00A66B06 /* sqlite3.c */; };
 		03E7BF47182DA5CF00A66B06 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 03E7BF44182DA5CF00A66B06 /* sqlite3.c */; };
@@ -140,6 +144,8 @@
 		03827A1418135CBF00A583E2 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = shipfitCRUD/MainViewController.m; sourceTree = "<group>"; };
 		03827A161813772400A583E2 /* AddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewController.h; sourceTree = "<group>"; };
 		03827A171813772400A583E2 /* AddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddViewController.m; sourceTree = "<group>"; };
+		03BB421A1830B1D9001ED4BA /* sample3.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = sample3.xml; sourceTree = "<group>"; };
+		03BB421D1830BEFC001ED4BA /* sample4.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = sample4.xml; sourceTree = "<group>"; };
 		03C0D6C0181F42510046E68B /* ViewArticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewArticleViewController.h; sourceTree = "<group>"; };
 		03C0D6C1181F42510046E68B /* ViewArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewArticleViewController.m; sourceTree = "<group>"; };
 		03E7BF44182DA5CF00A66B06 /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sqlite3.c; sourceTree = "<group>"; };
@@ -259,6 +265,8 @@
 		038279E21813598E00A583E2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				03BB421D1830BEFC001ED4BA /* sample4.xml */,
+				03BB421A1830B1D9001ED4BA /* sample3.xml */,
 				033418FC183008D000EA931C /* sample2.xml */,
 				030EFF921821F85E0049C126 /* shipfitMainDatabase.sqlite */,
 				038279EA1813598E00A583E2 /* SFAppDelegate.h */,
@@ -405,10 +413,12 @@
 				030EFF7E1821F2540049C126 /* Display your Licence Number.png in Resources */,
 				030EFF781821F2540049C126 /* boat-front.png in Resources */,
 				030EFF7C1821F2540049C126 /* DeepVHull.png in Resources */,
+				03BB421E1830BEFC001ED4BA /* sample4.xml in Resources */,
 				038279E61813598E00A583E2 /* InfoPlist.strings in Resources */,
 				030EFF8D1821F2DF0049C126 /* mystyle.css in Resources */,
 				030EFF8A1821F2540049C126 /* Untitled.png in Resources */,
 				038279F11813598E00A583E2 /* Images.xcassets in Resources */,
+				03BB421B1830B1D9001ED4BA /* sample3.xml in Resources */,
 				030EFF5D1821EFA80049C126 /* bcl.png in Resources */,
 				030EFF881821F2540049C126 /* RoundBottom.png in Resources */,
 				030EFF821821F2540049C126 /* FlatBottomHulls.png in Resources */,
@@ -426,6 +436,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03BB421F1830BEFC001ED4BA /* sample4.xml in Resources */,
 				030EFF831821F2540049C126 /* FlatBottomHulls.png in Resources */,
 				030EFF5E1821EFA80049C126 /* bcl.png in Resources */,
 				033418FE183008D000EA931C /* sample2.xml in Resources */,
@@ -434,6 +445,7 @@
 				030EFF811821F2540049C126 /* Enginetypes.png in Resources */,
 				030EFF8E1821F2DF0049C126 /* mystyle.css in Resources */,
 				030EFF941821F85E0049C126 /* shipfitMainDatabase.sqlite in Resources */,
+				03BB421C1830B1D9001ED4BA /* sample3.xml in Resources */,
 				030EFF651821EFFF0049C126 /* boat.png in Resources */,
 				030EFF691821EFFF0049C126 /* iPhoto Library.photolibrary in Resources */,
 				030EFF7B1821F2540049C126 /* ComplianceNotice.png in Resources */,
