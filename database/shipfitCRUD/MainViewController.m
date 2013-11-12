@@ -42,8 +42,8 @@
 
 
 
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    
     
     if ([[segue identifier]isEqualToString:@"addArticle"]) {
         AddViewController *acvc = (AddViewController *)[segue destinationViewController];
@@ -89,8 +89,12 @@
         abort();
     }
     
-
+    //[self createDatabase];
+    //[self fillDatabaseFromXMLFile];
 }
+
+
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -143,6 +147,37 @@
     
     return _fetchedResultsController;
 }
+
+- (IBAction)btnTest:(id)sender {
+    [self searchTheDatabase:(@"canada")];
+}
+
+
+-(void)searchTheDatabase:(NSString *)textToSearchFor{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath = [paths objectAtIndex:0];
+    NSString *path = [docsPath stringByAppendingPathComponent:@"shipfit_Index.sqlite"];
+    
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:path];
+    
+    
+
+    __block NSMutableArray *matches = [NSMutableArray array];
+    [queue inDatabase:^(FMDatabase *db) {
+
+        //FMResultSet *resultSet = [db executeQuery:@"SELECT name FROM docs WHERE docs MATCH ?", @"canada*"];
+        
+        FMResultSet *resultSet = [db executeQuery:@"SELECT name FROM docs WHERE docs MATCH ?",
+                                  [textToSearchFor stringByAppendingString:(@"*")]];
+        
+        while ([resultSet next]) {
+            [matches addObject:[resultSet stringForColumn:@"name"]];
+        }
+    }];
+    
+    NSLog(@"array: %@", matches);
+}
+
 
 
 -(void) controllerWillChangeContent:(NSFetchedResultsController *)controller {
@@ -219,6 +254,111 @@
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     return [[[self.fetchedResultsController sections]objectAtIndex:section]name];
 }
+
+
+
+//run only once. create the index for the database
+-(void)createDatabase{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+    
+    
+    //http://www.adevelopingstory.com/blog/2013/04/adding-full-text-search-to-core-data.html
+    //NSString *dbPath = [NSSearchPathForDirectoriesInDomains(NSApplicationDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    basePath = [basePath stringByAppendingPathComponent:@"shipfit_Index.sqlite"];
+    
+    // Using the FMDatabaseQueue ensures that we don't accidentally talk to our database concurrently from two different threads
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:basePath];
+    [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
+        [db executeUpdate:@"CREATE VIRTUAL TABLE IF NOT EXISTS docs USING fts4(name, contents);"];
+    }];
+    
+}
+
+
+
+//this method is run once
+-(void)fillDatabaseFromXMLFile{
+    
+    NSString * resourcePath = [[NSBundle mainBundle] resourcePath] ;
+    NSString * sampleXML = [resourcePath stringByAppendingPathComponent:@"sample4.xml"];
+    NSError * error;
+    
+	// find "sample.xml" in our bundle resources
+	//NSString *sampleXML = [pathForResource:@"sample2" ofType:@"xml"];
+    
+    
+	NSData *data = [NSData dataWithContentsOfFile:sampleXML];
+	
+	// create a new SMXMLDocument with the contents of sample.xml
+    //NSError *error;
+	SMXMLDocument *document = [SMXMLDocument documentWithData:data error:&error];
+    
+    // check for errors
+    if (error) {
+        NSLog(@"Error while parsing the document: %@", error);
+        return;
+    }
+    
+    
+    for (SMXMLElement *rows in [document.root childrenNamed:@"Row"]) {
+        NSArray *cell = [rows childrenNamed:(@"Cell")];
+        
+        int i=0;
+        ARTICLE *newArticle = (ARTICLE *)[NSEntityDescription insertNewObjectForEntityForName:@"ARTICLE" inManagedObjectContext:[self myManageObjectContext]];
+        
+        
+        for (SMXMLElement *c in cell) {
+            
+            NSArray *arr = [c children];
+            NSString *str = [(SMXMLElement *)[arr objectAtIndex:(0)] value];
+            NSLog(@"%@", str);
+            
+            
+            //title
+            if(i==0){
+                newArticle.title = str;
+            }
+            
+            
+            //maintext
+            else if (i==1){
+                newArticle.mainText = str;
+            }
+            
+            else if (i==2){
+                //if string is not empty add img tag
+                if ([str length] != 0){
+                    NSString *styleTag = @"<head><link rel='stylesheet' type='text/css' href='mystyle.css'></head>";
+                    
+                    
+                    NSString *imgTag = [NSString stringWithFormat:@"<img src='%@%@", str, @"'>"];
+                    //newArticle.mainText = [newArticle.mainText stringByAppendingString:(imgTag)]; //cancatinate
+                    
+                    newArticle.mainText = [[styleTag stringByAppendingString:(newArticle.mainText)]
+                                           stringByAppendingString:(imgTag)];
+                    
+                }
+            }
+            
+            i++;
+        }
+        
+        //save the new article to the database
+        NSManagedObjectContext *context = self.myManageObjectContext;
+        if(![context save:&error]){
+            NSLog(@"error %@", error);
+        }
+        
+    }
+    
+
+
+    
+}
+
+
+
 
 /*
 // Override to support conditional editing of the table view.
