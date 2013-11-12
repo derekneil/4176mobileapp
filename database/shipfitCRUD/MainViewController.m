@@ -149,11 +149,11 @@
 }
 
 - (IBAction)btnTest:(id)sender {
-    [self testSearch];
+    [self searchTheDatabase:(@"canada")];
 }
 
 
--(void)testSearch{
+-(void)searchTheDatabase:(NSString *)textToSearchFor{
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsPath = [paths objectAtIndex:0];
     NSString *path = [docsPath stringByAppendingPathComponent:@"shipfit_Index.sqlite"];
@@ -164,7 +164,12 @@
 
     __block NSMutableArray *matches = [NSMutableArray array];
     [queue inDatabase:^(FMDatabase *db) {
-        FMResultSet *resultSet = [db executeQuery:@"SELECT name FROM docs WHERE docs MATCH ?", @"canada*"];
+
+        //FMResultSet *resultSet = [db executeQuery:@"SELECT name FROM docs WHERE docs MATCH ?", @"canada*"];
+        
+        FMResultSet *resultSet = [db executeQuery:@"SELECT name FROM docs WHERE docs MATCH ?",
+                                  [textToSearchFor stringByAppendingString:(@"*")]];
+        
         while ([resultSet next]) {
             [matches addObject:[resultSet stringForColumn:@"name"]];
         }
