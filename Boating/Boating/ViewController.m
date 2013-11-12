@@ -11,6 +11,11 @@
     ShipFit *_shipfit;
 }
 
+- (IBAction)let_er_buck: (id)sender
+{
+    [_shipfit init_and_run_application];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -55,12 +60,6 @@
                forKeyPath:@"true_north_bearing"
                   options:NSKeyValueObservingOptionNew
                   context:nil ];
-
-    /* Run the Application */
-    [ _shipfit init_and_run_application ];
-    
-    
-    
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -70,12 +69,37 @@
 {
     if ( [keyPath isEqualToString:@"latitude" ] )
     {
-        // to do
+        self.latitude.text = [NSString stringWithFormat:@"Latitude: %f" , _shipfit.latitude ];
     }
     
     if ( [keyPath isEqualToString:@"longitude" ] )
     {
-        // to do
+       self.longitude.text = [NSString stringWithFormat:@"Longitude: %f" , _shipfit.longitude ];
+    }
+    
+    if ( [keyPath isEqualToString:@"knots" ] )
+    {
+        self.speed.text = [NSString stringWithFormat:@"Speed: %f" , _shipfit.knots ];
+    }
+    
+    if ( [keyPath isEqualToString:@"magnetic_north" ] )
+    {
+        self.magnetic_north.text = [NSString stringWithFormat:@"Magnetic North: %f" , _shipfit.magnetic_north ];
+    }
+    
+    if ( [keyPath isEqualToString:@"magnetic_north_bearing" ] )
+    {
+        self.magnetic_north_heading.text = _shipfit.magnetic_north_bearing;
+    }
+    
+    if ( [keyPath isEqualToString:@"true_north" ] )
+    {
+        self.true_north.text = [NSString stringWithFormat:@"Magnetic North: %f" , _shipfit.true_north ];
+    }
+    
+    if ( [keyPath isEqualToString:@"true_north_bearing" ] )
+    {
+         self.true_north_heading.text = _shipfit.true_north_bearing;
     }
     
 }
