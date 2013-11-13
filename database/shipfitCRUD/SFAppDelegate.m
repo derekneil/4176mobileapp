@@ -103,11 +103,44 @@
         return _persistentStoreCoordinator;
     }
     
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"shipfitCRUD.sqlite"];
+    //added---------------------------
+    //check if the two databases exists on the device, if not it means its the first time the app is running
+    //copy the databases preloaded with data from the resources to the device
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"shipfitMainDatabasev1.sqlite"];
+    NSURL *storeURL2 = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"shipfit_Index.sqlite"];
+    
+    //does the file exists
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:[storeURL path]]) {
+        
+        //file doesnt exist, its the first time that the app is running
+        NSURL *defaultStoreURL = [[NSBundle mainBundle] URLForResource:@"shipfitMainDatabasev1" withExtension:@"sqlite"];
+        
+        if (defaultStoreURL) {
+            [fileManager copyItemAtURL:defaultStoreURL toURL:storeURL error:NULL];
+        }
+    }
+    
+    if (![fileManager fileExistsAtPath:[storeURL2 path]]) {
+        
+        //file doesnt exist, its the first time that the app is running
+        NSURL *defaultStoreURL2 = [[NSBundle mainBundle] URLForResource:@"shipfit_Index" withExtension:@"sqlite"];
+        
+        if (defaultStoreURL2) {
+            [fileManager copyItemAtURL:defaultStoreURL2 toURL:storeURL2 error:NULL];
+        }
+    }
+    
+    //--------------------------------
+    //NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"shipfitCRUD.sqlite"];
+    
+    //added
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,nil];
+    
     
     NSError *error = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:dict error:&error]) {
         /*
          Replace this implementation with code to handle the error appropriately.
          
@@ -145,5 +178,12 @@
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
+
+
+
+
+
+
+
 
 @end

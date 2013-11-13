@@ -8,11 +8,16 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "FMDatabaseQueue.h"
+#import "FMDatabase.h"
+
 
 
 @interface ARTICLE : NSManagedObject
 
 @property (nonatomic, retain) NSString * mainText;
 @property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSString * indexID;
+
 
 @end
