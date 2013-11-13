@@ -18,7 +18,7 @@
 
 - (void)init_logs_and_manager
 {
-    _locationManager = [ [CLLocationManager alloc] init ];
+    _locationManager = [[CLLocationManager alloc] init ];
     _locationManager.delegate = self;
 }
 
@@ -47,13 +47,8 @@
     
     if ( ( [ [ NSDate date ]  timeIntervalSince1970 ] - [newHeading.timestamp timeIntervalSince1970 ] ) < 60 )
     {
-        if ( self.shipFit_ref.isTrueNorth ){
-            self.shipFit_ref.compassDegrees = newHeading.trueHeading;
-        }
-        else{
-            self.shipFit_ref.compassDegrees = newHeading.magneticHeading;
-        }
-        
+        self.shipFit_ref.magnetic_north = newHeading.magneticHeading;
+        self.shipFit_ref.true_north = newHeading.trueHeading;
         [ self set_bearing ];
     }
     else{
@@ -68,15 +63,25 @@
 // based on the readings of the compass.
 - (void)set_bearing
 {
-    if( self.shipFit_ref.compassDegrees >= 337.5 || self.shipFit_ref.compassDegrees <= 22.5 )self.shipFit_ref.compassDirection = N;
-    else if( self.shipFit_ref.compassDegrees > 22.5 && self.shipFit_ref.compassDegrees < 67.5 )self.shipFit_ref.compassDirection = NE;
-    else if( self.shipFit_ref.compassDegrees >= 67.5 && self.shipFit_ref.compassDegrees <= 112.5 )self.shipFit_ref.compassDirection = E;
-    else if( self.shipFit_ref.compassDegrees > 112.5 && self.shipFit_ref.compassDegrees < 157.5)self.shipFit_ref.compassDirection = SE;
-    else if( self.shipFit_ref.compassDegrees >= 157.5 && self.shipFit_ref.compassDegrees <= 202.5)self.shipFit_ref.compassDirection = S;
-    else if( self.shipFit_ref.compassDegrees > 202.5 && self.shipFit_ref.compassDegrees < 247.5 )self.shipFit_ref.compassDirection = SW;
-    else if( self.shipFit_ref.compassDegrees >= 247.5 && self.shipFit_ref.compassDegrees <= 292.5)self.shipFit_ref.compassDirection = W;
-    else if( self.shipFit_ref.compassDegrees > 292.5 && self.shipFit_ref.compassDegrees < 337.5)self.shipFit_ref.compassDirection = NW;
-    else if ( self.shipFit_ref.compassDegrees == -1 )self.shipFit_ref.compassDirection = ERROR;
+    if( self.shipFit_ref.true_north >= 337.5 || self.shipFit_ref.true_north <= 22.5 )self.shipFit_ref.true_north_bearing = N;
+    else if( self.shipFit_ref.true_north > 22.5 && self.shipFit_ref.true_north < 67.5 )self.shipFit_ref.true_north_bearing = NE;
+    else if( self.shipFit_ref.true_north >= 67.5 && self.shipFit_ref.true_north <= 112.5 )self.shipFit_ref.true_north_bearing = E;
+    else if( self.shipFit_ref.true_north > 112.5 && self.shipFit_ref.true_north < 157.5)self.shipFit_ref.true_north_bearing = SE;
+    else if( self.shipFit_ref.true_north >= 157.5 && self.shipFit_ref.true_north <= 202.5)self.shipFit_ref.true_north_bearing = S;
+    else if( self.shipFit_ref.true_north > 202.5 && self.shipFit_ref.true_north < 247.5 )self.shipFit_ref.true_north_bearing = SW;
+    else if( self.shipFit_ref.true_north >= 247.5 && self.shipFit_ref.true_north <= 292.5)self.shipFit_ref.true_north_bearing = W;
+    else if( self.shipFit_ref.true_north > 292.5 && self.shipFit_ref.true_north < 337.5)self.shipFit_ref.true_north_bearing = NW;
+    else if ( self.shipFit_ref.true_north == -1 )self.shipFit_ref.true_north_bearing = ERROR;
+    
+    if( self.shipFit_ref.magnetic_north >= 337.5 || self.shipFit_ref.magnetic_north <= 22.5 )self.shipFit_ref.magnetic_north_bearing = N;
+    else if( self.shipFit_ref.magnetic_north > 22.5 && self.shipFit_ref.magnetic_north < 67.5 )self.shipFit_ref.magnetic_north_bearing = NE;
+    else if( self.shipFit_ref.magnetic_north >= 67.5 && self.shipFit_ref.magnetic_north <= 112.5 )self.shipFit_ref.magnetic_north_bearing = E;
+    else if( self.shipFit_ref.magnetic_north > 112.5 && self.shipFit_ref.magnetic_north < 157.5)self.shipFit_ref.magnetic_north_bearing = SE;
+    else if( self.shipFit_ref.magnetic_north >= 157.5 && self.shipFit_ref.magnetic_north <= 202.5)self.shipFit_ref.magnetic_north_bearing = S;
+    else if( self.shipFit_ref.magnetic_north > 202.5 && self.shipFit_ref.magnetic_north < 247.5 )self.shipFit_ref.magnetic_north_bearing = SW;
+    else if( self.shipFit_ref.magnetic_north >= 247.5 && self.shipFit_ref.magnetic_north <= 292.5)self.shipFit_ref.magnetic_north_bearing = W;
+    else if( self.shipFit_ref.magnetic_north > 292.5 && self.shipFit_ref.magnetic_north < 337.5)self.shipFit_ref.magnetic_north_bearing = NW;
+    else if ( self.shipFit_ref.magnetic_north == -1 )self.shipFit_ref.magnetic_north_bearing = ERROR;
 }
 
 - (void)locationManager:(CLLocationManager *)manager

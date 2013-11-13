@@ -21,7 +21,7 @@ extern NSString *const ERROR;
 @property (nonatomic, readwrite, assign) CLLocationDegrees latitude;
 @property (nonatomic, readwrite, assign) CLLocationDegrees longitude;
 @property (nonatomic, readwrite, assign) BOOL isTrueNorth;
-@property (nonatomic, readwrite, assign) CLLocationDirection compassDegrees;
+@property (nonatomic, readwrite, assign) CLLocationDirection compassDegress;
 @property (nonatomic, readwrite, strong) NSString *compassDirection;
 @property (nonatomic, readwrite, assign) double knots;
 
