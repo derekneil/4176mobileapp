@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		650377B01821F7F200FF4EC3 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 650377AF1821F7F200FF4EC3 /* SettingsViewController.m */; };
 		65A654EE1821EFBF00122C1A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A654ED1821EFBE00122C1A /* UIKit.framework */; };
 		65A654F01821EFBF00122C1A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A654EF1821EFBF00122C1A /* Foundation.framework */; };
 		65A654F21821EFBF00122C1A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A654F11821EFBF00122C1A /* CoreGraphics.framework */; };
@@ -28,8 +27,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		650377AE1821F7F100FF4EC3 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
-		650377AF1821F7F200FF4EC3 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		65A654EA1821EFBE00122C1A /* mapApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mapApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65A654ED1821EFBE00122C1A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		65A654EF1821EFBF00122C1A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -107,8 +104,6 @@
 				65A655051821EFBF00122C1A /* MainStoryboard.storyboard */,
 				65A6551F1821F1E200122C1A /* MapViewController.h */,
 				65A655201821F1E200122C1A /* MapViewController.m */,
-				650377AE1821F7F100FF4EC3 /* SettingsViewController.h */,
-				650377AF1821F7F200FF4EC3 /* SettingsViewController.m */,
 				65A6550B1821EFBF00122C1A /* first.png */,
 				65A6550D1821EFBF00122C1A /* first@2x.png */,
 				65A655121821EFBF00122C1A /* second.png */,
@@ -205,7 +200,6 @@
 				65A654FA1821EFBF00122C1A /* main.m in Sources */,
 				65A654FE1821EFBF00122C1A /* AppDelegate.m in Sources */,
 				65A655211821F1E300122C1A /* MapViewController.m in Sources */,
-				650377B01821F7F200FF4EC3 /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
