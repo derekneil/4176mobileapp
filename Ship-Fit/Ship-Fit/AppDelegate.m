@@ -35,8 +35,8 @@
                 _MapVC = (MapViewController *) view2;
             }
             else if ([view2 isKindOfClass:[UINavigationController class]]){
-                if ([[view2.viewControllers objectAtIndex:0] isKindOfClass:[MainViewController class]]){
-                    _DatabaseMainVC = (MainViewController *) [view2.viewControllers objectAtIndex:0];
+                if ([[view2.viewControllers objectAtIndex:0] isKindOfClass:[DatabaseMainViewController class]]){
+                    _DatabaseMainVC = (DatabaseMainViewController *) [view2.viewControllers objectAtIndex:0];
                 }
             }
         }

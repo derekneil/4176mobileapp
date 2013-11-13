@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		655D9D0518340F750004CD21 /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9CF318340F750004CD21 /* AddViewController.m */; };
-		655D9D0718340F750004CD21 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9CF718340F750004CD21 /* MainViewController.m */; };
-		655D9D0818340F750004CD21 /* SFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9CF918340F750004CD21 /* SFAppDelegate.m */; };
+		655D9D0718340F750004CD21 /* DatabaseMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9CF718340F750004CD21 /* DatabaseMainViewController.m */; };
 		655D9D0918340F750004CD21 /* shipfit_Index.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 655D9CFA18340F750004CD21 /* shipfit_Index.sqlite */; };
 		655D9D0B18340F750004CD21 /* SMXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9D0018340F750004CD21 /* SMXMLDocument.m */; };
 		655D9D0C18340F750004CD21 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 655D9D0118340F750004CD21 /* sqlite3.c */; };
@@ -64,10 +63,8 @@
 /* Begin PBXFileReference section */
 		655D9CF218340F750004CD21 /* AddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewController.h; sourceTree = "<group>"; };
 		655D9CF318340F750004CD21 /* AddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddViewController.m; sourceTree = "<group>"; };
-		655D9CF618340F750004CD21 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		655D9CF718340F750004CD21 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		655D9CF818340F750004CD21 /* SFAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFAppDelegate.h; sourceTree = "<group>"; };
-		655D9CF918340F750004CD21 /* SFAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFAppDelegate.m; sourceTree = "<group>"; };
+		655D9CF618340F750004CD21 /* DataBaseMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataBaseMainViewController.h; sourceTree = "<group>"; };
+		655D9CF718340F750004CD21 /* DatabaseMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseMainViewController.m; sourceTree = "<group>"; };
 		655D9CFA18340F750004CD21 /* shipfit_Index.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = shipfit_Index.sqlite; sourceTree = "<group>"; };
 		655D9CFF18340F750004CD21 /* SMXMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMXMLDocument.h; sourceTree = "<group>"; };
 		655D9D0018340F750004CD21 /* SMXMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMXMLDocument.m; sourceTree = "<group>"; };
@@ -154,6 +151,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		655D9D28183430280004CD21 /* fmdb */ = {
+			isa = PBXGroup;
+			children = (
+				655D9D12183414CE0004CD21 /* FMDatabase.h */,
+				655D9D13183414CE0004CD21 /* FMDatabase.m */,
+				655D9D14183414CE0004CD21 /* FMDatabaseAdditions.h */,
+				655D9D15183414CE0004CD21 /* FMDatabaseAdditions.m */,
+				655D9D16183414CF0004CD21 /* FMDatabasePool.h */,
+				655D9D17183414CF0004CD21 /* FMDatabasePool.m */,
+				655D9D18183414CF0004CD21 /* FMDatabaseQueue.h */,
+				655D9D19183414CF0004CD21 /* FMDatabaseQueue.m */,
+				655D9D1A183414CF0004CD21 /* FMResultSet.h */,
+				655D9D1B183414CF0004CD21 /* FMResultSet.m */,
+			);
+			name = fmdb;
+			sourceTree = "<group>";
+		};
+		655D9D29183430420004CD21 /* sqlite */ = {
+			isa = PBXGroup;
+			children = (
+				655D9D2618342F7C0004CD21 /* shipfitMainDatabasev1.sqlite */,
+				655D9D21183418320004CD21 /* shipfitCRUD.xcdatamodeld */,
+				655D9CFA18340F750004CD21 /* shipfit_Index.sqlite */,
+				655D9D0118340F750004CD21 /* sqlite3.c */,
+				655D9D0218340F750004CD21 /* sqlite3.h */,
+			);
+			name = sqlite;
+			sourceTree = "<group>";
+		};
 		658DA5851832D817003B6952 = {
 			isa = PBXGroup;
 			children = (
@@ -264,31 +290,16 @@
 		658DA5EC1832DD6A003B6952 /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				655D9D2618342F7C0004CD21 /* shipfitMainDatabasev1.sqlite */,
-				655D9D21183418320004CD21 /* shipfitCRUD.xcdatamodeld */,
+				655D9D29183430420004CD21 /* sqlite */,
+				655D9D28183430280004CD21 /* fmdb */,
 				65CE3DE3183419B900ECA91C /* ARTICLE.h */,
 				65CE3DE4183419B900ECA91C /* ARTICLE.m */,
-				655D9D12183414CE0004CD21 /* FMDatabase.h */,
-				655D9D13183414CE0004CD21 /* FMDatabase.m */,
-				655D9D14183414CE0004CD21 /* FMDatabaseAdditions.h */,
-				655D9D15183414CE0004CD21 /* FMDatabaseAdditions.m */,
-				655D9D16183414CF0004CD21 /* FMDatabasePool.h */,
-				655D9D17183414CF0004CD21 /* FMDatabasePool.m */,
-				655D9D18183414CF0004CD21 /* FMDatabaseQueue.h */,
-				655D9D19183414CF0004CD21 /* FMDatabaseQueue.m */,
-				655D9D1A183414CF0004CD21 /* FMResultSet.h */,
-				655D9D1B183414CF0004CD21 /* FMResultSet.m */,
 				655D9CF218340F750004CD21 /* AddViewController.h */,
 				655D9CF318340F750004CD21 /* AddViewController.m */,
-				655D9CF618340F750004CD21 /* MainViewController.h */,
-				655D9CF718340F750004CD21 /* MainViewController.m */,
-				655D9CF818340F750004CD21 /* SFAppDelegate.h */,
-				655D9CF918340F750004CD21 /* SFAppDelegate.m */,
-				655D9CFA18340F750004CD21 /* shipfit_Index.sqlite */,
+				655D9CF618340F750004CD21 /* DataBaseMainViewController.h */,
+				655D9CF718340F750004CD21 /* DatabaseMainViewController.m */,
 				655D9CFF18340F750004CD21 /* SMXMLDocument.h */,
 				655D9D0018340F750004CD21 /* SMXMLDocument.m */,
-				655D9D0118340F750004CD21 /* sqlite3.c */,
-				655D9D0218340F750004CD21 /* sqlite3.h */,
 				655D9D0318340F750004CD21 /* ViewArticleViewController.h */,
 				655D9D0418340F750004CD21 /* ViewArticleViewController.m */,
 			);
@@ -420,8 +431,7 @@
 				658DA5E61832DC17003B6952 /* Direction.m in Sources */,
 				658DA5E71832DC17003B6952 /* Location.m in Sources */,
 				655D9D0518340F750004CD21 /* AddViewController.m in Sources */,
-				655D9D0718340F750004CD21 /* MainViewController.m in Sources */,
-				655D9D0818340F750004CD21 /* SFAppDelegate.m in Sources */,
+				655D9D0718340F750004CD21 /* DatabaseMainViewController.m in Sources */,
 				655D9D0B18340F750004CD21 /* SMXMLDocument.m in Sources */,
 				655D9D0C18340F750004CD21 /* sqlite3.c in Sources */,
 				655D9D0D18340F750004CD21 /* ViewArticleViewController.m in Sources */,

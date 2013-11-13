@@ -1,20 +1,20 @@
 //
-//  MainViewController.m
+//  DatabaseMainViewController.m
 //  shipfitCRUD
 //
 //  Created by hamid on 2013-10-19.
 //  Copyright (c) 2013 hamid. All rights reserved.
 //
 
-#import "MainViewController.h"
+#import "DatabaseMainViewController.h"
 #import "ARTICLE.h"
 
 
-@interface MainViewController ()
+@interface DatabaseMainViewController ()
 
 @end
 
-@implementation MainViewController
+@implementation DatabaseMainViewController
 
 
 //used synthesize here because of the custome accessor method for fetchedResultsController

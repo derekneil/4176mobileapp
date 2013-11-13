@@ -1,5 +1,5 @@
 //
-//  MainViewController.h
+//  DatabaseMainViewController.h
 //  shipfitCRUD
 //
 //  Created by hamid on 2013-10-19.
@@ -15,7 +15,7 @@
 #import "SMXMLDocument.h"
 
 
-@interface MainViewController : UITableViewController <AddDelegate>
+@interface DatabaseMainViewController : UITableViewController <AddDelegate>
 
 @property(nonatomic, strong) NSManagedObjectContext *myManageObjectContext;
 
