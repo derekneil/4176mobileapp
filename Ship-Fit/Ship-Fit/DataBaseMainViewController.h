@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AddViewController.h"
-#import "ViewArticleViewController.h"
+#import "DatabaseArticleViewController.h"
 
 #import "FMDatabaseQueue.h"
 #import "FMDatabase.h"

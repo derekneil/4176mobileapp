@@ -1,5 +1,5 @@
 //
-//  ViewArticleViewController.h
+//  DatabaseArticleViewController.h
 //  shipfitCRUD
 //
 //  Created by hamid on 2013-10-28.
@@ -10,7 +10,7 @@
 #import "ARTICLE.h"
 
 
-@interface ViewArticleViewController : UIViewController
+@interface DatabaseArticleViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITextField *txtTitle;
 //@property (weak, nonatomic) IBOutlet UITextView *txtMainArticle;
 

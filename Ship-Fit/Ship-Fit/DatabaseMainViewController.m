@@ -55,7 +55,7 @@
     }
     
     else if ([[segue identifier]isEqualToString:@"segueArticleToView"]) {
-        ViewArticleViewController *dest = (ViewArticleViewController *)[segue destinationViewController];
+        DatabaseArticleViewController *dest = (DatabaseArticleViewController *)[segue destinationViewController];
         //dest.delegate = self;
         
         //get idex of selected row

@@ -276,10 +276,10 @@
             </objects>
             <point key="canvasLocation" x="1292" y="902"/>
         </scene>
-        <!--View Article View Controller-->
+        <!--Database Article View Controller-->
         <scene sceneID="3wV-8Z-NAe">
             <objects>
-                <viewController id="VlX-SL-MBP" customClass="ViewArticleViewController" sceneMemberID="viewController">
+                <viewController id="VlX-SL-MBP" customClass="DatabaseArticleViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zIb-pg-Vci">
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

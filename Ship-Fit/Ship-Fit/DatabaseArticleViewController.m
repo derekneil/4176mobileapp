@@ -1,18 +1,18 @@
 //
-//  ViewArticleViewController.m
+//  DatabaseArticleViewController.m
 //  shipfitCRUD
 //
 //  Created by hamid on 2013-10-28.
 //  Copyright (c) 2013 hamid. All rights reserved.
 //
 
-#import "ViewArticleViewController.h"
+#import "DatabaseArticleViewController.h"
 
-@interface ViewArticleViewController ()
+@interface DatabaseArticleViewController ()
 
 @end
 
-@implementation ViewArticleViewController
+@implementation DatabaseArticleViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
