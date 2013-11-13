@@ -20,6 +20,5 @@
 - (void)makeTheChange
 {
     _speedLabel.hidden = YES;
-    //test
 }
 @end
