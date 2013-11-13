@@ -15,6 +15,7 @@
     // Override point for customization after application launch.
     
      _shipfit = [ [ShipFit alloc] init ];
+    [_shipfit init_and_run_application];
     
     return YES;
 }
