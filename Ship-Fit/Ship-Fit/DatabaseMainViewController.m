@@ -45,16 +45,7 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     
-    if ([[segue identifier]isEqualToString:@"addArticle"]) {
-        AddViewController *acvc = (AddViewController *)[segue destinationViewController];
-        acvc.delegate = self;
-        
-        ARTICLE *newArticle = (ARTICLE *)[NSEntityDescription insertNewObjectForEntityForName:@"ARTICLE" inManagedObjectContext:[self myManageObjectContext]];
-        
-        acvc.currentArticle = newArticle;
-    }
-    
-    else if ([[segue identifier]isEqualToString:@"segueArticleToView"]) {
+    if ([[segue identifier]isEqualToString:@"segueArticleToView"]) {
         DatabaseArticleViewController *dest = (DatabaseArticleViewController *)[segue destinationViewController];
         //dest.delegate = self;
         
@@ -149,7 +140,7 @@
 }
 
 - (IBAction)btnTest:(id)sender {
-    [self searchTheDatabase:(@"derek")];
+    [self searchTheDatabase:(@"canada")];
 }
 
 

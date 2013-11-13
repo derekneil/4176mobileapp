@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AddViewController.h"
 #import "DatabaseArticleViewController.h"
 
 #import "FMDatabaseQueue.h"
@@ -15,7 +14,7 @@
 #import "SMXMLDocument.h"
 
 
-@interface DatabaseMainViewController : UITableViewController <AddDelegate>
+@interface DatabaseMainViewController : UITableViewController
 
 @property(nonatomic, strong) NSManagedObjectContext *myManageObjectContext;
 
