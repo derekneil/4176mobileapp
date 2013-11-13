@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *zoomOutButton;
 @property (weak, nonatomic) IBOutlet UIButton *zoomInButton;
 - (IBAction)zoomChange:(id)sender;
-@property (weak, nonatomic) IBOutlet UILabel *testLabel;
+@property (weak, nonatomic) IBOutlet UILabel *compDirLabel;
+@property (weak, nonatomic) IBOutlet UILabel *compDegLabel;
 
 @end

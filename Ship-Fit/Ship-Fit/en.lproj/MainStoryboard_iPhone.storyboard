@@ -5,10 +5,25 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
-        <!--Map View Controller - First-->
+        <!--View Controller - Settings-->
+        <scene sceneID="Eb4-Ax-yYo">
+            <objects>
+                <viewController title="Settings" id="y50-dc-WMZ" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GGf-Ot-ot5">
+                        <rect key="frame" x="0.0" y="20" width="320" height="499"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="caH-0i-Na7"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hPW-IZ-L5R" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1679" y="180"/>
+        </scene>
+        <!--Map View Controller - Map-->
         <scene sceneID="11">
             <objects>
-                <viewController title="First" id="2" customClass="MapViewController" sceneMemberID="viewController">
+                <viewController title="Map" id="2" customClass="MapViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="16">
                         <rect key="frame" x="0.0" y="20" width="320" height="499"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -103,16 +118,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="rsA-Gc-ZMi" firstAttribute="leading" secondItem="HlY-Eu-jn2" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="0XW-et-Uly"/>
                             <constraint firstItem="HlY-Eu-jn2" firstAttribute="baseline" secondItem="rsA-Gc-ZMi" secondAttribute="baseline" type="default" id="1mR-In-QAv"/>
                             <constraint firstItem="H2G-7K-1hC" firstAttribute="leading" secondItem="16" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="3jo-at-xLK"/>
                             <constraint firstItem="q59-KX-QPi" firstAttribute="trailing" secondItem="16" secondAttribute="trailing" type="default" id="6Xv-05-kmf"/>
                             <constraint firstItem="R7I-Mo-Ua1" firstAttribute="leading" secondItem="16" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="6t8-7O-d39"/>
-                            <constraint firstAttribute="bottom" secondItem="HlY-Eu-jn2" secondAttribute="bottom" constant="94" id="DHH-A2-Fat"/>
+                            <constraint firstAttribute="bottom" secondItem="ncN-hO-xqn" secondAttribute="bottom" constant="56" id="8LB-eu-8RN"/>
                             <constraint firstItem="Gp5-zY-g1n" firstAttribute="top" secondItem="16" secondAttribute="top" constant="20" symbolic="YES" type="default" id="FN7-4a-bAe"/>
                             <constraint firstItem="q59-KX-QPi" firstAttribute="bottom" secondItem="16" secondAttribute="bottom" type="default" id="GkE-GN-BrD"/>
                             <constraint firstItem="Gp5-zY-g1n" firstAttribute="centerX" secondItem="q59-KX-QPi" secondAttribute="centerX" type="default" id="Hv2-CL-Waa"/>
                             <constraint firstItem="ncN-hO-xqn" firstAttribute="baseline" secondItem="rsA-Gc-ZMi" secondAttribute="baseline" type="default" id="Iez-NX-Wu5"/>
-                            <constraint firstItem="rsA-Gc-ZMi" firstAttribute="leading" secondItem="Gp5-zY-g1n" secondAttribute="leading" type="default" id="K29-I0-8SL"/>
                             <constraint firstItem="ak1-fR-8eO" firstAttribute="baseline" secondItem="R7I-Mo-Ua1" secondAttribute="baseline" type="default" id="KOg-fB-Pui"/>
                             <constraint firstAttribute="trailing" secondItem="reM-hb-KQ2" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Kgl-Mf-HVU"/>
                             <constraint firstItem="H2G-7K-1hC" firstAttribute="trailing" secondItem="DkJ-4m-rnd" secondAttribute="trailing" type="default" id="QeR-TI-upU"/>
@@ -136,45 +151,48 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="653" y="-138"/>
+            <point key="canvasLocation" x="534" y="180"/>
         </scene>
-        <!--View Controller - Second-->
+        <!--View Controller - Weather-->
+        <scene sceneID="fNY-d4-cGv">
+            <objects>
+                <viewController title="Weather" id="B1o-P1-9bd" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="32T-Bc-C7x">
+                        <rect key="frame" x="0.0" y="20" width="320" height="499"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="tsI-cS-Ptg"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X63-fn-fnU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1286" y="180"/>
+        </scene>
+        <!--View Controller - Database-->
         <scene sceneID="13">
             <objects>
-                <viewController title="Second" id="3" sceneMemberID="viewController">
+                <viewController title="Database" id="3" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="17">
                         <rect key="frame" x="0.0" y="20" width="320" height="499"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Second View" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="22">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eZI-3e-4tK">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" bouncesZoom="NO" editable="NO" text="Loaded by the second view controller — an instance of SecondViewController — specified in the app delegate." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="23">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="88" id="JfI-37-Jda"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" size="system"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textView>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="23" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="BZU-fQ-xTZ"/>
-                            <constraint firstItem="22" firstAttribute="top" secondItem="17" secondAttribute="top" constant="123" id="FbC-GT-AMI"/>
-                            <constraint firstItem="23" firstAttribute="leading" secondItem="17" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="dLQ-yb-IMj"/>
-                            <constraint firstAttribute="trailing" secondItem="22" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="jKy-hx-ebK"/>
-                            <constraint firstItem="22" firstAttribute="leading" secondItem="17" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="rga-te-0BD"/>
-                            <constraint firstItem="23" firstAttribute="top" secondItem="17" secondAttribute="top" constant="206" id="x3j-aa-o8N"/>
+                            <constraint firstItem="eZI-3e-4tK" firstAttribute="top" secondItem="17" secondAttribute="top" constant="-231" id="0KT-yI-fHX"/>
+                            <constraint firstAttribute="trailing" secondItem="eZI-3e-4tK" secondAttribute="trailing" constant="159" id="BQ9-rY-8h0"/>
+                            <constraint firstItem="eZI-3e-4tK" firstAttribute="leading" secondItem="17" secondAttribute="leading" constant="-159" id="KBs-Sz-071"/>
+                            <constraint firstAttribute="bottom" secondItem="eZI-3e-4tK" secondAttribute="bottom" constant="231" id="kkA-kS-Ejh"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Second" image="second" id="6"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="12" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="653" y="498"/>
+            <point key="canvasLocation" x="903" y="180"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="15">
@@ -189,6 +207,8 @@
                     <connections>
                         <segue destination="2" kind="relationship" relationship="viewControllers" id="26"/>
                         <segue destination="3" kind="relationship" relationship="viewControllers" id="27"/>
+                        <segue destination="B1o-P1-9bd" kind="relationship" relationship="viewControllers" id="sou-3y-G3O"/>
+                        <segue destination="y50-dc-WMZ" kind="relationship" relationship="viewControllers" id="lDM-c0-ZZN"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="14" sceneMemberID="firstResponder"/>
@@ -200,6 +220,27 @@
         <image name="first" width="16" height="16"/>
         <image name="second" width="16" height="16"/>
     </resources>
+    <classes>
+        <class className="MapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="toggleLocationOnMap:"/>
+                <relationship kind="action" name="zoomChange:"/>
+                <relationship kind="action" name="zoomToMe:"/>
+                <relationship kind="outlet" name="compDegLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="compDirLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="latLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="longLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="speedLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="zoomInButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="zoomOutButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
