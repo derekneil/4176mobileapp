@@ -533,6 +533,7 @@
 				658DA5D61832D818003B6952 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		658DA5D71832D818003B6952 /* Build configuration list for PBXNativeTarget "Ship-FitTests" */ = {
 			isa = XCConfigurationList;
@@ -541,6 +542,7 @@
 				658DA5D91832D818003B6952 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

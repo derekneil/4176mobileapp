@@ -27,6 +27,9 @@ NSString *const ERROR = @"ERROR";
 
 - (void)init_and_run_application
 {
+    /* By default set true north to true */
+    self.isTrueNorth = YES;
+    
     NSLog(@"initializing GPS");
     _location = [ [Location alloc] initWithReference:self ];
     [_location init_logs_and_manager];
@@ -36,9 +39,9 @@ NSString *const ERROR = @"ERROR";
     NSLog(@"initializing compass");
     _direction = [ [Direction alloc] initWithReference:self ];
     [ _direction init_logs_and_manager ];
-    [ _direction run_compass_withFilter:10 ];
+    [ _direction run_compass_withFilter:1 ];
     
-
+    
 }
 
 

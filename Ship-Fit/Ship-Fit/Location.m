@@ -9,7 +9,6 @@
     CLLocationManager *_locationManager;
 }
 
-
 - (id) initWithReference: (ShipFit *)reference
 {
     self = [super init];
