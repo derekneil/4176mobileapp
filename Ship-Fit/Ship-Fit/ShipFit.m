@@ -36,7 +36,7 @@ NSString *const ERROR = @"ERROR";
     NSLog(@"initializing compass");
     _direction = [ [Direction alloc] initWithReference:self ];
     [ _direction init_logs_and_manager ];
-    [ _direction run_compass_withFilter:10 ];
+    [ _direction run_compass_withFilter:1 ];
     
 
 }

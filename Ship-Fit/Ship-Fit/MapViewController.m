@@ -93,7 +93,7 @@
     
     if ( [keyPath isEqualToString:@"compassDegrees" ] )
     {
-        self.compDegLabel.text = [NSString stringWithFormat:@"This will control the compass: %f",_shipfit.compassDegress ];
+        self.compDegLabel.text = [NSString stringWithFormat:@"This will control the compass: %f",_shipfit.compassDegrees ];
     }
     
     if ( [keyPath isEqualToString:@"compassDirection" ] )
