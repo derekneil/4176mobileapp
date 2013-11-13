@@ -13,6 +13,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+
+    //TODO: check to make sure database exists on the device....
     
      _shipfit = [ [ShipFit alloc] init ];
     [_shipfit init_and_run_application];
