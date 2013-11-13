@@ -21,6 +21,7 @@
 		655D9D1F183414CF0004CD21 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9D19183414CF0004CD21 /* FMDatabaseQueue.m */; };
 		655D9D20183414CF0004CD21 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9D1B183414CF0004CD21 /* FMResultSet.m */; };
 		655D9D23183418320004CD21 /* shipfitCRUD.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 655D9D21183418320004CD21 /* shipfitCRUD.xcdatamodeld */; };
+		655D9D2718342F7C0004CD21 /* shipfitMainDatabasev1.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 655D9D2618342F7C0004CD21 /* shipfitMainDatabasev1.sqlite */; };
 		658DA5921832D817003B6952 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658DA5911832D817003B6952 /* UIKit.framework */; };
 		658DA5941832D817003B6952 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658DA5931832D817003B6952 /* Foundation.framework */; };
 		658DA5961832D817003B6952 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658DA5951832D817003B6952 /* CoreGraphics.framework */; };
@@ -86,6 +87,7 @@
 		655D9D1A183414CF0004CD21 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		655D9D1B183414CF0004CD21 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		655D9D22183418320004CD21 /* shipfitCRUD.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = shipfitCRUD.xcdatamodel; sourceTree = "<group>"; };
+		655D9D2618342F7C0004CD21 /* shipfitMainDatabasev1.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = shipfitMainDatabasev1.sqlite; sourceTree = "<group>"; };
 		658DA58E1832D817003B6952 /* Ship-Fit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ship-Fit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		658DA5911832D817003B6952 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		658DA5931832D817003B6952 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -155,7 +157,6 @@
 		658DA5851832D817003B6952 = {
 			isa = PBXGroup;
 			children = (
-				655D9D0E183413E00004CD21 /* CoreData.framework */,
 				658DA5971832D817003B6952 /* Ship-Fit */,
 				658DA5C91832D818003B6952 /* Ship-FitTests */,
 				658DA5901832D817003B6952 /* Frameworks */,
@@ -175,6 +176,7 @@
 		658DA5901832D817003B6952 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				655D9D0E183413E00004CD21 /* CoreData.framework */,
 				658DA5EA1832DC9A003B6952 /* CoreLocation.framework */,
 				658DA5E81832DC91003B6952 /* MapKit.framework */,
 				658DA5911832D817003B6952 /* UIKit.framework */,
@@ -262,6 +264,7 @@
 		658DA5EC1832DD6A003B6952 /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				655D9D2618342F7C0004CD21 /* shipfitMainDatabasev1.sqlite */,
 				655D9D21183418320004CD21 /* shipfitCRUD.xcdatamodeld */,
 				65CE3DE3183419B900ECA91C /* ARTICLE.h */,
 				65CE3DE4183419B900ECA91C /* ARTICLE.m */,
@@ -374,6 +377,7 @@
 				658DA5BA1832D818003B6952 /* second.png in Resources */,
 				658DA5BC1832D818003B6952 /* second@2x.png in Resources */,
 				655D9D0918340F750004CD21 /* shipfit_Index.sqlite in Resources */,
+				655D9D2718342F7C0004CD21 /* shipfitMainDatabasev1.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
