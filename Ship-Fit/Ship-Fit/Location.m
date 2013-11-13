@@ -4,7 +4,6 @@
 @implementation Location
 {
     CLLocationCoordinate2D *_head;
-    CLLocationCoordinate2D *_tail;
     CLLocationCoordinate2D *_base;
     CLLocationManager *_locationManager;
 }
@@ -26,15 +25,17 @@
     
     if ( [CLLocationManager locationServicesEnabled] )
     {
-        /* Make the call to the HEAP */
         _base = (CLLocationCoordinate2D *)malloc( 20000 * sizeof(CLLocationCoordinate2D) );
         
         if ( _base == NULL ){
             NSLog(@"Call to heap failed");
+            self.logging_enabled = NO;
         }
         else{
-            _tail = _base;
-            _head = _base + 1;
+            self.logging_enabled = YES;
+            self.shipFit_ref.gps_head = _base + 20000;
+            self.shipFit_ref.gps_count = 0;
+            _head = _base;
         }
     }
 }
@@ -42,8 +43,6 @@
 - (void)run_GPS_withAccuracy: (CLLocationAccuracy)accuracy
                 andDistanceFilter: (CLLocationDistance)distance
 {
-    printf("%d\n", [CLLocationManager authorizationStatus] );
-    
     if ( [CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied )
     {
         _locationManager.distanceFilter = distance;
@@ -61,27 +60,28 @@
 - (void)log_latitude: (CLLocationDegrees)lat
            longitude: (CLLocationDegrees)lon
 {
-    /* Update the tail pointer */
-    if ( _head == _tail ) 
+    if ( self.logging_enabled )
     {
-        if( _tail == (_base + 20000) ){
-            _tail = _base;
+        if (self.shipFit_ref.gps_count == 0 ){
+            _head->latitude = lat;
+            _head->longitude = lon;
+            self.shipFit_ref.gps_count++;
         }
-        else{
-            _tail++;
+        else if ( self.shipFit_ref.gps_count < 20000 )
+        {
+            _head = _head - 1;
+            _head->latitude = lat;
+            _head->longitude = lon;
+            self.shipFit_ref.gps_count++;
         }
-    }
-
-    /* Add the new entry */
-    _head->latitude = lat;
-    _head->longitude = lon;
-
-    /* Update the head pointer */
-    if( _head == (_base + 20000) ){
-        _head = _base;
-    }
-    else{
-        _head++;
+        else if ( self.shipFit_ref.gps_count == 20000 )
+        {
+            // TO DO.
+            // Do I store only 20,000 GPS OR Do I Malloc More Space
+            // It is expensive to have to shift the elements each time
+            // might be cheaper to malloc another array..
+            // write the old one to the DB and then reallocate the space !!!
+        }
     }
 }
 
@@ -90,7 +90,6 @@
     didUpdateToLocation:(CLLocation *)newLocation
            fromLocation:(CLLocation *)oldLocation
 {
-    NSLog(@"iOS 5 location event");
     /* Make sure the time stamp is relevant */
     if ( ( [ [ NSDate date ]  timeIntervalSince1970 ] - [newLocation.timestamp timeIntervalSince1970 ] ) < 60 )
     {
@@ -144,12 +143,12 @@
     {
         current_location = [locations objectAtIndex:l ];
         [self log_latitude:current_location.coordinate.latitude
-                    longitude:current_location.coordinate.longitude ];
+                 longitude:current_location.coordinate.longitude ];
     }
     
 }
 
-// Authorization Status Changes.
+// Handling Authorization Status Changes.
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 {
     NSLog(@"status: %d" , status );

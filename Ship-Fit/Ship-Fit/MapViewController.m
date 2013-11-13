@@ -172,16 +172,19 @@
 }
 
 -(void) updatePathOverlay{
-    int pathpointcount = [pathTraveled count];
-    CLLocationCoordinate2D coordArray[pathpointcount];
+//    int pathpointcount = [pathTraveled count];
+//    CLLocationCoordinate2D coordArray[pathpointcount];
+//    
+//    //TODO: get pathTraveled into coordArray
+//    for(int i=0; i<pathpointcount; i++){
+//        coordArray[i] = [[pathTraveled objectAtIndex:i] coordinate];
+//    }
     
-    //TODO: get pathTraveled into coordArray
-    for(int i=0; i<pathpointcount; i++){
-        coordArray[i] = [[pathTraveled objectAtIndex:i] coordinate];
+    if ( self.shipfit.gps_count != 0 ){
+        path = [MKPolyline polylineWithCoordinates:self.shipfit.gps_head count:self.shipfit.gps_count];
+        [self.mapView addOverlay:path];
     }
     
-    path = [MKPolyline polylineWithCoordinates:coordArray count:pathpointcount];
-    [self.mapView addOverlay:path];
     
 }
 

@@ -7,6 +7,7 @@
 @interface Location : NSObject <CLLocationManagerDelegate>
 
 @property (nonatomic, readwrite, strong) ShipFit *shipFit_ref;
+@property (nonatomic, readwrite, assign) BOOL logging_enabled;
 
 - (id) initWithReference: (ShipFit *)reference;
 

@@ -18,8 +18,8 @@ extern NSString *const ERROR;
 
 
 // For remote tracking
-@property ( nonatomic, readwrite, assign ) CLLocationCoordinate2D *head;
-@property ( nonatomic, readwrite, assign ) int count;
+@property ( nonatomic, readwrite, assign ) CLLocationCoordinate2D *gps_head;
+@property ( nonatomic, readwrite, assign ) NSUInteger gps_count;
 
 
 /*
