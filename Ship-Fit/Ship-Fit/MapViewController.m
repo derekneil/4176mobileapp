@@ -68,22 +68,22 @@
     
     if ( [keyPath isEqualToString:@"latitude" ] )
     {
-        self.latLabel.text = [NSString stringWithFormat:@"Latitude: %f" , _shipfit.latitude ];
+        self.latLabel.text = [NSString stringWithFormat:@"Lat: %.4f" , _shipfit.latitude ];
     }
     
     if ( [keyPath isEqualToString:@"longitude" ] )
     {
-        self.longLabel.text = [NSString stringWithFormat:@"Longitude: %f" , _shipfit.longitude ];
+        self.longLabel.text = [NSString stringWithFormat:@"Long: %.4f" , _shipfit.longitude ];
     }
     
     if ( [keyPath isEqualToString:@"knots" ] )
     {
-        self.speedLabel = [NSString stringWithFormat:@"Speed: %f" , _shipfit.knots ];
+        self.speedLabel = [NSString stringWithFormat:@"Speed: %.4f" , _shipfit.knots ];
     }
     
     if ( [keyPath isEqualToString:@"compassDegrees" ] )
     {
-        self.compDegLabel.text = [NSString stringWithFormat:@"This will control the compass: %f",_shipfit.compassDegrees ];
+        self.compDegLabel.text = [NSString stringWithFormat:@"%.2f",_shipfit.compassDegrees ];
     }
     
     if ( [keyPath isEqualToString:@"compassDirection" ] )
