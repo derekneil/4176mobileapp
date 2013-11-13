@@ -17,11 +17,10 @@ extern NSString *const ERROR;
 
 
 
-/* 
- For your line Drawing
- */
+// For remote tracking
 @property ( nonatomic, readwrite, assign ) CLLocationCoordinate2D *head;
 @property ( nonatomic, readwrite, assign ) int count;
+
 
 /*
  Properties for the UI to Observe..... Do with them what you please. 
