@@ -50,22 +50,12 @@
                   context:nil ];
     
     [_shipfit addObserver:self
-               forKeyPath:@"magnetic_north"
+               forKeyPath:@"compassDegrees"
                   options:NSKeyValueObservingOptionNew
                   context:nil ];
     
     [_shipfit addObserver:self
-               forKeyPath:@"magnetic_north_bearing"
-                  options:NSKeyValueObservingOptionNew
-                  context:nil ];
-    
-    [_shipfit addObserver:self
-               forKeyPath:@"true_north"
-                  options:NSKeyValueObservingOptionNew
-                  context:nil ];
-    
-    [_shipfit addObserver:self
-               forKeyPath:@"true_north_bearing"
+               forKeyPath:@"compassDirection"
                   options:NSKeyValueObservingOptionNew
                   context:nil ];
     
@@ -93,7 +83,7 @@
     
     if ( [keyPath isEqualToString:@"compassDegrees" ] )
     {
-        self.compDegLabel.text = [NSString stringWithFormat:@"This will control the compass: %f",_shipfit.compassDegress ];
+        self.compDegLabel.text = [NSString stringWithFormat:@"This will control the compass: %f",_shipfit.compassDegrees ];
     }
     
     if ( [keyPath isEqualToString:@"compassDirection" ] )
