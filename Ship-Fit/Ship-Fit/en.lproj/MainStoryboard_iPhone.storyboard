@@ -14,7 +14,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="caH-0i-Na7"/>
+                    <tabBarItem key="tabBarItem" title="Settings" id="caH-0i-Na7"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hPW-IZ-L5R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -143,7 +143,7 @@
                             <constraint firstItem="DkJ-4m-rnd" firstAttribute="leading" secondItem="16" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="yuP-Wu-aOJ"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="First" image="first" id="7"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="first" id="7"/>
                     <connections>
                         <outlet property="compDegLabel" destination="DkJ-4m-rnd" id="xer-ip-g24"/>
                         <outlet property="compDirLabel" destination="H2G-7K-1hC" id="WLX-9B-CUS"/>
@@ -162,7 +162,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="tsI-cS-Ptg"/>
+                    <tabBarItem key="tabBarItem" title="Weather" id="tsI-cS-Ptg"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X63-fn-fnU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -188,7 +188,7 @@
                             <constraint firstAttribute="bottom" secondItem="eZI-3e-4tK" secondAttribute="bottom" constant="231" id="kkA-kS-Ejh"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Second" image="second" id="6"/>
+                    <tabBarItem key="tabBarItem" title="Database" image="second" id="6"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="12" sceneMemberID="firstResponder"/>
             </objects>
