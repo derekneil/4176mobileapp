@@ -30,6 +30,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="toggleLocationOnMap:" destination="2" eventType="touchUpInside" id="tvX-9J-xS6"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="OR7-vk-2XA">
                                 <rect key="frame" x="20" y="892" width="47" height="44"/>
@@ -41,6 +44,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="zoomToMe:" destination="2" eventType="touchUpInside" id="EJn-ON-oCE"/>
+                                </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="lat" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ntr-63-WdG">
                                 <rect key="frame" x="241" y="93" width="129" height="21"/>
@@ -70,6 +76,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="zoomChange:" destination="2" eventType="touchUpInside" id="S4Q-EI-OvJ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KhX-0d-WfU">
                                 <rect key="frame" x="668" y="892" width="36" height="44"/>
@@ -81,11 +90,35 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="zoomChange:" destination="2" eventType="touchUpInside" id="Gnv-kC-vK5"/>
+                                </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="deg" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4dy-3t-9SW">
+                                <rect key="frame" x="20" y="64" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="dir" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BiD-aA-ree">
+                                <rect key="frame" x="20" y="93" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="first" id="7"/>
+                    <connections>
+                        <outlet property="compDegLabel" destination="4dy-3t-9SW" id="hbP-71-LYk"/>
+                        <outlet property="compDirLabel" destination="BiD-aA-ree" id="7eV-Yi-vUm"/>
+                        <outlet property="latLabel" destination="Ntr-63-WdG" id="cc9-kY-QIc"/>
+                        <outlet property="longLabel" destination="Ywa-cJ-Qd1" id="RDr-p6-aLG"/>
+                        <outlet property="speedLabel" destination="MUH-pJ-kjN" id="0A8-ns-G0B"/>
+                        <outlet property="zoomInButton" destination="MrQ-4d-g3e" id="sqc-3I-tHQ"/>
+                        <outlet property="zoomOutButton" destination="KhX-0d-WfU" id="FK1-JD-AuH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10" sceneMemberID="firstResponder"/>
             </objects>
@@ -170,6 +203,24 @@
         <image name="first" width="16" height="16"/>
         <image name="second" width="16" height="16"/>
     </resources>
+    <classes>
+        <class className="MapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="toggleLocationOnMap:"/>
+                <relationship kind="action" name="zoomChange:"/>
+                <relationship kind="action" name="zoomToMe:"/>
+                <relationship kind="outlet" name="compDegLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="compDirLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="latLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="longLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="speedLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="zoomInButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="zoomOutButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
