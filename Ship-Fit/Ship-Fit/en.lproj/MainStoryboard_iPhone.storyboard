@@ -41,6 +41,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="toggleLocationOnMap:" destination="2" eventType="touchUpInside" id="Nfm-us-W95"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HlY-Eu-jn2">
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -51,6 +54,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="zoomToMe:" destination="2" eventType="touchUpInside" id="JOZ-q7-y1G"/>
+                                </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="lat" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R7I-Mo-Ua1">
                                 <constraints>
@@ -101,6 +107,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="zoomChange:" destination="2" eventType="touchUpInside" id="PlG-d7-GPN"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ncN-hO-xqn">
                                 <constraints>
@@ -114,6 +123,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="zoomChange:" destination="2" eventType="touchUpInside" id="kSL-hQ-LMn"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -145,8 +157,13 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="first" id="7"/>
                     <connections>
-                        <outlet property="compDegLabel" destination="DkJ-4m-rnd" id="xer-ip-g24"/>
-                        <outlet property="compDirLabel" destination="H2G-7K-1hC" id="WLX-9B-CUS"/>
+                        <outlet property="compDegLabel" destination="DkJ-4m-rnd" id="gdT-jX-4Cw"/>
+                        <outlet property="compDirLabel" destination="H2G-7K-1hC" id="Jvv-AL-YGt"/>
+                        <outlet property="latLabel" destination="R7I-Mo-Ua1" id="ZBt-Da-aLA"/>
+                        <outlet property="longLabel" destination="ak1-fR-8eO" id="nA6-x0-YPY"/>
+                        <outlet property="speedLabel" destination="Gp5-zY-g1n" id="xMi-uj-Hsp"/>
+                        <outlet property="zoomInButton" destination="reM-hb-KQ2" id="LDY-Rm-Cct"/>
+                        <outlet property="zoomOutButton" destination="ncN-hO-xqn" id="P6g-ec-3uD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10" sceneMemberID="firstResponder"/>
