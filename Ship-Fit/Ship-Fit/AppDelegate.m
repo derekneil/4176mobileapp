@@ -17,6 +17,24 @@
      _shipfit = [ [ShipFit alloc] init ];
     [_shipfit init_and_run_application];
     
+    //get ref to tab bar controller
+    UITabBarController *tabController = (UITabBarController *)self.window.rootViewController;
+    
+    //get refs for other view controllers contained within tab bar controller
+    if (tabController.viewControllers){
+        
+        //look for view controllers in tab bar views
+        for (UITabBarController *view2 in tabController.viewControllers) {
+            
+            //save ref to specific view controllers so we can work with them
+            if ([view2 isKindOfClass:[MapViewController class]]){
+                _MVC = (MapViewController *) view2;
+            }
+        }
+    }
+    
+    _MVC.shipfit = _shipfit;
+    
     return YES;
 }
 							
