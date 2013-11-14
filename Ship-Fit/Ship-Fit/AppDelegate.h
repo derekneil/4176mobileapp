@@ -9,11 +9,24 @@
 #import <UIKit/UIKit.h>
 #import "ShipFit.h"
 #import "MapViewController.h"
+#import "DatabaseMainViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
+//Main Application Logic Coordination
 @property (strong, nonatomic) ShipFit* shipfit;
-@property (strong, nonatomic) MapViewController* MVC;
+
+//Map
+@property (strong, nonatomic) MapViewController* MapVC;
+
+//Database
+@property (strong, nonatomic) DatabaseMainViewController* DatabaseMainVC;
+@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+- (void)saveContext;
+- (NSURL *)applicationDocumentsDirectory;
 
 @end
