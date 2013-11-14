@@ -53,6 +53,7 @@
 		65C392E0183473740042FA81 /* icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = 65C392DF183473740042FA81 /* icon72.png */; };
 		65C392E21834737C0042FA81 /* icon144.png in Resources */ = {isa = PBXBuildFile; fileRef = 65C392E11834737C0042FA81 /* icon144.png */; };
 		65CE3DE5183419B900ECA91C /* ARTICLE.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CE3DE4183419B900ECA91C /* ARTICLE.m */; };
+		D51118621835592F009D722B /* Weather.m in Sources */ = {isa = PBXBuildFile; fileRef = D51118611835592F009D722B /* Weather.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +132,8 @@
 		65C392E11834737C0042FA81 /* icon144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon144.png; path = ../icon144.png; sourceTree = "<group>"; };
 		65CE3DE3183419B900ECA91C /* ARTICLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARTICLE.h; sourceTree = "<group>"; };
 		65CE3DE4183419B900ECA91C /* ARTICLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARTICLE.m; sourceTree = "<group>"; };
+		D51118601835592F009D722B /* Weather.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Weather.h; sourceTree = "<group>"; };
+		D51118611835592F009D722B /* Weather.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Weather.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -309,6 +312,8 @@
 				658DA5E31832DC17003B6952 /* Direction.m */,
 				658DA5E41832DC17003B6952 /* Location.h */,
 				658DA5E51832DC17003B6952 /* Location.m */,
+				D51118601835592F009D722B /* Weather.h */,
+				D51118611835592F009D722B /* Weather.m */,
 			);
 			name = BackendLogic;
 			sourceTree = "<group>";
@@ -467,6 +472,7 @@
 				655D9D1F183414CF0004CD21 /* FMDatabaseQueue.m in Sources */,
 				655D9D20183414CF0004CD21 /* FMResultSet.m in Sources */,
 				655D9D23183418320004CD21 /* shipfitCRUD.xcdatamodeld in Sources */,
+				D51118621835592F009D722B /* Weather.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
