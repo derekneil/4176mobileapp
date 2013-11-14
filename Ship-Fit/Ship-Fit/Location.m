@@ -33,9 +33,11 @@
         }
         else{
             self.logging_enabled = YES;
-            self.shipFit_ref.gps_head = _base + 20000;
+            _head = _base + 19999;
+            ( _head + 1 )->latitude = 0;
+            ( _head + 1 )->longitude = 0;
+            self.shipFit_ref.gps_head = _head;
             self.shipFit_ref.gps_count = 0;
-            _head = _base;
         }
     }
 }
@@ -69,7 +71,7 @@
         }
         else if ( self.shipFit_ref.gps_count < 20000 )
         {
-            _head = _head - 1;
+            _head--;
             _head->latitude = lat;
             _head->longitude = lon;
             self.shipFit_ref.gps_count++;
@@ -82,6 +84,19 @@
             // might be cheaper to malloc another array..
             // write the old one to the DB and then reallocate the space !!!
         }
+    }
+}
+
+//for debug
+
+- (void)print_logs_to_console
+{
+    CLLocationCoordinate2D *runner = _head;
+    int i = 0;
+    while ( i < self.shipFit_ref.gps_count )
+    {
+        NSLog(@"%f:%f", runner->latitude , runner->longitude );
+        i++;
     }
 }
 
@@ -102,7 +117,9 @@
                   longitude:newLocation.coordinate.longitude ];
             
         /* Set the new speed property */
-        self.shipFit_ref.knots = ( (newLocation.speed) * 1.94384 );
+        if ( newLocation.speed != -1 ){
+            self.shipFit_ref.knots = ( (newLocation.speed) * 1.94384 );
+        }
 
         NSLog( @"LAT: %f\nLONG: %f\nKNOTS:%f" , self.shipFit_ref.latitude , self.shipFit_ref.longitude , self.shipFit_ref.knots);
     }

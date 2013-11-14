@@ -8,9 +8,9 @@
 
 @property (nonatomic, readwrite, strong) ShipFit *shipFit_ref;
 
-
-/* Compass */
+/* Class Inititializer */
 - (id) initWithReference: (ShipFit *)reference;
+
 - (void)init_logs_and_manager;
 
 - (void)run_compass_withFilter: (CLLocationDegrees)compass_accuracy;

@@ -15,7 +15,6 @@
 
 - (void)halt_GPS;
 
-
 - (void)run_GPS_withAccuracy: (CLLocationAccuracy)accuracy
                 andDistanceFilter: (CLLocationDistance)distance;
 
