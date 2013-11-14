@@ -127,6 +127,7 @@
                         <outlet property="compDirLabel" destination="H2G-7K-1hC" id="Jvv-AL-YGt"/>
                         <outlet property="latLabel" destination="R7I-Mo-Ua1" id="ZBt-Da-aLA"/>
                         <outlet property="longLabel" destination="ak1-fR-8eO" id="nA6-x0-YPY"/>
+                        <outlet property="mapView" destination="q59-KX-QPi" id="R2J-gA-fQn"/>
                         <outlet property="speedLabel" destination="Gp5-zY-g1n" id="xMi-uj-Hsp"/>
                         <outlet property="zoomInButton" destination="reM-hb-KQ2" id="LDY-Rm-Cct"/>
                         <outlet property="zoomOutButton" destination="ncN-hO-xqn" id="P6g-ec-3uD"/>
