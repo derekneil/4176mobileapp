@@ -48,6 +48,10 @@
 		658DA5E71832DC17003B6952 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DA5E51832DC17003B6952 /* Location.m */; };
 		658DA5E91832DC91003B6952 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658DA5E81832DC91003B6952 /* MapKit.framework */; };
 		658DA5EB1832DC9A003B6952 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658DA5EA1832DC9A003B6952 /* CoreLocation.framework */; };
+		65C392DD183470E10042FA81 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 65C392DB183470E10042FA81 /* icon.png */; };
+		65C392DE183470E10042FA81 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65C392DC183470E10042FA81 /* icon@2x.png */; };
+		65C392E0183473740042FA81 /* icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = 65C392DF183473740042FA81 /* icon72.png */; };
+		65C392E21834737C0042FA81 /* icon144.png in Resources */ = {isa = PBXBuildFile; fileRef = 65C392E11834737C0042FA81 /* icon144.png */; };
 		65CE3DE5183419B900ECA91C /* ARTICLE.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CE3DE4183419B900ECA91C /* ARTICLE.m */; };
 /* End PBXBuildFile section */
 
@@ -121,6 +125,10 @@
 		658DA5E51832DC17003B6952 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		658DA5E81832DC91003B6952 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		658DA5EA1832DC9A003B6952 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		65C392DB183470E10042FA81 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		65C392DC183470E10042FA81 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		65C392DF183473740042FA81 /* icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon72.png; path = ../icon72.png; sourceTree = "<group>"; };
+		65C392E11834737C0042FA81 /* icon144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon144.png; path = ../icon144.png; sourceTree = "<group>"; };
 		65CE3DE3183419B900ECA91C /* ARTICLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARTICLE.h; sourceTree = "<group>"; };
 		65CE3DE4183419B900ECA91C /* ARTICLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARTICLE.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -243,6 +251,10 @@
 		658DA5981832D817003B6952 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				65C392E11834737C0042FA81 /* icon144.png */,
+				65C392DF183473740042FA81 /* icon72.png */,
+				65C392DB183470E10042FA81 /* icon.png */,
+				65C392DC183470E10042FA81 /* icon@2x.png */,
 				658DA5991832D817003B6952 /* Ship-Fit-Info.plist */,
 				658DA59A1832D817003B6952 /* InfoPlist.strings */,
 				658DA59D1832D817003B6952 /* main.m */,
@@ -400,6 +412,10 @@
 				655D9D2718342F7C0004CD21 /* shipfitMainDatabasev1.sqlite in Resources */,
 				655D9D2B183434730004CD21 /* DB_Images in Resources */,
 				655D9D2D183434900004CD21 /* mystyle.css in Resources */,
+				65C392DD183470E10042FA81 /* icon.png in Resources */,
+				65C392DE183470E10042FA81 /* icon@2x.png in Resources */,
+				65C392E0183473740042FA81 /* icon72.png in Resources */,
+				65C392E21834737C0042FA81 /* icon144.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
