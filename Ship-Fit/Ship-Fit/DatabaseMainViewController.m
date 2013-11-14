@@ -84,7 +84,13 @@
     //[self fillDatabaseFromXMLFile];
 }
 
-
+//hide the navigation bar in the main database view, but show it in the article view for the back button
+- (void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBar.hidden = YES;
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    self.navigationController.navigationBar.hidden = NO;
+}
 
 
 - (void)didReceiveMemoryWarning
@@ -137,10 +143,6 @@
     _fetchedResultsController.delegate = self;
     
     return _fetchedResultsController;
-}
-
-- (IBAction)btnTest:(id)sender {
-    [self searchTheDatabase:(@"canada")];
 }
 
 
@@ -401,5 +403,27 @@
 }
 
  */
+
+- (void)viewDidUnload {
+    [self setDatabaseSearchBar:nil];
+    [super viewDidUnload];
+}
+
+//------SEARCHING CODE--------
+//source https://developer.apple.com/LIBRARY/IOS/samplecode/ToolbarSearch/Listings/ToolbarSearch_APLToolbarSearchViewController_m.html
+
+- (void)searchBar:(UISearchBar *)aSearchBar textDidChange:(NSString *)searchText{
+    if(searchText.length == 0){
+        [self searchBarTextDidEndEditing:aSearchBar];
+        //unfilter articles here
+    }
+    [self searchTheDatabase:searchText];
+}
+- (void)searchBarSearchButtonClicked:(UISearchBar *)aSearchBar {
+    [self searchBarTextDidEndEditing:aSearchBar];
+}
+- (void)searchBarTextDidEndEditing:(UISearchBar *)aSearchBar {
+    [aSearchBar resignFirstResponder];
+}
 
 @end
