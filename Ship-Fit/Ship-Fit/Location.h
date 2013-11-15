@@ -7,13 +7,13 @@
 @interface Location : NSObject <CLLocationManagerDelegate>
 
 @property (nonatomic, readwrite, strong) ShipFit *shipFit_ref;
+@property (nonatomic, readwrite, assign) BOOL logging_enabled;
 
 - (id) initWithReference: (ShipFit *)reference;
 
 - (void)init_logs_and_manager;
 
 - (void)halt_GPS;
-
 
 - (void)run_GPS_withAccuracy: (CLLocationAccuracy)accuracy
                 andDistanceFilter: (CLLocationDistance)distance;
