@@ -28,7 +28,6 @@
 
 - (IBAction)togglePathAction:(id)sender;
 - (IBAction)zoomToMe:(id)sender;
-- (IBAction)toggleLocationOnMap:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIButton *zoomOutButton;
 @property (weak, nonatomic) IBOutlet UIButton *zoomInButton;

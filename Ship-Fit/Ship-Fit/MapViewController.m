@@ -153,10 +153,6 @@
     [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
 }
 
-- (IBAction)toggleLocationOnMap:(id)sender {
-    mapView.showsUserLocation = !mapView.showsUserLocation;
-}
-
 - (IBAction)zoomChange:(id)sender {
     
     //starting source https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/LocationAwarenessPG/MapKit/MapKit.html#//apple_ref/doc/uid/TP40009497-CH3-SW1
