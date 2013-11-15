@@ -145,6 +145,9 @@
 
 //END MKMapView protocol-------
 
+- (IBAction)togglePathAction:(id)sender {
+}
+
 - (IBAction)zoomToMe:(id)sender {
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(mapView.userLocation.coordinate, 1000, 1000);
     [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
@@ -192,6 +195,12 @@
 - (void)viewDidUnload {
     [self setCompDegLabel:nil];
     [self setCompDirLabel:nil];
+    [self setTempHighLabel:nil];
+    [self setTempLabel:nil];
+    [self setTempLoLabel:nil];
+    [self setWindLabel:nil];
+    [self setWindDirLabel:nil];
+    [self setSunLabel:nil];
     [super viewDidUnload];
 }
 @end
