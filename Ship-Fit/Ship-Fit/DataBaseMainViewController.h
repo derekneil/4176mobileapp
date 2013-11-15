@@ -20,6 +20,4 @@
 @property(nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (weak, nonatomic) IBOutlet UISearchBar *databaseSearchBar;
 
-- (IBAction)btnTest:(id)sender;
-
 @end
