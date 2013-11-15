@@ -18,8 +18,12 @@
 
 - (void)init_logs_and_manager
 {
-    _locationManager = [ [CLLocationManager alloc] init ];
-    _locationManager.delegate = self;
+    if ( [CLLocationManager locationServicesEnabled ])
+    {
+        _locationManager = [ [CLLocationManager alloc] init ];
+        _locationManager.delegate = self;
+        // Havn't set up logs yet. 
+    }
 }
 
 - (void)run_compass_withFilter: (CLLocationDegrees)compass_accuracy
@@ -43,7 +47,7 @@
 - (void)locationManager:(CLLocationManager *)manager
        didUpdateHeading:(CLHeading *)newHeading
 {
-    NSLog(@"Compass!!\n%@\n", newHeading);
+    //NSLog(@"%@", newHeading);
     
     if ( ( [ [ NSDate date ]  timeIntervalSince1970 ] - [newHeading.timestamp timeIntervalSince1970 ] ) < 60 )
     {
@@ -82,7 +86,7 @@
 - (void)locationManager:(CLLocationManager *)manager
        didFailWithError:(NSError *)error
 {
-    // to do
+    NSLog( @"%@" , error );
 }
 
 

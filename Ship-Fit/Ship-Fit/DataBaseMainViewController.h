@@ -14,12 +14,10 @@
 #import "SMXMLDocument.h"
 
 
-@interface DatabaseMainViewController : UITableViewController
+@interface DatabaseMainViewController : UITableViewController <UISearchBarDelegate>
 
 @property(nonatomic, strong) NSManagedObjectContext *myManageObjectContext;
-
 @property(nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-
-- (IBAction)btnTest:(id)sender;
+@property (weak, nonatomic) IBOutlet UISearchBar *databaseSearchBar;
 
 @end

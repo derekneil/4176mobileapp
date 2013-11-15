@@ -134,6 +134,7 @@
     //copy the databases preloaded with data from the resources to the device
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"shipfitMainDatabasev1.sqlite"];
     NSURL *storeURL2 = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"shipfit_Index.sqlite"];
+    NSURL *storeURL3 = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"shipfitGPS.sqlite"];
     
     //does the file exists
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -154,6 +155,16 @@
         
         if (defaultStoreURL2) {
             [fileManager copyItemAtURL:defaultStoreURL2 toURL:storeURL2 error:NULL];
+        }
+    }
+    
+    if (![fileManager fileExistsAtPath:[storeURL3 path]]) {
+        
+        //file doesnt exist, its the first time that the app is running
+        NSURL *defaultStoreURL3 = [[NSBundle mainBundle] URLForResource:@"shipfitGPS" withExtension:@"sqlite"];
+        
+        if (defaultStoreURL3) {
+            [fileManager copyItemAtURL:defaultStoreURL3 toURL:storeURL3 error:NULL];
         }
     }
     

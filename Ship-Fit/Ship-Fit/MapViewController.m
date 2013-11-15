@@ -145,13 +145,12 @@
 
 //END MKMapView protocol-------
 
+- (IBAction)togglePathAction:(id)sender {
+}
+
 - (IBAction)zoomToMe:(id)sender {
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(mapView.userLocation.coordinate, 1000, 1000);
     [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
-}
-
-- (IBAction)toggleLocationOnMap:(id)sender {
-    mapView.showsUserLocation = !mapView.showsUserLocation;
 }
 
 - (IBAction)zoomChange:(id)sender {
@@ -172,16 +171,19 @@
 }
 
 -(void) updatePathOverlay{
-    int pathpointcount = [pathTraveled count];
-    CLLocationCoordinate2D coordArray[pathpointcount];
+//    int pathpointcount = [pathTraveled count];
+//    CLLocationCoordinate2D coordArray[pathpointcount];
+//    
+//    //TODO: get pathTraveled into coordArray
+//    for(int i=0; i<pathpointcount; i++){
+//        coordArray[i] = [[pathTraveled objectAtIndex:i] coordinate];
+//    }
     
-    //TODO: get pathTraveled into coordArray
-    for(int i=0; i<pathpointcount; i++){
-        coordArray[i] = [[pathTraveled objectAtIndex:i] coordinate];
+    if ( self.shipfit.gps_count != 0 ){
+        path = [MKPolyline polylineWithCoordinates:self.shipfit.gps_head count:self.shipfit.gps_count];
+        [self.mapView addOverlay:path];
     }
     
-    path = [MKPolyline polylineWithCoordinates:coordArray count:pathpointcount];
-    [self.mapView addOverlay:path];
     
 }
 
@@ -192,6 +194,12 @@
 - (void)viewDidUnload {
     [self setCompDegLabel:nil];
     [self setCompDirLabel:nil];
+    [self setTempHighLabel:nil];
+    [self setTempLabel:nil];
+    [self setTempLoLabel:nil];
+    [self setWindLabel:nil];
+    [self setWindDirLabel:nil];
+    [self setSunLabel:nil];
     [super viewDidUnload];
 }
 @end

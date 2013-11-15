@@ -8,7 +8,7 @@
 
 #import "DatabaseMainViewController.h"
 #import "ARTICLE.h"
-
+#import "DatabaseAccess.h"
 
 @interface DatabaseMainViewController ()
 
@@ -84,7 +84,13 @@
     //[self fillDatabaseFromXMLFile];
 }
 
-
+//hide the navigation bar in the main database view, but show it in the article view for the back button
+- (void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBar.hidden = YES;
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    self.navigationController.navigationBar.hidden = NO;
+}
 
 
 - (void)didReceiveMemoryWarning
@@ -108,6 +114,7 @@
     
     return [sectInfo numberOfObjects];
 }
+
 
 
 //------ custome accessor method -----------------
@@ -139,9 +146,39 @@
     return _fetchedResultsController;
 }
 
-- (IBAction)btnTest:(id)sender {
-    [self searchTheDatabase:(@"canada")];
+
+-(void)displayArticles:(NSMutableArray *)arrayOfIndexids{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ARTICLE" inManagedObjectContext:[self myManageObjectContext]];
+    [fetchRequest setEntity:entity];
+
+    //NSPredicate *predicate = [NSPredicate predicateWithFormat:@"indexID=='B726E3B8-9634-4C57-A93D-C1F5718D9E3E'"];
+    
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"indexID IN %@",arrayOfIndexids];
+    
+    [fetchRequest setPredicate:predicate];
+
+    NSError *error = nil;
+    NSArray *fetchedObjects = [[self myManageObjectContext] executeFetchRequest:fetchRequest error:&error];
+    if (fetchedObjects == nil) {
+        NSLog(@"error in fetching the article!");
+    }
+    
+    NSLog(@"------------Search results--------------\n");
+    
+    for (ARTICLE *a in fetchedObjects) {
+        NSLog(@"%@\n", a.title);
+    }
+    
+    NSLog(@"---------------------------\n");
+    //Article objects are retrieve. now display them in the tableview using NSFetchedResultsController
+    //read this:
+    //http://www.raywenderlich.com/999/core-data-tutorial-for-ios-how-to-use-nsfetchedresultscontroller
+    
 }
+
+
 
 
 -(void)searchTheDatabase:(NSString *)textToSearchFor{
@@ -166,7 +203,9 @@
         }
     }];
     
-    NSLog(@"array: %@", matches);
+    
+    [self displayArticles:(matches)];
+    //NSLog(@"array: %@", matches);
 }
 
 
@@ -401,5 +440,27 @@
 }
 
  */
+
+- (void)viewDidUnload {
+    [self setDatabaseSearchBar:nil];
+    [super viewDidUnload];
+}
+
+//------SEARCHING CODE--------
+//source https://developer.apple.com/LIBRARY/IOS/samplecode/ToolbarSearch/Listings/ToolbarSearch_APLToolbarSearchViewController_m.html
+
+- (void)searchBar:(UISearchBar *)aSearchBar textDidChange:(NSString *)searchText{
+    if(searchText.length == 0){
+        [self searchBarTextDidEndEditing:aSearchBar];
+        //unfilter articles here
+    }
+    [self searchTheDatabase:searchText];
+}
+- (void)searchBarSearchButtonClicked:(UISearchBar *)aSearchBar {
+    [self searchBarTextDidEndEditing:aSearchBar];
+}
+- (void)searchBarTextDidEndEditing:(UISearchBar *)aSearchBar {
+    [aSearchBar resignFirstResponder];
+}
 
 @end
