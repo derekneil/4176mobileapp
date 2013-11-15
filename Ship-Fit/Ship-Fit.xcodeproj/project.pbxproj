@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		037B17FE1835C73100D80AAD /* shipfitGPS.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 037B17FD1835C73100D80AAD /* shipfitGPS.sqlite */; };
+		037B17FF1835C73100D80AAD /* shipfitGPS.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 037B17FD1835C73100D80AAD /* shipfitGPS.sqlite */; };
+		037B18021835C7F200D80AAD /* DatabaseAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 037B18011835C7F200D80AAD /* DatabaseAccess.m */; };
+		037B18031835C7F200D80AAD /* DatabaseAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 037B18011835C7F200D80AAD /* DatabaseAccess.m */; };
+		037B18061835D46F00D80AAD /* GPS.m in Sources */ = {isa = PBXBuildFile; fileRef = 037B18051835D46F00D80AAD /* GPS.m */; };
+		037B18071835D46F00D80AAD /* GPS.m in Sources */ = {isa = PBXBuildFile; fileRef = 037B18051835D46F00D80AAD /* GPS.m */; };
 		655D9D0718340F750004CD21 /* DatabaseMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9CF718340F750004CD21 /* DatabaseMainViewController.m */; };
 		655D9D0918340F750004CD21 /* shipfit_Index.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 655D9CFA18340F750004CD21 /* shipfit_Index.sqlite */; };
 		655D9D0B18340F750004CD21 /* SMXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9D0018340F750004CD21 /* SMXMLDocument.m */; };
@@ -66,6 +72,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		037B17FD1835C73100D80AAD /* shipfitGPS.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = shipfitGPS.sqlite; sourceTree = "<group>"; };
+		037B18001835C7F200D80AAD /* DatabaseAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseAccess.h; sourceTree = "<group>"; };
+		037B18011835C7F200D80AAD /* DatabaseAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseAccess.m; sourceTree = "<group>"; };
+		037B18041835D46F00D80AAD /* GPS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPS.h; sourceTree = "<group>"; };
+		037B18051835D46F00D80AAD /* GPS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPS.m; sourceTree = "<group>"; };
 		655D9CF618340F750004CD21 /* DataBaseMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DataBaseMainViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		655D9CF718340F750004CD21 /* DatabaseMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DatabaseMainViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		655D9CFA18340F750004CD21 /* shipfit_Index.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = shipfit_Index.sqlite; sourceTree = "<group>"; };
@@ -180,6 +191,7 @@
 		655D9D29183430420004CD21 /* sqlite */ = {
 			isa = PBXGroup;
 			children = (
+				037B17FD1835C73100D80AAD /* shipfitGPS.sqlite */,
 				655D9D2618342F7C0004CD21 /* shipfitMainDatabasev1.sqlite */,
 				655D9D21183418320004CD21 /* shipfitCRUD.xcdatamodeld */,
 				655D9CFA18340F750004CD21 /* shipfit_Index.sqlite */,
@@ -323,6 +335,10 @@
 				65CE3DE4183419B900ECA91C /* ARTICLE.m */,
 				655D9CFF18340F750004CD21 /* SMXMLDocument.h */,
 				655D9D0018340F750004CD21 /* SMXMLDocument.m */,
+				037B18001835C7F200D80AAD /* DatabaseAccess.h */,
+				037B18011835C7F200D80AAD /* DatabaseAccess.m */,
+				037B18041835D46F00D80AAD /* GPS.h */,
+				037B18051835D46F00D80AAD /* GPS.m */,
 			);
 			name = Database;
 			sourceTree = "<group>";
@@ -402,6 +418,7 @@
 				658DA5A41832D817003B6952 /* Default.png in Resources */,
 				658DA5A61832D817003B6952 /* Default@2x.png in Resources */,
 				658DA5A81832D818003B6952 /* Default-568h@2x.png in Resources */,
+				037B17FE1835C73100D80AAD /* shipfitGPS.sqlite in Resources */,
 				658DA5AB1832D818003B6952 /* MainStoryboard_iPhone.storyboard in Resources */,
 				658DA5AE1832D818003B6952 /* MainStoryboard_iPad.storyboard in Resources */,
 				658DA5B31832D818003B6952 /* first.png in Resources */,
@@ -423,6 +440,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				037B17FF1835C73100D80AAD /* shipfitGPS.sqlite in Resources */,
 				658DA5CE1832D818003B6952 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -456,11 +474,13 @@
 				65CE3DE5183419B900ECA91C /* ARTICLE.m in Sources */,
 				658DA5E11832DBF9003B6952 /* ShipFit.m in Sources */,
 				658DA5E61832DC17003B6952 /* Direction.m in Sources */,
+				037B18061835D46F00D80AAD /* GPS.m in Sources */,
 				658DA5E71832DC17003B6952 /* Location.m in Sources */,
 				655D9D0718340F750004CD21 /* DatabaseMainViewController.m in Sources */,
 				655D9D0B18340F750004CD21 /* SMXMLDocument.m in Sources */,
 				655D9D0C18340F750004CD21 /* sqlite3.c in Sources */,
 				655D9D0D18340F750004CD21 /* DatabaseArticleViewController.m in Sources */,
+				037B18021835C7F200D80AAD /* DatabaseAccess.m in Sources */,
 				655D9D1C183414CF0004CD21 /* FMDatabase.m in Sources */,
 				655D9D1D183414CF0004CD21 /* FMDatabaseAdditions.m in Sources */,
 				655D9D1E183414CF0004CD21 /* FMDatabasePool.m in Sources */,
@@ -474,6 +494,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				037B18071835D46F00D80AAD /* GPS.m in Sources */,
+				037B18031835C7F200D80AAD /* DatabaseAccess.m in Sources */,
 				658DA5D11832D818003B6952 /* Ship_FitTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

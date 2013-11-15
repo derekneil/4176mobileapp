@@ -8,7 +8,7 @@
 
 #import "DatabaseMainViewController.h"
 #import "ARTICLE.h"
-
+#import "DatabaseAccess.h"
 
 @interface DatabaseMainViewController ()
 
@@ -79,8 +79,6 @@
         NSLog(@"errorrr! %@", error);
         abort();
     }
-    
-    //[self displayArticle];
     
     //[self createDatabase];
     //[self fillDatabaseFromXMLFile];

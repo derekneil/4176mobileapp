@@ -47,20 +47,7 @@
     
     
     FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:path];
-    
-    /*
-     test
-     [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
-     [db executeUpdate:@"CREATE VIRTUAL TABLE IF NOT EXISTS docs USING fts4(name, contents);"];
-     }];
-     
-     FMDatabase *database = [FMDatabase databaseWithPath:path];
-     [database open];
-     [database executeUpdate:@"INSERT INTO docs (name, contents) VALUES(?, ?);", @"doc1", @"She sells sea shells by the sea shore."];
-     NSLog(@"%@", path);
-     */
-    
-    
+
     
     
     if (self.indexID.length) {
