@@ -272,7 +272,15 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell;
+    
+    //check for iOS 5
+    if( [[[UIDevice currentDevice] systemVersion] hasPrefix:@"5"]){
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    }
+    else{ //assume it's 6 or higher
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    }
     
     // Configure the cell...
     ARTICLE *article = [self.fetchedResultsController objectAtIndexPath:indexPath];
