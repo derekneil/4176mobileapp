@@ -105,6 +105,7 @@
     didUpdateToLocation:(CLLocation *)newLocation
            fromLocation:(CLLocation *)oldLocation
 {
+    NSLog(@"iOS 5 location event");
     /* Make sure the time stamp is relevant */
     if ( ( [ [ NSDate date ]  timeIntervalSince1970 ] - [newLocation.timestamp timeIntervalSince1970 ] ) < 60 )
     {
@@ -121,7 +122,7 @@
             self.shipFit_ref.knots = ( (newLocation.speed) * 1.94384 );
         }
 
-        NSLog( @"LAT: %f\nLONG: %f\nKNOTS:%f" , self.shipFit_ref.latitude , self.shipFit_ref.longitude , self.shipFit_ref.knots);
+        NSLog( @"LAT: %f LONG: %f KNOTS:%f" , self.shipFit_ref.latitude , self.shipFit_ref.longitude , self.shipFit_ref.knots);
     }
     else{
         NSLog(@"Entry is over 1 minute old.....");
@@ -147,7 +148,7 @@
         /* Set the speed */
         self.shipFit_ref.knots = ( current_location.speed * 1.94384 );
             
-        NSLog( @"LAT: %f\nLONG: %f\nKNOTS:%f" , self.shipFit_ref.latitude , self.shipFit_ref.longitude , self.shipFit_ref.knots);
+        NSLog( @"LAT: %f LONG: %f KNOTS:%f" , self.shipFit_ref.latitude , self.shipFit_ref.longitude , self.shipFit_ref.knots);
     }
     
     else{
