@@ -51,13 +51,14 @@ FMDatabase* db;
     
     [db open];
     
-    [db executeUpdate:@"INSERT INTO GPS (tripid, lat, lng, dateandtime) VALUES(%@, %@, %@, %@);", [NSNumber numberWithInt:tripID], lat, lng, dateandtime];
+    NSString* update = [NSString stringWithFormat:@"INSERT INTO GPS (tripid, lat, lng, dateandtime) VALUES(\"%@\", \"%@\", \"%@\", \"%@\");", [NSNumber numberWithInt:tripID], lat, lng, dateandtime];
+    [db executeUpdate:update];
     
     [db close];
     
-    NSInteger lastId = [db lastInsertRowId];
+    //NSInteger lastId = [db lastInsertRowId];
     
-    return lastId;
+    return 0;//lastId;
 }
 
 
@@ -66,13 +67,14 @@ FMDatabase* db;
     
     [db open];
 
-    [db executeUpdate:@"INSERT INTO Trips (startdate) VALUES(%@);", startdate];
+    NSString* update = [NSString stringWithFormat:@"INSERT INTO Trips (startdate) VALUES(\"%@\");", startdate];
+    [db executeUpdate:update];
     
     [db close];
     
-    NSInteger tripId = [db lastInsertRowId];
+    //NSInteger tripId = [db lastInsertRowId];
 
-    return tripId;
+    return 0; //tripId;
 }
 
 -(NSInteger)getLatestTripID{
@@ -83,7 +85,7 @@ FMDatabase* db;
     
     [db close];
     
-    return [results intForColumn:@"id"];
+    return 0;//[results intForColumn:@"id"];
 }
 
 /*
