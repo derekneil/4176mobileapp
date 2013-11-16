@@ -6,6 +6,7 @@
     CLLocationCoordinate2D *_head;
     CLLocationCoordinate2D *_base;
     CLLocationManager *_locationManager;
+    int _lastGPStimeInt;
 }
 
 - (id) initWithReference: (ShipFit *)reference
@@ -22,6 +23,7 @@
 {
     _locationManager = [ [CLLocationManager alloc] init ];
     _locationManager.delegate = self;
+    _lastGPStimeInt = [[NSDate date] timeIntervalSince1970];
     
     if ( [CLLocationManager locationServicesEnabled] )
     {
@@ -106,27 +108,12 @@
            fromLocation:(CLLocation *)oldLocation
 {
     NSLog(@"iOS 5 location event");
-    /* Make sure the time stamp is relevant */
-    if ( ( [ [ NSDate date ]  timeIntervalSince1970 ] - [newLocation.timestamp timeIntervalSince1970 ] ) < 60 )
-    {
-        /* Set the new lat and long values */
-        self.shipFit_ref.latitude = newLocation.coordinate.latitude;
-        self.shipFit_ref.longitude = newLocation.coordinate.longitude;
-            
-        /* Log the new lat and long values */
-        [ self log_latitude:newLocation.coordinate.latitude
-                  longitude:newLocation.coordinate.longitude ];
-            
-        /* Set the new speed property */
-        if ( newLocation.speed != -1 ){
-            self.shipFit_ref.knots = ( (newLocation.speed) * 1.94384 );
-        }
-
-        NSLog( @"LAT: %f LONG: %f KNOTS:%f" , self.shipFit_ref.latitude , self.shipFit_ref.longitude , self.shipFit_ref.knots);
-    }
-    else{
-        NSLog(@"Entry is over 1 minute old.....");
-    }
+    
+    [self updateShipFitLocation:newLocation];
+    
+    /* Log the new lat and long values */
+    [ self log_latitude:newLocation.coordinate.latitude
+              longitude:newLocation.coordinate.longitude ];
 }
 
 // iOS 6 & 7
@@ -137,23 +124,8 @@
     
     // Get the most recent. 
     CLLocation *current_location = [ locations lastObject ];
+    [self updateShipFitLocation:current_location];
     
-    /* Make sure the update is relevant within 60 seconds */
-    if ( ( [ [ NSDate date ]  timeIntervalSince1970 ] - [current_location.timestamp timeIntervalSince1970 ] ) < 60 )
-    {
-        /* Set the new lat/long */
-        self.shipFit_ref.latitude = current_location.coordinate.latitude;
-        self.shipFit_ref.longitude = current_location.coordinate.longitude;
-            
-        /* Set the speed */
-        self.shipFit_ref.knots = ( current_location.speed * 1.94384 );
-            
-        NSLog( @"LAT: %f LONG: %f KNOTS:%f" , self.shipFit_ref.latitude , self.shipFit_ref.longitude , self.shipFit_ref.knots);
-    }
-    
-    else{
-        NSLog(@"Entry is over 1 minute old......");
-    }
         
     /* Log each entry */
     int l;
@@ -164,6 +136,30 @@
                  longitude:current_location.coordinate.longitude ];
     }
     
+}
+
+//worker method to save duplicate code
+- (void)updateShipFitLocation: (CLLocation*) current_location{
+    /* Make sure the update is relevant within 60 seconds */
+    if ( ( [ [ NSDate date ]  timeIntervalSince1970 ] - [current_location.timestamp timeIntervalSince1970 ] ) < 60 &&
+        ( [current_location.timestamp timeIntervalSince1970 ] - _lastGPStimeInt) > 3)
+    {
+        //save last time we updated the display property for GPS
+        _lastGPStimeInt = [current_location.timestamp timeIntervalSince1970];
+        
+        /* Set the new lat/long */
+        self.shipFit_ref.latitude = current_location.coordinate.latitude;
+        self.shipFit_ref.longitude = current_location.coordinate.longitude;
+        
+        /* Set the speed */
+        self.shipFit_ref.knots = ( current_location.speed * 1.94384 );
+        
+        NSLog( @"LAT: %f LONG: %f KNOTS:%f" , self.shipFit_ref.latitude , self.shipFit_ref.longitude , self.shipFit_ref.knots);
+    }
+    
+    else{
+        NSLog(@"not updating GPS display");
+    }
 }
 
 // Handling Authorization Status Changes.
