@@ -27,7 +27,7 @@ extern NSString *const ERROR;
 
 
 /*
- Properties for the UI to Observe..... Do with them what you please. 
+ Properties for the UI to Observe 
  */
 @property (nonatomic, readwrite, assign) CLLocationDegrees latitude;
 @property (nonatomic, readwrite, assign) CLLocationDegrees longitude;
