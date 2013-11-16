@@ -47,11 +47,13 @@ NSString *const ERROR = @"ERROR";
     _DB = [[DatabaseAccess alloc] init];
     _tripID = [_DB getLatestTripID];
     
+    
     NSLog(@"getting weather");
     _weather = [ [Weather alloc] initWithReference:self ];
     [_weather getWeatherForLatitude:45
                           Longitude:-63.5
                                Time:1.0];
+
     
 }
 
