@@ -16,7 +16,7 @@
 
 -(id) init;
 
--(NSMutableArray *) getGPS:(NSInteger)tripID;
+-(NSMutableArray *) getGPSforTrip:(NSInteger)tripID;
 
 -(NSInteger)getLatestTripID;
 

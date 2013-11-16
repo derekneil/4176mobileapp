@@ -51,7 +51,7 @@ FMDatabase* db;
     
     [db open];
     
-    [db executeUpdate:@"INSERT INTO GPS (tripid, lat, lng, dateandtime) VALUES(?, ?, ?, ?);", [NSNumber numberWithInt:tripID], lat, lng, dateandtime];
+    [db executeUpdate:@"INSERT INTO GPS (tripid, lat, lng, dateandtime) VALUES(%@, %@, %@, %@);", [NSNumber numberWithInt:tripID], lat, lng, dateandtime];
     
     [db close];
     
@@ -61,13 +61,12 @@ FMDatabase* db;
 }
 
 
-// [_DB insertIntoTrips:(@"mytrip")];
+// [_DB insertIntoTrips:(@"2013-11-27-18:45:53")];
 -(NSInteger)insertIntoTrips:(NSString *)startdate{
     
     [db open];
-    
-    //INSERT INTO Trips (startdate) VALUES ("e32e32e32");
-    [db executeUpdate:@"INSERT INTO Trips (startdate) VALUES(?);", startdate];
+
+    [db executeUpdate:@"INSERT INTO Trips (startdate) VALUES(%@);", startdate];
     
     [db close];
     
@@ -80,14 +79,11 @@ FMDatabase* db;
     
     [db open];
     
-    //INSERT INTO Trips (startdate) VALUES ("e32e32e32");
-    [db executeUpdate:@"SELECT * FROM Trips;"];
+    FMResultSet *results = [db executeQuery:@"SELECT MAX(id) FROM Trips;"];
     
     [db close];
     
-    NSInteger tripId = [db lastInsertRowId];
-    
-    return tripId;
+    return [results intForColumn:@"id"];
 }
 
 /*
@@ -125,7 +121,7 @@ for (GPS *gps in gpsObjects) {
 
 //get gps coordinates for a particular tirp
 // [_DB getGPS:4 ];
--(NSMutableArray *) getGPS:(NSInteger)tripID
+-(NSMutableArray *) getGPSforTrip:(NSInteger)tripID
 {
     NSMutableArray *gpsArr = [[NSMutableArray alloc] init];
     
