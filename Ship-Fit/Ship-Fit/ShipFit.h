@@ -35,6 +35,7 @@ extern NSString *const ERROR;
 @property (nonatomic, readwrite, assign) CLLocationDirection compassDegrees;
 @property (nonatomic, readwrite, strong) NSString *compassDirection;
 @property (nonatomic, readwrite, assign) double knots;
+@property (nonatomic, readwrite, strong) NSString* weatherJSON;
 
 
 /* Functions */
