@@ -60,6 +60,17 @@
 		65C392E21834737C0042FA81 /* icon144.png in Resources */ = {isa = PBXBuildFile; fileRef = 65C392E11834737C0042FA81 /* icon144.png */; };
 		65CE3DE5183419B900ECA91C /* ARTICLE.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CE3DE4183419B900ECA91C /* ARTICLE.m */; };
 		D51118621835592F009D722B /* Weather.m in Sources */ = {isa = PBXBuildFile; fileRef = D51118611835592F009D722B /* Weather.m */; };
+		D56337A31838101A00A9EDE8 /* Status-weather-clear-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D56337981838101A00A9EDE8 /* Status-weather-clear-icon.png */; };
+		D56337A41838101A00A9EDE8 /* Status-weather-clear-night-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D56337991838101A00A9EDE8 /* Status-weather-clear-night-icon.png */; };
+		D56337A51838101A00A9EDE8 /* thermometer.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = D563379A1838101A00A9EDE8 /* thermometer.jpeg */; };
+		D56337A61838101A00A9EDE8 /* Status-weather-showers-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D563379B1838101A00A9EDE8 /* Status-weather-showers-icon.png */; };
+		D56337A71838101A00A9EDE8 /* Status-weather-snow-rain-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D563379C1838101A00A9EDE8 /* Status-weather-snow-rain-icon.png */; };
+		D56337A81838101A00A9EDE8 /* Status-weather-snow-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D563379D1838101A00A9EDE8 /* Status-weather-snow-icon.png */; };
+		D56337A91838101A00A9EDE8 /* Status-weather-many-clouds-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D563379E1838101A00A9EDE8 /* Status-weather-many-clouds-icon.png */; };
+		D56337AA1838101A00A9EDE8 /* Status-weather-clouds-night-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D563379F1838101A00A9EDE8 /* Status-weather-clouds-night-icon.png */; };
+		D56337AB1838101A00A9EDE8 /* Status-weather-clouds-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D56337A01838101A00A9EDE8 /* Status-weather-clouds-icon.png */; };
+		D56337AC1838101A00A9EDE8 /* Fog-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D56337A11838101A00A9EDE8 /* Fog-icon.png */; };
+		D56337AD1838101A00A9EDE8 /* Wind-Flag-Storm-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D56337A21838101A00A9EDE8 /* Wind-Flag-Storm-icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +156,18 @@
 		65CE3DE4183419B900ECA91C /* ARTICLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARTICLE.m; sourceTree = "<group>"; };
 		D51118601835592F009D722B /* Weather.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Weather.h; sourceTree = "<group>"; };
 		D51118611835592F009D722B /* Weather.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Weather.m; sourceTree = "<group>"; };
+		D563379618380A1C00A9EDE8 /* WeatherDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherDelegate.h; sourceTree = "<group>"; };
+		D56337981838101A00A9EDE8 /* Status-weather-clear-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Status-weather-clear-icon.png"; sourceTree = "<group>"; };
+		D56337991838101A00A9EDE8 /* Status-weather-clear-night-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Status-weather-clear-night-icon.png"; sourceTree = "<group>"; };
+		D563379A1838101A00A9EDE8 /* thermometer.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = thermometer.jpeg; sourceTree = "<group>"; };
+		D563379B1838101A00A9EDE8 /* Status-weather-showers-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Status-weather-showers-icon.png"; sourceTree = "<group>"; };
+		D563379C1838101A00A9EDE8 /* Status-weather-snow-rain-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Status-weather-snow-rain-icon.png"; sourceTree = "<group>"; };
+		D563379D1838101A00A9EDE8 /* Status-weather-snow-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Status-weather-snow-icon.png"; sourceTree = "<group>"; };
+		D563379E1838101A00A9EDE8 /* Status-weather-many-clouds-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Status-weather-many-clouds-icon.png"; sourceTree = "<group>"; };
+		D563379F1838101A00A9EDE8 /* Status-weather-clouds-night-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Status-weather-clouds-night-icon.png"; sourceTree = "<group>"; };
+		D56337A01838101A00A9EDE8 /* Status-weather-clouds-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Status-weather-clouds-icon.png"; sourceTree = "<group>"; };
+		D56337A11838101A00A9EDE8 /* Fog-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fog-icon.png"; sourceTree = "<group>"; };
+		D56337A21838101A00A9EDE8 /* Wind-Flag-Storm-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Wind-Flag-Storm-icon.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -266,6 +289,7 @@
 		658DA5981832D817003B6952 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D56337971838101A00A9EDE8 /* WeatherIcons */,
 				65C392E11834737C0042FA81 /* icon144.png */,
 				65C392DF183473740042FA81 /* icon72.png */,
 				65C392DB183470E10042FA81 /* icon.png */,
@@ -326,6 +350,7 @@
 				658DA5E51832DC17003B6952 /* Location.m */,
 				D51118601835592F009D722B /* Weather.h */,
 				D51118611835592F009D722B /* Weather.m */,
+				D563379618380A1C00A9EDE8 /* WeatherDelegate.h */,
 			);
 			name = BackendLogic;
 			sourceTree = "<group>";
@@ -346,6 +371,24 @@
 				037B18051835D46F00D80AAD /* GPS.m */,
 			);
 			name = Database;
+			sourceTree = "<group>";
+		};
+		D56337971838101A00A9EDE8 /* WeatherIcons */ = {
+			isa = PBXGroup;
+			children = (
+				D56337981838101A00A9EDE8 /* Status-weather-clear-icon.png */,
+				D56337991838101A00A9EDE8 /* Status-weather-clear-night-icon.png */,
+				D563379A1838101A00A9EDE8 /* thermometer.jpeg */,
+				D563379B1838101A00A9EDE8 /* Status-weather-showers-icon.png */,
+				D563379C1838101A00A9EDE8 /* Status-weather-snow-rain-icon.png */,
+				D563379D1838101A00A9EDE8 /* Status-weather-snow-icon.png */,
+				D563379E1838101A00A9EDE8 /* Status-weather-many-clouds-icon.png */,
+				D563379F1838101A00A9EDE8 /* Status-weather-clouds-night-icon.png */,
+				D56337A01838101A00A9EDE8 /* Status-weather-clouds-icon.png */,
+				D56337A11838101A00A9EDE8 /* Fog-icon.png */,
+				D56337A21838101A00A9EDE8 /* Wind-Flag-Storm-icon.png */,
+			);
+			path = WeatherIcons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -438,6 +481,17 @@
 				65C392DE183470E10042FA81 /* icon@2x.png in Resources */,
 				65C392E0183473740042FA81 /* icon72.png in Resources */,
 				65C392E21834737C0042FA81 /* icon144.png in Resources */,
+				D56337A31838101A00A9EDE8 /* Status-weather-clear-icon.png in Resources */,
+				D56337A41838101A00A9EDE8 /* Status-weather-clear-night-icon.png in Resources */,
+				D56337A51838101A00A9EDE8 /* thermometer.jpeg in Resources */,
+				D56337A61838101A00A9EDE8 /* Status-weather-showers-icon.png in Resources */,
+				D56337A71838101A00A9EDE8 /* Status-weather-snow-rain-icon.png in Resources */,
+				D56337A81838101A00A9EDE8 /* Status-weather-snow-icon.png in Resources */,
+				D56337A91838101A00A9EDE8 /* Status-weather-many-clouds-icon.png in Resources */,
+				D56337AA1838101A00A9EDE8 /* Status-weather-clouds-night-icon.png in Resources */,
+				D56337AB1838101A00A9EDE8 /* Status-weather-clouds-icon.png in Resources */,
+				D56337AC1838101A00A9EDE8 /* Fog-icon.png in Resources */,
+				D56337AD1838101A00A9EDE8 /* Wind-Flag-Storm-icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
