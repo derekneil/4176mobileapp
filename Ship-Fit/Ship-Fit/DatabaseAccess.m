@@ -13,34 +13,22 @@
 FMDatabase* db;
 
 /*
- ------------example------------------:
- 
- DatabaseAccess *obj = [[DatabaseAccess alloc] init];
 
  //insert into the tables
- int lastInsertID = [obj insertIntoTrips:(@"mytrip")];
- 
+ int lastInsertID = [_DB insertIntoTrips:(@"mytrip")];
  if(lastInsertID){
- [obj insertIntoGPS:lastInsertID lat:@"32333" lng:@"3232" dateandtime:@"323223"];
+    [_DB insertIntoGPS:lastInsertID lat:@"32333" lng:@"3232" dateandtime:@"323223"];
  }else{
- NSLog(@"error inserting into GPS table");
+    NSLog(@"error inserting into GPS table");
  }
  
  
  //get all the gps coordinates
- DatabaseAccess *obj = [[DatabaseAccess alloc] init];
- GPS *gpsObjects = (GPS *)[obj getGPSAll];
- 
+ GPS *gpsObjects = (GPS *)[_DB getGPSAll];
  for (GPS *gps in gpsObjects) {
- NSLog(@"gps coordinates: %@, %@", gps.lat, gps.lng);
+    NSLog(@"gps coordinates: %@, %@", gps.lat, gps.lng);
  }
- 
- 
- //get a particular gps coordinate
- DatabaseAccess *obj = [[DatabaseAccess alloc] init];
- GPS *gps = (GPS *)[obj getGPS:1];
- 
- NSLog(@"gps coordinates: %@, %@", gps.lat, gps.lng);
+
  
  */
 
@@ -58,31 +46,32 @@ FMDatabase* db;
     return self;
 }
 
-
+// [_DB insertIntoGPS:lastInsertID lat:@"32333" lng:@"3232" dateandtime:@"323223"];
 -(NSInteger)insertIntoGPS:(NSInteger)tripID lat:(NSString *)lat lng:(NSString *)lng dateandtime:(NSString *)dateandtime{
     
     [db open];
     
     [db executeUpdate:@"INSERT INTO GPS (tripid, lat, lng, dateandtime) VALUES(?, ?, ?, ?);", [NSNumber numberWithInt:tripID], lat, lng, dateandtime];
     
+    [db close];
     
     NSInteger lastId = [db lastInsertRowId];
-    
-    [db close];
     
     return lastId;
 }
 
 
-
+// [_DB insertIntoTrips:(@"mytrip")];
 -(NSInteger)insertIntoTrips:(NSString *)startdate{
+    
+    [db open];
     
     //INSERT INTO Trips (startdate) VALUES ("e32e32e32");
     [db executeUpdate:@"INSERT INTO Trips (startdate) VALUES(?);", startdate];
     
-    NSInteger tripId = [db lastInsertRowId];
-    
     [db close];
+    
+    NSInteger tripId = [db lastInsertRowId];
 
     return tripId;
 }
@@ -94,14 +83,19 @@ FMDatabase* db;
     //INSERT INTO Trips (startdate) VALUES ("e32e32e32");
     [db executeUpdate:@"SELECT * FROM Trips;"];
     
-    NSInteger tripId = [db lastInsertRowId];
-    
     [db close];
+    
+    NSInteger tripId = [db lastInsertRowId];
     
     return tripId;
 }
 
-
+/*
+GPS *gpsObjects = (GPS *)[_DB getGPSAll];
+for (GPS *gps in gpsObjects) {
+    NSLog(@"gps coordinates: %@, %@", gps.lat, gps.lng);
+}
+*/
 -(NSMutableArray *) getGPSAll
 {
     NSMutableArray *gpsArr = [[NSMutableArray alloc] init];
@@ -110,6 +104,8 @@ FMDatabase* db;
     
     FMResultSet *results = [db executeQuery:@"SELECT * FROM GPS"];
     
+    [db close];
+    
     while([results next])
     {
         GPS *gps = [[GPS alloc] init];
@@ -123,19 +119,14 @@ FMDatabase* db;
         [gpsArr addObject:gps];
     }
     
-    [db close];
-    
     return gpsArr;
 }
 
 
-
-
 //get gps coordinates for a particular tirp
--(GPS *) getGPS:(NSInteger)tripID
+// [_DB getGPS:4 ];
+-(NSMutableArray *) getGPS:(NSInteger)tripID
 {
-    //NSString *q = [NSString stringWithFormat:@"select * from GPS where id = %d", tripID];
-    
     NSMutableArray *gpsArr = [[NSMutableArray alloc] init];
     
     [db open];
@@ -144,6 +135,8 @@ FMDatabase* db;
     NSString *q = [NSString stringWithFormat:@"select * from GPS where tripid = %d", tripID];
     FMResultSet *results = [db executeQuery:q];
     
+    [db close];
+    
     while([results next])
     {
         GPS *gps = [[GPS alloc] init];
@@ -157,9 +150,7 @@ FMDatabase* db;
         [gpsArr addObject:gps];
     }
     
-    [db close];
-    
-    return [gpsArr objectAtIndex:(0)];
+    return gpsArr;
 }
 
 
