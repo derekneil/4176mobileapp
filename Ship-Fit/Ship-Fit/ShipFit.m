@@ -42,6 +42,10 @@ NSString *const ERROR = @"ERROR";
     [ _direction run_compass_withFilter:5 ];
     
     
+    NSLog(@"initializing Database Access");
+    _DB = [[DatabaseAccess alloc] init];
+    _tripID = [_DB getLatestTripID];
+    
 }
 
 

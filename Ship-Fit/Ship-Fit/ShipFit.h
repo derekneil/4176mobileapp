@@ -1,5 +1,6 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import "DatabaseAccess.h"
 
 //Compass Macros
 extern NSString *const N;
@@ -16,6 +17,9 @@ extern NSString *const ERROR;
 //@property (nonatomic, readwrite, assign) MKMapView *map_view_ref;
 
 
+// DATABASE
+@property ( nonatomic, readonly, strong) DatabaseAccess* DB;
+@property (nonatomic, readwrite, assign) int tripID;
 
 // For remote tracking
 @property ( nonatomic, readwrite, assign ) CLLocationCoordinate2D *gps_head;
@@ -31,7 +35,6 @@ extern NSString *const ERROR;
 @property (nonatomic, readwrite, assign) CLLocationDirection compassDegrees;
 @property (nonatomic, readwrite, strong) NSString *compassDirection;
 @property (nonatomic, readwrite, assign) double knots;
-
 
 
 /* Functions */
