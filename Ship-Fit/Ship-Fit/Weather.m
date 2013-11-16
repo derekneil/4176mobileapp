@@ -44,11 +44,16 @@ NSString *const baseURL = @"https://api.forecast.io/forecast/";
              
          } else
          {
-             NSLog(@"success!!");
+             
              id jsonObject = [NSJSONSerialization JSONObjectWithData:data
                                                              options:NSJSONReadingAllowFragments
                                                                error:&error];
-             NSLog(@"%@", jsonObject);
+             
+             if ( [jsonObject isKindOfClass:[NSDictionary class ] ])
+             {
+                 NSLog(@"Weather JSON saved to ShipFit Property");
+                 self.shipFit_ref.weatherJSON = (NSDictionary *)jsonObject;
+             }
          }
      }];
 }
