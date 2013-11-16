@@ -64,8 +64,19 @@
 - (void)log_latitude: (CLLocationDegrees)lat
            longitude: (CLLocationDegrees)lon
 {
-    if ( self.logging_enabled )
-    {
+    if ( self.logging_enabled ){
+        
+        NSString* datetime = [NSDateFormatter localizedStringFromDate:[NSDate date]
+                                                            dateStyle:NSDateFormatterShortStyle
+                                                            timeStyle:NSDateFormatterFullStyle];
+        NSLog(@"Log to DB with tripID %d and datetime: %@",_shipFit_ref.tripID, datetime);
+    
+        //save point to database
+        [_shipFit_ref.DB insertIntoGPS:_shipFit_ref.tripID
+                                   lat:[NSString stringWithFormat:@"%.4f",lat ]
+                                   lng:[NSString stringWithFormat:@"%.4f",lon ]
+                           dateandtime:datetime];
+        
         if (self.shipFit_ref.gps_count == 0 ){
             _head->latitude = lat;
             _head->longitude = lon;
