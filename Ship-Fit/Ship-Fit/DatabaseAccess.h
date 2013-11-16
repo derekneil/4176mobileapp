@@ -14,7 +14,11 @@
 
 @interface DatabaseAccess : NSObject
 
--(GPS *) getGPS:(NSInteger)gpsID;
+-(id) init;
+
+-(GPS *) getGPS:(NSInteger)tripID;
+
+-(NSInteger)getLatestTripID;
 
 -(NSMutableArray *) getGPSAll;
 
