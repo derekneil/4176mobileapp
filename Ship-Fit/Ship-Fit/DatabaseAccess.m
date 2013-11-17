@@ -81,7 +81,7 @@ FMDatabase* db;
     
     [db open];
     
-    FMResultSet *results = [db executeQuery:@"SELECT MAX(id) FROM Trips;"];
+    FMResultSet *results = [db executeQuery:@"SELECT MAX(id) as id FROM Trips;"];
     
     [db close];
     
