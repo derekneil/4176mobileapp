@@ -13,7 +13,8 @@
 FMDatabase* db;
 
 /*
-
+ ------------example------------------:
+ 
  //insert into the tables
  int lastInsertID = [_DB insertIntoTrips:(@"mytrip")];
  if(lastInsertID){
@@ -51,7 +52,7 @@ FMDatabase* db;
     
     [db open];
     
-    NSString* update = [NSString stringWithFormat:@"INSERT INTO GPS (tripid, lat, lng, dateandtime) VALUES(\"%@\", \"%@\", \"%@\", \"%@\");", [NSNumber numberWithInt:tripID], lat, lng, dateandtime];
+    NSString* update = [NSString stringWithFormat:@"INSERT INTO GPS (tripid, lat, lng, dateandtime) VALUES(?, ?, ?, ?);", [NSNumber numberWithInt:tripID], lat, lng, dateandtime];
     [db executeUpdate:update];
     
     [db close];
@@ -67,7 +68,7 @@ FMDatabase* db;
     
     [db open];
 
-    NSString* update = [NSString stringWithFormat:@"INSERT INTO Trips (startdate) VALUES(\"%@\");", startdate];
+    NSString* update = [NSString stringWithFormat:@"INSERT INTO Trips (startdate) VALUES(?);", startdate];
     [db executeUpdate:update];
     
     [db close];
