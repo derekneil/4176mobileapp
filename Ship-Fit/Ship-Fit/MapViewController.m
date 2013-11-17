@@ -132,9 +132,9 @@
 }
 
 - (void) updateWeatherLabels{
-    NSString* temp = [NSString stringWithFormat:@"%@",[[weatherJSON objectForKey:@"currently"] valueForKey:@"temperature"]];
-    self.tempLoLabel.text = [NSString stringWithFormat:@"DAMNIT"];
-    NSLog(@"%@", temp);
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        self.tempLoLabel.text = [NSString stringWithFormat:@"%@",[[weatherJSON objectForKey:@"currently"] valueForKey:@"temperature"]];
+    }];
 }
 
 //MKMapView protocol----------
