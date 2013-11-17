@@ -210,6 +210,15 @@
     [self.mapView removeOverlay:path];
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [_shipfit removeObserver:self forKeyPath:@"latitude"];
+    [_shipfit removeObserver:self forKeyPath:@"longitude"];
+    [_shipfit removeObserver:self forKeyPath:@"knots"];
+    [_shipfit removeObserver:self forKeyPath:@"compassDegrees"];
+    [_shipfit removeObserver:self forKeyPath:@"compassDirection"];
+    [_shipfit removeObserver:self forKeyPath:@"weatherJSON"];
+}
+
 - (void)viewDidUnload {
     [self setCompDegLabel:nil];
     [self setCompDirLabel:nil];
