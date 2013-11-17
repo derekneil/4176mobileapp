@@ -8,7 +8,7 @@ NSString *const baseURL = @"https://api.forecast.io/forecast/";
 
 @implementation Weather
 {
-    
+   // instance var
 }
 
 - (id) initWithReference: (ShipFit *)reference
@@ -20,16 +20,17 @@ NSString *const baseURL = @"https://api.forecast.io/forecast/";
     return self;
 }
 
-
-- (void)getWeatherForLatitude: (double)lat
+- (short int)getWeatherForLatitude: (double)lat
                     Longitude: (double)lon
                          Time: (double)time
 {
+    __block short int returncode;
+    
     NSURL *theURL = [ NSURL URLWithString:[NSString stringWithFormat:@"%@%@/%.6f,%.6f",baseURL,theKey,lat,lon] ];
     
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:theURL
                                                   cachePolicy:NSURLCacheStorageAllowedInMemoryOnly
-                                              timeoutInterval:10];
+                                              timeoutInterval:8];
     
     
     NSLog(@"Getting Forecast for: %@ " , theURL );
@@ -39,12 +40,13 @@ NSString *const baseURL = @"https://api.forecast.io/forecast/";
      {	
          if (error)
          {
-             NSLog(@"failure");
+             returncode = -1;
+             NSLog(@"The Call to Forecast.io was not successful.");
              NSLog(@"%@" , error);
-             
-         } else
+         }
+         else
          {
-             
+             returncode = 1;
              id jsonObject = [NSJSONSerialization JSONObjectWithData:data
                                                              options:NSJSONReadingAllowFragments
                                                                error:&error];
@@ -56,6 +58,8 @@ NSString *const baseURL = @"https://api.forecast.io/forecast/";
              }
          }
      }];
+    
+    return returncode;
 }
 
 

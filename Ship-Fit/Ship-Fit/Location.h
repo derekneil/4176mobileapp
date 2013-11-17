@@ -3,7 +3,6 @@
 
 @class ShipFit;
 
-
 @interface Location : NSObject <CLLocationManagerDelegate>
 
 @property (nonatomic, readwrite, strong) ShipFit *shipFit_ref;

@@ -75,7 +75,7 @@
     self.shipFit_ref.compassDirection = [Direction bearing_String:self.shipFit_ref.compassDegrees];
 }
 
-+ (NSString*)bearing_String:(float)deg
++ (NSString*)bearing_String:(double)deg
 {
     if( deg >= 337.5 || deg <= 22.5 ) return N;
     else if( deg > 22.5 && deg < 67.5 ) return NE;

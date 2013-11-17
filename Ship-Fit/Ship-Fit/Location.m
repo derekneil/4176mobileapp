@@ -101,7 +101,6 @@
 }
 
 //for debug
-
 - (void)print_logs_to_console
 {
     CLLocationCoordinate2D *runner = _head;
