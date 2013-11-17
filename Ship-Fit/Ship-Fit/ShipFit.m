@@ -31,6 +31,10 @@ NSString *const ERROR = @"ERROR";
     /* By default set true north to true */
     self.isTrueNorth = YES;
     
+    NSLog(@"initializing Database Access");
+    _DB = [[DatabaseAccess alloc] init];
+    _tripID = [_DB getLatestTripID];
+    
     NSLog(@"initializing GPS");
     _location = [ [Location alloc] initWithReference:self ];
     [_location init_logs_and_manager];
@@ -41,11 +45,6 @@ NSString *const ERROR = @"ERROR";
     _direction = [ [Direction alloc] initWithReference:self ];
     [ _direction init_logs_and_manager ];
     [ _direction run_compass_withFilter:5 ];
-    
-    
-    NSLog(@"initializing Database Access");
-    _DB = [[DatabaseAccess alloc] init];
-    _tripID = [_DB getLatestTripID];
     
     
     NSLog(@"getting weather");
