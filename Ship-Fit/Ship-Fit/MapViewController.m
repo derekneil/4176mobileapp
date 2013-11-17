@@ -81,6 +81,10 @@
                forKeyPath:@"compassDirection"
                   options:NSKeyValueObservingOptionNew
                   context:nil ];
+    [_shipfit addObserver:self
+               forKeyPath:@"weatherJSON"
+                  options:NSKeyValueObservingOptionNew
+                  context:nil ];
     
 }
 
@@ -127,6 +131,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void) updateWeatherLabels{
+    NSString* temp = [NSString stringWithFormat:@"%@",[[weatherJSON objectForKey:@"currently"] valueForKey:@"temperature"]];
+    self.tempLoLabel.text = [NSString stringWithFormat:@"DAMNIT"];
+    NSLog(@"%@", temp);
+}
 
 //MKMapView protocol----------
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
