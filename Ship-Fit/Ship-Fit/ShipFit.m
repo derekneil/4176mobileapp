@@ -2,6 +2,7 @@
 #import "ShipFit.h"
 #import "Location.h"
 #import "Direction.h"
+#import "Weather.h"
 
 // Compass Bearing
 NSString *const N = @"N";
@@ -16,11 +17,11 @@ NSString *const ERROR = @"ERROR";
 
 
 
-
 @implementation ShipFit
 {
     Location *_location;
     Direction *_direction;
+    Weather *_weather;
 }
 
 
@@ -29,6 +30,10 @@ NSString *const ERROR = @"ERROR";
 {
     /* By default set true north to true */
     self.isTrueNorth = YES;
+    
+    NSLog(@"initializing Database Access");
+    _DB = [[DatabaseAccess alloc] init];
+    _tripID = [_DB getLatestTripID];
     
     NSLog(@"initializing GPS");
     _location = [ [Location alloc] initWithReference:self ];
@@ -42,6 +47,12 @@ NSString *const ERROR = @"ERROR";
     [ _direction run_compass_withFilter:5 ];
     
     
+    NSLog(@"getting weather");
+    _weather = [ [Weather alloc] initWithReference:self ];
+    [_weather getWeatherForLatitude:45
+                          Longitude:-63.5
+                               Time:1.0];
+
 }
 
 

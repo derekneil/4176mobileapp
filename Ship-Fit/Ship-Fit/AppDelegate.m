@@ -18,8 +18,8 @@
 {
     // Override point for customization after application launch.
     
+    NSLog(@"alloc and init shipFit");
      _shipfit = [ [ShipFit alloc] init ];
-    [_shipfit init_and_run_application];
     
     //get ref to tab bar controller
     UITabBarController *tabController = (UITabBarController *)self.window.rootViewController;
@@ -42,8 +42,13 @@
         }
     }
     
-    _MapVC.shipfit = _shipfit;
+    NSLog(@"pass databaseMainVC ref to manageObjectContext");
     _DatabaseMainVC.myManageObjectContext = self.managedObjectContext;
+    
+    NSLog(@"pass mapVC ref to shipFit");
+    _MapVC.shipfit = _shipfit;
+    
+    [_shipfit init_and_run_application];
     
     return YES;
 }

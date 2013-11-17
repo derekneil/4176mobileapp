@@ -7,6 +7,7 @@
 //
 
 #import "MapViewController.h"
+#import "Direction.h"
 
 @interface MapViewController ()
 
@@ -15,6 +16,8 @@
 @implementation MapViewController {
     NSMutableArray* pathTraveled;
     MKPolyline* path;
+    BOOL drawPathisOn;
+    NSDictionary* weatherJSON;
 }
 
 @synthesize mapView;
@@ -27,6 +30,27 @@
         
     }
     return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	// Do any additional setup after loading the view.
+    
+    //source http://www.appcoda.com/ios-programming-101-drop-a-pin-on-map-with-mapkit-api/
+    self.mapView.delegate = self;
+    
+    drawPathisOn = FALSE;
+    
+    //check for bottom layout guide and adjust up the bottom alignment
+    
+    //create ios 5 ipad layout with no autolayout
+    
+    //outlet collections, or just name them the same
+    
+    //use AFNetworking APHTTPequestOperationManager to get navionics (serverside api calls) instead of using NSURL directly
+    
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -58,6 +82,10 @@
                forKeyPath:@"compassDirection"
                   options:NSKeyValueObservingOptionNew
                   context:nil ];
+    [_shipfit addObserver:self
+               forKeyPath:@"weatherJSON"
+                  options:NSKeyValueObservingOptionNew
+                  context:nil ];
     
 }
 
@@ -68,48 +96,45 @@
     
     if ( [keyPath isEqualToString:@"latitude" ] )
     {
-        self.latLabel.text = [NSString stringWithFormat:@"Lat: %.4f" , _shipfit.latitude ];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            self.latLabel.text = [NSString stringWithFormat:@"%.4f" , _shipfit.latitude ];
+        }];
     }
     
-    if ( [keyPath isEqualToString:@"longitude" ] )
+    else if ( [keyPath isEqualToString:@"longitude" ] )
     {
-        self.longLabel.text = [NSString stringWithFormat:@"Long: %.4f" , _shipfit.longitude ];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            self.longLabel.text = [NSString stringWithFormat:@"%.4f" , _shipfit.longitude ];
+        }];
     }
     
-    if ( [keyPath isEqualToString:@"knots" ] )
+    else if ( [keyPath isEqualToString:@"knots" ] )
     {
-        self.speedLabel = [NSString stringWithFormat:@"Speed: %.4f" , _shipfit.knots ];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            self.speedLabel = [NSString stringWithFormat:@"%.4f knots" , _shipfit.knots ];
+        }];
     }
     
-    if ( [keyPath isEqualToString:@"compassDegrees" ] )
+    else if ( [keyPath isEqualToString:@"compassDegrees" ] )
     {
-        self.compDegLabel.text = [NSString stringWithFormat:@"%.2f",_shipfit.compassDegrees ];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            self.compDegLabel.text = [NSString stringWithFormat:@"%.2f",_shipfit.compassDegrees ];
+        }];
     }
     
-    if ( [keyPath isEqualToString:@"compassDirection" ] )
+    else if ( [keyPath isEqualToString:@"compassDirection" ] )
     {
-        self.compDirLabel.text = _shipfit.compassDirection;
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            self.compDirLabel.text = _shipfit.compassDirection;
+        }];
     }
-    
-}
-
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    
-    //source http://www.appcoda.com/ios-programming-101-drop-a-pin-on-map-with-mapkit-api/
-    self.mapView.delegate = self;
-    
-    //check for bottom layout guide and adjust up the bottom alignment
-    
-    //create ios 5 ipad layout with no autolayout
-    
-    //outlet collections, or just name them the same
-    
-    //use AFNetworking APHTTPequestOperationManager to get navionics (serverside api calls) instead of using NSURL directly
-    
+    else if ( [keyPath isEqualToString:@"weatherJSON" ] )
+    {
+        //keep these on the value changing thread since it could be a big update
+        weatherJSON = [change objectForKey:NSKeyValueChangeNewKey];
+//        NSLog(@"%@",weatherJSON);
+        [self updateWeatherLabels];
+    }
     
 }
 
@@ -119,6 +144,22 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void) updateWeatherLabels{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        
+        NSDictionary* currently = [weatherJSON objectForKey:@"currently"];
+        self.tempLabel.text = [NSString stringWithFormat:@"%@",[currently valueForKey:@"temperature"]];
+        self.windLabel.text = [NSString stringWithFormat:@"%@",[currently valueForKey:@"windSpeed"]];
+        self.windDirLabel.text = [Direction bearing_String:[[currently valueForKey:@"windBearing"] floatValue]];
+        
+        NSArray* temp = [[weatherJSON objectForKey:@"daily"] objectForKey:@"data"];
+        NSDictionary* today = temp[0];
+        self.tempHighLabel.text = [NSString stringWithFormat:@"%@",[today valueForKey:@"temperatureMax"]];
+        self.tempLoLabel.text = [NSString stringWithFormat:@"%@",[today valueForKey:@"temperatureMin"]];
+        self.sunLabel.text = [NSString stringWithFormat:@"%@",[today valueForKey:@"sunsetTime"]];
+        
+    }];
+}
 
 //MKMapView protocol----------
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
@@ -145,8 +186,6 @@
 
 //END MKMapView protocol-------
 
-- (IBAction)togglePathAction:(id)sender {
-}
 
 - (IBAction)zoomToMe:(id)sender {
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(mapView.userLocation.coordinate, 1000, 1000);
@@ -171,15 +210,8 @@
 }
 
 -(void) updatePathOverlay{
-//    int pathpointcount = [pathTraveled count];
-//    CLLocationCoordinate2D coordArray[pathpointcount];
-//    
-//    //TODO: get pathTraveled into coordArray
-//    for(int i=0; i<pathpointcount; i++){
-//        coordArray[i] = [[pathTraveled objectAtIndex:i] coordinate];
-//    }
     
-    if ( self.shipfit.gps_count != 0 ){
+    if ( drawPathisOn &&  self.shipfit.gps_count != 0 ){
         path = [MKPolyline polylineWithCoordinates:self.shipfit.gps_head count:self.shipfit.gps_count];
         [self.mapView addOverlay:path];
     }
@@ -187,8 +219,28 @@
     
 }
 
+- (IBAction)togglePathAction:(id)sender {
+    if( drawPathisOn ){
+        drawPathisOn = FALSE;
+        [self removePathOverlay];
+    }
+    else{
+        drawPathisOn = TRUE;
+        [self updatePathOverlay];
+    }
+}
+
 - (void) removePathOverlay{
     [self.mapView removeOverlay:path];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [_shipfit removeObserver:self forKeyPath:@"latitude"];
+    [_shipfit removeObserver:self forKeyPath:@"longitude"];
+    [_shipfit removeObserver:self forKeyPath:@"knots"];
+    [_shipfit removeObserver:self forKeyPath:@"compassDegrees"];
+    [_shipfit removeObserver:self forKeyPath:@"compassDirection"];
+    [_shipfit removeObserver:self forKeyPath:@"weatherJSON"];
 }
 
 - (void)viewDidUnload {

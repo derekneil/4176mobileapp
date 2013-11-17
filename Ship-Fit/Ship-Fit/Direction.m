@@ -72,15 +72,20 @@
 // based on the readings of the compass.
 - (void)set_bearing
 {
-    if( self.shipFit_ref.compassDegrees >= 337.5 || self.shipFit_ref.compassDegrees <= 22.5 )self.shipFit_ref.compassDirection = N;
-    else if( self.shipFit_ref.compassDegrees > 22.5 && self.shipFit_ref.compassDegrees < 67.5 )self.shipFit_ref.compassDirection = NE;
-    else if( self.shipFit_ref.compassDegrees >= 67.5 && self.shipFit_ref.compassDegrees <= 112.5 )self.shipFit_ref.compassDirection = E;
-    else if( self.shipFit_ref.compassDegrees > 112.5 && self.shipFit_ref.compassDegrees < 157.5)self.shipFit_ref.compassDirection = SE;
-    else if( self.shipFit_ref.compassDegrees >= 157.5 && self.shipFit_ref.compassDegrees <= 202.5)self.shipFit_ref.compassDirection = S;
-    else if( self.shipFit_ref.compassDegrees > 202.5 && self.shipFit_ref.compassDegrees < 247.5 )self.shipFit_ref.compassDirection = SW;
-    else if( self.shipFit_ref.compassDegrees >= 247.5 && self.shipFit_ref.compassDegrees <= 292.5)self.shipFit_ref.compassDirection = W;
-    else if( self.shipFit_ref.compassDegrees > 292.5 && self.shipFit_ref.compassDegrees < 337.5)self.shipFit_ref.compassDirection = NW;
-    else if ( self.shipFit_ref.compassDegrees == -1 )self.shipFit_ref.compassDirection = ERROR;
+    self.shipFit_ref.compassDirection = [Direction bearing_String:self.shipFit_ref.compassDegrees];
+}
+
++ (NSString*)bearing_String:(float)deg
+{
+    if( deg >= 337.5 || deg <= 22.5 ) return N;
+    else if( deg > 22.5 && deg < 67.5 ) return NE;
+    else if( deg >= 67.5 && deg <= 112.5 ) return E;
+    else if( deg > 112.5 && deg < 157.5) return SE;
+    else if( deg >= 157.5 && deg <= 202.5) return S;
+    else if( deg > 202.5 && deg < 247.5 ) return SW;
+    else if( deg >= 247.5 && deg <= 292.5) return W;
+    else if( deg > 292.5 && deg < 337.5) return NW;
+    else return ERROR;
 }
 
 - (void)locationManager:(CLLocationManager *)manager

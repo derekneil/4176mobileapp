@@ -10,98 +10,100 @@
 
 @implementation DatabaseAccess
 
+FMDatabase* db;
+
 /*
- ------------example------------------:
- 
- DatabaseAccess *obj = [[DatabaseAccess alloc] init];
 
  //insert into the tables
- int lastInsertID = [obj insertIntoTrips:(@"mytrip")];
- 
+ int lastInsertID = [_DB insertIntoTrips:(@"mytrip")];
  if(lastInsertID){
- [obj insertIntoGPS:lastInsertID lat:@"32333" lng:@"3232" dateandtime:@"323223"];
+    [_DB insertIntoGPS:lastInsertID lat:@"32333" lng:@"3232" dateandtime:@"323223"];
  }else{
- NSLog(@"error inserting into GPS table");
+    NSLog(@"error inserting into GPS table");
  }
- 
  
  
  //get all the gps coordinates
- DatabaseAccess *obj = [[DatabaseAccess alloc] init];
- GPS *gpsObjects = (GPS *)[obj getGPSAll];
- 
+ GPS *gpsObjects = (GPS *)[_DB getGPSAll];
  for (GPS *gps in gpsObjects) {
- NSLog(@"gps coordinates: %@, %@", gps.lat, gps.lng);
+    NSLog(@"gps coordinates: %@, %@", gps.lat, gps.lng);
  }
- 
- 
- 
- //get a particular gps coordinate
- DatabaseAccess *obj = [[DatabaseAccess alloc] init];
- GPS *gps = (GPS *)[obj getGPS:1];
- 
- NSLog(@"gps coordinates: %@, %@", gps.lat, gps.lng);
+
  
  */
 
+-(id)init{
+    self = [super init];
+    if ( self ){
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *docsPath = [paths objectAtIndex:0];
+        NSString *path = [docsPath stringByAppendingPathComponent:@"shipfitGPS.sqlite"];
+        
+        db = [FMDatabase databaseWithPath:path];
+        
+    }
+    return self;
+}
 
+// [_DB insertIntoGPS:lastInsertID lat:@"32333" lng:@"3232" dateandtime:@"323223"];
 -(NSInteger)insertIntoGPS:(NSInteger)tripID lat:(NSString *)lat lng:(NSString *)lng dateandtime:(NSString *)dateandtime{
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *docsPath = [paths objectAtIndex:0];
-    NSString *path = [docsPath stringByAppendingPathComponent:@"shipfitGPS.sqlite"];
-    
-    FMDatabase *db = [FMDatabase databaseWithPath:path];
-    
     [db open];
     
-    [db executeUpdate:@"INSERT INTO GPS (tripid, lat, lng, dateandtime) VALUES(?, ?, ?, ?);", [NSNumber numberWithInt:tripID], lat, lng, dateandtime];
-    
-    
-    NSInteger lastId = [db lastInsertRowId];
+    NSString* update = [NSString stringWithFormat:@"INSERT INTO GPS (tripid, lat, lng, dateandtime) VALUES(\"%@\", \"%@\", \"%@\", \"%@\");", [NSNumber numberWithInt:tripID], lat, lng, dateandtime];
+    [db executeUpdate:update];
     
     [db close];
-
     
-    return lastId;
+    //NSInteger lastId = [db lastInsertRowId];
+    
+    return 0;//lastId;
 }
 
 
-
+// [_DB insertIntoTrips:(@"2013-11-27-18:45:53")];
 -(NSInteger)insertIntoTrips:(NSString *)startdate{
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *docsPath = [paths objectAtIndex:0];
-    NSString *path = [docsPath stringByAppendingPathComponent:@"shipfitGPS.sqlite"];
-    FMDatabase *db = [FMDatabase databaseWithPath:path];
     [db open];
-    
-    
-    //INSERT INTO Trips (startdate) VALUES ("e32e32e32");
-    [db executeUpdate:@"INSERT INTO Trips (startdate) VALUES(?);", startdate];
-    
-    
-    NSInteger lastId = [db lastInsertRowId];
+
+    NSString* update = [NSString stringWithFormat:@"INSERT INTO Trips (startdate) VALUES(\"%@\");", startdate];
+    [db executeUpdate:update];
     
     [db close];
+    
+    //NSInteger tripId = [db lastInsertRowId];
 
-    return lastId;
+    return 0; //tripId;
 }
 
+-(NSInteger)getLatestTripID{
+    
+    [db open];
+    
+    FMResultSet *results = [db executeQuery:@"SELECT MAX(id) as id FROM Trips;"];
+    
+    [db close];
+    
+    return 0;//[results intForColumn:@"id"];
+}
 
-
+/*
+GPS *gpsObjects = (GPS *)[_DB getGPSAll];
+for (GPS *gps in gpsObjects) {
+    NSLog(@"gps coordinates: %@, %@", gps.lat, gps.lng);
+}
+*/
 -(NSMutableArray *) getGPSAll
 {
     NSMutableArray *gpsArr = [[NSMutableArray alloc] init];
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *docsPath = [paths objectAtIndex:0];
-    NSString *path = [docsPath stringByAppendingPathComponent:@"shipfitGPS.sqlite"];
-    FMDatabase *db = [FMDatabase databaseWithPath:path];
     [db open];
     
     FMResultSet *results = [db executeQuery:@"SELECT * FROM GPS"];
     
+    [db close];
+    
     while([results next])
     {
         GPS *gps = [[GPS alloc] init];
@@ -115,29 +117,23 @@
         [gpsArr addObject:gps];
     }
     
-    [db close];
     return gpsArr;
 }
 
 
-
-
-//get a particular gps coordinate
--(GPS *) getGPS:(NSInteger)gpsID
+//get gps coordinates for a particular tirp
+// [_DB getGPS:4 ];
+-(NSMutableArray *) getGPSforTrip:(NSInteger)tripID
 {
-    //NSString *q = [NSString stringWithFormat:@"select * from GPS where id = %d", gpsID];
-    
     NSMutableArray *gpsArr = [[NSMutableArray alloc] init];
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *docsPath = [paths objectAtIndex:0];
-    NSString *path = [docsPath stringByAppendingPathComponent:@"shipfitGPS.sqlite"];
-    FMDatabase *db = [FMDatabase databaseWithPath:path];
     [db open];
     
     
-    NSString *q = [NSString stringWithFormat:@"select * from GPS where id = %d", gpsID];
+    NSString *q = [NSString stringWithFormat:@"select * from GPS where tripid = %d", tripID];
     FMResultSet *results = [db executeQuery:q];
+    
+    [db close];
     
     while([results next])
     {
@@ -152,9 +148,7 @@
         [gpsArr addObject:gps];
     }
     
-    [db close];
-    
-    return [gpsArr objectAtIndex:(0)];
+    return gpsArr;
 }
 
 
