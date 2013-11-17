@@ -37,8 +37,7 @@ NSString *const ERROR = @"ERROR";
     _location = [ [Location alloc] initWithReference:self ];
     [_location init_logs_and_manager];
     _location.GPS_MODE = SAILING_STARTUP;
-    [_location run_GPS_withAccuracy:kCLLocationAccuracyBest
-                  andDistanceFilter:kCLDistanceFilterNone ];
+    [_location run_GPS:nil ];
     
     NSLog(@"initializing compass");
     _direction = [ [Direction alloc] initWithReference:self ];

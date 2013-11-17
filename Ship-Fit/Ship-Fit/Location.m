@@ -12,6 +12,8 @@
     double *_timesBase;
     
     int _lastGPStimeInt;
+    
+    NSTimer *_theTimer;
 }
 
 - (id) initWithReference: (ShipFit *)reference
@@ -51,19 +53,20 @@
     }
 }
 
-- (void)run_GPS_withAccuracy: (CLLocationAccuracy)accuracy
-           andDistanceFilter: (CLLocationDistance)distance
+- (void)run_GPS:(NSTimer *)timer
 {
+    NSLog(@"Running GPS");
     if ( [CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied )
     {
-        _locationManager.distanceFilter = distance;
-        _locationManager.desiredAccuracy = accuracy;
+        _locationManager.distanceFilter = kCLDistanceFilterNone;
+        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
         [ _locationManager startUpdatingLocation ];
     }
 }
 
 - (void)halt_GPS
 {
+    NSLog(@"Halting GPS");
     [ _locationManager stopUpdatingLocation ];
 }
 
@@ -179,35 +182,47 @@
 - (void)evaluate_GPS_MODE
 {
     int l, o;
-    for(;;)
+    
+    switch (self.GPS_MODE)
     {
-        if (self.shipFit_ref.gps_count < 10){
-            break;
-        }
-        
-        
-        if ( self.GPS_MODE == SAILING_STARTUP )
-        {
-            double *runner = _timesHead;
-            for( l=0, o=1 ; l<10 ; l++ ,runner++ ){
-                if( ( [ [ NSDate date ]  timeIntervalSince1970 ] - *runner ) > 30 ){
-                    o = 0;
-                    break;
+        case SAILING_STARTUP:
+            if (self.shipFit_ref.gps_count < 10){
+                break;
+            }
+            else{
+                double *runner = _timesHead;
+                for( l=0, o=1 ; l<10 ; l++ ,runner++ ){
+                    if( ( [ [ NSDate date ]  timeIntervalSince1970 ] - *runner ) > 30 ){
+                        o = 0;
+                        break;
+                    }
                 }
+                if (o){
+                    self.GPS_MODE = SAILING_ROUGH;
+                    [self halt_GPS];
+                }
+                break;
             }
-            if (o){
-                self.GPS_MODE = SAILING_ROUGH;
-            }
-            break;
-        }
-        
-        
-        if ( self.GPS_MODE == SAILING_ROUGH )
-        {
+    
+        case SAILING_ROUGH:
+            [self halt_GPS];
             NSLog(@"rough sailing");
-        }
-        
-        break;
+            break;
+            
+        case SAILING_SMOOTH:
+            [self halt_GPS];
+            NSLog(@"smooth sailing");
+            break;
+    }
+    
+    // Set Timer
+    if ( self.GPS_MODE == SAILING_ROUGH )
+    {
+        _theTimer = [NSTimer scheduledTimerWithTimeInterval:15
+                                                     target:self
+                                                   selector:@selector(run_GPS:)
+                                                   userInfo:nil
+                                                    repeats:NO ];
     }
 }
 

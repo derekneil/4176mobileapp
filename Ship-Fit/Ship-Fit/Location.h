@@ -22,8 +22,7 @@ enum GPS_OPERATION_MODE
 
 - (void)halt_GPS;
 
-- (void)run_GPS_withAccuracy: (CLLocationAccuracy)accuracy
-                andDistanceFilter: (CLLocationDistance)distance;
+- (void)run_GPS:(NSTimer*)timer;
 
 - (void)log_latitude: (CLLocationDegrees)lat
            longitude: (CLLocationDegrees)lon
