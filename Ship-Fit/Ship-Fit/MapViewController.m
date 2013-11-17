@@ -15,6 +15,8 @@
 @implementation MapViewController {
     NSMutableArray* pathTraveled;
     MKPolyline* path;
+    BOOL drawPathisOn;
+    NSDictionary* weatherJSON;
 }
 
 @synthesize mapView;
@@ -27,6 +29,27 @@
         
     }
     return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	// Do any additional setup after loading the view.
+    
+    //source http://www.appcoda.com/ios-programming-101-drop-a-pin-on-map-with-mapkit-api/
+    self.mapView.delegate = self;
+    
+    drawPathisOn = FALSE;
+    
+    //check for bottom layout guide and adjust up the bottom alignment
+    
+    //create ios 5 ipad layout with no autolayout
+    
+    //outlet collections, or just name them the same
+    
+    //use AFNetworking APHTTPequestOperationManager to get navionics (serverside api calls) instead of using NSURL directly
+    
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -71,45 +94,30 @@
         self.latLabel.text = [NSString stringWithFormat:@"Lat: %.4f" , _shipfit.latitude ];
     }
     
-    if ( [keyPath isEqualToString:@"longitude" ] )
+    else if ( [keyPath isEqualToString:@"longitude" ] )
     {
         self.longLabel.text = [NSString stringWithFormat:@"Long: %.4f" , _shipfit.longitude ];
     }
     
-    if ( [keyPath isEqualToString:@"knots" ] )
+    else if ( [keyPath isEqualToString:@"knots" ] )
     {
         self.speedLabel = [NSString stringWithFormat:@"Speed: %.4f" , _shipfit.knots ];
     }
     
-    if ( [keyPath isEqualToString:@"compassDegrees" ] )
+    else if ( [keyPath isEqualToString:@"compassDegrees" ] )
     {
         self.compDegLabel.text = [NSString stringWithFormat:@"%.2f",_shipfit.compassDegrees ];
     }
     
-    if ( [keyPath isEqualToString:@"compassDirection" ] )
+    else if ( [keyPath isEqualToString:@"compassDirection" ] )
     {
         self.compDirLabel.text = _shipfit.compassDirection;
     }
-    
-}
-
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    
-    //source http://www.appcoda.com/ios-programming-101-drop-a-pin-on-map-with-mapkit-api/
-    self.mapView.delegate = self;
-    
-    //check for bottom layout guide and adjust up the bottom alignment
-    
-    //create ios 5 ipad layout with no autolayout
-    
-    //outlet collections, or just name them the same
-    
-    //use AFNetworking APHTTPequestOperationManager to get navionics (serverside api calls) instead of using NSURL directly
-    
+    else if ( [keyPath isEqualToString:@"weatherJSON" ] )
+    {
+        weatherJSON = [change objectForKey:NSKeyValueChangeNewKey];
+        [self updateWeatherLabels];
+    }
     
 }
 
@@ -145,8 +153,6 @@
 
 //END MKMapView protocol-------
 
-- (IBAction)togglePathAction:(id)sender {
-}
 
 - (IBAction)zoomToMe:(id)sender {
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(mapView.userLocation.coordinate, 1000, 1000);
@@ -171,20 +177,24 @@
 }
 
 -(void) updatePathOverlay{
-//    int pathpointcount = [pathTraveled count];
-//    CLLocationCoordinate2D coordArray[pathpointcount];
-//    
-//    //TODO: get pathTraveled into coordArray
-//    for(int i=0; i<pathpointcount; i++){
-//        coordArray[i] = [[pathTraveled objectAtIndex:i] coordinate];
-//    }
     
-    if ( self.shipfit.gps_count != 0 ){
+    if ( drawPathisOn &&  self.shipfit.gps_count != 0 ){
         path = [MKPolyline polylineWithCoordinates:self.shipfit.gps_head count:self.shipfit.gps_count];
         [self.mapView addOverlay:path];
     }
     
     
+}
+
+- (IBAction)togglePathAction:(id)sender {
+    if( drawPathisOn ){
+        drawPathisOn = FALSE;
+        [self removePathOverlay];
+    }
+    else{
+        drawPathisOn = TRUE;
+        [self updatePathOverlay];
+    }
 }
 
 - (void) removePathOverlay{
