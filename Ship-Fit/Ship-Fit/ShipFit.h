@@ -26,9 +26,7 @@ extern NSString *const ERROR;
 @property ( nonatomic, readwrite, assign ) NSUInteger gps_count;
 
 
-/*
- Properties for the UI to Observe 
- */
+//Properties for the UI to Observe
 @property (nonatomic, readwrite, assign) CLLocationDegrees latitude;
 @property (nonatomic, readwrite, assign) CLLocationDegrees longitude;
 @property (nonatomic, readwrite, assign) BOOL isTrueNorth;

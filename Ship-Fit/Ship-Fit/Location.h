@@ -3,10 +3,18 @@
 
 @class ShipFit;
 
+enum GPS_OPERATION_MODE
+{
+    SAILING_STARTUP,
+    SAILING_ROUGH,
+    SAILING_SMOOTH
+};
+
 @interface Location : NSObject <CLLocationManagerDelegate>
 
 @property (nonatomic, readwrite, strong) ShipFit *shipFit_ref;
 @property (nonatomic, readwrite, assign) BOOL logging_enabled;
+@property (nonatomic, readwrite, assign) enum GPS_OPERATION_MODE GPS_MODE;
 
 - (id) initWithReference: (ShipFit *)reference;
 
@@ -18,7 +26,8 @@
                 andDistanceFilter: (CLLocationDistance)distance;
 
 - (void)log_latitude: (CLLocationDegrees)lat
-           longitude: (CLLocationDegrees)lon;
+           longitude: (CLLocationDegrees)lon
+           timestamp: (double)time;
 
 - (void)locationManager: (CLLocationManager *)manager
      didUpdateLocations: (NSArray *)locations;

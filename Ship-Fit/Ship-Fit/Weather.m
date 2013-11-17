@@ -32,7 +32,6 @@ NSString *const baseURL = @"https://api.forecast.io/forecast/";
                                                   cachePolicy:NSURLCacheStorageAllowedInMemoryOnly
                                               timeoutInterval:8];
     
-    
     NSLog(@"Getting Forecast for: %@ " , theURL );
     [ NSURLConnection sendAsynchronousRequest:request
                                         queue:[[NSOperationQueue alloc] init]
@@ -58,7 +57,6 @@ NSString *const baseURL = @"https://api.forecast.io/forecast/";
              }
          }
      }];
-    
     return returncode;
 }
 

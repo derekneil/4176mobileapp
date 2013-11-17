@@ -3,9 +3,14 @@
 
 @implementation Location
 {
-    CLLocationCoordinate2D *_head;
-    CLLocationCoordinate2D *_base;
     CLLocationManager *_locationManager;
+    
+    CLLocationCoordinate2D *_locationsHead;
+    CLLocationCoordinate2D *_locationsBase;
+    
+    double *_timesHead;
+    double *_timesBase;
+    
     int _lastGPStimeInt;
 }
 
@@ -27,25 +32,27 @@
     
     if ( [CLLocationManager locationServicesEnabled] )
     {
-        _base = (CLLocationCoordinate2D *)malloc( 20000 * sizeof(CLLocationCoordinate2D) );
+        _locationsBase = (CLLocationCoordinate2D *)malloc( 20000 * sizeof(CLLocationCoordinate2D) );
+        _timesBase = (double *)malloc( 20000 * sizeof(double));
         
-        if ( _base == NULL ){
-            NSLog(@"Call to heap failed");
+        if ( _timesBase == NULL || _locationsBase == NULL ){
+            NSLog(@"Logging not enabled.");
             self.logging_enabled = NO;
         }
-        else{
+        else
+        {
             self.logging_enabled = YES;
-            _head = _base + 19999;
-            ( _head + 1 )->latitude = 0;
-            ( _head + 1 )->longitude = 0;
-            self.shipFit_ref.gps_head = _head;
+            _timesHead = _timesBase + 20000;
+            _locationsHead = _locationsBase + 20000;
+            
+            self.shipFit_ref.gps_head = _locationsHead;
             self.shipFit_ref.gps_count = 0;
         }
     }
 }
 
 - (void)run_GPS_withAccuracy: (CLLocationAccuracy)accuracy
-                andDistanceFilter: (CLLocationDistance)distance
+           andDistanceFilter: (CLLocationDistance)distance
 {
     if ( [CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied )
     {
@@ -55,7 +62,6 @@
     }
 }
 
-
 - (void)halt_GPS
 {
     [ _locationManager stopUpdatingLocation ];
@@ -63,6 +69,7 @@
 
 - (void)log_latitude: (CLLocationDegrees)lat
            longitude: (CLLocationDegrees)lon
+           timestamp: (double)time
 {
     if ( self.logging_enabled ){
         
@@ -77,38 +84,25 @@
                                    lng:[NSString stringWithFormat:@"%.4f",lon ]
                            dateandtime:datetime];
         
+        // Heap Storage.
         if (self.shipFit_ref.gps_count == 0 ){
-            _head->latitude = lat;
-            _head->longitude = lon;
+            _locationsHead->latitude = lat;
+            _locationsHead->longitude = lon;
+            *_timesHead = time;
             self.shipFit_ref.gps_count++;
         }
         else if ( self.shipFit_ref.gps_count < 20000 )
         {
-            _head--;
-            _head->latitude = lat;
-            _head->longitude = lon;
+            _locationsHead--; _timesHead--;
+            _locationsHead->latitude = lat;
+            _locationsHead->longitude = lon;
+            *_timesHead = time;
             self.shipFit_ref.gps_count++;
         }
         else if ( self.shipFit_ref.gps_count == 20000 )
         {
             // TO DO.
-            // Do I store only 20,000 GPS OR Do I Malloc More Space
-            // It is expensive to have to shift the elements each time
-            // might be cheaper to malloc another array..
-            // write the old one to the DB and then reallocate the space !!!
         }
-    }
-}
-
-//for debug
-- (void)print_logs_to_console
-{
-    CLLocationCoordinate2D *runner = _head;
-    int i = 0;
-    while ( i < self.shipFit_ref.gps_count )
-    {
-        NSLog(@"%f:%f", runner->latitude , runner->longitude );
-        i++;
     }
 }
 
@@ -118,12 +112,15 @@
            fromLocation:(CLLocation *)oldLocation
 {
     NSLog(@"iOS 5 location event");
-    
     [self updateShipFitLocation:newLocation];
     
     /* Log the new lat and long values */
     [ self log_latitude:newLocation.coordinate.latitude
-              longitude:newLocation.coordinate.longitude ];
+              longitude:newLocation.coordinate.longitude
+              timestamp:[newLocation.timestamp timeIntervalSince1970 ] ];
+    
+    // Should we change the GPS_MODE ??
+    [ self evaluate_GPS_MODE ];
 }
 
 // iOS 6 & 7
@@ -136,20 +133,22 @@
     CLLocation *current_location = [ locations lastObject ];
     [self updateShipFitLocation:current_location];
     
-        
     /* Log each entry */
     int l;
     for (l = 0 ; l < [locations count] ; l++)
     {
         current_location = [locations objectAtIndex:l ];
         [self log_latitude:current_location.coordinate.latitude
-                 longitude:current_location.coordinate.longitude ];
+                 longitude:current_location.coordinate.longitude
+                 timestamp:[current_location.timestamp timeIntervalSince1970 ] ];
     }
-    
+
+    // Should we Change the GPS mode??
+    [ self evaluate_GPS_MODE ];
 }
 
-//worker method to save duplicate code
 - (void)updateShipFitLocation: (CLLocation*) current_location{
+    
     /* Make sure the update is relevant within 60 seconds */
     if ( ( [ [ NSDate date ]  timeIntervalSince1970 ] - [current_location.timestamp timeIntervalSince1970 ] ) < 60 &&
         ( [current_location.timestamp timeIntervalSince1970 ] - _lastGPStimeInt) > 3)
@@ -169,6 +168,46 @@
     
     else{
         NSLog(@"not updating GPS display");
+    }
+}
+
+- (void)calculateSpeed
+{
+    // to do
+}
+
+- (void)evaluate_GPS_MODE
+{
+    int l, o;
+    for(;;)
+    {
+        if (self.shipFit_ref.gps_count < 10){
+            break;
+        }
+        
+        
+        if ( self.GPS_MODE == SAILING_STARTUP )
+        {
+            double *runner = _timesHead;
+            for( l=0, o=1 ; l<10 ; l++ ,runner++ ){
+                if( ( [ [ NSDate date ]  timeIntervalSince1970 ] - *runner ) > 30 ){
+                    o = 0;
+                    break;
+                }
+            }
+            if (o){
+                self.GPS_MODE = SAILING_ROUGH;
+            }
+            break;
+        }
+        
+        
+        if ( self.GPS_MODE == SAILING_ROUGH )
+        {
+            NSLog(@"rough sailing");
+        }
+        
+        break;
     }
 }
 
@@ -196,6 +235,17 @@
        didFailWithError:(NSError *)error
 {
     NSLog(@"%@", error);
+}
+
+//for debug
+- (void)print_logs_to_console
+{
+    CLLocationCoordinate2D *runner = _locationsHead;
+    int i;
+    for ( i=0; i < self.shipFit_ref.gps_count; i++ , runner++ )
+    {
+        NSLog(@"%f:%f" , runner->latitude , runner->longitude );
+    }
 }
 
 @end
@@ -230,7 +280,10 @@
 // it should be as spread out as possible.
 // don't ya think!!
 
-
+// Do I store only 20,000 GPS OR Do I Malloc More Space
+// It is expensive to have to shift the elements each time
+// might be cheaper to malloc another array..
+// write the old one to the DB and then reallocate the space !!!
 
 
 
