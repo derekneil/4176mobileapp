@@ -7,6 +7,7 @@
 //
 
 #import "MapViewController.h"
+#import "Direction.h"
 
 @interface MapViewController ()
 
@@ -131,6 +132,7 @@
     {
         //keep these on the value changing thread since it could be a big update
         weatherJSON = [change objectForKey:NSKeyValueChangeNewKey];
+//        NSLog(@"%@",weatherJSON);
         [self updateWeatherLabels];
     }
     
@@ -144,7 +146,18 @@
 
 - (void) updateWeatherLabels{
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        self.tempLoLabel.text = [NSString stringWithFormat:@"%@",[[weatherJSON objectForKey:@"currently"] valueForKey:@"temperature"]];
+        
+        NSDictionary* currently = [weatherJSON objectForKey:@"currently"];
+        self.tempLabel.text = [NSString stringWithFormat:@"%@",[currently valueForKey:@"temperature"]];
+        self.windLabel.text = [NSString stringWithFormat:@"%@",[currently valueForKey:@"windSpeed"]];
+        self.windDirLabel.text = [Direction bearing_String:[[currently valueForKey:@"windBearing"] floatValue]];
+        
+        NSArray* temp = [[weatherJSON objectForKey:@"daily"] objectForKey:@"data"];
+        NSDictionary* today = temp[0];
+        self.tempHighLabel.text = [NSString stringWithFormat:@"%@",[today valueForKey:@"temperatureMax"]];
+        self.tempLoLabel.text = [NSString stringWithFormat:@"%@",[today valueForKey:@"temperatureMin"]];
+        self.sunLabel.text = [NSString stringWithFormat:@"%@",[today valueForKey:@"sunsetTime"]];
+        
     }];
 }
 
