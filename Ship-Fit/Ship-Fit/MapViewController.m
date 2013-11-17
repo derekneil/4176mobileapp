@@ -95,30 +95,41 @@
     
     if ( [keyPath isEqualToString:@"latitude" ] )
     {
-        self.latLabel.text = [NSString stringWithFormat:@"Lat: %.4f" , _shipfit.latitude ];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            self.latLabel.text = [NSString stringWithFormat:@"%.4f" , _shipfit.latitude ];
+        }];
     }
     
     else if ( [keyPath isEqualToString:@"longitude" ] )
     {
-        self.longLabel.text = [NSString stringWithFormat:@"Long: %.4f" , _shipfit.longitude ];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            self.longLabel.text = [NSString stringWithFormat:@"%.4f" , _shipfit.longitude ];
+        }];
     }
     
     else if ( [keyPath isEqualToString:@"knots" ] )
     {
-        self.speedLabel = [NSString stringWithFormat:@"Speed: %.4f" , _shipfit.knots ];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            self.speedLabel = [NSString stringWithFormat:@"%.4f knots" , _shipfit.knots ];
+        }];
     }
     
     else if ( [keyPath isEqualToString:@"compassDegrees" ] )
     {
-        self.compDegLabel.text = [NSString stringWithFormat:@"%.2f",_shipfit.compassDegrees ];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            self.compDegLabel.text = [NSString stringWithFormat:@"%.2f",_shipfit.compassDegrees ];
+        }];
     }
     
     else if ( [keyPath isEqualToString:@"compassDirection" ] )
     {
-        self.compDirLabel.text = _shipfit.compassDirection;
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            self.compDirLabel.text = _shipfit.compassDirection;
+        }];
     }
     else if ( [keyPath isEqualToString:@"weatherJSON" ] )
     {
+        //keep these on the value changing thread since it could be a big update
         weatherJSON = [change objectForKey:NSKeyValueChangeNewKey];
         [self updateWeatherLabels];
     }
