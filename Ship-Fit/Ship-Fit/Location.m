@@ -4,14 +4,14 @@
 @implementation Location
 {
     CLLocationManager *_locationManager;
-    
-    CLLocationCoordinate2D *_locationsHead; //locations
-    CLLocationCoordinate2D *_locationsBase;
-    double *_timesHead; //timestamps
-    double *_timesBase;
-    
-    int _lastGPStimeInt;
+    CLLocationCoordinate2D *locationHead; //locations
+    CLLocationCoordinate2D *locationBase;
+    double *timeHead; //timestamps
+    double *timeBase;
     NSTimer *_theTimer;
+    BOOL logging_enabled;
+    int count;
+    int _lastGPStimeInt;
 }
 
 - (id) initWithReference: (ShipFit *)reference
@@ -25,42 +25,53 @@
 }
 
 
-- (void)init_logs_and_manager
+// Initialize Data Structures For GPS Logs 
+- (void)init_GPSLOGS
 {
     _locationManager = [ [CLLocationManager alloc] init ];
     _locationManager.delegate = self;
-    _lastGPStimeInt = [[NSDate date] timeIntervalSince1970];
+    _lastGPStimeInt = [ [ NSDate date ] timeIntervalSince1970 ];
     
-    if ( [CLLocationManager locationServicesEnabled] )
+
+
+    // DO WE HAVE PERMISSION TO ACCESS LOCATION SERVICES
+    if (  [   CLLocationManager locationServicesEnabled  ] && 
+        [ CLLocationManager authorizationStatus ] != kCLAuthorizationStatusDenied )
     {
-        _locationsBase = (CLLocationCoordinate2D *)malloc( 20000 * sizeof(CLLocationCoordinate2D) );
-        _timesBase = (double *)malloc( 20000 * sizeof(double));
-        
-        if ( _timesBase == NULL || _locationsBase == NULL ){
-            NSLog(@"Logging not enabled.");
+
+        // HEAP TO STORE LOGS
+        // 40000 GPS COORDINATES
+        if (
+            ( _timesBase = (double *)malloc( 40000 * sizeof(double) ) == NULL )  
+            ||
+            ( ( _locationsBase = (CLLocationCoordinate2D *)malloc( 40000 * sizeof( CLLocationCoordinate2D ) ) ) == NULL )
+            )
+        {
             self.logging_enabled = NO;
+            // MEMORY CONSERVATION MODE?
         }
         else
         {
             self.logging_enabled = YES;
-            _timesHead = _timesBase + 20000;
-            _locationsHead = _locationsBase + 20000;
+
+            // Move the heads to the edge of memory farthest away from the base
+            _timesHead = _timesBase + 39999;
+            _locationsHead = _locationsBase + 39999;
             
+
+            // GIVE THE LIST TO THE MAP FOR ITS CONVENIENCE
             self.shipFit_ref.gps_head = _locationsHead;
             self.shipFit_ref.gps_count = 0;
         }
     }
 }
 
-- (void)run_GPS:(NSTimer *)timer
+- (void)run_GPS: (NSTimer *) timer
 {
     NSLog(@"Running GPS");
-    if ( [CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied )
-    {
-        _locationManager.distanceFilter = kCLDistanceFilterNone;
-        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        [ _locationManager startUpdatingLocation ];
-    }
+    _locationManager.distanceFilter = kCLDistanceFilterNone;
+    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [ _locationManager startUpdatingLocation ];
 }
 
 - (void)halt_GPS
@@ -71,59 +82,90 @@
 
 - (void)log_latitude: (CLLocationDegrees)lat
            longitude: (CLLocationDegrees)lon
-           timestamp: (double)time
+           timestamp: (double)timetime
 {
-    if ( self.logging_enabled ){
+    
+    //SAVE THE POINT IN DYNAMIC MEMORY
+
+    if ( self.logging_enabled )
+    {
         
-        NSString* datetime = [NSDateFormatter localizedStringFromDate:[NSDate date]
-                                                            dateStyle:NSDateFormatterShortStyle
-                                                            timeStyle:NSDateFormatterFullStyle];
-        NSLog(@"Log to DB with tripID %d and datetime: %@",_shipFit_ref.tripID, datetime);
+        // Increment the counts. Two variables hopefully same value. 
+        self.shipFit_ref.gps_count++; count++;
+
+        if ( count == 0 )
+        {
+            *(timeHead) = timetime; 
+            locationHead->latitude = lat;
+            locationHead->longitude = lon;    
+        }
+        else
+        {
+            timehead--;
+            *(timeHead) = timetime;
+
+            locationHead--;
+            locationHead->latitude;
+            locationHead->longitude;
+        }
+
+    }
+
+    // SAVE THE POINT TO THE DATABASE        
+    NSString* datetime = [NSDateFormatter localizedStringFromDate:[NSDate date]
+        dateStyle:NSDateFormatterShortStyle
+        timeStyle:NSDateFormatterFullStyle];
+    NSLog(@"Log to DB with tripID %d and datetime: %@",_shipFit_ref.tripID, datetime);
     
         //save point to database
-        [_shipFit_ref.DB insertIntoGPS:_shipFit_ref.tripID
-                                   lat:[NSString stringWithFormat:@"%.4f",lat ]
-                                   lng:[NSString stringWithFormat:@"%.4f",lon ]
-                           dateandtime:datetime];
-        
-        // Heap Storage.
-        if (self.shipFit_ref.gps_count == 0 ){
-            _locationsHead->latitude = lat;
-            _locationsHead->longitude = lon;
-            *_timesHead = time;
-            self.shipFit_ref.gps_count++;
-        }
-        else if ( self.shipFit_ref.gps_count < 20000 )
-        {
-            _locationsHead--; _timesHead--;
-            _locationsHead->latitude = lat;
-            _locationsHead->longitude = lon;
-            *_timesHead = time;
-            self.shipFit_ref.gps_count++;
-        }
-        else if ( self.shipFit_ref.gps_count == 20000 )
-        {
-            // TO DO.
-        }
-    }
-    else{
-        NSLog(@"Logging not enabled");
+    [_shipFit_ref.DB insertIntoGPS:_shipFit_ref.tripID
+     lat:[NSString stringWithFormat:@"%.4f",lat ]
+     lng:[NSString stringWithFormat:@"%.4f",lon ]
+     dateandtime:datetime];
+}
+
+- (void)zero_logs
+{
+    int l;
+    CLLocationCoordinate2D *runner = _locationsBase;
+    for(l = 0; l < 200000; l++, runner++){
+        runner->latitude = 0;
+        runner->longitude = 0;
     }
 }
 
-// iOS 5 location manager delegate method
+//for debug
+- (void)print_logs_to_console
+{
+    CLLocationCoordinate2D *runner = _locationsHead;
+    int i;
+    for ( i=0; i < self.shipFit_ref.gps_count; i++ , runner++ )
+    {
+        NSLog(@"%f:%f" , runner->latitude , runner->longitude );
+    }
+}
+
+// 
+// HANDLE
+// EVeNTS
+// LOCATION 
 - (void)locationManager:(CLLocationManager *)manager
     didUpdateToLocation:(CLLocation *)newLocation
            fromLocation:(CLLocation *)oldLocation
+
+
 {
     NSLog(@"iOS 5 location event");
-    [self updateShipFitLocation:newLocation];
+
+    // UPDATE THE PROPERTIES
+    [ self updateShipFitLocation:newLocation ];
     
     /* Log the new lat and long values */
     [ self log_latitude:newLocation.coordinate.latitude
               longitude:newLocation.coordinate.longitude
               timestamp:[newLocation.timestamp timeIntervalSince1970 ] ];
     
+    /* EVALUATE */
     [ self evaluate_GPS_MODE ];
 }
 
@@ -143,16 +185,19 @@
                  longitude:current_location.coordinate.longitude
                  timestamp:[current_location.timestamp timeIntervalSince1970 ] ];
     }
-    
-    current_location = [ locations lastObject ];
-    [self updateShipFitLocation:current_location];
+
+    [self updateShipFitLocation: [ locations lastObject ] ];
 }
 
-- (void)updateShipFitLocation: (CLLocation*) current_location{
+
+
+// UPDATE FRONT END PROPERTIES
+- (void)updateShipFitLocation: (CLLocation*) current_location
+{
     
     /* Make sure the update is relevant within 60 seconds */
     if ( ( [ [ NSDate date ]  timeIntervalSince1970 ] - [current_location.timestamp timeIntervalSince1970 ] ) < 60 &&
-        ( [current_location.timestamp timeIntervalSince1970 ] - _lastGPStimeInt) > 3)
+        ( [current_location.timestamp timeIntervalSince1970 ] - _lastGPStimeInt) > 3 )
     {
         //save last time we updated the display property for GPS
         _lastGPStimeInt = [current_location.timestamp timeIntervalSince1970];
@@ -160,21 +205,30 @@
         // Set the new lat/lon
         self.shipFit_ref.latitude = current_location.coordinate.latitude;
         self.shipFit_ref.longitude = current_location.coordinate.longitude;
+        
+        // Let the SHIPFIT class know that the time stamp is valid.
         if(!self.GPSisValid)self.GPSisValid = YES;
         
-        // Calculate the current speed 
-        [ self calculateSpeed:current_location ];
-        
+        // If we have more than 10 entries calculate the speed
+        if ( count > 10 )
+        {
+            [ self calculateSpeed:current_location ];    
+        }
         NSLog( @"LAT: %f LONG: %f KNOTS:%f" , self.shipFit_ref.latitude , self.shipFit_ref.longitude , self.shipFit_ref.knots);
     }
     else{
         NSLog(@"not updating GPS display");
     }
-    
+
     //Evaluate the GPS MODE
     [ self evaluate_GPS_MODE ];
 }
 
+
+// CALCULATE 
+// THE 
+// SPEED 
+// OF THE VESSEL
 - (void)calculateSpeed: (CLLocation*)current
 {
     CLLocation *location = [[ CLLocation alloc] initWithLatitude:(_locationsHead + 1)->latitude
@@ -195,17 +249,27 @@
     }
 }
 
+
+
 - (void)evaluate_GPS_MODE
 {
+
+#if 0
     int l, o;
     
     switch (self.GPS_MODE)
     {
         case SAILING_STARTUP:
-            if (self.shipFit_ref.gps_count < 10){
+            
+
+            if (self.shipFit_ref.gps_count < 10)
+            {
                 break;
             }
-            else{
+
+            else
+
+            {
                 double *runner = _timesHead;
                 for( l=0, o=1 ; l<10 ; l++ ,runner++ ){
                     if( ( [ [ NSDate date ]  timeIntervalSince1970 ] - *runner ) > 30 ){
@@ -213,12 +277,18 @@
                         break;
                     }
                 }
-                if (o){
+
+                // STARTUP TO ROUGH
+                if (o)
+                {
                     self.GPS_MODE = SAILING_ROUGH;
                     [self halt_GPS];
                 }
                 break;
             }
+
+
+
     
         case SAILING_ROUGH:
             NSLog(@"rough sailing");
@@ -240,6 +310,8 @@
                                                    userInfo:nil
                                                     repeats:NO ];
     }
+
+#endif
 }
 
 // Handling Authorization Status Changes.
@@ -272,26 +344,7 @@
     NSLog(@"%@", error);
 }
 
-- (void)flushlogs
-{
-    int l;
-    CLLocationCoordinate2D *runner = _locationsBase;
-    for(l = 0; l < 200000; l++, runner++){
-        runner->latitude = 0;
-        runner->longitude = 0;
-    }
-}
 
-//for debug
-- (void)print_logs_to_console
-{
-    CLLocationCoordinate2D *runner = _locationsHead;
-    int i;
-    for ( i=0; i < self.shipFit_ref.gps_count; i++ , runner++ )
-    {
-        NSLog(@"%f:%f" , runner->latitude , runner->longitude );
-    }
-}
 @end
 
 
