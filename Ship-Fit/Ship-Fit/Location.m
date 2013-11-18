@@ -5,14 +5,12 @@
 {
     CLLocationManager *_locationManager;
     
-    CLLocationCoordinate2D *_locationsHead;
+    CLLocationCoordinate2D *_locationsHead; //locations
     CLLocationCoordinate2D *_locationsBase;
-    
-    double *_timesHead;
+    double *_timesHead; //timestamps
     double *_timesBase;
     
     int _lastGPStimeInt;
-    
     NSTimer *_theTimer;
 }
 
@@ -107,6 +105,9 @@
             // TO DO.
         }
     }
+    else{
+        NSLog(@"Logging not enabled");
+    }
 }
 
 // iOS 5 location manager delegate method
@@ -122,7 +123,6 @@
               longitude:newLocation.coordinate.longitude
               timestamp:[newLocation.timestamp timeIntervalSince1970 ] ];
     
-    // Should we change the GPS_MODE ??
     [ self evaluate_GPS_MODE ];
 }
 
@@ -132,11 +132,8 @@
 {
     NSLog(@"iOS 6 location event");
     
-    // Get the most recent. 
-    CLLocation *current_location = [ locations lastObject ];
-    [self updateShipFitLocation:current_location];
-    
-    /* Log each entry */
+    // Log each entry
+    CLLocation *current_location;
     int l;
     for (l = 0 ; l < [locations count] ; l++)
     {
@@ -145,9 +142,9 @@
                  longitude:current_location.coordinate.longitude
                  timestamp:[current_location.timestamp timeIntervalSince1970 ] ];
     }
-
-    // Should we Change the GPS mode??
-    [ self evaluate_GPS_MODE ];
+    
+    current_location = [ locations lastObject ];
+    [self updateShipFitLocation:current_location];
 }
 
 - (void)updateShipFitLocation: (CLLocation*) current_location{
@@ -159,24 +156,41 @@
         //save last time we updated the display property for GPS
         _lastGPStimeInt = [current_location.timestamp timeIntervalSince1970];
         
-        /* Set the new lat/long */
+        // Set the new lat/lon
         self.shipFit_ref.latitude = current_location.coordinate.latitude;
         self.shipFit_ref.longitude = current_location.coordinate.longitude;
         
-        /* Set the speed */
-        self.shipFit_ref.knots = ( current_location.speed * 1.94384 );
+        // Calculate the current speed 
+        [ self calculateSpeed:current_location ];
         
         NSLog( @"LAT: %f LONG: %f KNOTS:%f" , self.shipFit_ref.latitude , self.shipFit_ref.longitude , self.shipFit_ref.knots);
     }
-    
     else{
         NSLog(@"not updating GPS display");
     }
+    
+    //Evaluate the GPS MODE
+    [ self evaluate_GPS_MODE ];
 }
 
-- (void)calculateSpeed
+- (void)calculateSpeed: (CLLocation*)current
 {
-    // to do
+    CLLocation *location = [[ CLLocation alloc] initWithLatitude:(_locationsHead + 1)->latitude
+                                                       longitude:(_locationsHead + 1)->longitude ];
+    switch (self.GPS_MODE)
+    {
+        case SAILING_STARTUP:
+            self.shipFit_ref.knots = 0;
+            break;
+        case SAILING_ROUGH:
+            self.shipFit_ref.knots = ( (
+                                        ( [current distanceFromLocation:location] ) / ( *_timesHead - *(_timesHead + 1) )
+                                        ) * 1.94384 );
+            break;
+        case SAILING_SMOOTH:
+            // to do
+            break;
+    }
 }
 
 - (void)evaluate_GPS_MODE
@@ -205,13 +219,13 @@
             }
     
         case SAILING_ROUGH:
-            [self halt_GPS];
             NSLog(@"rough sailing");
+            [self halt_GPS];
             break;
             
         case SAILING_SMOOTH:
-            [self halt_GPS];
             NSLog(@"smooth sailing");
+            [self halt_GPS];
             break;
     }
     
@@ -229,20 +243,23 @@
 // Handling Authorization Status Changes.
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 {
-    NSLog(@"status: %d" , status );
-    
     switch (status)
     {
         case kCLAuthorizationStatusNotDetermined:
+            NSLog(@"Location Services not determined");
             break;
         case kCLAuthorizationStatusRestricted:
+            NSLog(@"Location Services Restricted");
             break;
         case kCLAuthorizationStatusDenied:
+            NSLog(@"Location Services Denied");
+            [self halt_GPS];
+            //pop up?
             break;
         case kCLAuthorizationStatusAuthorized:
+            NSLog(@"Location Services Authorized");
             break;
     }
-    
 }
 
 // Error Handling
@@ -250,6 +267,16 @@
        didFailWithError:(NSError *)error
 {
     NSLog(@"%@", error);
+}
+
+- (void)flushlogs
+{
+    int l;
+    CLLocationCoordinate2D *runner = _locationsBase;
+    for(l = 0; l < 200000; l++, runner++){
+        runner->latitude = 0;
+        runner->longitude = 0;
+    }
 }
 
 //for debug
@@ -262,7 +289,6 @@
         NSLog(@"%f:%f" , runner->latitude , runner->longitude );
     }
 }
-
 @end
 
 
