@@ -80,6 +80,8 @@
         abort();
     }
     
+
+    
     //[self createDatabase];
     //[self fillDatabaseFromXMLFile];
 }

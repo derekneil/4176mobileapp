@@ -55,11 +55,13 @@ FMDatabase* db;
     NSString* update = [NSString stringWithFormat:@"INSERT INTO GPS (tripid, lat, lng, dateandtime) VALUES(?, ?, ?, ?);", [NSNumber numberWithInt:tripID], lat, lng, dateandtime];
     [db executeUpdate:update];
     
+    
+    
+    NSInteger lastId = [db lastInsertRowId];
+    
     [db close];
     
-    //NSInteger lastId = [db lastInsertRowId];
-    
-    return 0;//lastId;
+    return lastId;//lastId;
 }
 
 
