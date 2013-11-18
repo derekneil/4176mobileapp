@@ -61,7 +61,7 @@ FMDatabase* db;
     
     [db close];
     
-    return lastId;//lastId;
+    return lastId;
 }
 
 
@@ -73,11 +73,12 @@ FMDatabase* db;
     NSString* update = [NSString stringWithFormat:@"INSERT INTO Trips (startdate) VALUES(?);", startdate];
     [db executeUpdate:update];
     
+    
+    NSInteger tripId = [db lastInsertRowId];
+
     [db close];
     
-    //NSInteger tripId = [db lastInsertRowId];
-
-    return 0; //tripId;
+    return tripId;
 }
 
 -(NSInteger)getLatestTripID{
@@ -88,7 +89,7 @@ FMDatabase* db;
     
     [db close];
     
-    return 0;//[results intForColumn:@"id"];
+    return [results intForColumn:@"id"];
 }
 
 /*
