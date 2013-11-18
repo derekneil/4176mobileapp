@@ -8,7 +8,7 @@ NSString *const baseURL = @"https://api.forecast.io/forecast/";
 
 @implementation Weather
 {
-   // instance var
+
 }
 
 - (id) initWithReference: (ShipFit *)reference
@@ -20,32 +20,28 @@ NSString *const baseURL = @"https://api.forecast.io/forecast/";
     return self;
 }
 
-- (short int)getWeatherForLatitude: (double)lat
+- (void)getWeatherForLatitude: (double)lat
                     Longitude: (double)lon
                          Time: (double)time
 {
-    __block short int returncode;
-    
+    // Build the URL string
     NSURL *theURL = [ NSURL URLWithString:[NSString stringWithFormat:@"%@%@/%.6f,%.6f",baseURL,theKey,lat,lon] ];
     
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:theURL
-                                                  cachePolicy:NSURLCacheStorageAllowedInMemoryOnly
-                                              timeoutInterval:8];
-    
+    // Make the Asynchronous call to the API
     NSLog(@"Getting Forecast for: %@ " , theURL );
-    [ NSURLConnection sendAsynchronousRequest:request
+    [ NSURLConnection sendAsynchronousRequest:[[NSURLRequest alloc] initWithURL:theURL
+                                                                    cachePolicy:NSURLCacheStorageAllowedInMemoryOnly
+                                                                timeoutInterval:8 ]
                                         queue:[[NSOperationQueue alloc] init]
                             completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
      {	
          if (error)
          {
-             returncode = -1;
              NSLog(@"The Call to Forecast.io was not successful.");
              NSLog(@"%@" , error);
          }
          else
          {
-             returncode = 1;
              id jsonObject = [NSJSONSerialization JSONObjectWithData:data
                                                              options:NSJSONReadingAllowFragments
                                                                error:&error];
@@ -57,11 +53,30 @@ NSString *const baseURL = @"https://api.forecast.io/forecast/";
              }
          }
      }];
-    return returncode;
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+    if ( [keyPath isEqualToString:@"GPSisValid" ] )
+    {
+        // make the call
+        [self getWeatherForLatitude:self.shipFit_ref.latitude
+                          Longitude:self.shipFit_ref.longitude
+                               Time:  1   ];
+    }
+    
+}
 
 @end
+
+
+// state machine?
+// Weather startup phase
+// Weather caching phase
+// How often to update weather??
 
 //handle timeouts
 //if you hit the timeout then you have no weather available and you will have to use the cached weather. 

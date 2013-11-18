@@ -25,7 +25,7 @@ NSString *const ERROR = @"ERROR";
 
 - (void)init_and_run_application
 {
-    /* Set Defaults for Application Start */
+    /* Set Defaults for Application Start-up */
     self.isTrueNorth = YES;
     
     
@@ -33,24 +33,29 @@ NSString *const ERROR = @"ERROR";
     _DB = [[DatabaseAccess alloc] init];
     _tripID = [_DB getLatestTripID];
     
-    NSLog(@"initializing GPS");
+    NSLog(@"initializing and running GPS");
     _location = [ [Location alloc] initWithReference:self ];
     [_location init_logs_and_manager];
     _location.GPS_MODE = SAILING_STARTUP;
     [_location run_GPS:nil ];
     
-    NSLog(@"initializing compass");
+    NSLog(@"initializing and running compass");
     _direction = [ [Direction alloc] initWithReference:self ];
     [ _direction init_logs_and_manager ];
     [ _direction run_compass_withFilter:5 ];
     
-    
-    NSLog(@"getting weather");
+    NSLog(@"initializing weather");
     _weather = [ [Weather alloc] initWithReference:self ];
-    [_weather getWeatherForLatitude:45
-                          Longitude:-63.5
-                               Time:1.0];
+    
+    // Set up an observer to notify the weather class when we get a valid GPS reading
+    [_location addObserver:_weather
+               forKeyPath:@"GPSisValid"
+                  options:NSKeyValueObservingOptionNew
+                  context:nil ];
+    
 }
+
+
 
 
 

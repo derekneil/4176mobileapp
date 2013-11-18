@@ -19,6 +19,7 @@
     self = [super init];
     if ( self ){
         _shipFit_ref = reference;
+        _GPSisValid = NO;
     }
     return self;
 }
@@ -159,6 +160,7 @@
         // Set the new lat/lon
         self.shipFit_ref.latitude = current_location.coordinate.latitude;
         self.shipFit_ref.longitude = current_location.coordinate.longitude;
+        if(!self.GPSisValid)self.GPSisValid = YES;
         
         // Calculate the current speed 
         [ self calculateSpeed:current_location ];
@@ -258,6 +260,7 @@
             break;
         case kCLAuthorizationStatusAuthorized:
             NSLog(@"Location Services Authorized");
+            [self run_GPS:nil];
             break;
     }
 }
@@ -326,6 +329,8 @@
 // might be cheaper to malloc another array..
 // write the old one to the DB and then reallocate the space !!!
 
+// flush logs...
+// what if we are in Ecuador !!!?
 
 
 

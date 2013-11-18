@@ -16,6 +16,9 @@ enum GPS_OPERATION_MODE
 @property (nonatomic, readwrite, assign) BOOL logging_enabled;
 @property (nonatomic, readwrite, assign) enum GPS_OPERATION_MODE GPS_MODE;
 
+//Flags
+@property (nonatomic, readwrite, assign) BOOL GPSisValid;
+
 - (id) initWithReference: (ShipFit *)reference;
 
 - (void)init_logs_and_manager;

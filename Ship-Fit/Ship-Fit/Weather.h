@@ -12,7 +12,7 @@ extern NSString *const baseURL;
 
 - (id) initWithReference: (ShipFit *)reference;
 
-- (short int)getWeatherForLatitude: (double)lat
+- (void)getWeatherForLatitude: (double)lat
                     Longitude: (double)lon
                          Time: (double)time;
 @end
