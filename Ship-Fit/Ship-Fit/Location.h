@@ -14,13 +14,13 @@ enum GPS_OPERATION_MODE
 
 @property (nonatomic, readwrite, strong) ShipFit *shipFit_ref;
 
-@property (nonatomic, readwrite, assign) BOOL GPSisValid; // IS THE GPS 
+@property (nonatomic, readwrite, assign) BOOL GPSisValid; // IS THE GPS VALID?
 
 @property (nonatomic, readwrite, assign) enum GPS_OPERATION_MODE GPS_MODE;
 
 
 - (id) initWithReference: (ShipFit *)reference;
-- (void)init_logs_and_manager;
+- (void)init_GPSLOGS;
 
 - (void)halt_GPS;
 - (void)run_GPS:(NSTimer*)timer;

@@ -88,6 +88,27 @@
     else return ERROR;
 }
 
+// Handling Authorization Status Changes.
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    switch (status)
+    {
+        case kCLAuthorizationStatusNotDetermined:
+            NSLog(@"Location Services not determined");
+            break;
+        case kCLAuthorizationStatusRestricted:
+            NSLog(@"Location Services Restricted");
+            break;
+        case kCLAuthorizationStatusDenied:
+            NSLog(@"Location Services Denied");
+            break;
+        case kCLAuthorizationStatusAuthorized:
+            NSLog(@"Location Services Authorized");
+            [self run_compass_withFilter:5 ];
+            break;
+    }
+}
+
 - (void)locationManager:(CLLocationManager *)manager
        didFailWithError:(NSError *)error
 {

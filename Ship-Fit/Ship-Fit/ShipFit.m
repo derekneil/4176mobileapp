@@ -35,7 +35,7 @@ NSString *const ERROR = @"ERROR";
     
     NSLog(@"initializing and running GPS");
     _location = [ [Location alloc] initWithReference:self ];
-    [_location init_logs_and_manager];
+    [_location init_GPSLOGS];
     _location.GPS_MODE = SAILING_STARTUP;
     [_location run_GPS:nil ];
     

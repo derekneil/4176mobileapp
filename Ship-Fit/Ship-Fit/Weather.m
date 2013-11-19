@@ -8,7 +8,6 @@ NSString *const baseURL = @"https://api.forecast.io/forecast/";
 
 @implementation Weather
 {
-    NSDictionary *theweather;
 }
 
 - (id) initWithReference: (ShipFit *)reference
@@ -43,23 +42,34 @@ NSString *const baseURL = @"https://api.forecast.io/forecast/";
          else
          {
              NSLog(@"JSON Received");
-             theweather = (NSDictionary *) ([NSJSONSerialization JSONObjectWithData:data
+              id json = ([NSJSONSerialization JSONObjectWithData:data
                                                              options:NSJSONReadingAllowFragments
                                                                error:&error] );
-            // Give the UI the Dictionary to work with
-             self.shipFit_ref.weatherJSON = theweatherman;
+            
+             if ( [ json isKindOfClass:[NSDictionary class ] ] )
+             {
+                self.shipFit_ref.weatherJSON = (NSDictionary *)json;
+             }
+             
+             /*
+             int i;
+             for ( i = 0; i < 48 ; i++ )
+             {
+                NSLog( @"%@",theweather.hourly.data[i].time );
+                NSLog( @"%@",theweather.hourly.data[i].icon );
+                NSLog( @"%@",theweather.hourly.data[i].temperature );
+                NSLog( @"%@",theweather.hourly.data[i].windBearing );
+                NSLog( @"%@",theweather.hourly.data[i].windSpeed );
+                NSLog( @"%@",theweather.hourly.data[i].cloudCover);
+                NSLog( @"%@",theweather.hourly.data[i].precipProbability );
+                NSLog( @"%@",theweather.hourly.data[i].humidity );
+                NSLog( @"%@",theweather.hourly.data[i].pressure );
+             }
+              
+              */
 
-            // lets see what we got
-             NSLog( @"%@",theweather.hourly.data[i].time );
-             NSLog( @"%@",theweather.hourly.data[i].icon );
-             NSLog( @"%@",theweather.hourly.data[i].temperature );
-             NSLog( @"%@",theweather.hourly.data[i].windBearing );
-             NSLog( @"%@",theweather.hourly.data[i].windSpeed );
-             NSLog( @"%@",theweather.hourly.data[i].cloudCover);
-             NSLog( @"%@",theweather.hourly.data[i].precipProbability );
-             NSLog( @"%@",theweather.hourly.data[i].humidity );
-             NSLog( @"%@",theweather.hourly.data[i].pressure );             
 
+            
              // How do you parse the json? 
              // What do we do with the weather ???
              // Something amazing perhaps..!

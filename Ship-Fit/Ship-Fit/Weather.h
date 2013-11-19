@@ -14,5 +14,5 @@ extern NSString *const baseURL;
 
 - (void)getWeatherForLatitude: (double)lat
                     Longitude: (double)lon
-                         Time: (double)time;
+                         Time: (double)timetime;
 @end

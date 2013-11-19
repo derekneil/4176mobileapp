@@ -41,9 +41,9 @@
         // HEAP TO STORE LOGS
         // 40000 GPS COORDINATES
         if (
-            ( timeBase = (double *)malloc( 40000 * sizeof(double) ) == NULL )  
+            (  ( timeBase = (double *)malloc( 40000 * sizeof(double) ) ) == NULL )
             ||
-            ( ( _locationsBase = (CLLocationCoordinate2D *)malloc( 40000 * sizeof( CLLocationCoordinate2D ) ) ) == NULL )
+            ( ( locationBase = (CLLocationCoordinate2D *)malloc( 40000 * sizeof( CLLocationCoordinate2D ) ) ) == NULL )
             )
         {
             _logging_enabled = NO;
@@ -52,14 +52,15 @@
         else
         {
             _logging_enabled = YES;
+            _count = 0;
 
             // Move the heads to the edge of memory farthest away from the base
-            _timesHead = _timesBase + 39999;
-            _locationsHead = _locationsBase + 39999;
+            timeHead = timeBase + 39999;
+            locationHead = locationBase + 39999;
             
 
             // GIVE THE LIST TO THE MAP FOR ITS CONVENIENCE
-            self.shipFit_ref.gps_head = _locationsHead;
+            self.shipFit_ref.gps_head = locationHead;
             self.shipFit_ref.gps_count = 0;
         }
     }
@@ -86,13 +87,13 @@
     
     //SAVE THE POINT IN DYNAMIC MEMORY
 
-    if ( self.logging_enabled )
+    if ( _logging_enabled )
     {
         
         // Increment the counts. Two variables hopefully same value. 
-        self.shipFit_ref.gps_count++; count++;
+        self.shipFit_ref.gps_count++; _count++;
 
-        if ( count == 0 )
+        if ( _count == 0 )
         {
             *(timeHead) = timetime; 
             locationHead->latitude = lat;
@@ -100,12 +101,12 @@
         }
         else
         {
-            timehead--;
+            timeHead--;
             *(timeHead) = timetime;
 
             locationHead--;
-            locationHead->latitude;
-            locationHead->longitude;
+            locationHead->latitude = lat;
+            locationHead->longitude = lon;
         }
 
     }
@@ -126,7 +127,7 @@
 - (void)zero_logs
 {
     int l;
-    CLLocationCoordinate2D *runner = _locationsBase;
+    CLLocationCoordinate2D *runner = locationBase;
     for(l = 0; l < 200000; l++, runner++){
         runner->latitude = 0;
         runner->longitude = 0;
@@ -136,7 +137,7 @@
 //for debug
 - (void)print_logs_to_console
 {
-    CLLocationCoordinate2D *runner = _locationsHead;
+    CLLocationCoordinate2D *runner = locationHead;
     int i;
     for ( i=0; i < self.shipFit_ref.gps_count; i++ , runner++ )
     {
@@ -231,8 +232,8 @@
 // OF THE VESSEL
 - (void)calculateSpeed: (CLLocation*)current
 {
-    CLLocation *location = [[ CLLocation alloc] initWithLatitude:(_locationsHead + 1)->latitude
-                                                       longitude:(_locationsHead + 1)->longitude ];
+    CLLocation *location = [[ CLLocation alloc] initWithLatitude:(locationHead + 1)->latitude
+                                                       longitude:(locationHead + 1)->longitude ];
     switch (self.GPS_MODE)
     {
         case SAILING_STARTUP:
@@ -241,7 +242,7 @@
 
         case SAILING_ROUGH:
             self.shipFit_ref.knots = ( (
-                                        ( [current distanceFromLocation:location] ) / ( *_timesHead - *(_timesHead + 1) )
+                                        ( [current distanceFromLocation:location] ) / ( *timeHead - *(timeHead + 1) )
                                         ) * 1.94384 );
             break;
         case SAILING_SMOOTH:
@@ -270,7 +271,7 @@
             else
 
             {
-                double *runner = _timesHead;
+                double *runner = timeHead;
                 for( l=0, o=1 ; l<10 ; l++ ,runner++ ){
                     if( ( [ [ NSDate date ]  timeIntervalSince1970 ] - *runner ) > 30 ){
                         o = 0;
