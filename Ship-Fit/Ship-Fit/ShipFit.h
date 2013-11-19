@@ -35,5 +35,7 @@ extern NSString *const ERROR;
 
 /* Functions */
 - (void)init_and_run_application;
+- (unsigned short int)get_gps_mode;
+- (BOOL)currently_sailing_straight;
 
 @end

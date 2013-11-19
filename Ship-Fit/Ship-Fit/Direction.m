@@ -1,6 +1,7 @@
 
 #import "ShipFit.h"
 #import "Direction.h"
+#import "Location.h"
 
 @implementation Direction
 {
@@ -12,30 +13,80 @@
     self = [super init];
     if ( self ){
         _shipFit_ref = reference;
+        _compass_readings = [[NSMutableArray alloc] init ];
+        _locationManager = [ [CLLocationManager alloc] init ] ;
+        _locationManager.delegate = self;
     }
     return self;
 }
 
-- (void)init_logs_and_manager
-{
-    if ( [CLLocationManager locationServicesEnabled ])
-    {
-        _locationManager = [ [CLLocationManager alloc] init ];
-        _locationManager.delegate = self;
-        // Havn't set up logs yet. 
-    }
-}
-
-- (void)run_compass_withFilter: (CLLocationDegrees)compass_accuracy
+- (void)run_compass
 {
     if ( [ CLLocationManager headingAvailable ] )
     {
-        _locationManager.headingFilter = compass_accuracy;
+        _locationManager.headingFilter = 2;
         [ _locationManager startUpdatingHeading ];
     }
     else{
         NSLog(@"Compass Not Available");
     }
+}
+
+- (void)logHeading: (CLHeading *)heading
+{
+    // Add the entry
+    [self.compass_readings insertObject:heading atIndex:0 ];
+    
+    // Remove all elements older than 2 minutes
+    int i;
+    for (i = 0; i < [self.compass_readings count]; i++ )
+    {
+        CLHeading *info = [self.compass_readings objectAtIndex:i];
+        if( [heading.timestamp timeIntervalSince1970] - [info.timestamp timeIntervalSince1970] > 120 )
+        {
+            [self.compass_readings removeObjectAtIndex:i];
+            i--;
+        }
+    }
+    
+}
+
+- (BOOL)straight_travel
+{
+    int l = [self.compass_readings count];
+    int o = 0;
+    double theBaseReading;
+    CLHeading *recent = [self.compass_readings objectAtIndex:0];
+    
+    if ( self.shipFit_ref.isTrueNorth){
+        theBaseReading = recent.trueHeading;
+    }
+    else{
+        theBaseReading = recent.magneticHeading;
+    }
+    
+    while ( o < l )
+    {
+        recent = [self.compass_readings objectAtIndex:o];
+        
+        if ( self.shipFit_ref.isTrueNorth )
+        {
+            if ( (theBaseReading - recent.trueHeading > 7.5 ) || (theBaseReading - recent.trueHeading < -7.5 )  )
+            {
+                return NO;
+            }
+        }
+        else
+        {
+            if ( (theBaseReading - recent.magneticHeading > 7.5 ) || (theBaseReading - recent.magneticHeading < -7.5 ) )
+            {
+                return NO;
+            }
+        }
+        o++;
+    }
+    NSLog(@"Travelling Straight!!!!!");
+    return YES;
 }
 
 - (void)halt_compass
@@ -51,7 +102,8 @@
     
     if ( ( [ [ NSDate date ]  timeIntervalSince1970 ] - [newHeading.timestamp timeIntervalSince1970 ] ) < 60 )
     {
-        if ( self.shipFit_ref.isTrueNorth ){
+        if ( self.shipFit_ref.isTrueNorth )
+        {
             self.shipFit_ref.compassDegrees = newHeading.trueHeading;
         }
         else{
@@ -59,6 +111,11 @@
         }
         
         [ self set_bearing ];
+        
+        if ( [ self.shipFit_ref get_gps_mode ] != SAILING_STARTUP )
+        {
+            [self logHeading:newHeading];
+        }
     }
     else{
         NSLog(@"Time stamp for the compass is stale. Take the according action");
@@ -94,17 +151,17 @@
     switch (status)
     {
         case kCLAuthorizationStatusNotDetermined:
-            NSLog(@"Location Services not determined");
+            NSLog(@"Compass Services not determined");
             break;
         case kCLAuthorizationStatusRestricted:
-            NSLog(@"Location Services Restricted");
+            NSLog(@"Compass Services Restricted");
             break;
         case kCLAuthorizationStatusDenied:
-            NSLog(@"Location Services Denied");
+            NSLog(@"Compass Services Denied");
             break;
         case kCLAuthorizationStatusAuthorized:
-            NSLog(@"Location Services Authorized");
-            [self run_compass_withFilter:5 ];
+            NSLog(@"Compass Services Authorized");
+            [self run_compass ];
             break;
     }
 }
@@ -112,7 +169,7 @@
 - (void)locationManager:(CLLocationManager *)manager
        didFailWithError:(NSError *)error
 {
-    NSLog( @"%@" , error );
+    NSLog( @"COMPASS_ERROR\n%@" , error );
 }
 
 

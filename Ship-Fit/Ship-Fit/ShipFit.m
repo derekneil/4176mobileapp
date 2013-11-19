@@ -41,8 +41,7 @@ NSString *const ERROR = @"ERROR";
     
     NSLog(@"initializing and running compass");
     _direction = [ [Direction alloc] initWithReference:self ];
-    [ _direction init_logs_and_manager ];
-    [ _direction run_compass_withFilter:5 ];
+    [ _direction run_compass ];
     
     NSLog(@"initializing weather");
     _weather = [ [Weather alloc] initWithReference:self ];
@@ -55,7 +54,15 @@ NSString *const ERROR = @"ERROR";
     
 }
 
+- (unsigned short int)get_gps_mode
+{
+    return _location.GPS_MODE;
+}
 
+- (BOOL)currently_sailing_straight
+{
+    return [_direction straight_travel];
+}
 
 
 

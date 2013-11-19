@@ -128,9 +128,11 @@
 {
     int l;
     CLLocationCoordinate2D *runner = locationBase;
-    for(l = 0; l < 200000; l++, runner++){
+    double *runner2 = timeBase;
+    for(l = 0; l < 400000; l++, runner++, runner2++){
         runner->latitude = 0;
         runner->longitude = 0;
+        *runner2 = 0;
     }
 }
 
@@ -155,6 +157,8 @@
 
 
 {
+    if( self.GPS_MODE != SAILING_STARTUP)[self halt_GPS];
+    
     NSLog(@"iOS 5 location event");
     
     /* Log the new lat and long values */
@@ -173,6 +177,8 @@
 - (void)locationManager: (CLLocationManager *)manager
      didUpdateLocations:(NSArray *)locations
 {
+    if ( self.GPS_MODE != SAILING_STARTUP ) [self halt_GPS];
+    
     NSLog(@"iOS 6 location event");
     
     // Log each entry
@@ -197,11 +203,13 @@
 // UPDATE FRONT END PROPERTIES
 - (void)updateShipFitLocation: (CLLocation*) current_location
 {
-    
     /* Make sure the update is relevant within 60 seconds */
     if ( ( [ [ NSDate date ]  timeIntervalSince1970 ] - [current_location.timestamp timeIntervalSince1970 ] ) < 60 &&
         ( [current_location.timestamp timeIntervalSince1970 ] - _lastGPStimeInt) > 3 )
     {
+        // Let the SHIPFIT class know that the time stamp is valid.
+        if(!self.GPSisValid)self.GPSisValid = YES;
+        
         //save last time we updated the display property for GPS
         _lastGPStimeInt = [current_location.timestamp timeIntervalSince1970];
         
@@ -209,20 +217,23 @@
         self.shipFit_ref.latitude = current_location.coordinate.latitude;
         self.shipFit_ref.longitude = current_location.coordinate.longitude;
         
-        // Let the SHIPFIT class know that the time stamp is valid.
-        if(!self.GPSisValid)self.GPSisValid = YES;
         
-        // If we have more than 10 entries calculate the speed
-        if ( _count > 10 )
-        {
-            [ self calculateSpeed: current_location ];    
-        }
-        NSLog( @"LAT: %f LONG: %f KNOTS:%f" , self.shipFit_ref.latitude , self.shipFit_ref.longitude , self.shipFit_ref.knots);
+    
+        NSLog( @"LAT: %f LONG: %f KNOTS:%f" , self.shipFit_ref.latitude , self.shipFit_ref.longitude , self.shipFit_ref.knots );
     }
     else
     {
         NSLog(@"not updating GPS display");
     }
+    
+    // Set the speed
+    if ( current_location.speed != -1 )
+    {
+        self.shipFit_ref.knots = current_location.speed * 1.94384;
+    }
+    // mY speed function that still has some bugs
+    //self.shipFit_ref.knots = [ self calculateSpeed: current_location ];
+    
 }
 
 
@@ -230,28 +241,30 @@
 // THE 
 // SPEED 
 // OF THE VESSEL
-- (void)calculateSpeed: (CLLocation*)current
-{
-    CLLocation *location = [[ CLLocation alloc] initWithLatitude:(locationHead + 1)->latitude
-                                                       longitude:(locationHead + 1)->longitude ];
-    switch (self.GPS_MODE)
-    {
-        case SAILING_STARTUP:
-            self.shipFit_ref.knots = 0;
-            break;
-
-        case SAILING_ROUGH:
-            self.shipFit_ref.knots = ( (
-                                        ( [current distanceFromLocation:location] ) / ( *timeHead - *(timeHead + 1) )
-                                        ) * 1.94384 );
-            break;
-        case SAILING_SMOOTH:
-            // to do
-            break;
-    }
-}
-
-
+// USING A WEIGHTED AVERAGE BASED ON THE LAST 5 RELEVANT READINGS
+// WORK IN PROGRESS
+//- (double)calculateSpeed: (CLLocation*)current
+//{
+//    double speed = 0;
+//
+//    if ( _count > 5 )
+//    {
+//        CLLocation *location;
+//        CLLocationCoordinate2D *locationRunner = locationHead + 1;
+//        double *timeRunner = timeHead + 1;
+//        double weight = 0.51612;
+//
+//        int i;
+//        for (i = 0; i < 5; i++ , locationRunner++ , timeRunner++ )
+//        {
+//            double distance =  [current distanceFromLocation:[location initWithLatitude: (locationHead + i)->latitude
+//                                                                              longitude: (locationHead + i)->longitude ] ];
+//            speed += (weight) * ( distance / ( [current.timestamp timeIntervalSince1970] - *(timeRunner + i) ) );
+//        }
+//        weight /= 2;
+//    }
+//    return speed * 1.94384;
+//}
 
 - (void)evaluate_GPS_MODE
 {
@@ -261,57 +274,49 @@
     switch (self.GPS_MODE)
     {
         case SAILING_STARTUP:
-            
-
+            NSLog(@"GPS MODE: STARTUP");
+            // If you have less than 10 gps locations stay in start up
             if (self.shipFit_ref.gps_count < 10)
             {
                 break;
             }
 
+            // If you have more, check to see if the last 10 location updates are within the last 5 minutes
             else
-
             {
                 double *runner = timeHead;
                 for( l=0, o=1 ; l<10 ; l++ ,runner++ ){
-                    if( ( [ [ NSDate date ]  timeIntervalSince1970 ] - *runner ) > 30 ){
+                    if( ( [ [ NSDate date ]  timeIntervalSince1970 ] - *runner ) > 300 ){
                         o = 0;
                         break;
                     }
                 }
 
-                // STARTUP TO ROUGH
-                if (o)
-                {
+                // SAILING_STARTUP TO SAILING_ROUGH TRANSITION
+                if (o){
                     self.GPS_MODE = SAILING_ROUGH;
-                    [self halt_GPS];
                 }
                 break;
             }
 
-
-
-    
         case SAILING_ROUGH:
-            NSLog(@"rough sailing");
-            [self halt_GPS];
+            NSLog(@"GPS MODE: ROUGH");
+            _theTimer = [NSTimer scheduledTimerWithTimeInterval:15
+                                                         target:self
+                                                       selector:@selector(run_GPS:)
+                                                       userInfo:nil
+                                                        repeats:NO ];
             break;
             
         case SAILING_SMOOTH:
-            NSLog(@"smooth sailing");
-            [self halt_GPS];
+            NSLog(@"GPS MODE: SMOOTH");
+            _theTimer = [NSTimer scheduledTimerWithTimeInterval:60
+                                                         target:self
+                                                       selector:@selector(run_GPS:)
+                                                       userInfo:nil
+                                                        repeats:NO ];
             break;
     }
-    
-    // Set Timer
-    if ( self.GPS_MODE == SAILING_ROUGH )
-    {
-        _theTimer = [NSTimer scheduledTimerWithTimeInterval:15
-                                                     target:self
-                                                   selector:@selector(run_GPS:)
-                                                   userInfo:nil
-                                                    repeats:NO ];
-    }
-
 }
 
 // Handling Authorization Status Changes.
@@ -326,6 +331,7 @@
             NSLog(@"Location Services Restricted");
             break;
         case kCLAuthorizationStatusDenied:
+            [self release_memory];
             NSLog(@"Location Services Denied");
             break;
         case kCLAuthorizationStatusAuthorized:
