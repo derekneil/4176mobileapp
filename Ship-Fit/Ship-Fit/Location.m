@@ -207,8 +207,7 @@
     if ( ( [ [ NSDate date ]  timeIntervalSince1970 ] - [current_location.timestamp timeIntervalSince1970 ] ) < 60 &&
         ( [current_location.timestamp timeIntervalSince1970 ] - _lastGPStimeInt) > 3 )
     {
-        // Let the SHIPFIT class know that the time stamp is valid.
-        if(!self.GPSisValid)self.GPSisValid = YES;
+        
         
         //save last time we updated the display property for GPS
         _lastGPStimeInt = [current_location.timestamp timeIntervalSince1970];
@@ -217,8 +216,8 @@
         self.shipFit_ref.latitude = current_location.coordinate.latitude;
         self.shipFit_ref.longitude = current_location.coordinate.longitude;
         
-        
-    
+        // Let the SHIPFIT class know that the time stamp is valid.
+        if(!self.GPSisValid && current_location.coordinate.latitude != 0 && current_location.coordinate.longitude != 0)self.GPSisValid = YES;
         NSLog( @"LAT: %f LONG: %f KNOTS:%f" , self.shipFit_ref.latitude , self.shipFit_ref.longitude , self.shipFit_ref.knots );
     }
     else
