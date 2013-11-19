@@ -11,14 +11,12 @@ enum GPS_OPERATION_MODE
 };
 
 @interface Location : NSObject <CLLocationManagerDelegate>
+
 @property (nonatomic, readwrite, strong) ShipFit *shipFit_ref;
 
 @property (nonatomic, readwrite, assign) BOOL GPSisValid; // IS THE GPS 
 
-@property (nonatomic, readwrite, assign) BOOL logging_enabled;
 @property (nonatomic, readwrite, assign) enum GPS_OPERATION_MODE GPS_MODE;
-
-
 
 
 - (id) initWithReference: (ShipFit *)reference;

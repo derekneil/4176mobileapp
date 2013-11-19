@@ -9,8 +9,8 @@
     double *timeHead; //timestamps
     double *timeBase;
     NSTimer *_theTimer;
-    BOOL logging_enabled;
-    int count;
+    BOOL _logging_enabled;
+    int _count;
     int _lastGPStimeInt;
 }
 
@@ -33,7 +33,6 @@
     _lastGPStimeInt = [ [ NSDate date ] timeIntervalSince1970 ];
     
 
-
     // DO WE HAVE PERMISSION TO ACCESS LOCATION SERVICES
     if (  [   CLLocationManager locationServicesEnabled  ] && 
         [ CLLocationManager authorizationStatus ] != kCLAuthorizationStatusDenied )
@@ -42,17 +41,17 @@
         // HEAP TO STORE LOGS
         // 40000 GPS COORDINATES
         if (
-            ( _timesBase = (double *)malloc( 40000 * sizeof(double) ) == NULL )  
+            ( timeBase = (double *)malloc( 40000 * sizeof(double) ) == NULL )  
             ||
             ( ( _locationsBase = (CLLocationCoordinate2D *)malloc( 40000 * sizeof( CLLocationCoordinate2D ) ) ) == NULL )
             )
         {
-            self.logging_enabled = NO;
+            _logging_enabled = NO;
             // MEMORY CONSERVATION MODE?
         }
         else
         {
-            self.logging_enabled = YES;
+            _logging_enabled = YES;
 
             // Move the heads to the edge of memory farthest away from the base
             _timesHead = _timesBase + 39999;
@@ -156,14 +155,14 @@
 
 {
     NSLog(@"iOS 5 location event");
-
-    // UPDATE THE PROPERTIES
-    [ self updateShipFitLocation:newLocation ];
     
     /* Log the new lat and long values */
     [ self log_latitude:newLocation.coordinate.latitude
               longitude:newLocation.coordinate.longitude
-              timestamp:[newLocation.timestamp timeIntervalSince1970 ] ];
+              timestamp: [newLocation.timestamp timeIntervalSince1970 ] ];
+
+    // UPDATE THE PROPERTIES
+    [ self updateShipFitLocation: newLocation ];
     
     /* EVALUATE */
     [ self evaluate_GPS_MODE ];
@@ -187,6 +186,9 @@
     }
 
     [self updateShipFitLocation: [ locations lastObject ] ];
+
+    //Evaluate the GPS MODE
+    [ self evaluate_GPS_MODE ];
 }
 
 
@@ -210,18 +212,16 @@
         if(!self.GPSisValid)self.GPSisValid = YES;
         
         // If we have more than 10 entries calculate the speed
-        if ( count > 10 )
+        if ( _count > 10 )
         {
-            [ self calculateSpeed:current_location ];    
+            [ self calculateSpeed: current_location ];    
         }
         NSLog( @"LAT: %f LONG: %f KNOTS:%f" , self.shipFit_ref.latitude , self.shipFit_ref.longitude , self.shipFit_ref.knots);
     }
-    else{
+    else
+    {
         NSLog(@"not updating GPS display");
     }
-
-    //Evaluate the GPS MODE
-    [ self evaluate_GPS_MODE ];
 }
 
 
@@ -238,6 +238,7 @@
         case SAILING_STARTUP:
             self.shipFit_ref.knots = 0;
             break;
+
         case SAILING_ROUGH:
             self.shipFit_ref.knots = ( (
                                         ( [current distanceFromLocation:location] ) / ( *_timesHead - *(_timesHead + 1) )
@@ -254,7 +255,6 @@
 - (void)evaluate_GPS_MODE
 {
 
-#if 0
     int l, o;
     
     switch (self.GPS_MODE)
@@ -311,7 +311,6 @@
                                                     repeats:NO ];
     }
 
-#endif
 }
 
 // Handling Authorization Status Changes.
@@ -327,8 +326,6 @@
             break;
         case kCLAuthorizationStatusDenied:
             NSLog(@"Location Services Denied");
-            [self halt_GPS];
-            //pop up?
             break;
         case kCLAuthorizationStatusAuthorized:
             NSLog(@"Location Services Authorized");
@@ -342,6 +339,12 @@
        didFailWithError:(NSError *)error
 {
     NSLog(@"%@", error);
+}
+
+- (void)release_memory
+{
+    free(locationBase);
+    free(timeBase);
 }
 
 
