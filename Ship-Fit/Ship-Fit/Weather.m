@@ -8,7 +8,7 @@ NSString *const baseURL = @"https://api.forecast.io/forecast/";
 
 @implementation Weather
 {
-
+    NSDictionary *theweatherman;
 }
 
 - (id) initWithReference: (ShipFit *)reference
@@ -22,37 +22,39 @@ NSString *const baseURL = @"https://api.forecast.io/forecast/";
 
 - (void)getWeatherForLatitude: (double)lat
                     Longitude: (double)lon
-                         Time: (double)time
+                         Time: (double)timetime  // Unused parameter thus far.  Predict Weather
 {
     // Build the URL string
-    NSURL *theURL = [ NSURL URLWithString:[NSString stringWithFormat:@"%@%@/%.6f,%.6f",baseURL,theKey,lat,lon] ];
+    NSURL *theURL = [ NSURL URLWithString: [ NSString stringWithFormat:@"%@%@/%.6f,%.6f",baseURL,theKey,lat,lon ] ];
     
     // Make the Asynchronous call to the API
     NSLog(@"Getting Forecast for: %@ " , theURL );
     [ NSURLConnection sendAsynchronousRequest:[[NSURLRequest alloc] initWithURL:theURL
                                                                     cachePolicy:NSURLCacheStorageAllowedInMemoryOnly
-                                                                timeoutInterval:8 ]
+                                                                timeoutInterval:30]
                                         queue:[[NSOperationQueue alloc] init]
                             completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
      {	
          if (error)
          {
-             NSLog(@"The Call to Forecast.io was not successful.");
              NSLog(@"%@" , error);
          }
          else
          {
-             id jsonObject = [NSJSONSerialization JSONObjectWithData:data
+             NSLog(@"JSON Received");
+             theweatherman = (NSDictionary *) ([NSJSONSerialization JSONObjectWithData:data
                                                              options:NSJSONReadingAllowFragments
-                                                               error:&error];
-             
-             if ( [jsonObject isKindOfClass:[NSDictionary class ] ])
-             {
-                 NSLog(@"Weather JSON saved to ShipFit Property");
-                 self.shipFit_ref.weatherJSON = (NSDictionary *)jsonObject;
-             }
+                                                               error:&error] );
+            // Give the UI the Dictionary to work with
+             self.shipFit_ref.weatherJSON = theweatherman;
+
+
+             // What do we do with the weather ???
+             // Something amazing perhaps..!
+                 
          }
-     }];
+     } 
+     ]; 
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -63,9 +65,9 @@ NSString *const baseURL = @"https://api.forecast.io/forecast/";
     if ( [keyPath isEqualToString:@"GPSisValid" ] )
     {
         // make the call
-        [self getWeatherForLatitude:self.shipFit_ref.latitude
-                          Longitude:self.shipFit_ref.longitude
-                               Time:  1   ];
+        [self getWeatherForLatitude: self.shipFit_ref.latitude
+                          Longitude: self.shipFit_ref.longitude
+                               Time:  1 ];
     }
     
 }
