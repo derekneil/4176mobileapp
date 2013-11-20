@@ -111,7 +111,7 @@
     else if ( [keyPath isEqualToString:@"knots" ] )
     {
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            self.speedLabel = [NSString stringWithFormat:@"%.4f knots" , _shipfit.knots ];
+            self.speedLabel.text = [NSString stringWithFormat:@"%.4f knots" , _shipfit.knots ];
         }];
     }
     
