@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Jander Alves. All rights reserved.
 //
 
-#import "SimViewController.h"
+#import "WeatherViewController.h"
 
 @interface SimViewController ()
 
@@ -39,13 +39,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [titleSource count];//need to make a count of how many days were saved
+    return 1;
+    //need to make a count of how many days were saved
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 
 {
-    return _hoursStored.count;//make a count of how many hours were saed per day
+    return 48;
 }
 
 
@@ -54,34 +55,19 @@
 {
     static NSString * cellIdentifier = @"cell";
     
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    tableCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if(!cell)
     {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+        cell = [[tableCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
     }
+    cell.windImage.image = [UIImage imageNamed:@"Wind-Flag-Storm-icon.png"];
+    cell.tempImage.image =  [UIImage imageNamed:@"thermometer.jpeg"];
+    cell.maxTemp.text = @"test temp";
     
-    UILabel *temperature = [[UILabel alloc]init];
-    temperature.text = @"current temp for this hour";
-    temperature.textAlignment = NSTextAlignmentRight;//change this method for ios5.1
-    [cell.contentView addSubview:temperature];
-    cell.textLabel.text = @"whatever";
-    cell.imageView.image = [UIImage imageNamed:@"Status-weather-clear-icon.png"];
-    NSLog(@"%d",indexPath.row);
-    cell.detailTextLabel.text = temperature.text;
     return cell;
-}
+   }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    for (int i =0; i<_hoursStored.count;i++) {
-        
-    
-    if(section == i)
-    {
-        return [titleSource objectAtIndex:i];
-    }
-    }
-}
+
 
 
 
@@ -96,6 +82,14 @@
     [self setConditionImage:nil];
     [self setWindSpeed:nil];
     [self setWindIcon:nil];
+    [self setViewController:nil];
+    [self setMaxTemp:nil];
+    [self setMinTemp:nil];
+    [self setWindDirection:nil];
+    [self setCloudCover:nil];
+    [self setPrecipitation:nil];
+    [self setTime:nil];
+    [self setPressure:nil];
     [super viewDidUnload];
 }
 
@@ -109,20 +103,22 @@
     [_temperatureMax setText:@"Max: 10C"];
     [_temperatureMin setText:@"Min: 2C"];
     [_windSpeed setText: @"Wind Speed: 5KH"];
-    [_tableView setBackgroundView:_conditionImage];
-    _windIcon.image = [UIImage imageNamed:@"Wind-Flag-Storm-Icon.png"];
+    [_cloudCover setText:@"2"];
+    [_pressure setText:@"1020"];
+    [_precipitation setText:@"2%"];
     
 }
 
 - (void) setImages {
-    _conditionImage = [[UIImageView alloc]init];
+    //condition image
     condition =[UIImage imageNamed:@"Status-weather-clear-icon.png"];
-    [_conditionImage setImage:condition];
+    _conditionImage = [[UIImageView alloc]initWithImage:condition];
+    [_viewController addSubview:_conditionImage];
+        _windIcon.image = [UIImage imageNamed:@"Wind-Flag-Storm-icon.png"];//windspeed icon
+    [_viewController addSubview:_windIcon];
+    _maxTemp.image = [UIImage imageNamed:@"thermometer.jpeg"];
+    _minTemp.image = [UIImage imageNamed:@"thermometer.jpeg"];
 }
-
-
-
-
 
 
 @end
