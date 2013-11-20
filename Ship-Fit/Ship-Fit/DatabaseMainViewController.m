@@ -61,8 +61,9 @@
         NSLog(@"errorrr! %@", error);
         abort();
     }
-
 }
+
+
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     
@@ -176,7 +177,9 @@
     
     
     //use fetchedResultsController to display the result in a table view
-    _fetchedResultsController = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:[self myManageObjectContext] sectionNameKeyPath:@"title" cacheName:Nil];
+    _fetchedResultsController = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest
+                                                                   managedObjectContext:[self myManageObjectContext]
+                                                                     sectionNameKeyPath:@"title" cacheName:Nil];
     
     _fetchedResultsController.delegate = self;
     
@@ -253,54 +256,64 @@
 #pragma mark search
 
 -(void)displayArticles:(NSMutableArray *)arrayOfIndexids term:(NSString *)term{
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ARTICLE" inManagedObjectContext:[self myManageObjectContext]];
-    [fetchRequest setEntity:entity];
     
-    //NSPredicate *predicate = [NSPredicate predicateWithFormat:@"indexID=='B726E3B8-9634-4C57-A93D-C1F5718D9E3E'"];
-    
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"indexID IN %@",arrayOfIndexids];
-    
-    [fetchRequest setPredicate:predicate];
-    
-    NSError *error = nil;
-    
-    NSArray *fetchedObjects = [[self myManageObjectContext] executeFetchRequest:fetchRequest error:&error];
-    if (fetchedObjects == nil) {
-        NSLog(@"error in fetching the article!");
+    if ([term isEqualToString:@""]) {
+        _fetchedResultsController =nil;
+        NSError *error = nil;
+        if (![[self fetchedResultsController]performFetch:&error]) {
+            NSLog(@"errorrr! %@", error);
+            abort();
+        }
     }
-    
-    NSLog(@"---------result for %@-------------\n\n\n", term);
-    
-    for (ARTICLE *a in fetchedObjects) {
-        NSLog(@"%@\n", a.title);
-    }
-    
-    NSLog(@"---------------------------\n\n\n");
-    //Article objects are retrieve. now display them in the tableview using NSFetchedResultsController
-    //by changing fetch request
-    //https://developer.apple.com/library/ios/documentation/CoreData/Reference/NSFetchedResultsController_Class/Reference/Reference.html
-    
+    else{
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"ARTICLE" inManagedObjectContext:[self myManageObjectContext]];
+        [fetchRequest setEntity:entity];
+        
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"indexID IN %@",arrayOfIndexids];
+        
+        [fetchRequest setPredicate:predicate];
+        
+        NSError *error = nil;
+        
+        NSArray *fetchedObjects = [[self myManageObjectContext] executeFetchRequest:fetchRequest error:&error];
+        if (fetchedObjects == nil) {
+            NSLog(@"error in fetching the article!");
+        }
+        
+        NSLog(@"---------result for %@-------------\n\n\n", term);
+        
+        for (ARTICLE *a in fetchedObjects) {
+            NSLog(@"%@\n", a.title);
+        }
+        
+        NSLog(@"---------------------------\n\n\n");
+        //Article objects are retrieve. now display them in the tableview using NSFetchedResultsController
+        //by changing fetch request
+        //https://developer.apple.com/library/ios/documentation/CoreData/Reference/NSFetchedResultsController_Class/Reference/Reference.html
+        
 
-    /*
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"title"
-                                                                   ascending:YES];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    
-    _fetchedResultsController = [[NSFetchedResultsController alloc]
-                                 initWithFetchRequest:fetchRequest
-                                 managedObjectContext:[self myManageObjectContext]
-                                 sectionNameKeyPath:@"title"
-                                 cacheName:Nil];
-    
-    if (![[self fetchedResultsController]performFetch:&error]) {
-        NSLog(@"errorrr! %@", error);
-        abort();
+        
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"title"
+                                                                       ascending:YES];
+        NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+        [fetchRequest setSortDescriptors:sortDescriptors];
+        
+        
+        _fetchedResultsController = [[NSFetchedResultsController alloc]
+                                     initWithFetchRequest:fetchRequest
+                                     managedObjectContext:[self myManageObjectContext]
+                                     sectionNameKeyPath:@"title"
+                                     cacheName:Nil];
+        
+        if (![[self fetchedResultsController]performFetch:&error]) {
+            NSLog(@"errorrr! %@", error);
+            abort();
+        }
+        
+        [self.tableView reloadData];
     }
-    */
     
 }
 
