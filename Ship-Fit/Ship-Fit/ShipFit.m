@@ -16,7 +16,6 @@ NSString *const NE = @"NE";
 NSString *const ERROR = @"ERROR";
 
 
-
 @implementation ShipFit
 {
     Location *_location;
@@ -24,47 +23,50 @@ NSString *const ERROR = @"ERROR";
     Weather *_weather;
 }
 
-
-
 - (void)init_and_run_application
 {
-    /* By default set true north to true */
+    /* Set Defaults for Application Start-up */
     self.isTrueNorth = YES;
+    
     
     NSLog(@"initializing Database Access");
     _DB = [[DatabaseAccess alloc] init];
     _tripID = [_DB getLatestTripID];
     
-    NSLog(@"initializing GPS");
+    NSLog(@"initializing and running GPS");
     _location = [ [Location alloc] initWithReference:self ];
-    [_location init_logs_and_manager];
-    [_location run_GPS_withAccuracy:kCLLocationAccuracyBest
-                 andDistanceFilter:kCLDistanceFilterNone ];
+    [_location init_GPSLOGS];
+    _location.GPS_MODE = SAILING_STARTUP;
+    [_location run_GPS:nil ];
     
-    NSLog(@"initializing compass");
+    NSLog(@"initializing and running compass");
     _direction = [ [Direction alloc] initWithReference:self ];
-    [ _direction init_logs_and_manager ];
-    [ _direction run_compass_withFilter:5 ];
+    [ _direction run_compass ];
     
-    
-    NSLog(@"getting weather");
+    NSLog(@"initializing weather");
     _weather = [ [Weather alloc] initWithReference:self ];
-    [_weather getWeatherForLatitude:45
-                          Longitude:-63.5
-                               Time:1.0];
-
+    
+    // Set up an observer to notify the weather class when we get a valid GPS reading
+    [_location addObserver:_weather
+               forKeyPath:@"GPSisValid"
+                  options:NSKeyValueObservingOptionNew
+                  context:nil ];
+    
 }
 
+- (unsigned short int)get_gps_mode
+{
+    return _location.GPS_MODE;
+}
 
-
-
-
+- (BOOL)currently_sailing_straight
+{
+    return [_direction straight_travel];
+}
 
 
 
 @end
 
-// Reminder: declare and use macros to define the granularity of GPS and Compass
-// Perhaps have a power saver mode.
 
 

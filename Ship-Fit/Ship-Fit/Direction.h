@@ -8,15 +8,17 @@
 
 @property (nonatomic, readwrite, strong) ShipFit *shipFit_ref;
 
+@property (nonatomic, readwrite, strong) NSMutableArray *compass_readings;
+
 /* Class Inititializer */
 - (id) initWithReference: (ShipFit *)reference;
 
-- (void)init_logs_and_manager;
 
-- (void)run_compass_withFilter: (CLLocationDegrees)compass_accuracy;
+- (void)run_compass;
 - (void)halt_compass;
 - (void)set_bearing;
-+ (NSString*)bearing_String:(float)deg;
++ (NSString*)bearing_String:(double)deg;
+- (BOOL)straight_travel;
 
 - (void)locationManager:(CLLocationManager *)manager
        didUpdateHeading:(CLHeading *)newHeading;

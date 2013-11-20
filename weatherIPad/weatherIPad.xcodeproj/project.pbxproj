@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16072765183C0AF800818412 /* tableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 16072764183C0AF800818412 /* tableCell.m */; };
+		16574FD8183BBAF000ADB28C /* weather.m in Sources */ = {isa = PBXBuildFile; fileRef = 16574FD7183BBAF000ADB28C /* weather.m */; };
+		1657501C183BC35300ADB28C /* WeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1657501B183BC35300ADB28C /* WeatherViewController.m */; };
 		1691B9D01837D64F006C55E7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1691B9CF1837D64F006C55E7 /* UIKit.framework */; };
 		1691B9D21837D64F006C55E7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1691B9D11837D64F006C55E7 /* Foundation.framework */; };
 		1691B9D41837D64F006C55E7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1691B9D31837D64F006C55E7 /* CoreGraphics.framework */; };
@@ -18,7 +21,6 @@
 		1691B9E61837D650006C55E7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1691B9E51837D650006C55E7 /* Default-568h@2x.png */; };
 		1691B9E91837D650006C55E7 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1691B9E71837D650006C55E7 /* MainStoryboard_iPhone.storyboard */; };
 		1691B9EC1837D650006C55E7 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1691B9EA1837D650006C55E7 /* MainStoryboard_iPad.storyboard */; };
-		1691B9EF1837D650006C55E7 /* SimViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1691B9EE1837D650006C55E7 /* SimViewController.m */; };
 		1691BA001837D896006C55E7 /* Fog-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1691B9F51837D896006C55E7 /* Fog-icon.png */; };
 		1691BA011837D896006C55E7 /* Status-weather-clear-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1691B9F61837D896006C55E7 /* Status-weather-clear-icon.png */; };
 		1691BA021837D896006C55E7 /* Status-weather-clear-night-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1691B9F71837D896006C55E7 /* Status-weather-clear-night-icon.png */; };
@@ -33,6 +35,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		16072763183C0AF800818412 /* tableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tableCell.h; sourceTree = "<group>"; };
+		16072764183C0AF800818412 /* tableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tableCell.m; sourceTree = "<group>"; };
+		16574FD6183BBAF000ADB28C /* weather.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = weather.h; sourceTree = "<group>"; };
+		16574FD7183BBAF000ADB28C /* weather.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = weather.m; sourceTree = "<group>"; };
+		1657501A183BC35300ADB28C /* WeatherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherViewController.h; sourceTree = "<group>"; };
+		1657501B183BC35300ADB28C /* WeatherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherViewController.m; sourceTree = "<group>"; };
 		1691B9CC1837D64F006C55E7 /* weatherIPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weatherIPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1691B9CF1837D64F006C55E7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1691B9D11837D64F006C55E7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -48,8 +56,6 @@
 		1691B9E51837D650006C55E7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		1691B9E81837D650006C55E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		1691B9EB1837D650006C55E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		1691B9ED1837D650006C55E7 /* SimViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimViewController.h; sourceTree = "<group>"; };
-		1691B9EE1837D650006C55E7 /* SimViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimViewController.m; sourceTree = "<group>"; };
 		1691B9F51837D896006C55E7 /* Fog-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fog-icon.png"; sourceTree = "<group>"; };
 		1691B9F61837D896006C55E7 /* Status-weather-clear-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Status-weather-clear-icon.png"; sourceTree = "<group>"; };
 		1691B9F71837D896006C55E7 /* Status-weather-clear-night-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Status-weather-clear-night-icon.png"; sourceTree = "<group>"; };
@@ -111,8 +117,12 @@
 				1691B9DF1837D650006C55E7 /* SimAppDelegate.m */,
 				1691B9E71837D650006C55E7 /* MainStoryboard_iPhone.storyboard */,
 				1691B9EA1837D650006C55E7 /* MainStoryboard_iPad.storyboard */,
-				1691B9ED1837D650006C55E7 /* SimViewController.h */,
-				1691B9EE1837D650006C55E7 /* SimViewController.m */,
+				1657501A183BC35300ADB28C /* WeatherViewController.h */,
+				1657501B183BC35300ADB28C /* WeatherViewController.m */,
+				16072763183C0AF800818412 /* tableCell.h */,
+				16072764183C0AF800818412 /* tableCell.m */,
+				16574FD6183BBAF000ADB28C /* weather.h */,
+				16574FD7183BBAF000ADB28C /* weather.m */,
 				1691B9D61837D64F006C55E7 /* Supporting Files */,
 			);
 			path = weatherIPad;
@@ -224,7 +234,9 @@
 			files = (
 				1691B9DC1837D64F006C55E7 /* main.m in Sources */,
 				1691B9E01837D650006C55E7 /* SimAppDelegate.m in Sources */,
-				1691B9EF1837D650006C55E7 /* SimViewController.m in Sources */,
+				16574FD8183BBAF000ADB28C /* weather.m in Sources */,
+				1657501C183BC35300ADB28C /* WeatherViewController.m in Sources */,
+				16072765183C0AF800818412 /* tableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,6 +371,7 @@
 				1691B9F41837D650006C55E7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

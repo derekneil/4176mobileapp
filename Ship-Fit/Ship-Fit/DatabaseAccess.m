@@ -14,6 +14,11 @@ FMDatabase* db;
 
 /*
  ------------example------------------:
+//insert into weather
+ DatabaseAccess *db = [[DatabaseAccess alloc]init];
+ 
+ NSMutableArray * arr3 = [db getWeatherAll];
+ WeatherClass *weather = [db getWeatherWithID:(1)];
  
  //insert into the tables
  int lastInsertID = [_DB insertIntoTrips:(@"mytrip")];
@@ -23,15 +28,14 @@ FMDatabase* db;
     NSLog(@"error inserting into GPS table");
  }
  
- 
  //get all the gps coordinates
  GPS *gpsObjects = (GPS *)[_DB getGPSAll];
  for (GPS *gps in gpsObjects) {
     NSLog(@"gps coordinates: %@, %@", gps.lat, gps.lng);
  }
 
- 
  */
+
 
 -(id)init{
     self = [super init];
@@ -55,11 +59,13 @@ FMDatabase* db;
     NSString* update = [NSString stringWithFormat:@"INSERT INTO GPS (tripid, lat, lng, dateandtime) VALUES(?, ?, ?, ?);", [NSNumber numberWithInt:tripID], lat, lng, dateandtime];
     [db executeUpdate:update];
     
+    
+    
+    NSInteger lastId = [db lastInsertRowId];
+    
     [db close];
     
-    //NSInteger lastId = [db lastInsertRowId];
-    
-    return 0;//lastId;
+    return lastId;
 }
 
 
@@ -71,11 +77,12 @@ FMDatabase* db;
     NSString* update = [NSString stringWithFormat:@"INSERT INTO Trips (startdate) VALUES(?);", startdate];
     [db executeUpdate:update];
     
+    
+    NSInteger tripId = [db lastInsertRowId];
+
     [db close];
     
-    //NSInteger tripId = [db lastInsertRowId];
-
-    return 0; //tripId;
+    return tripId;
 }
 
 -(NSInteger)getLatestTripID{
@@ -86,7 +93,7 @@ FMDatabase* db;
     
     [db close];
     
-    return 0;//[results intForColumn:@"id"];
+    return [results intForColumn:@"id"];
 }
 
 /*
@@ -103,7 +110,6 @@ for (GPS *gps in gpsObjects) {
     
     FMResultSet *results = [db executeQuery:@"SELECT * FROM GPS"];
     
-    [db close];
     
     while([results next])
     {
@@ -118,13 +124,15 @@ for (GPS *gps in gpsObjects) {
         [gpsArr addObject:gps];
     }
     
+    [db close];
+    
     return gpsArr;
 }
 
 
 //get gps coordinates for a particular tirp
 // [_DB getGPS:4 ];
--(NSMutableArray *) getGPSforTrip:(NSInteger)tripID
+-(GPS *) getGPSforTrip:(NSInteger)tripID
 {
     NSMutableArray *gpsArr = [[NSMutableArray alloc] init];
     
@@ -134,7 +142,7 @@ for (GPS *gps in gpsObjects) {
     NSString *q = [NSString stringWithFormat:@"select * from GPS where tripid = %d", tripID];
     FMResultSet *results = [db executeQuery:q];
     
-    [db close];
+    
     
     while([results next])
     {
@@ -149,8 +157,87 @@ for (GPS *gps in gpsObjects) {
         [gpsArr addObject:gps];
     }
     
-    return gpsArr;
+    [db close];
+    
+    return [gpsArr objectAtIndex:(0)];
 }
 
+
+
+//INSERT INTO weather (lat, lng, JSON, datetime) VALUES ("3232", "4343", "frefneronfe", "23232")
+-(NSInteger)insertIntoWeather:(NSString *)lat lng:(NSString *)lng JSON:(NSString *)JSON dateandtime:(NSString *)dateandtime{
+    
+    [db open];
+    
+
+    NSString* update =  [NSString stringWithFormat:@"INSERT INTO weather (lat, lng, JSON, datetime) VALUES(?, ?, ?, ?);", lat, lng, JSON, dateandtime];
+
+    [db executeUpdate:update];
+    
+    
+    NSInteger lastId = [db lastInsertRowId];
+    
+    [db close];
+    
+    return lastId;
+}
+
+
+
+-(NSMutableArray *) getWeatherAll
+{
+    NSMutableArray *weatherArr = [[NSMutableArray alloc] init];
+    
+    [db open];
+    
+    FMResultSet *results = [db executeQuery:@"SELECT * FROM weather"];
+    
+    while([results next])
+    {
+        WeatherClass *w = [[WeatherClass alloc] init];
+        
+        w.ID = [results intForColumn:@"id"];
+        w.lat = [results stringForColumn:@"lat"];
+        w.lng = [results stringForColumn:@"lng"];
+        w.JSON = [results stringForColumn:@"JSON"];
+        w.dateandtime = [results stringForColumn:@"datetime"];
+        
+        [weatherArr addObject:w];
+    }
+    
+    [db close];
+    
+    return weatherArr;
+}
+
+
+
+
+-(WeatherClass *) getWeatherWithID:(NSInteger)weatherID
+{
+    NSMutableArray *weatherArr = [[NSMutableArray alloc] init];
+    
+    [db open];
+    
+    NSString *q = [NSString stringWithFormat:@"select * from weather where id = %d", weatherID];
+    FMResultSet *results = [db executeQuery:q];
+    
+    while([results next])
+    {
+        WeatherClass *w = [[WeatherClass alloc] init];
+        
+        w.ID = [results intForColumn:@"id"];
+        w.lat = [results stringForColumn:@"lat"];
+        w.lng = [results stringForColumn:@"lng"];
+        w.JSON = [results stringForColumn:@"JSON"];
+        w.dateandtime = [results stringForColumn:@"datetime"];
+        
+        [weatherArr addObject:w];
+    }
+    
+    [db close];
+    
+    return [weatherArr objectAtIndex:(0)];
+}
 
 @end
