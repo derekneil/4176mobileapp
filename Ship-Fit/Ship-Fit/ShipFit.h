@@ -16,7 +16,6 @@ extern NSString *const ERROR;
 @interface ShipFit : NSObject
 //@property (nonatomic, readwrite, assign) MKMapView *map_view_ref;
 
-
 // DATABASE
 @property ( nonatomic, readonly, strong) DatabaseAccess* DB;
 @property (nonatomic, readwrite, assign) int tripID;
@@ -25,10 +24,7 @@ extern NSString *const ERROR;
 @property ( nonatomic, readwrite, assign ) CLLocationCoordinate2D *gps_head;
 @property ( nonatomic, readwrite, assign ) NSUInteger gps_count;
 
-
-/*
- Properties for the UI to Observe 
- */
+//Properties for the UI to Observe
 @property (nonatomic, readwrite, assign) CLLocationDegrees latitude;
 @property (nonatomic, readwrite, assign) CLLocationDegrees longitude;
 @property (nonatomic, readwrite, assign) BOOL isTrueNorth;
@@ -37,8 +33,9 @@ extern NSString *const ERROR;
 @property (nonatomic, readwrite, assign) double knots;
 @property (nonatomic, readwrite, strong) NSDictionary* weatherJSON;
 
-
 /* Functions */
 - (void)init_and_run_application;
+- (unsigned short int)get_gps_mode;
+- (BOOL)currently_sailing_straight;
 
 @end
