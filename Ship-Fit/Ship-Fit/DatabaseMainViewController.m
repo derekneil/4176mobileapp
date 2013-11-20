@@ -97,6 +97,15 @@
 //hide the navigation bar in the main database view, but show it in the article view for the back button
 - (void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBar.hidden = YES;
+    
+    _fetchedResultsController = nil;
+    NSError *error = nil;
+    if (![[self fetchedResultsController]performFetch:&error]) {
+        NSLog(@"errorrr! %@", error);
+        abort();
+    }
+    [self.tableView reloadData];
+    
 }
 - (void)viewWillDisappear:(BOOL)animated{
     self.navigationController.navigationBar.hidden = NO;
@@ -264,6 +273,8 @@
             NSLog(@"errorrr! %@", error);
             abort();
         }
+        
+        [self.tableView reloadData];
     }
     else{
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
