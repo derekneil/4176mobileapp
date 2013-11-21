@@ -17,9 +17,9 @@
 @implementation DatabaseMainViewController
 
 
-//used synthesize here because of the custome accessor method for fetchedResultsController
-@synthesize fetchedResultsController = _fetchedResultsController;
 
+
+/*
 
 -(void)AddDidCancel:(ARTICLE *)article{
     NSManagedObjectContext *context = self.myManageObjectContext;
@@ -39,7 +39,29 @@
     
     [self dismissModalViewControllerAnimated:YES];
 }
+*/
 
+#pragma mark viewcontroller
+
+//used synthesize here because of the custome accessor method for fetchedResultsController
+@synthesize fetchedResultsController = _fetchedResultsController;
+
+
+- (void)viewDidUnload {
+    [self setDatabaseSearchBar:nil];
+    [super viewDidUnload];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    NSError *error = nil;
+    if (![[self fetchedResultsController]performFetch:&error]) {
+        NSLog(@"errorrr! %@", error);
+        abort();
+    }
+}
 
 
 
@@ -70,23 +92,20 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
 
+
+//hide the navigation bar in the main database view, but show it in the article view for the back button
+- (void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBar.hidden = YES;
+    
+    _fetchedResultsController = nil;
     NSError *error = nil;
     if (![[self fetchedResultsController]performFetch:&error]) {
         NSLog(@"errorrr! %@", error);
         abort();
     }
+    [self.tableView reloadData];
     
-    //[self createDatabase];
-    //[self fillDatabaseFromXMLFile];
-}
-
-//hide the navigation bar in the main database view, but show it in the article view for the back button
-- (void)viewWillAppear:(BOOL)animated{
-    self.navigationController.navigationBar.hidden = YES;
 }
 - (void)viewWillDisappear:(BOOL)animated{
     self.navigationController.navigationBar.hidden = NO;
@@ -100,7 +119,7 @@
 }
 
 
-
+#pragma mark tableview methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -115,7 +134,35 @@
     return [sectInfo numberOfObjects];
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell;
+    
+    //check for iOS 5
+    if( [[[UIDevice currentDevice] systemVersion] hasPrefix:@"5"]){
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    }
+    else{ //assume it's 6 or higher
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    }
+    
+    // Configure the cell...
+    ARTICLE *article = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = article.title;
+    
+    return cell;
+}
 
+//Asks the data source for the title of the header of the specified section of the table view.
+//source: https://developer.apple.com/library/ios/documentation/uikit/reference/UITableViewDataSource_Protocol/Reference/Reference.html#//apple_ref/occ/intfm/UITableViewDataSource/tableView:titleForHeaderInSection:
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    return [[[self.fetchedResultsController sections]objectAtIndex:section]name];
+}
+
+
+
+#pragma mark NSFetchedResultsController methods
 
 //------ custome accessor method -----------------
 -(NSFetchedResultsController *) fetchedResultsController{
@@ -126,20 +173,22 @@
     //create a fetch request
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"ARTICLE"
-    inManagedObjectContext:[self myManageObjectContext]];
+                                              inManagedObjectContext:[self myManageObjectContext]];
     [fetchRequest setEntity:entity];
-
+    
     //how artcles are sorted
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"title"
-    ascending:YES];
+                                                                   ascending:YES];
     
     
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
     [fetchRequest setSortDescriptors:sortDescriptors];
-
+    
     
     //use fetchedResultsController to display the result in a table view
-    _fetchedResultsController = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:[self myManageObjectContext] sectionNameKeyPath:@"title" cacheName:Nil];
+    _fetchedResultsController = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest
+                                                                   managedObjectContext:[self myManageObjectContext]
+                                                                     sectionNameKeyPath:@"title" cacheName:Nil];
     
     _fetchedResultsController.delegate = self;
     
@@ -147,82 +196,29 @@
 }
 
 
--(void)displayArticles:(NSMutableArray *)arrayOfIndexids{
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ARTICLE" inManagedObjectContext:[self myManageObjectContext]];
-    [fetchRequest setEntity:entity];
-
-    //NSPredicate *predicate = [NSPredicate predicateWithFormat:@"indexID=='B726E3B8-9634-4C57-A93D-C1F5718D9E3E'"];
-    
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"indexID IN %@",arrayOfIndexids];
-    
-    [fetchRequest setPredicate:predicate];
-
-    NSError *error = nil;
-    NSArray *fetchedObjects = [[self myManageObjectContext] executeFetchRequest:fetchRequest error:&error];
-    if (fetchedObjects == nil) {
-        NSLog(@"error in fetching the article!");
-    }
-    
-    NSLog(@"------------Search results--------------\n");
-    
-    for (ARTICLE *a in fetchedObjects) {
-        NSLog(@"%@\n", a.title);
-    }
-    
-    NSLog(@"---------------------------\n");
-    //Article objects are retrieve. now display them in the tableview using NSFetchedResultsController
-    //read this:
-    //http://www.raywenderlich.com/999/core-data-tutorial-for-ios-how-to-use-nsfetchedresultscontroller
-    
-}
 
 
+/*
+//NSFetchedResultsControllerDelegate Protocols
+
+ source: https://developer.apple.com/library/ios/documentation/CoreData/Reference/NSFetchedResultsControllerDelegate_Protocol/Reference/Reference.html
+ 
+*/
 
 
--(void)searchTheDatabase:(NSString *)textToSearchFor{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *docsPath = [paths objectAtIndex:0];
-    NSString *path = [docsPath stringByAppendingPathComponent:@"shipfit_Index.sqlite"];
-    
-    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:path];
-    
-    
-
-    __block NSMutableArray *matches = [NSMutableArray array];
-    [queue inDatabase:^(FMDatabase *db) {
-
-        //FMResultSet *resultSet = [db executeQuery:@"SELECT name FROM docs WHERE docs MATCH ?", @"canada*"];
-        
-        FMResultSet *resultSet = [db executeQuery:@"SELECT name FROM docs WHERE docs MATCH ?",
-                                  [textToSearchFor stringByAppendingString:(@"*")]];
-        
-        while ([resultSet next]) {
-            [matches addObject:[resultSet stringForColumn:@"name"]];
-        }
-    }];
-    
-    
-    [self displayArticles:(matches)];
-    //NSLog(@"array: %@", matches);
-}
-
-
-
+//Notifies the receiver that the fetched results controller is about to start processing of one or more changes due to an add, remove, move, or update
 -(void) controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView beginUpdates];
 }
 
+
+//Notifies the receiver that the fetched results controller has completed processing of one or more changes
 -(void) controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
 }
 
 
-
-
-
-
+//Notifies the receiver that a fetched object has been changed due to an add, remove, move, or update
 -(void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
     
     UITableView *tableView = self.tableView;
@@ -266,34 +262,123 @@
 
 
 
+#pragma mark search
 
-//-------
+-(void)displayArticles:(NSMutableArray *)arrayOfIndexids term:(NSString *)term{
+    
+    if ([term isEqualToString:@""]) {
+        _fetchedResultsController =nil;
+        NSError *error = nil;
+        if (![[self fetchedResultsController]performFetch:&error]) {
+            NSLog(@"errorrr! %@", error);
+            abort();
+        }
+        
+        [self.tableView reloadData];
+    }
+    else{
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"ARTICLE" inManagedObjectContext:[self myManageObjectContext]];
+        [fetchRequest setEntity:entity];
+        
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"indexID IN %@",arrayOfIndexids];
+        
+        [fetchRequest setPredicate:predicate];
+        
+        NSError *error = nil;
+        
+        NSArray *fetchedObjects = [[self myManageObjectContext] executeFetchRequest:fetchRequest error:&error];
+        if (fetchedObjects == nil) {
+            NSLog(@"error in fetching the article!");
+        }
+        
+        NSLog(@"---------result for %@-------------\n\n\n", term);
+        
+        for (ARTICLE *a in fetchedObjects) {
+            NSLog(@"%@\n", a.title);
+        }
+        
+        NSLog(@"---------------------------\n\n\n");
+        //Article objects are retrieve. now display them in the tableview using NSFetchedResultsController
+        //by changing fetch request
+        //https://developer.apple.com/library/ios/documentation/CoreData/Reference/NSFetchedResultsController_Class/Reference/Reference.html
+        
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell;
-    
-    //check for iOS 5
-    if( [[[UIDevice currentDevice] systemVersion] hasPrefix:@"5"]){
-        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"title"
+                                                                       ascending:YES];
+        NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+        [fetchRequest setSortDescriptors:sortDescriptors];
+        
+        
+        _fetchedResultsController = [[NSFetchedResultsController alloc]
+                                     initWithFetchRequest:fetchRequest
+                                     managedObjectContext:[self myManageObjectContext]
+                                     sectionNameKeyPath:@"title"
+                                     cacheName:Nil];
+        
+        if (![[self fetchedResultsController]performFetch:&error]) {
+            NSLog(@"errorrr! %@", error);
+            abort();
+        }
+        
+        [self.tableView reloadData];
     }
-    else{ //assume it's 6 or higher
-        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    }
     
-    // Configure the cell...
-    ARTICLE *article = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = article.title;
-    
-    return cell;
 }
 
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    return [[[self.fetchedResultsController sections]objectAtIndex:section]name];
+
+
+
+-(void)searchTheDatabase:(NSString *)textToSearchFor{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath = [paths objectAtIndex:0];
+    NSString *path = [docsPath stringByAppendingPathComponent:@"shipfit_Index.sqlite"];
+    
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:path];
+    
+    
+    //search the index database for a match
+    __block NSMutableArray *matches = [NSMutableArray array];
+    [queue inDatabase:^(FMDatabase *db) {
+        
+        //FMResultSet *resultSet = [db executeQuery:@"SELECT name FROM docs WHERE docs MATCH ?", @"canada*"];
+        
+        FMResultSet *resultSet = [db executeQuery:@"SELECT name FROM docs WHERE docs MATCH ?",
+                                  [textToSearchFor stringByAppendingString:(@"*")]];
+        
+        while ([resultSet next]) {
+            [matches addObject:[resultSet stringForColumn:@"name"]];
+        }
+    }];
+    
+    
+    //send the indexids of the matched artcils to displayArticles to query the main database via core data
+    [self displayArticles:(matches) term:(textToSearchFor)];
 }
 
 
+//------SEARCHING CODE--------
+//source https://developer.apple.com/LIBRARY/IOS/samplecode/ToolbarSearch/Listings/ToolbarSearch_APLToolbarSearchViewController_m.html
+
+- (void)searchBar:(UISearchBar *)aSearchBar textDidChange:(NSString *)searchText{
+    if(searchText.length == 0){
+        [self searchBarTextDidEndEditing:aSearchBar];
+        //unfilter articles here
+    }
+    [self searchTheDatabase:searchText];
+}
+- (void)searchBarSearchButtonClicked:(UISearchBar *)aSearchBar {
+    [self searchBarTextDidEndEditing:aSearchBar];
+}
+- (void)searchBarTextDidEndEditing:(UISearchBar *)aSearchBar {
+    [aSearchBar resignFirstResponder];
+}
+
+
+
+#pragma mark database creating and indexing
 
 //run only once. create the index for the database
 -(void)createDatabase{
@@ -449,26 +534,7 @@
 
  */
 
-- (void)viewDidUnload {
-    [self setDatabaseSearchBar:nil];
-    [super viewDidUnload];
-}
 
-//------SEARCHING CODE--------
-//source https://developer.apple.com/LIBRARY/IOS/samplecode/ToolbarSearch/Listings/ToolbarSearch_APLToolbarSearchViewController_m.html
 
-- (void)searchBar:(UISearchBar *)aSearchBar textDidChange:(NSString *)searchText{
-    if(searchText.length == 0){
-        [self searchBarTextDidEndEditing:aSearchBar];
-        //unfilter articles here
-    }
-    [self searchTheDatabase:searchText];
-}
-- (void)searchBarSearchButtonClicked:(UISearchBar *)aSearchBar {
-    [self searchBarTextDidEndEditing:aSearchBar];
-}
-- (void)searchBarTextDidEndEditing:(UISearchBar *)aSearchBar {
-    [aSearchBar resignFirstResponder];
-}
 
 @end

@@ -89,9 +89,6 @@
 
     if ( _logging_enabled )
     {
-        
-        // Increment the counts. Two variables hopefully same value. 
-        self.shipFit_ref.gps_count++; _count++;
 
         if ( _count == 0 )
         {
@@ -108,6 +105,11 @@
             locationHead->latitude = lat;
             locationHead->longitude = lon;
         }
+        
+        // Increment the counts. Two variables hopefully same value.
+        _count++;
+        self.shipFit_ref.gps_count = _count;
+        self.shipFit_ref.gps_head = locationHead;
 
     }
 

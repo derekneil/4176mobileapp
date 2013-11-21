@@ -13,6 +13,8 @@
 		037B18031835C7F200D80AAD /* DatabaseAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 037B18011835C7F200D80AAD /* DatabaseAccess.m */; };
 		037B18061835D46F00D80AAD /* GPS.m in Sources */ = {isa = PBXBuildFile; fileRef = 037B18051835D46F00D80AAD /* GPS.m */; };
 		037B18071835D46F00D80AAD /* GPS.m in Sources */ = {isa = PBXBuildFile; fileRef = 037B18051835D46F00D80AAD /* GPS.m */; };
+		03D99465183ABE1A0061382E /* WeatherClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D99464183ABE1A0061382E /* WeatherClass.m */; };
+		03D99467183ACD2F0061382E /* erd.png in Resources */ = {isa = PBXBuildFile; fileRef = 03D99466183ACD2F0061382E /* erd.png */; };
 		655D9D0718340F750004CD21 /* DatabaseMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9CF718340F750004CD21 /* DatabaseMainViewController.m */; };
 		655D9D0918340F750004CD21 /* shipfit_Index.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 655D9CFA18340F750004CD21 /* shipfit_Index.sqlite */; };
 		655D9D0B18340F750004CD21 /* SMXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9D0018340F750004CD21 /* SMXMLDocument.m */; };
@@ -92,6 +94,9 @@
 		037B18011835C7F200D80AAD /* DatabaseAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseAccess.m; sourceTree = "<group>"; };
 		037B18041835D46F00D80AAD /* GPS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPS.h; sourceTree = "<group>"; };
 		037B18051835D46F00D80AAD /* GPS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPS.m; sourceTree = "<group>"; };
+		03D99463183ABE1A0061382E /* WeatherClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherClass.h; sourceTree = "<group>"; };
+		03D99464183ABE1A0061382E /* WeatherClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherClass.m; sourceTree = "<group>"; };
+		03D99466183ACD2F0061382E /* erd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = erd.png; sourceTree = "<group>"; };
 		655D9CF618340F750004CD21 /* DataBaseMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DataBaseMainViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		655D9CF718340F750004CD21 /* DatabaseMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DatabaseMainViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		655D9CFA18340F750004CD21 /* shipfit_Index.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = shipfit_Index.sqlite; sourceTree = "<group>"; };
@@ -370,6 +375,7 @@
 		658DA5EC1832DD6A003B6952 /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				03D99466183ACD2F0061382E /* erd.png */,
 				655D9D2A183434730004CD21 /* DB_Images */,
 				655D9D29183430420004CD21 /* sqlite */,
 				655D9D28183430280004CD21 /* fmdb */,
@@ -379,6 +385,8 @@
 				655D9D0018340F750004CD21 /* SMXMLDocument.m */,
 				037B18001835C7F200D80AAD /* DatabaseAccess.h */,
 				037B18011835C7F200D80AAD /* DatabaseAccess.m */,
+				03D99463183ABE1A0061382E /* WeatherClass.h */,
+				03D99464183ABE1A0061382E /* WeatherClass.m */,
 				037B18041835D46F00D80AAD /* GPS.h */,
 				037B18051835D46F00D80AAD /* GPS.m */,
 			);
@@ -501,6 +509,7 @@
 				D56337A71838101A00A9EDE8 /* Status-weather-snow-rain-icon.png in Resources */,
 				D56337A81838101A00A9EDE8 /* Status-weather-snow-icon.png in Resources */,
 				D56337A91838101A00A9EDE8 /* Status-weather-many-clouds-icon.png in Resources */,
+				03D99467183ACD2F0061382E /* erd.png in Resources */,
 				D56337AA1838101A00A9EDE8 /* Status-weather-clouds-night-icon.png in Resources */,
 				D56337AB1838101A00A9EDE8 /* Status-weather-clouds-icon.png in Resources */,
 				D56337AC1838101A00A9EDE8 /* Fog-icon.png in Resources */,
@@ -542,6 +551,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				658DA59E1832D817003B6952 /* main.m in Sources */,
+				03D99465183ABE1A0061382E /* WeatherClass.m in Sources */,
 				658DA5A21832D817003B6952 /* AppDelegate.m in Sources */,
 				658DA5DE1832DA38003B6952 /* MapViewController.m in Sources */,
 				65CE3DE5183419B900ECA91C /* ARTICLE.m in Sources */,

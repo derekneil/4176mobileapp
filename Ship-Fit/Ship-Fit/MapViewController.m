@@ -40,13 +40,12 @@
     //source http://www.appcoda.com/ios-programming-101-drop-a-pin-on-map-with-mapkit-api/
     self.mapView.delegate = self;
     
+    //TODO: restore previous state
     drawPathisOn = FALSE;
     
     //check for bottom layout guide and adjust up the bottom alignment
     
-    //create ios 5 ipad layout with no autolayout
-    
-    //outlet collections, or just name them the same
+    //outlet collections, or just name them the samef
     
     //use AFNetworking APHTTPequestOperationManager to get navionics (serverside api calls) instead of using NSURL directly
     
@@ -98,6 +97,7 @@
     {
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             self.latLabel.text = [NSString stringWithFormat:@"%.4f" , _shipfit.latitude ];
+            [self updatePathOverlay];
         }];
     }
     
@@ -111,7 +111,7 @@
     else if ( [keyPath isEqualToString:@"knots" ] )
     {
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            self.speedLabel = [NSString stringWithFormat:@"%.4f knots" , _shipfit.knots ];
+            self.speedLabel.text = [NSString stringWithFormat:@"%.4f knots" , _shipfit.knots ];
         }];
     }
     
@@ -172,7 +172,7 @@
 //        pathTraveled = [[NSMutableArray alloc] initWithObjects:location, nil];
 //    }
 //    [pathTraveled addObject:location];
-//    
+//
 //    [self updatePathOverlay];
     
 }
@@ -181,6 +181,7 @@
     MKPolylineView* polyLineView = [[MKPolylineView alloc] initWithOverlay:overlay];
     polyLineView.strokeColor = [UIColor blueColor];
     polyLineView.lineWidth = 3.0;
+    NSLog(@"mapView polylineView configured");
     return polyLineView;
 }
 
@@ -198,7 +199,7 @@
     MKCoordinateRegion theRegion = mapView.region;
     
     //get user change
-    double change = 1.5; //assume zooming in
+    double change = 1.5; //assume zooming out
     if(sender == _zoomInButton){
         change = 0.5;
     }
@@ -211,11 +212,11 @@
 
 -(void) updatePathOverlay{
     
-    if ( drawPathisOn &&  self.shipfit.gps_count != 0 ){
+    if ( drawPathisOn &&  _shipfit.gps_count != 0 ){
         path = [MKPolyline polylineWithCoordinates:self.shipfit.gps_head count:self.shipfit.gps_count];
         [self.mapView addOverlay:path];
+        NSLog(@"mapView Path updated shipfit.gps_count->%d",_shipfit.gps_count);
     }
-    
     
 }
 

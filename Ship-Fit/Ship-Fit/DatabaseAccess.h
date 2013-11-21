@@ -10,21 +10,27 @@
 #import "FMDatabaseQueue.h"
 #import "FMDatabase.h"
 #import "GPS.h"
-
+#import "WeatherClass.h"
 
 @interface DatabaseAccess : NSObject
 
 -(id) init;
 
--(NSMutableArray *) getGPSforTrip:(NSInteger)tripID;
+-(NSInteger)insertIntoGPS:(NSInteger)tripID lat:(NSString *)lat lng:(NSString *)lng dateandtime:(NSString *)dateandtime;
+
+-(NSInteger)insertIntoTrips:(NSString *)startdate;
+
+-(NSInteger)insertIntoWeather:(NSString *)lat lng:(NSString *)lng JSON:(NSString *)JSON dateandtime:(NSString *)dateandtime;
+
+-(GPS *) getGPSforTrip:(NSInteger)tripID;
+
+-(WeatherClass *) getWeatherWithID:(NSInteger)weatherID;
 
 -(NSInteger)getLatestTripID;
 
 -(NSMutableArray *) getGPSAll;
 
--(NSInteger)insertIntoGPS:(NSInteger)tripID lat:(NSString *)lat lng:(NSString *)lng dateandtime:(NSString *)dateandtime;
-
--(NSInteger)insertIntoTrips:(NSString *)startdate;
+-(NSMutableArray *) getWeatherAll;
 
 
 @end
