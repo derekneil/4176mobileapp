@@ -171,7 +171,7 @@
 //        pathTraveled = [[NSMutableArray alloc] initWithObjects:location, nil];
 //    }
 //    [pathTraveled addObject:location];
-//    
+//
 //    [self updatePathOverlay];
     
 }
@@ -180,6 +180,7 @@
     MKPolylineView* polyLineView = [[MKPolylineView alloc] initWithOverlay:overlay];
     polyLineView.strokeColor = [UIColor blueColor];
     polyLineView.lineWidth = 3.0;
+    NSLog(@"mapView polylineView configured");
     return polyLineView;
 }
 
@@ -197,7 +198,7 @@
     MKCoordinateRegion theRegion = mapView.region;
     
     //get user change
-    double change = 1.5; //assume zooming in
+    double change = 1.5; //assume zooming out
     if(sender == _zoomInButton){
         change = 0.5;
     }
@@ -213,8 +214,8 @@
     if ( drawPathisOn &&  _shipfit.gps_count != 0 ){
         path = [MKPolyline polylineWithCoordinates:self.shipfit.gps_head count:self.shipfit.gps_count];
         [self.mapView addOverlay:path];
+        NSLog(@"mapView Path updated shipfit.gps_count->%d",_shipfit.gps_count);
     }
-    
     
 }
 
