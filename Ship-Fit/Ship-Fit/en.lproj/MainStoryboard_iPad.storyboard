@@ -261,16 +261,127 @@
             </objects>
             <point key="canvasLocation" x="2895" y="718"/>
         </scene>
-        <!--View Controller - Weather-->
+        <!--Weather View Controller - Weather-->
         <scene sceneID="a48-tV-5IZ">
             <objects>
-                <viewController title="Weather" id="Nwe-nv-25i" sceneMemberID="viewController">
+                <viewController title="Weather" id="Nwe-nv-25i" customClass="WeatherViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FXz-7B-RTd">
                         <rect key="frame" x="0.0" y="20" width="768" height="955"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="213" sectionHeaderHeight="22" sectionFooterHeight="22" id="mIs-jo-5Sz">
+                                <rect key="frame" x="-11" y="262" width="779" height="688"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell" rowHeight="213" id="s4f-N4-BbU" customClass="TableCell">
+                                        <rect key="frame" x="0.0" y="22" width="779" height="213"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="779" height="212"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="TRc-LU-YXi">
+                                                    <rect key="frame" x="28" y="20" width="58" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="bcZ-uD-qIf">
+                                                    <rect key="frame" x="279" y="15" width="60" height="48"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="iZf-5J-McF">
+                                                    <rect key="frame" x="574" y="20" width="59" height="47"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rFi-IZ-SVd">
+                                                    <rect key="frame" x="582" y="95" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CPH-eL-z7H">
+                                                    <rect key="frame" x="582" y="130" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="g3b-Mu-JGH">
+                                                    <rect key="frame" x="582" y="159" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OoY-Zw-f39">
+                                                    <rect key="frame" x="288" y="95" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aD3-FY-xIj">
+                                                    <rect key="frame" x="288" y="130" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="khd-fH-0dh">
+                                                    <rect key="frame" x="288" y="159" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="q1g-th-uP9">
+                                                    <rect key="frame" x="36" y="95" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QFp-gk-KkJ">
+                                                    <rect key="frame" x="36" y="130" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HMn-g7-GIc">
+                                                    <rect key="frame" x="36" y="159" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <outlet property="condition" destination="q1g-th-uP9" id="Kij-yP-Czl"/>
+                                            <outlet property="conditionImage" destination="TRc-LU-YXi" id="lj8-ed-8cj"/>
+                                            <outlet property="curTemp" destination="khd-fH-0dh" id="TuL-M4-9NI"/>
+                                            <outlet property="maxTemp" destination="aD3-FY-xIj" id="RQr-sR-soe"/>
+                                            <outlet property="minTemp" destination="OoY-Zw-f39" id="yYN-ya-RTO"/>
+                                            <outlet property="pressure" destination="g3b-Mu-JGH" id="E9o-pa-y6b"/>
+                                            <outlet property="tempImage" destination="bcZ-uD-qIf" id="USY-Wu-M1y"/>
+                                            <outlet property="timeLabel" destination="HMn-g7-GIc" id="54R-7T-hd5"/>
+                                            <outlet property="windDirection" destination="CPH-eL-z7H" id="FCw-Rv-fNh"/>
+                                            <outlet property="windImage" destination="iZf-5J-McF" id="8pg-zX-Qwz"/>
+                                            <outlet property="windSpeed" destination="rFi-IZ-SVd" id="OZF-kN-PSg"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Weather" id="rkG-HW-VD3"/>
+                    <connections>
+                        <outlet property="tableView" destination="mIs-jo-5Sz" id="VOQ-9t-eD0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QFc-Q0-pxe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -316,6 +427,81 @@
     <resources>
         <image name="first" width="16" height="16"/>
     </resources>
+    <classes>
+        <class className="DatabaseArticleViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DatabaseArticleViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="txtTitle" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="wvMainText" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="DatabaseMainViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DatabaseMainViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="databaseSearchBar" candidateClass="UISearchBar"/>
+            </relationships>
+        </class>
+        <class className="MapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="togglePathAction:"/>
+                <relationship kind="action" name="zoomChange:"/>
+                <relationship kind="action" name="zoomToMe:"/>
+                <relationship kind="outlet" name="compDegLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="compDirLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="latLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="longLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="speedLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="sunLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="tempHighLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="tempLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="tempLoLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="windDirLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="windLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="zoomInButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="zoomOutButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="TableCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TableCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="condition" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="conditionImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="curTemp" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="maxTemp" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="minTemp" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="pressure" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="tempImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="timeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="windDirection" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="windImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="windSpeed" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="WeatherViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/WeatherViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="cloudCover" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="conditionImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="conditionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="maxTemp" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="minTemp" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="precipitation" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="pressure" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="tableCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="temperatureCurrent" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="temperatureMax" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="temperatureMin" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="time" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="viewController" candidateClass="UIView"/>
+                <relationship kind="outlet" name="windDirection" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="windIcon" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="windSpeed" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
