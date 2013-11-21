@@ -97,6 +97,7 @@
     {
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             self.latLabel.text = [NSString stringWithFormat:@"%.4f" , _shipfit.latitude ];
+            [self updatePathOverlay];
         }];
     }
     
