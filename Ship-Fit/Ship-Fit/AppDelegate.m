@@ -30,16 +30,20 @@
     if (tabController.viewControllers){
         
         //look for view controllers in tab bar views
-        for (UITabBarController *view2 in tabController.viewControllers) {
+        for (UIViewController *view2 in tabController.viewControllers) {
             
             //save ref to specific view controllers so we can work with them
             if ([view2 isKindOfClass:[MapViewController class]]){
                 _MapVC = (MapViewController *) view2;
             }
             else if ([view2 isKindOfClass:[UINavigationController class]]){
-                if ([[view2.viewControllers objectAtIndex:0] isKindOfClass:[DatabaseMainViewController class]]){
-                    _DatabaseMainVC = (DatabaseMainViewController *) [view2.viewControllers objectAtIndex:0];
+                UINavigationController *navController = (UINavigationController *)view2;
+                if ([[navController.viewControllers objectAtIndex:0] isKindOfClass:[DatabaseMainViewController class]]){
+                    _DatabaseMainVC = (DatabaseMainViewController *) [navController.viewControllers objectAtIndex:0];
                 }
+            }
+            else if([view2 isKindOfClass:[WeatherViewController class]]){
+                _WeatherVC = (WeatherViewController *)view2;
             }
         }
     }
@@ -47,8 +51,11 @@
     NSLog(@"pass databaseMainVC ref to manageObjectContext");
     _DatabaseMainVC.myManageObjectContext = self.managedObjectContext;
     
-    NSLog(@"pass mapVC ref to shipFit");
+    // pass shipfit refence to map
     _MapVC.shipfit = _shipfit;
+    
+    // pass shipfit reference to weather
+    _WeatherVC.shipfit_ref = _shipfit;
     
     [_shipfit init_and_run_application];
     

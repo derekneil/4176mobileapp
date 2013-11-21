@@ -16,15 +16,14 @@
 @property (weak, nonatomic) IBOutlet UIImageView *windImage;
 
 @property (weak, nonatomic) IBOutlet UIImageView *conditionImage;
+@property (weak, nonatomic) IBOutlet UIImageView *pressureImage;
 
-@property (weak, nonatomic) IBOutlet UILabel *minTemp;
+@property (weak, nonatomic) IBOutlet UILabel *precipitation;
 
-@property (weak, nonatomic) IBOutlet UILabel *maxTemp;
 @property (weak, nonatomic) IBOutlet UILabel *curTemp;
 @property (weak, nonatomic) IBOutlet UILabel *windSpeed;
 @property (weak, nonatomic) IBOutlet UILabel *windDirection;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *condition;
 @property (weak, nonatomic) IBOutlet UILabel *pressure;
 
 @end

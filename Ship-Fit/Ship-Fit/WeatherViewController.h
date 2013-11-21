@@ -1,14 +1,10 @@
-//
-//  WeatherViewController.h
-//  Ship-Fit
-//
-//  Created by Ben Irving on 11/19/13.
-//  Copyright (c) 2013 ship-fit. All rights reserved.
-//
 
 #import <UIKit/UIKit.h>
+#import "ShipFit.h"
 
 @interface WeatherViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+
+@property (weak, nonatomic) ShipFit* shipfit_ref;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (retain, nonatomic) IBOutlet UIImageView *conditionImage;

@@ -3,19 +3,19 @@
 #import "Direction.h"
 #import "Location.h"
 
+// We need a CLLocation Manager for our LocationManager Object
 @implementation Direction
 {
     CLLocationManager *_locationManager;
 }
 
+
+// This is the default class initializer. It is passed a reference from the mother shipFit class
 - (id) initWithReference: (ShipFit *)reference
 {
     self = [super init];
     if ( self ){
         _shipFit_ref = reference;
-        _compass_readings = [[NSMutableArray alloc] init ];
-        _locationManager = [ [CLLocationManager alloc] init ] ;
-        _locationManager.delegate = self;
     }
     return self;
 }
@@ -98,22 +98,21 @@
 - (void)locationManager:(CLLocationManager *)manager
        didUpdateHeading:(CLHeading *)newHeading
 {
-    //NSLog(@"%@", newHeading);
-    
-    if ( ( [ [ NSDate date ]  timeIntervalSince1970 ] - [newHeading.timestamp timeIntervalSince1970 ] ) < 60 )
+    NSLog(@"%@", newHeading);
+    if ( ( [ [ NSDate date ]  timeIntervalSince1970 ] - 
+        [newHeading.timestamp timeIntervalSince1970 ] ) < 60 )
     {
-        if ( self.shipFit_ref.isTrueNorth )
-        {
+        if ( self.shipFit_ref.isTrueNorth ){
             self.shipFit_ref.compassDegrees = newHeading.trueHeading;
         }
         else{
             self.shipFit_ref.compassDegrees = newHeading.magneticHeading;
         }
-        
         [ self set_bearing ];
         
-        if ( [ self.shipFit_ref get_gps_mode ] != SAILING_STARTUP )
-        {
+        // If we are not in Startup mode we need to log the GPS
+        // This is for predictive tracking of the vessel.
+        if ( [ self.shipFit_ref get_gps_mode ] != SAILING_STARTUP ){
             [self logHeading:newHeading];
         }
     }
@@ -160,6 +159,9 @@
             NSLog(@"Compass Services Denied");
             break;
         case kCLAuthorizationStatusAuthorized:
+            _compass_readings = [ [NSMutableArray alloc] init ];
+            _locationManager = [ [CLLocationManager alloc] init ] ;
+            _locationManager.delegate = self;
             NSLog(@"Compass Services Authorized");
             [self run_compass ];
             break;

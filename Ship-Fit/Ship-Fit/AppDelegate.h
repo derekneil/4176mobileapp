@@ -10,6 +10,7 @@
 #import "ShipFit.h"
 #import "MapViewController.h"
 #import "DatabaseMainViewController.h"
+#import "WeatherViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -20,6 +21,7 @@
 
 //Map
 @property (strong, nonatomic) MapViewController* MapVC;
+@property (strong, nonatomic) WeatherViewController *WeatherVC;
 
 //Database
 @property (strong, nonatomic) DatabaseMainViewController* DatabaseMainVC;
