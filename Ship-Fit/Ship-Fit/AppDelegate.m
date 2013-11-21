@@ -49,8 +49,11 @@
     NSLog(@"pass databaseMainVC ref to manageObjectContext");
     _DatabaseMainVC.myManageObjectContext = self.managedObjectContext;
     
-    NSLog(@"pass mapVC ref to shipFit");
+    // pass shipfit refence to map
     _MapVC.shipfit = _shipfit;
+    
+    // pass shipfit reference to weather
+    _WeatherVC.shipfit_ref = _shipfit;
     
     [_shipfit init_and_run_application];
     
