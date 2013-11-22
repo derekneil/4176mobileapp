@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <MapBox/MapBox.h>
 
-@interface MapViewController : UIViewController //<MKMapViewDelegate>
+@interface MapViewController : UIViewController <RMMapViewDelegate>//<MKMapViewDelegate>
 //@property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (weak, nonatomic) IBOutlet RMMapView *mapView;
+@property (strong, nonatomic) IBOutlet RMMapView *mapView;
 @property (weak, nonatomic) IBOutlet RMMapBoxSource *mapBoxSource;
 @property (weak, nonatomic) IBOutlet UILabel *latLabel;
 @property (weak, nonatomic) IBOutlet UILabel *longLabel;

@@ -11,10 +11,11 @@
 
 #import "FMDatabaseQueue.h"
 #import "FMDatabase.h"
+#import <Foundation/Foundation.h>
 #import "SMXMLDocument.h"
 
 
-@interface DatabaseMainViewController : UITableViewController <UISearchBarDelegate>
+@interface DatabaseMainViewController : UITableViewController <UISearchBarDelegate, NSFetchedResultsControllerDelegate>
 
 @property(nonatomic, strong) NSManagedObjectContext *myManageObjectContext;
 @property(nonatomic, strong) NSFetchedResultsController *fetchedResultsController;

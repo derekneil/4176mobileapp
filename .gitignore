@@ -3,3 +3,5 @@
 
 **/*.xcodeproj/project.xcworkspace/
 **/*.xcodeproj/xcuserdata/
+
+ne_*

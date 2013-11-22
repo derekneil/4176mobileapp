@@ -1,10 +1,3 @@
-//
-//  TableCell.h
-//  Ship-Fit
-//
-//  Created by Ben Irving on 11/19/13.
-//  Copyright (c) 2013 ship-fit. All rights reserved.
-//
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -25,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *windDirection;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pressure;
+
 
 @end
 

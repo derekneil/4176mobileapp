@@ -8,18 +8,16 @@
 
 @implementation WeatherViewController
 {
-    int _count;
     NSArray *hourly_weather;
 }
 
-@synthesize condition;
 - (void)viewDidLoad
 {
     
     [super viewDidLoad];
     [self setLabels];
     [self setImages];
-    
+
     _tableView.dataSource = self;
     _tableView.delegate = self;
     
@@ -27,16 +25,14 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    _count = 0;
     hourly_weather = [ [self.shipfit_ref.weatherJSON objectForKey:@"hourly"] objectForKey:@"data"];
-    NSLog(@"%@",hourly_weather[0]);
+    //NSLog(@"%@",hourly_weather[0]);
 }
-
-
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //NSLog(@"%i",indexPath.row);
     // Set up the default layout of the cell
     static NSString * cellIdentifier = @"cell";
     TableCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -50,7 +46,7 @@
     
     // Populate With JSON Data
     // Get the Dictionary for the entry
-    NSDictionary *weather_data = hourly_weather[_count];
+    NSDictionary *weather_data = hourly_weather[indexPath.row];
     
     // Temperature Related
     cell.curTemp.text = [NSString stringWithFormat:@"Temperature: %.1f \u00B0 C", [self set_temp: [weather_data valueForKey:@"temperature"] ] ];
@@ -73,11 +69,6 @@
     cell.pressure.text = [ NSString stringWithFormat:@"%@" , [weather_data valueForKey:@"pressure"]];
     
     
-    
-    
-    
-    
-    _count++;
     return cell;
 }
                            
@@ -90,6 +81,7 @@
     else if (dayOfWeek == 5){ return @"Thursday"; }
     else if (dayOfWeek == 6){ return @"Friday"; }
     else if (dayOfWeek == 7){ return @"Saturday"; }
+    else { return @"Error"; }
 }
                         
 
@@ -177,7 +169,7 @@
     [self setTemperatureCurrent:nil];
     [self setTemperatureMax:nil];
     [self setTemperatureMin:nil];
-#endif
+
     [self setConditionImage:nil];
     [self setWindSpeed:nil];
     [self setWindIcon:nil];
@@ -190,11 +182,13 @@
     [self setTime:nil];
     [self setPressure:nil];
     [super viewDidUnload];
+#endif
 }
 
 
 - (void) setLabels
 {
+#if 0
     [_conditionLabel setText:@"clear"];
     [_temperatureCurrent setText:@"5C"];
     [_temperatureMax setText:@"Max: 10C"];
@@ -203,19 +197,20 @@
     [_cloudCover setText:@"2"];
     [_pressure setText:@"1020"];
     [_precipitation setText:@"2%"];
-    
+#endif
 }
 
 - (void) setImages
 {
+#if 0
+    
     //condition image
-    condition =[UIImage imageNamed:@"Status-weather-clear-icon.png"];
-    _conditionImage = [[UIImageView alloc]initWithImage:condition];
     [_viewController addSubview:_conditionImage];
     _windIcon.image = [UIImage imageNamed:@"Wind-Flag-Storm-icon.png"];//windspeed icon
     [_viewController addSubview:_windIcon];
     _maxTemp.image = [UIImage imageNamed:@"thermometer.jpeg"];
     _minTemp.image = [UIImage imageNamed:@"thermometer.jpeg"];
+#endif
 }
 
 - (void)didReceiveMemoryWarning

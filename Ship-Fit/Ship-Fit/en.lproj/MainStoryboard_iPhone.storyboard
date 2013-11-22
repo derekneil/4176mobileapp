@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" initialViewController="4">
     <dependencies>
+        <deployment defaultVersion="1296" identifier="iOS"/>
         <development version="4600" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
         <!--View Controller - Settings-->
@@ -283,11 +284,8 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
-                                            <outlet property="condition" destination="e4x-15-p2J" id="ad9-0v-qa5"/>
                                             <outlet property="conditionImage" destination="vVT-2T-qL8" id="WRF-US-SdL"/>
                                             <outlet property="curTemp" destination="015-wa-Wf5" id="3hq-rb-217"/>
-                                            <outlet property="maxTemp" destination="o2g-GT-BpD" id="m3H-dS-b8Z"/>
-                                            <outlet property="minTemp" destination="CgA-Pc-CUi" id="tBz-ew-R0C"/>
                                             <outlet property="pressure" destination="KTR-Lq-iT7" id="Syz-Sl-3iQ"/>
                                             <outlet property="tempImage" destination="KIp-A5-ueJ" id="Dc6-Za-XdQ"/>
                                             <outlet property="timeLabel" destination="QsR-w7-q89" id="0Ap-C9-i5C"/>
@@ -429,81 +427,6 @@
     <resources>
         <image name="first" width="16" height="16"/>
     </resources>
-    <classes>
-        <class className="DatabaseArticleViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DatabaseArticleViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="txtTitle" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="wvMainText" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="DatabaseMainViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DatabaseMainViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="databaseSearchBar" candidateClass="UISearchBar"/>
-            </relationships>
-        </class>
-        <class className="MapViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="togglePathAction:"/>
-                <relationship kind="action" name="zoomChange:"/>
-                <relationship kind="action" name="zoomToMe:"/>
-                <relationship kind="outlet" name="compDegLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="compDirLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="latLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="longLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="speedLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="sunLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="tempHighLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="tempLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="tempLoLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="windDirLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="windLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="zoomInButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="zoomOutButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="TableCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TableCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="condition" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="conditionImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="curTemp" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="maxTemp" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="minTemp" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="pressure" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="tempImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="timeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="windDirection" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="windImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="windSpeed" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="WeatherViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WeatherViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="cloudCover" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="conditionImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="conditionLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="maxTemp" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="minTemp" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="precipitation" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="pressure" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="tableCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="temperatureCurrent" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="temperatureMax" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="temperatureMin" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="time" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="viewController" candidateClass="UIView"/>
-                <relationship kind="outlet" name="windDirection" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="windIcon" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="windSpeed" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
