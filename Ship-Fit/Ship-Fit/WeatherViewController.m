@@ -11,7 +11,6 @@
     NSArray *hourly_weather;
 }
 
-@synthesize condition;
 - (void)viewDidLoad
 {
     
@@ -29,8 +28,6 @@
     hourly_weather = [ [self.shipfit_ref.weatherJSON objectForKey:@"hourly"] objectForKey:@"data"];
     //NSLog(@"%@",hourly_weather[0]);
 }
-
-
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -72,10 +69,6 @@
     cell.pressure.text = [ NSString stringWithFormat:@"%@" , [weather_data valueForKey:@"pressure"]];
     
     
-    
-    
-    
-    
     return cell;
 }
                            
@@ -109,7 +102,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 
 {
-    return 24;
+    return 48;
 }
 
 
@@ -176,7 +169,7 @@
     [self setTemperatureCurrent:nil];
     [self setTemperatureMax:nil];
     [self setTemperatureMin:nil];
-#endif
+
     [self setConditionImage:nil];
     [self setWindSpeed:nil];
     [self setWindIcon:nil];
@@ -189,11 +182,13 @@
     [self setTime:nil];
     [self setPressure:nil];
     [super viewDidUnload];
+#endif
 }
 
 
 - (void) setLabels
 {
+#if 0
     [_conditionLabel setText:@"clear"];
     [_temperatureCurrent setText:@"5C"];
     [_temperatureMax setText:@"Max: 10C"];
@@ -202,19 +197,20 @@
     [_cloudCover setText:@"2"];
     [_pressure setText:@"1020"];
     [_precipitation setText:@"2%"];
-    
+#endif
 }
 
 - (void) setImages
 {
+#if 0
+    
     //condition image
-    condition =[UIImage imageNamed:@"Status-weather-clear-icon.png"];
-    _conditionImage = [[UIImageView alloc]initWithImage:condition];
     [_viewController addSubview:_conditionImage];
     _windIcon.image = [UIImage imageNamed:@"Wind-Flag-Storm-icon.png"];//windspeed icon
     [_viewController addSubview:_windIcon];
     _maxTemp.image = [UIImage imageNamed:@"thermometer.jpeg"];
     _minTemp.image = [UIImage imageNamed:@"thermometer.jpeg"];
+#endif
 }
 
 - (void)didReceiveMemoryWarning
