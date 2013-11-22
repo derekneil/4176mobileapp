@@ -169,7 +169,6 @@
 		D5237F13183C367D00A77423 /* TableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableCell.h; sourceTree = "<group>"; };
 		D5237F14183C367D00A77423 /* TableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableCell.m; sourceTree = "<group>"; };
 		D5256F4C183D6EE900DDE933 /* pressure.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pressure.jpeg; sourceTree = "<group>"; };
-		D563379618380A1C00A9EDE8 /* WeatherDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherDelegate.h; sourceTree = "<group>"; };
 		D56337981838101A00A9EDE8 /* Status-weather-clear-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Status-weather-clear-icon.png"; sourceTree = "<group>"; };
 		D56337991838101A00A9EDE8 /* Status-weather-clear-night-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Status-weather-clear-night-icon.png"; sourceTree = "<group>"; };
 		D563379A1838101A00A9EDE8 /* thermometer.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = thermometer.jpeg; sourceTree = "<group>"; };
@@ -367,7 +366,6 @@
 				658DA5E51832DC17003B6952 /* Location.m */,
 				D51118601835592F009D722B /* Weather.h */,
 				D51118611835592F009D722B /* Weather.m */,
-				D563379618380A1C00A9EDE8 /* WeatherDelegate.h */,
 			);
 			name = BackendLogic;
 			sourceTree = "<group>";
