@@ -8,7 +8,6 @@
 
 @implementation WeatherViewController
 {
-    int _count;
     NSArray *hourly_weather;
 }
 
@@ -19,7 +18,7 @@
     [super viewDidLoad];
     [self setLabels];
     [self setImages];
-    
+
     _tableView.dataSource = self;
     _tableView.delegate = self;
     
@@ -27,9 +26,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    _count = 0;
     hourly_weather = [ [self.shipfit_ref.weatherJSON objectForKey:@"hourly"] objectForKey:@"data"];
-    NSLog(@"%@",hourly_weather[0]);
+    //NSLog(@"%@",hourly_weather[0]);
 }
 
 
@@ -37,6 +35,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //NSLog(@"%i",indexPath.row);
     // Set up the default layout of the cell
     static NSString * cellIdentifier = @"cell";
     TableCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -50,7 +49,7 @@
     
     // Populate With JSON Data
     // Get the Dictionary for the entry
-    NSDictionary *weather_data = hourly_weather[_count];
+    NSDictionary *weather_data = hourly_weather[indexPath.row];
     
     // Temperature Related
     cell.curTemp.text = [NSString stringWithFormat:@"Temperature: %.1f \u00B0 C", [self set_temp: [weather_data valueForKey:@"temperature"] ] ];
@@ -77,7 +76,6 @@
     
     
     
-    _count++;
     return cell;
 }
                            
@@ -90,6 +88,7 @@
     else if (dayOfWeek == 5){ return @"Thursday"; }
     else if (dayOfWeek == 6){ return @"Friday"; }
     else if (dayOfWeek == 7){ return @"Saturday"; }
+    else { return @"Error"; }
 }
                         
 
@@ -110,7 +109,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 
 {
-    return 48;
+    return 24;
 }
 
 
