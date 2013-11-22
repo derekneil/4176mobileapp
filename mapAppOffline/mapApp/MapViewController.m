@@ -39,16 +39,20 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    //source http://www.appcoda.com/ios-programming-101-drop-a-pin-on-map-with-mapkit-api/
-    self.mapView.delegate = self;
     
-    //check for bottom layout guide and adjust up the bottom alignment
+    RMMapBoxSource *interactiveSource = [[RMMapBoxSource alloc] initWithMapID:@"krazyderek.g8dkgmh4"];
     
-    //create ios 5 ipad layout with no autolayout
+    mapView = [[RMMapView alloc] initWithFrame:self.view.bounds andTilesource:interactiveSource];
     
-    //outlet collections, or just name them the same
+    mapView.delegate = self;
     
-    //use AFNetworking APHTTPequestOperationManager to get navionics (serverside api calls) instead of using NSURL directly
+    mapView.zoom = 2;
+    
+    mapView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    
+    mapView.adjustTilesForRetinaDisplay = YES; // these tiles aren't designed specifically for retina, so make them legible
+    
+    [self.view addSubview:mapView];
     
     
 }
