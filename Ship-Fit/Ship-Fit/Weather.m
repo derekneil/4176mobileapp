@@ -1,7 +1,6 @@
 
 #import "Weather.h"
 #import "ShipFit.h"
-#import "WeatherDelegate.h"
 
 NSString *const theKey = @"138dc64deba99d47df996e3a3a1c4bd1";
 NSString *const baseURL = @"https://api.forecast.io/forecast/";
