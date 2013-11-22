@@ -56,8 +56,8 @@ FMDatabase* db;
     
     [db open];
     
-    NSString* update = [NSString stringWithFormat:@"INSERT INTO GPS (tripid, lat, lng, dateandtime) VALUES(?, ?, ?, ?);", [NSNumber numberWithInt:tripID], lat, lng, dateandtime];
-    [db executeUpdate:update];
+    NSString* update = @"INSERT INTO GPS (tripid, lat, lng, dateandtime) VALUES(?, ?, ?, ?);";
+    [db executeUpdate:update, [NSNumber numberWithInt:tripID], lat, lng, dateandtime];
     
     
     
@@ -74,8 +74,8 @@ FMDatabase* db;
     
     [db open];
 
-    NSString* update = [NSString stringWithFormat:@"INSERT INTO Trips (startdate) VALUES(?);", startdate];
-    [db executeUpdate:update];
+    NSString* update = @"INSERT INTO Trips (startdate) VALUES(?);";
+    [db executeUpdate:update, startdate];
     
     
     NSInteger tripId = [db lastInsertRowId];
@@ -170,9 +170,9 @@ for (GPS *gps in gpsObjects) {
     [db open];
     
 
-    NSString* update =  [NSString stringWithFormat:@"INSERT INTO weather (lat, lng, JSON, datetime) VALUES(?, ?, ?, ?);", lat, lng, JSON, dateandtime];
+    NSString* update = @"INSERT INTO weather (lat, lng, JSON, datetime) VALUES(?, ?, ?, ?);";
 
-    [db executeUpdate:update];
+    [db executeUpdate:update, lat, lng, JSON, dateandtime];
     
     
     NSInteger lastId = [db lastInsertRowId];
