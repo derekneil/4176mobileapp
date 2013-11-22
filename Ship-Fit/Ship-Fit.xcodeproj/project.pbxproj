@@ -18,11 +18,11 @@
 		655D9D0718340F750004CD21 /* DatabaseMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9CF718340F750004CD21 /* DatabaseMainViewController.m */; };
 		655D9D0918340F750004CD21 /* shipfit_Index.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 655D9CFA18340F750004CD21 /* shipfit_Index.sqlite */; };
 		655D9D0B18340F750004CD21 /* SMXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9D0018340F750004CD21 /* SMXMLDocument.m */; };
-		655D9D0C18340F750004CD21 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 655D9D0118340F750004CD21 /* sqlite3.c */; };
+		655D9D0C18340F750004CD21 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 655D9D0118340F750004CD21 /* sqlite3.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		655D9D0D18340F750004CD21 /* DatabaseArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9D0418340F750004CD21 /* DatabaseArticleViewController.m */; };
 		655D9D0F183413E00004CD21 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 655D9D0E183413E00004CD21 /* CoreData.framework */; };
-		655D9D1C183414CF0004CD21 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9D13183414CE0004CD21 /* FMDatabase.m */; };
-		655D9D1D183414CF0004CD21 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9D15183414CE0004CD21 /* FMDatabaseAdditions.m */; };
+		655D9D1C183414CF0004CD21 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9D13183414CE0004CD21 /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-w"; }; };
+		655D9D1D183414CF0004CD21 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9D15183414CE0004CD21 /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		655D9D1E183414CF0004CD21 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9D17183414CF0004CD21 /* FMDatabasePool.m */; };
 		655D9D1F183414CF0004CD21 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9D19183414CF0004CD21 /* FMDatabaseQueue.m */; };
 		655D9D20183414CF0004CD21 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9D1B183414CF0004CD21 /* FMResultSet.m */; };
