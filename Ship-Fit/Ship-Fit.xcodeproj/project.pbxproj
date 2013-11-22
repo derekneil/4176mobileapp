@@ -701,6 +701,7 @@
 					SQLITE_ENABLE_FTS3_PARENTHESIS,
 				);
 				INFOPLIST_FILE = "Ship-Fit/Ship-Fit-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -716,6 +717,7 @@
 					SQLITE_ENABLE_FTS3,
 				);
 				INFOPLIST_FILE = "Ship-Fit/Ship-Fit-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
