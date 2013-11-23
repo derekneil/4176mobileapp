@@ -52,6 +52,7 @@
         }
         
         //[self print_logs_to_console];
+        //[self straight_travel ];
     }
     else{
         NSLog(@"Time stamp for the compass is stale. Take the according action");
@@ -100,49 +101,42 @@
     }
 }
 
-//- (BOOL)straight_travel
-//{
-//    int l = [self.compass_readings count];
-//    int o = 0;
-//    double theBaseReading;
-//    CLHeading *recent = [self.compass_readings objectAtIndex:0];
-//    
-//    if ( self.shipFit_ref.isTrueNorth){
-//        theBaseReading = recent.trueHeading;
-//    }
-//    else{
-//        theBaseReading = recent.magneticHeading;
-//    }
-//    
-//    while ( o < l )
-//    {
-//        recent = [self.compass_readings objectAtIndex:o];
-//        
-//        if ( self.shipFit_ref.isTrueNorth )
-//        {
-//            if ( (theBaseReading - recent.trueHeading > 7.5 ) || (theBaseReading - recent.trueHeading < -7.5 )  )
-//            {
-//                return NO;
-//            }
-//        }
-//        else
-//        {
-//            if ( (theBaseReading - recent.magneticHeading > 7.5 ) || (theBaseReading - recent.magneticHeading < -7.5 ) )
-//            {
-//                return NO;
-//            }
-//        }
-//        o++;
-//    }
-//    NSLog(@"Travelling Straight!!!!!");
-//    return YES;
-//}
-
-
-
-
-
-
+// Function to calculate if the vessel is travelling on a relatively straight path
+// Calculates the std_deviation of all the compass readings within the last two minutes
+// If the std_deviation is within 30 degrees then return YES!
+- (BOOL)straight_travel
+{
+    int l, o;
+    double mean=0, std_deviation=0;
+    CLHeading *runner;
+    
+    //calculate the mean of the compass readings
+    l = [compassLogs count];
+    for (o = 0; o < l; o++ )
+    {
+        runner = compassLogs[o];
+        mean += runner.trueHeading;
+    }
+    mean = mean / l;
+    
+    //calculate the std_deviation
+    for(o=0; o < l; o++)
+    {
+        runner = compassLogs[o];
+        std_deviation += (runner.trueHeading - mean) * (runner.trueHeading - mean);
+    }
+    std_deviation = sqrt(std_deviation / l);
+    
+    //NSLog(@"Std_Deviation: %f" , std_deviation);
+    
+    if ( std_deviation < 15 ){
+        return YES;
+    }
+    else{
+        return NO;
+    }
+}
+    
 // Sets the properties:
 // magnetic_north_bearing
 // true_north_bearing
