@@ -346,7 +346,7 @@
 - (void)locationManager:(CLLocationManager *)manager
        didFailWithError:(NSError *)error
 {
-    NSLog(@"%@", error);
+    NSLog(@"GPS ERROR:%@", error);
 }
 
 - (void)release_memory
