@@ -297,37 +297,13 @@
 
 - (void)evaluate_GPS_MODE
 {
-
-    int l, o;
-    
     switch (self.GPS_MODE)
     {
         case SAILING_STARTUP:
-            NSLog(@"GPS MODE: STARTUP");
-            // If you have less than 10 gps locations stay in start up
-            if (self.shipFit_ref.gps_count < 10)
-            {
-                break;
-            }
-
-            // If you have more, check to see if the last 10 location updates are within the last 5 minutes
-            else
-            {
-                double *runner = timeHead;
-                for( l=0, o=1 ; l<10 ; l++ ,runner++ ){
-                    if( ( [ [ NSDate date ]  timeIntervalSince1970 ] - *runner ) > 300 ){
-                        o = 0;
-                        break;
-                    }
-                }
-
-                // SAILING_STARTUP TO SAILING_ROUGH TRANSITION
-                if (o){
-                    self.GPS_MODE = SAILING_ROUGH;
-                }
-                break;
-            }
-
+          if ( [self upgrade_GPS_from_startup_to_rough] ){
+            self.GPS_MODE = SAILING_ROUGH;
+          }
+          break;  
         case SAILING_ROUGH:
             NSLog(@"GPS MODE: ROUGH");
             _theTimer = [NSTimer scheduledTimerWithTimeInterval:15
@@ -335,6 +311,9 @@
                                                        selector:@selector(run_GPS:)
                                                        userInfo:nil
                                                         repeats:NO ];
+            if ( [self upgrade_GPS_from_rough_to_smooth] ){
+                self.GPS_MODE = SAILING_SMOOTH;
+            }
             break;
             
         case SAILING_SMOOTH:
@@ -344,7 +323,47 @@
                                                        selector:@selector(run_GPS:)
                                                        userInfo:nil
                                                         repeats:NO ];
+            if ( [self upgrade_GPS_from_rough_to_smooth] == NO ){
+                self.GPS_MODE = SAILING_SMOOTH;
+            }
             break;
+    }
+}
+
+- (BOOL)upgrade_GPS_from_startup_to_rough
+{
+    int l, o;
+
+    if ( self.shipFit_ref.gps_count < 15 ){
+        return NO;
+    }
+    else{
+        double *runner = timeHead;
+        for( l=0, o=1 ; l<15 ; l++ ,runner++ ){
+            if( ( [ [ NSDate date ]  timeIntervalSince1970 ] - *runner ) > 120 ){
+                o = 0;
+                break;
+            }
+        }
+
+        // SAILING_STARTUP TO SAILING_ROUGH TRANSITION
+        if (o){
+            return YES:
+        }
+        else{
+            return NO;
+        }
+    }
+}
+
+- (BOOL)upgrade_GPS_from_rough_to_smooth
+{
+    if ( [self.shipFit_ref currently_sailing_straight] )
+    {
+        return YES;
+    }
+    else{
+        return NO;
     }
 }
 
@@ -360,7 +379,6 @@
             NSLog(@"Location Services Restricted");
             break;
         case kCLAuthorizationStatusDenied:
-            [self release_memory];
             NSLog(@"Location Services Denied");
             break;
         case kCLAuthorizationStatusAuthorized:
@@ -395,35 +413,18 @@
 // to traverse all elements of the log you start from the tail and go to the head.
 // once the array wraps around the valid entries range from the tail to the head
 // to traverse: if the head == tail just start from head + 1 and go till you hit head again
-// if head != tail. then go from tail + 1 to head - 1
+// if head != tail. then go f
 
-// Initiazes a gps_manager with the accuracy and distance setting.
-// Controlling these settings is at the whim of the ShipFit.h class
-// Which contains the majority of functions that we need.
-// RETURNS -1 Location Services Not Available 0 Location Services Not Determined Yet
-// 1 If the GPS is Authorized and Running (ONE IS GOOD) (NEGATIVE ONE BAD)
 // When the location manager calls this method an error was encountered
 // when trying to get the location or heading data. If the service was
 // unable to get a location error right away it reports a kCLErrorLocationUnkown
 // error and keeps trying. This can be ingnored. However, a kCLErrorDenied is
 // received if the User denies LS. A kCLErrorHeadingFailure is due to interference.
 
-// log each element in the array.
-// maybe have to do some checking on the size of the logs
-// also what is the most efficient way that we can
-// how many reading do you think we need.
-// how many does derek need to draw his line?
-// it should be as spread out as possible.
-// don't ya think!!
-
 // Do I store only 20,000 GPS OR Do I Malloc More Space
 // It is expensive to have to shift the elements each time
 // might be cheaper to malloc another array..
 // write the old one to the DB and then reallocate the space !!!
-
-// flush logs...
-// what if we are in Ecuador !!!?
-
 
 
 
