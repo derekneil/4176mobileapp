@@ -3,12 +3,23 @@
 
 @implementation Location
 {
+    // OUR LOCATION MANAGER
     CLLocationManager *_locationManager;
-    CLLocationCoordinate2D *locationHead; //locations
+
+    // STANDARD C ARRAY FOR STORING GPS COORDINATES
+    // CLLOCATION2D for lat and long
+    CLLocationCoordinate2D *locationHead; 
     CLLocationCoordinate2D *locationBase;
-    double *timeHead; //timestamps
+    
+    // double for the time stamps
+    // synchronized array to same indexes
+    double *timeHead; 
     double *timeBase;
+
+    // The Timer
     NSTimer *_theTimer;
+
+    // Utility Variables
     BOOL _logging_enabled;
     int _count;
     int _lastGPStimeInt;
@@ -40,6 +51,8 @@
 
         // HEAP TO STORE LOGS
         // 40000 GPS COORDINATES
+        // DOUBLES FOR TIMESTAMPS
+        // CLLOCATION FOR OUR COORDINATES
         if (
             (  ( timeBase = (double *)malloc( 40000 * sizeof(double) ) ) == NULL )
             ||
@@ -55,11 +68,12 @@
             _count = 0;
 
             // Move the heads to the edge of memory farthest away from the base
-            timeHead = timeBase + 39999;
-            locationHead = locationBase + 39999;
-            
+            // Lets give ourselves a small amount of buffer space for errors
+            timeHead = timeBase + 39900;
+            locationHead = locationBase + 39900;
+            //admin
 
-            // GIVE THE LIST TO THE MAP FOR ITS CONVENIENCE
+            // GIVE THE POINTER TO THE HEAD OF THE ARRAY TO THE MAP FOR PATH TRACKING
             self.shipFit_ref.gps_head = locationHead;
             self.shipFit_ref.gps_count = 0;
         }
@@ -131,7 +145,7 @@
     int l;
     CLLocationCoordinate2D *runner = locationBase;
     double *runner2 = timeBase;
-    for(l = 0; l < 400000; l++, runner++, runner2++){
+    for(l = 0; l < 39900; l++, runner++, runner2++){
         runner->latitude = 0;
         runner->longitude = 0;
         *runner2 = 0;
@@ -159,30 +173,32 @@
 
 
 {
-    if( self.GPS_MODE != SAILING_STARTUP)[self halt_GPS];
-    
-    NSLog(@"iOS 5 location event");
-    
+    if( self.GPS_MODE != SAILING_STARTUP){
+        [self halt_GPS];
+    }
+
     /* Log the new lat and long values */
     [ self log_latitude:newLocation.coordinate.latitude
               longitude:newLocation.coordinate.longitude
               timestamp: [newLocation.timestamp timeIntervalSince1970 ] ];
 
-    // UPDATE THE PROPERTIES
-    [ self updateShipFitLocation: newLocation ];
+    // UPDATE THE DISPLAY
+    [ self updateShipFitLocation:newLocation ];
     
-    /* EVALUATE */
+    // EVALUATE
     [ self evaluate_GPS_MODE ];
+    NSLog(@"iOS 5 location event");
 }
 
 // iOS 6 & 7
 - (void)locationManager: (CLLocationManager *)manager
      didUpdateLocations:(NSArray *)locations
 {
-    if ( self.GPS_MODE != SAILING_STARTUP ) [self halt_GPS];
-    
-    NSLog(@"iOS 6 location event");
-    
+    if (self.GPS_MODE != SAILING_STARTUP)\
+    {
+        [self halt_GPS];  
+    } 
+
     // Log each entry
     CLLocation *current_location;
     int l;
@@ -194,10 +210,12 @@
                  timestamp:[current_location.timestamp timeIntervalSince1970 ] ];
     }
 
+    // UPDATE THE DISPLAY
     [self updateShipFitLocation: [ locations lastObject ] ];
 
     //Evaluate the GPS MODE
     [ self evaluate_GPS_MODE ];
+    NSLog(@"iOS 6 location event");
 }
 
 
@@ -205,36 +223,35 @@
 // UPDATE FRONT END PROPERTIES
 - (void)updateShipFitLocation: (CLLocation*) current_location
 {
-    /* Make sure the update is relevant within 60 seconds */
-    if ( ( [ [ NSDate date ]  timeIntervalSince1970 ] - [current_location.timestamp timeIntervalSince1970 ] ) < 60 &&
-        ( [current_location.timestamp timeIntervalSince1970 ] - _lastGPStimeInt) > 3 )
+     // Set the speed
+    if ( _count > 5 && ( ( [ [ NSDate date ]  timeIntervalSince1970 ] - [current_location.timestamp timeIntervalSince1970 ] ) < 3 ) )    
     {
-        
-        
+        self.shipFit_ref.knots = [ self calculateSpeed];
+        //self.shipFit_ref.knots = current_location.speed * 1.94384;
+    }
+
+    // Set the latitude and longitude 
+        if ( ( [ [ NSDate date ]  timeIntervalSince1970 ] - [current_location.timestamp timeIntervalSince1970 ] ) < 60 &&
+        ( [current_location.timestamp timeIntervalSince1970 ] - _lastGPStimeInt) > 3 ){
+
         //save last time we updated the display property for GPS
         _lastGPStimeInt = [current_location.timestamp timeIntervalSince1970];
         
-        // Set the new lat/lon
+        // update the lat/long display
         self.shipFit_ref.latitude = current_location.coordinate.latitude;
         self.shipFit_ref.longitude = current_location.coordinate.longitude;
         
-        // Let the SHIPFIT class know that the time stamp is valid.
-        if(!self.GPSisValid && current_location.coordinate.latitude != 0 && current_location.coordinate.longitude != 0)self.GPSisValid = YES;
         NSLog( @"LAT: %f LONG: %f KNOTS:%f" , self.shipFit_ref.latitude , self.shipFit_ref.longitude , self.shipFit_ref.knots );
     }
-    else
-    {
+    else{
         NSLog(@"not updating GPS display");
     }
-    
-    // Set the speed
-    if ( current_location.speed != -1 )
+
+    // FLIP THE WEATHER SWITCH
+    if( !self.GPSisValid )
     {
-        self.shipFit_ref.knots = current_location.speed * 1.94384;
+        self.GPSisValid = YES;
     }
-    // mY speed function that still has some bugs
-    //self.shipFit_ref.knots = [ self calculateSpeed: current_location ];
-    
 }
 
 
@@ -244,28 +261,39 @@
 // OF THE VESSEL
 // USING A WEIGHTED AVERAGE BASED ON THE LAST 5 RELEVANT READINGS
 // WORK IN PROGRESS
-//- (double)calculateSpeed: (CLLocation*)current
-//{
-//    double speed = 0;
-//
-//    if ( _count > 5 )
-//    {
-//        CLLocation *location;
-//        CLLocationCoordinate2D *locationRunner = locationHead + 1;
-//        double *timeRunner = timeHead + 1;
-//        double weight = 0.51612;
-//
-//        int i;
-//        for (i = 0; i < 5; i++ , locationRunner++ , timeRunner++ )
-//        {
-//            double distance =  [current distanceFromLocation:[location initWithLatitude: (locationHead + i)->latitude
-//                                                                              longitude: (locationHead + i)->longitude ] ];
-//            speed += (weight) * ( distance / ( [current.timestamp timeIntervalSince1970] - *(timeRunner + i) ) );
-//        }
-//        weight /= 2;
-//    }
-//    return speed * 1.94384;
-//}
+- (double)calculateSpeed
+{
+    CLLocationCoordinate2D *locationRunner = locationHead + 1;
+    double  speed = 0, 
+            *timeRunner = timeHead + 1,
+            weight = 0.51612;
+    int i;
+
+    for (i = 0; i < 5; i++ , locationRunner++ , timeRunner++ )
+    {
+        double distance = [self haversine_km_withLat1:locationHead->latitude Lon1:locationHead->longitude Lat2:locationRunner->latitude Lon2:locationRunner->longitude];
+        double elapsed_time = *timeHead - *timeRunner;
+        double velocity = distance / elapsed_time;
+
+        if ( velocity < 0 ){
+            velocity *= -1;
+        }
+
+        speed += (weight)*(velocity);
+    }
+    return speed * 1.94384;
+}
+
+- (double) haversine_km_withLat1: (double) lat1 Lon1: (double) lon1 Lat2: (double) lat2 Lon2: (double) lon1
+{
+    double R = 6371;
+    double RAD = (M_PI * 180.0 );
+    double dlon = (lon1 - lon2) * RAD;  // convert from degrees to radians
+    double dlat = (lat1 - lat2 ) * RAD; // convert from degrees to radian
+    double a = pow(sin(dlat/2.0) , 2) * cos(lat1*RAD) * cos(lat2*RAD) * pow(sin(dlon/2.0),2);
+    double c = 2 * atan( sqrt(a), sqrt(1-a) );
+    return c * R;
+}
 
 - (void)evaluate_GPS_MODE
 {
