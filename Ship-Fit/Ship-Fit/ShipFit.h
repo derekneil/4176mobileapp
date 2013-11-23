@@ -14,9 +14,8 @@ extern NSString *const NE;
 extern NSString *const ERROR;
 
 @interface ShipFit : NSObject
-//@property (nonatomic, readwrite, assign) MKMapView *map_view_ref;
 
-// DATABASE
+// For DATABASE
 @property ( nonatomic, readonly, strong) DatabaseAccess* DB;
 @property (nonatomic, readwrite, assign) int tripID;
 
@@ -37,5 +36,10 @@ extern NSString *const ERROR;
 - (void)init_and_run_application;
 - (unsigned short int)get_gps_mode;
 - (BOOL)currently_sailing_straight;
++ (void)setApplicationDefaults;
++ (void)setUpObservers;
++ (short int)inandr_compass_and_gps
++ (short int)inandr_Database
++ (short int)inandr_weather
 
 @end

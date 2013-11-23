@@ -25,33 +25,11 @@ NSString *const ERROR = @"ERROR";
 
 - (void)init_and_run_application
 {
-    /* Set Defaults for Application Start-up */
-    self.isTrueNorth = YES;
-    
-    
-    NSLog(@"initializing Database Access");
-    _DB = [[DatabaseAccess alloc] init];
-    _tripID = [_DB getLatestTripID];
-    
-    NSLog(@"initializing and running GPS");
-    _location = [ [Location alloc] initWithReference:self ];
-    [_location init_GPSLOGS];
-    _location.GPS_MODE = SAILING_STARTUP;
-    [_location run_GPS:nil ];
-    
-    NSLog(@"initializing and running compass");
-    _direction = [ [Direction alloc] initWithReference:self ];
-    [ _direction run_compass ];
-    
-    NSLog(@"initializing weather");
-    _weather = [ [Weather alloc] initWithReference:self ];
-    
-    // Set up an observer to notify the weather class when we get a valid GPS reading
-    [_location addObserver:_weather
-               forKeyPath:@"GPSisValid"
-                  options:NSKeyValueObservingOptionNew
-                  context:nil ];
-    
+    [ ShipFit inandr_compass_and_gps ];
+    [ ShipFit inandr_weather];
+    [ ShipFit inandr_Database];
+    [ ShipFit setApplicationDefaults];
+    [ ShipFit setUpObservers]; 
 }
 
 - (unsigned short int)get_gps_mode
@@ -64,6 +42,51 @@ NSString *const ERROR = @"ERROR";
     return [_direction straight_travel];
 }
 
++ (void)setApplicationDefaults
+{
+    /* Set Defaults for Application Start-up */
+    self.isTrueNorth = YES;
+    printf("setting application defaults\n");
+}
+
++ (void)setUpObservers
+{
+    // Set up an observer to notify the weather class when we get a valid GPS reading
+    [_location addObserver:_weather
+               forKeyPath:@"GPSisValid"
+                  options:NSKeyValueObservingOptionNew
+                  context:nil ];
+}
+
++ (short int)inandr_compass_and_gps
+{
+    NSLog(@"initializing and running GPS");
+    _location = [ [Location alloc] initWithReference:self ];
+    [_location init_GPSLOGS];
+    _location.GPS_MODE = SAILING_STARTUP;
+    [_location run_GPS:nil ];
+    
+    NSLog(@"initializing and running compass");
+    _direction = [ [Direction alloc] initWithReference:self ];
+    [ _direction run_compass ];
+   return 1; 
+}
+
++ (short int)inandr_Database
+{
+    NSLog(@"initializing Database Access");
+    _DB = [[DatabaseAccess alloc] init];
+    _tripID = [_DB getLatestTripID];
+    return 1;
+    
+}
+
++ (short int)inandr_weather
+{
+    NSLog(@"initializing weather");
+    _weather = [ [Weather alloc] initWithReference:self ];
+    return 1;
+}
 
 
 @end
