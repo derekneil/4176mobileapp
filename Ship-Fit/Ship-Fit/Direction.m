@@ -50,9 +50,10 @@
         if ( [ self.shipFit_ref get_gps_mode ] != SAILING_STARTUP ){
             [self logHeading:newHeading];
         }
-        
+
+        // DEBUG        
         //[self print_logs_to_console];
-        //[self straight_travel ];
+        [ self straight_travel ];
     }
     else{
         NSLog(@"Time stamp for the compass is stale. Take the according action");
@@ -79,32 +80,41 @@
     [ _locationManager stopUpdatingHeading ];
 }
 
-// Keep a log of Compass readings within the last 2 minutes
+
+
+/*  Keeps a log of compass readings within the last two minutes. 
+    Adds the element
+    Removes elements that are older than 2 minutes
+    Note: the elements are stored from oldest to youngest.
+    If you hit an element that is valid you do not have to bother to check the rest. 
+    */
 - (void)logHeading: (CLHeading*)heading
 {
-    // Add the entry
-    [compassLogs insertObject:heading atIndex:0];
+    // Add the new entry
+    [compassLogs addObject:heading];
     
-    // Remove all elements older than 2 minutes
+    // Remove old entries
     CLHeading *info;
     int l = [compassLogs count],
-    o = 0;
-    for (; o < l; o++ )
+    i = 0 , v = 1;
+    while(v && (i < l))
     {
-        info = [compassLogs objectAtIndex:o];
-        if( [heading.timestamp timeIntervalSince1970] - [info.timestamp timeIntervalSince1970] > 120 )
-        {
-            [compassLogs removeObjectAtIndex:o];
-            o--;
-            l--;
+        info = [compassLogs objectAtIndex:0];
+        if ( [heading.timestamp timeIntervalSince1970] - [info.timestamp timeIntervalSince1970] < 120){
+            v = 0;
+            continue;
+        }
+        else{
+            [compassLogs removeObjectAtIndex:0];
+            i++;
         }
     }
 }
 
 // Function to calculate if the vessel is travelling on a relatively straight path
 // Calculates the std_deviation of all the compass readings within the last two minutes
-// If the std_deviation is within 30 degrees then return YES!
-- (BOOL)straight_travel
+// If the std_deviation is within X degrees then return YES!
+- (BOOL)straight_travel:
 {
     int l, o;
     double mean=0, std_deviation=0;
@@ -125,11 +135,12 @@
         runner = compassLogs[o];
         std_deviation += (runner.trueHeading - mean) * (runner.trueHeading - mean);
     }
-    std_deviation = sqrt(std_deviation / l);
+    std_deviation = sqrt( (std_deviation/l) );
     
     //NSLog(@"Std_Deviation: %f" , std_deviation);
     
-    if ( std_deviation < 15 ){
+    //JUST A GUESS. 
+    if ( std_deviation < 25.0000000 ){
         return YES;
     }
     else{
@@ -175,7 +186,7 @@
             break;
         case kCLAuthorizationStatusAuthorized:
             NSLog(@"Compass Services Authorized");
-            [self run_compass ];
+            [self run_compass];
             break;
     }
 }
