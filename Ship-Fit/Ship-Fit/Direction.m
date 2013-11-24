@@ -3,104 +3,40 @@
 #import "Direction.h"
 #import "Location.h"
 
-// We need a CLLocation Manager for our LocationManager Object
 @implementation Direction
 {
     CLLocationManager *_locationManager;
+    NSMutableArray *compassLogs;
 }
 
 
-// This is the default class initializer. It is passed a reference from the mother shipFit class
+// This is the default class initializer.
+// It is passed a reference from the shipFit class
+// Initializes the CLLocationManager Object
+// Initializes a mutable array for logging compass readings 
 - (id) initWithReference: (ShipFit *)reference
 {
     self = [super init];
-    if ( self ){
+    if ( self )
+    {
         _shipFit_ref = reference;
+        _locationManager = [ [CLLocationManager alloc] init ];
+        _locationManager.delegate = self;
+        compassLogs = [ [NSMutableArray alloc] init ];
     }
     return self;
 }
 
-- (void)run_compass
-{
-    if ( [ CLLocationManager headingAvailable ] )
-    {
-        _locationManager.headingFilter = 2;
-        [ _locationManager startUpdatingHeading ];
-    }
-    else{
-        NSLog(@"Compass Not Available");
-    }
-}
-
-- (void)logHeading: (CLHeading *)heading
-{
-    // Add the entry
-    [self.compass_readings insertObject:heading atIndex:0 ];
-    
-    // Remove all elements older than 2 minutes
-    int i;
-    for (i = 0; i < [self.compass_readings count]; i++ )
-    {
-        CLHeading *info = [self.compass_readings objectAtIndex:i];
-        if( [heading.timestamp timeIntervalSince1970] - [info.timestamp timeIntervalSince1970] > 120 )
-        {
-            [self.compass_readings removeObjectAtIndex:i];
-            i--;
-        }
-    }
-    
-}
-
-- (BOOL)straight_travel
-{
-    int l = [self.compass_readings count];
-    int o = 0;
-    double theBaseReading;
-    CLHeading *recent = [self.compass_readings objectAtIndex:0];
-    
-    if ( self.shipFit_ref.isTrueNorth){
-        theBaseReading = recent.trueHeading;
-    }
-    else{
-        theBaseReading = recent.magneticHeading;
-    }
-    
-    while ( o < l )
-    {
-        recent = [self.compass_readings objectAtIndex:o];
-        
-        if ( self.shipFit_ref.isTrueNorth )
-        {
-            if ( (theBaseReading - recent.trueHeading > 7.5 ) || (theBaseReading - recent.trueHeading < -7.5 )  )
-            {
-                return NO;
-            }
-        }
-        else
-        {
-            if ( (theBaseReading - recent.magneticHeading > 7.5 ) || (theBaseReading - recent.magneticHeading < -7.5 ) )
-            {
-                return NO;
-            }
-        }
-        o++;
-    }
-    NSLog(@"Travelling Straight!!!!!");
-    return YES;
-}
-
-- (void)halt_compass
-{
-    [ _locationManager stopUpdatingHeading ];
-}
-
 // Delegate Method for Compass Events
+// Make sure the time stamp is within the last 5 seconds
+// Update display based on the mode of compass (true vs magnetic north)
+// Log the compass reading
 - (void)locationManager:(CLLocationManager *)manager
        didUpdateHeading:(CLHeading *)newHeading
 {
-    NSLog(@"%@", newHeading);
-    if ( ( [ [ NSDate date ]  timeIntervalSince1970 ] - 
-        [newHeading.timestamp timeIntervalSince1970 ] ) < 60 )
+    //NSLog(@"%@", newHeading);
+    if ( ( [ [ NSDate date ]  timeIntervalSince1970 ] -
+          [newHeading.timestamp timeIntervalSince1970 ] ) < 5 )
     {
         if ( self.shipFit_ref.isTrueNorth ){
             self.shipFit_ref.compassDegrees = newHeading.trueHeading;
@@ -108,20 +44,110 @@
         else{
             self.shipFit_ref.compassDegrees = newHeading.magneticHeading;
         }
+        
         [ self set_bearing ];
         
-        // If we are not in Startup mode we need to log the GPS
-        // This is for predictive tracking of the vessel.
-        if ( [ self.shipFit_ref get_gps_mode ] != SAILING_STARTUP ){
+        if ( [ self.shipFit_ref get_gps_mode ] != GPS_ALL ){
             [self logHeading:newHeading];
         }
+
+        // DEBUG        
+        //[self print_logs_to_console];
+        [ self straight_travel ];
     }
     else{
         NSLog(@"Time stamp for the compass is stale. Take the according action");
     }
 }
 
+// Run the compass with heading filter 5
+- (void)run_compass
+{
+    if ( [ CLLocationManager headingAvailable ] )
+    {
+        _locationManager.headingFilter = 5;
+        [ _locationManager startUpdatingHeading ];
+    }
+    else
+    {
+        NSLog(@"Compass Not Available");
+    }
+}
 
+// Stop running the compass
+- (void)halt_compass
+{
+    [ _locationManager stopUpdatingHeading ];
+}
+
+
+
+/*  Keeps a log of compass readings within the last two minutes. 
+    Adds the element
+    Removes elements that are older than 2 minutes
+    Note: the elements are stored from oldest to youngest.
+    If you hit an element that is valid you do not have to bother to check the rest. 
+    */
+- (void)logHeading: (CLHeading*)heading
+{
+    // Add the new entry
+    [compassLogs addObject:heading];
+    
+    // Remove old entries
+    CLHeading *info;
+    int l = [compassLogs count],
+    i = 0 , v = 1;
+    while(v && (i < l))
+    {
+        info = [compassLogs objectAtIndex:0];
+        if ( [heading.timestamp timeIntervalSince1970] - [info.timestamp timeIntervalSince1970] < 120){
+            v = 0;
+            continue;
+        }
+        else{
+            [compassLogs removeObjectAtIndex:0];
+            i++;
+        }
+    }
+}
+
+// Function to calculate if the vessel is travelling on a relatively straight path
+// Calculates the std_deviation of all the compass readings within the last two minutes
+// If the std_deviation is within X degrees then return YES!
+- (BOOL)straight_travel
+{
+    int l, o;
+    double mean=0, std_deviation=0;
+    CLHeading *runner;
+    
+    //calculate the mean of the compass readings
+    l = [compassLogs count];
+    for (o = 0; o < l; o++ )
+    {
+        runner = compassLogs[o];
+        mean += runner.trueHeading;
+    }
+    mean = mean / l;
+    
+    //calculate the std_deviation
+    for(o=0; o < l; o++)
+    {
+        runner = compassLogs[o];
+        std_deviation += (runner.trueHeading - mean) * (runner.trueHeading - mean);
+    }
+    std_deviation = sqrt( (std_deviation/l) );
+    
+    //NSLog(@"Std_Deviation: %f" , std_deviation);
+    
+    //JUST A GUESS. 
+    if ( std_deviation < 25.0000000 ){
+        return YES;
+    }
+    else{
+        return NO;
+    }
+}
+    
 // Sets the properties:
 // magnetic_north_bearing
 // true_north_bearing
@@ -159,12 +185,18 @@
             NSLog(@"Compass Services Denied");
             break;
         case kCLAuthorizationStatusAuthorized:
-            _compass_readings = [ [NSMutableArray alloc] init ];
-            _locationManager = [ [CLLocationManager alloc] init ] ;
-            _locationManager.delegate = self;
             NSLog(@"Compass Services Authorized");
-            [self run_compass ];
+            [self run_compass];
             break;
+    }
+}
+
+- (void)print_logs_to_console
+{
+    int i;
+    for (i = 0; i < [compassLogs count]; i++)
+    {
+        NSLog(@"%@",[compassLogs objectAtIndex:i]);
     }
 }
 
@@ -173,6 +205,5 @@
 {
     NSLog( @"COMPASS_ERROR\n%@" , error );
 }
-
 
 @end
