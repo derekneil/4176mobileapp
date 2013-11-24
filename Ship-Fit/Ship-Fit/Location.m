@@ -173,7 +173,7 @@
 
 
 {
-    if( self.GPS_MODE != SAILING_STARTUP){
+    if( self.GPS_MODE != GPS_ALL){
         [self halt_GPS];
     }
 
@@ -194,7 +194,7 @@
 - (void)locationManager: (CLLocationManager *)manager
      didUpdateLocations:(NSArray *)locations
 {
-    if (self.GPS_MODE != SAILING_STARTUP)\
+    if (self.GPS_MODE != GPS_ALL)\
     {
         [self halt_GPS];  
     } 
@@ -240,6 +240,11 @@
         // update the lat/long display
         self.shipFit_ref.latitude = current_location.coordinate.latitude;
         self.shipFit_ref.longitude = current_location.coordinate.longitude;
+            
+        // FLIP THE WEATHER SWITCH
+        if( !self.GPSisValid ){
+            self.GPSisValid = YES;
+        }
         
         NSLog( @"LAT: %f LONG: %f KNOTS:%f" , self.shipFit_ref.latitude , self.shipFit_ref.longitude , self.shipFit_ref.knots );
     }
@@ -247,11 +252,7 @@
         NSLog(@"not updating GPS display");
     }
 
-    // FLIP THE WEATHER SWITCH
-    if( !self.GPSisValid )
-    {
-        self.GPSisValid = YES;
-    }
+    
 }
 
 
@@ -264,6 +265,8 @@
 - (double)calculateSpeed
 {
     CLLocationCoordinate2D *locationRunner = locationHead + 1;
+    CLLocation *coordinate1 = [[CLLocation alloc] initWithLatitude:locationHead->latitude longitude:locationHead->longitude ],
+    *coordinate2;
     double  speed = 0, 
             *timeRunner = timeHead + 1,
             weight = 0.51612;
@@ -271,60 +274,62 @@
 
     for (i = 0; i < 5; i++ , locationRunner++ , timeRunner++ )
     {
-        double distance = [self haversine_km_withLat1:locationHead->latitude Lon1:locationHead->longitude Lat2:locationRunner->latitude Lon2:locationRunner->longitude];
-        double elapsed_time = *timeHead - *timeRunner;
-        double velocity = distance / elapsed_time;
+        coordinate2 = [ [CLLocation alloc] initWithLatitude:locationRunner->latitude longitude:locationRunner->longitude];
+        double d = [ coordinate1 distanceFromLocation:coordinate2];
+        //double distance = [self haversine_km_withLat1:locationHead->latitude Lon1:locationHead->longitude Lat2:locationRunner->latitude Lon2:locationRunner->longitude];
+        NSLog(@"distance travelled: %f", d);
+        double t = *timeHead - *timeRunner;
+        double velocity = d / t;
 
         if ( velocity < 0 ){
             velocity *= -1;
         }
-
         speed += (weight)*(velocity);
     }
     return speed * 1.94384;
 }
 
-- (double) haversine_km_withLat1: (double) lat1 Lon1: (double) lon1 Lat2: (double) lat2 Lon2: (double) lon1
-{
-    double R = 6371;
-    double RAD = (M_PI * 180.0 );
-    double dlon = (lon1 - lon2) * RAD;  // convert from degrees to radians
-    double dlat = (lat1 - lat2 ) * RAD; // convert from degrees to radian
-    double a = pow(sin(dlat/2.0) , 2) * cos(lat1*RAD) * cos(lat2*RAD) * pow(sin(dlon/2.0),2);
-    double c = 2 * atan( sqrt(a), sqrt(1-a) );
-    return c * R;
-}
+//- (double) haversine_km_withLat1: (double) lat1 Lon1: (double) lon1 Lat2: (double) lat2 Lon2: (double) lon2
+//{
+//    double R = 6371;
+//    double RAD = ( M_PI * 180.0 );
+//    double dlon = (lon1 - lon2) * RAD;  // convert from degrees to radians
+//    double dlat = (lat1 - lat2 ) * RAD; // convert from degrees to radian
+//    double a = pow(sin(dlat/2.0) , 2) * cos(lat1*RAD) * cos(lat2*RAD) * pow(sin(dlon/2.0),2);
+//    double c = 2 * atan2( sqrt(a), sqrt(1-a) );
+//    return c * R * 1000;
+//}
 
 - (void)evaluate_GPS_MODE
 {
     switch (self.GPS_MODE)
     {
-        case SAILING_STARTUP:
+        case GPS_ALL:
           if ( [self upgrade_GPS_from_startup_to_rough] ){
-            self.GPS_MODE = SAILING_ROUGH;
+            self.GPS_MODE = GPS_SHORT;
           }
           break;  
-        case SAILING_ROUGH:
-            NSLog(@"GPS MODE: ROUGH");
+        case GPS_SHORT:
+            NSLog(@"GPS MODE: GPS_SHORT");
             _theTimer = [NSTimer scheduledTimerWithTimeInterval:15
                                                          target:self
                                                        selector:@selector(run_GPS:)
                                                        userInfo:nil
                                                         repeats:NO ];
             if ( [self upgrade_GPS_from_rough_to_smooth] ){
-                self.GPS_MODE = SAILING_SMOOTH;
+                self.GPS_MODE = GPS_LONG;
             }
             break;
             
-        case SAILING_SMOOTH:
-            NSLog(@"GPS MODE: SMOOTH");
+        case GPS_LONG:
+            NSLog(@"GPS MODE: GPS_LONG");
             _theTimer = [NSTimer scheduledTimerWithTimeInterval:60
                                                          target:self
                                                        selector:@selector(run_GPS:)
                                                        userInfo:nil
                                                         repeats:NO ];
             if ( [self upgrade_GPS_from_rough_to_smooth] == NO ){
-                self.GPS_MODE = SAILING_SMOOTH;
+                self.GPS_MODE = GPS_SHORT;
             }
             break;
     }
@@ -346,9 +351,9 @@
             }
         }
 
-        // SAILING_STARTUP TO SAILING_ROUGH TRANSITION
+        // GPS_ALL TO GPS_SHORT TRANSITION
         if (o){
-            return YES:
+            return YES;
         }
         else{
             return NO;

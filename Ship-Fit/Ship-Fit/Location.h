@@ -6,9 +6,9 @@
 // Enumeration for modes of GPS
 enum GPS_OPERATION_MODE
 {
-    SAILING_STARTUP, // Captures all location events
-    SAILING_ROUGH,   // Polls the GPS every 15 seconds
-    SAILING_SMOOTH   // Polls the GPS every 60 seconds (uses predictive GPS in between pollings)
+    GPS_ALL,    // Captures all location events
+    GPS_SHORT,  // Polls the GPS every 15 seconds
+    GPS_LONG    // Polls the GPS every 60 seconds (uses predictive GPS in between pollings)
 };
 
 @interface Location : NSObject <CLLocationManagerDelegate>

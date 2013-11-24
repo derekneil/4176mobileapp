@@ -47,7 +47,7 @@
         
         [ self set_bearing ];
         
-        if ( [ self.shipFit_ref get_gps_mode ] != SAILING_STARTUP ){
+        if ( [ self.shipFit_ref get_gps_mode ] != GPS_ALL ){
             [self logHeading:newHeading];
         }
 
@@ -114,7 +114,7 @@
 // Function to calculate if the vessel is travelling on a relatively straight path
 // Calculates the std_deviation of all the compass readings within the last two minutes
 // If the std_deviation is within X degrees then return YES!
-- (BOOL)straight_travel:
+- (BOOL)straight_travel
 {
     int l, o;
     double mean=0, std_deviation=0;

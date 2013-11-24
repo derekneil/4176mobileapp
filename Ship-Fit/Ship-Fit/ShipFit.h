@@ -36,10 +36,10 @@ extern NSString *const ERROR;
 - (void)init_and_run_application;
 - (unsigned short int)get_gps_mode;
 - (BOOL)currently_sailing_straight;
-+ (void)setApplicationDefaults;
-+ (void)setUpObservers;
-+ (short int)inandr_compass_and_gps
-+ (short int)inandr_Database
-+ (short int)inandr_weather
+- (void)setApplicationDefaults;
+- (void)setUpObservers;
+- (short int)inandr_compass_and_gps;
+- (short int)inandr_Database;
+- (short int)inandr_weather;
 
 @end

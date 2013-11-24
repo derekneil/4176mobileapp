@@ -25,11 +25,11 @@ NSString *const ERROR = @"ERROR";
 
 - (void)init_and_run_application
 {
-    [ ShipFit inandr_compass_and_gps ];
-    [ ShipFit inandr_weather];
-    [ ShipFit inandr_Database];
-    [ ShipFit setApplicationDefaults];
-    [ ShipFit setUpObservers]; 
+    [ self inandr_compass_and_gps ];
+    [ self inandr_weather];
+    [ self inandr_Database];
+    [ self setApplicationDefaults];
+    [ self setUpObservers];
 }
 
 - (unsigned short int)get_gps_mode
@@ -42,14 +42,15 @@ NSString *const ERROR = @"ERROR";
     return [_direction straight_travel];
 }
 
-+ (void)setApplicationDefaults
+- (void)setApplicationDefaults
 {
     /* Set Defaults for Application Start-up */
     self.isTrueNorth = YES;
+    //(__bridge struct objc_class *)(self).isTrueNorth = YES;
     printf("setting application defaults\n");
 }
 
-+ (void)setUpObservers
+- (void)setUpObservers
 {
     // Set up an observer to notify the weather class when we get a valid GPS reading
     [_location addObserver:_weather
@@ -58,12 +59,12 @@ NSString *const ERROR = @"ERROR";
                   context:nil ];
 }
 
-+ (short int)inandr_compass_and_gps
+- (short int)inandr_compass_and_gps
 {
     NSLog(@"initializing and running GPS");
     _location = [ [Location alloc] initWithReference:self ];
     [_location init_GPSLOGS];
-    _location.GPS_MODE = SAILING_STARTUP;
+    _location.GPS_MODE = GPS_ALL;
     [_location run_GPS:nil ];
     
     NSLog(@"initializing and running compass");
@@ -72,7 +73,7 @@ NSString *const ERROR = @"ERROR";
    return 1; 
 }
 
-+ (short int)inandr_Database
+- (short int)inandr_Database
 {
     NSLog(@"initializing Database Access");
     _DB = [[DatabaseAccess alloc] init];
@@ -81,7 +82,7 @@ NSString *const ERROR = @"ERROR";
     
 }
 
-+ (short int)inandr_weather
+- (short int)inandr_weather
 {
     NSLog(@"initializing weather");
     _weather = [ [Weather alloc] initWithReference:self ];
