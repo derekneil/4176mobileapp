@@ -725,7 +725,12 @@
 				);
 				INFOPLIST_FILE = "Ship-Fit/Ship-Fit-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/derekneil/Google\\ Drive/Dropbox/4176\\ Mobile/project/Ship-Fit/mapbox-ios-sdk/Proj4",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -746,7 +751,12 @@
 				);
 				INFOPLIST_FILE = "Ship-Fit/Ship-Fit-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/derekneil/Google\\ Drive/Dropbox/4176\\ Mobile/project/Ship-Fit/mapbox-ios-sdk/Proj4",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
