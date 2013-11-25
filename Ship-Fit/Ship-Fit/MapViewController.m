@@ -192,13 +192,13 @@
     
 }
 
-- (MKOverlayView *) mapView:(MKMapView*)delMapView viewForOverlay:(id)overlay{
-    MKPolylineView* polyLineView = [[MKPolylineView alloc] initWithOverlay:overlay];
-    polyLineView.strokeColor = [UIColor blueColor];
-    polyLineView.lineWidth = 3.0;
-    NSLog(@"mapView polylineView configured");
-    return polyLineView;
-}
+//- (MKOverlayView *) mapView:(MKMapView*)delMapView viewForOverlay:(id)overlay{
+//    MKPolylineView* polyLineView = [[MKPolylineView alloc] initWithOverlay:overlay];
+//    polyLineView.strokeColor = [UIColor blueColor];
+//    polyLineView.lineWidth = 3.0;
+//    NSLog(@"mapView polylineView configured");
+//    return polyLineView;
+//}
 
 //END MKMapView protocol-------
 
