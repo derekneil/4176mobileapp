@@ -224,10 +224,10 @@
 - (void)updateShipFitLocation: (CLLocation*) current_location
 {
      // Set the speed
-    if ( _count > 5 && ( ( [ [ NSDate date ]  timeIntervalSince1970 ] - [current_location.timestamp timeIntervalSince1970 ] ) < 3 ) )    
+    if ( _count > 5 && ( [ [ NSDate date ]  timeIntervalSince1970 ] - [current_location.timestamp timeIntervalSince1970 ] ) < 60  )
     {
-        self.shipFit_ref.knots = [ self calculateSpeed];
-        //self.shipFit_ref.knots = current_location.speed * 1.94384;
+        NSLog(@"bens function: %f km/h", [self calculateSpeed]);
+        self.shipFit_ref.knots = (0.539957) * ([ self calculateSpeed ]);
     }
 
     // Set the latitude and longitude 
@@ -276,8 +276,6 @@
     {
         coordinate2 = [ [CLLocation alloc] initWithLatitude:locationRunner->latitude longitude:locationRunner->longitude];
         double d = [ coordinate1 distanceFromLocation:coordinate2];
-        //double distance = [self haversine_km_withLat1:locationHead->latitude Lon1:locationHead->longitude Lat2:locationRunner->latitude Lon2:locationRunner->longitude];
-        NSLog(@"distance travelled: %f", d);
         double t = *timeHead - *timeRunner;
         double velocity = d / t;
 
@@ -285,20 +283,11 @@
             velocity *= -1;
         }
         speed += (weight)*(velocity);
+        weight /= 2;
     }
-    return speed * 1.94384;
+    return speed * 3.6;
 }
 
-//- (double) haversine_km_withLat1: (double) lat1 Lon1: (double) lon1 Lat2: (double) lat2 Lon2: (double) lon2
-//{
-//    double R = 6371;
-//    double RAD = ( M_PI * 180.0 );
-//    double dlon = (lon1 - lon2) * RAD;  // convert from degrees to radians
-//    double dlat = (lat1 - lat2 ) * RAD; // convert from degrees to radian
-//    double a = pow(sin(dlat/2.0) , 2) * cos(lat1*RAD) * cos(lat2*RAD) * pow(sin(dlon/2.0),2);
-//    double c = 2 * atan2( sqrt(a), sqrt(1-a) );
-//    return c * R * 1000;
-//}
 
 - (void)evaluate_GPS_MODE
 {
