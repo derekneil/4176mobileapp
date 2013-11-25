@@ -176,48 +176,20 @@
     }];
 }
 
-//MKMapView protocol----------
-//- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
-//{
-//    
-////    //update pathTraveled to draw on screen
-////    CLLocation *location = [[CLLocation alloc] initWithLatitude: userLocation.coordinate.latitude
-////                                                      longitude: userLocation.coordinate.longitude];
-////    if(pathTraveled==Nil){
-////        pathTraveled = [[NSMutableArray alloc] initWithObjects:location, nil];
-////    }
-////    [pathTraveled addObject:location];
-////
-////    [self updatePathOverlay];
-//    
-//}
-
-//- (MKOverlayView *) mapView:(MKMapView*)delMapView viewForOverlay:(id)overlay{
-//    MKPolylineView* polyLineView = [[MKPolylineView alloc] initWithOverlay:overlay];
-//    polyLineView.strokeColor = [UIColor blueColor];
-//    polyLineView.lineWidth = 3.0;
-//    NSLog(@"mapView polylineView configured");
-//    return polyLineView;
-//}
-
-//END MKMapView protocol-------
-
-
 - (IBAction)zoomToMe:(id)sender {
-//    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(_shipfit.latitude, _shipfit.longitude);
-//    [self.mapView setCenterCoordinate:*(_shipfit.gps_head) animated:YES];
+    [self.mapView setCenterCoordinate:*(_shipfit.gps_head) animated:YES];
 }
 
 - (IBAction)zoomChange:(id)sender {
     
-//    CGPoint point = CGPointMake(self.shipfit.latitude, self.shipfit.longitude);
+    CGPoint point = CGPointMake(self.shipfit.latitude, self.shipfit.longitude);
     
     //get user change
     if(sender == _zoomInButton){
-//        [self.mapView zoomInToNextNativeZoomAt:point animated:YES];
+        [self.mapView zoomInToNextNativeZoomAt:point animated:YES];
     }
     else if(sender == _zoomOutButton){
-//        [self.mapView zoomOutToNextNativeZoomAt:point animated:YES];
+        [self.mapView zoomOutToNextNativeZoomAt:point animated:YES];
     }
 
 }
