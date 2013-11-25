@@ -294,7 +294,7 @@
     switch (self.GPS_MODE)
     {
         case GPS_ALL:
-          if ( [self upgrade_GPS_from_startup_to_rough] ){
+          if ( [self change_GPSMode_toShort] ){
             self.GPS_MODE = GPS_SHORT;
           }
           break;  
@@ -305,7 +305,7 @@
                                                        selector:@selector(run_GPS:)
                                                        userInfo:nil
                                                         repeats:NO ];
-            if ( [self upgrade_GPS_from_rough_to_smooth] ){
+            if ( [ self change_GPSMode_toLong ] ){
                 self.GPS_MODE = GPS_LONG;
             }
             break;
@@ -317,17 +317,16 @@
                                                        selector:@selector(run_GPS:)
                                                        userInfo:nil
                                                         repeats:NO ];
-            if ( [self upgrade_GPS_from_rough_to_smooth] == NO ){
+            if ( [self change_GPSMode_toLong] == NO){
                 self.GPS_MODE = GPS_SHORT;
             }
             break;
     }
 }
 
-- (BOOL)upgrade_GPS_from_startup_to_rough
+- (BOOL)change_GPSMode_toShort
 {
     int l, o;
-
     if ( self.shipFit_ref.gps_count < 15 ){
         return NO;
     }
@@ -339,8 +338,6 @@
                 break;
             }
         }
-
-        // GPS_ALL TO GPS_SHORT TRANSITION
         if (o){
             return YES;
         }
@@ -350,7 +347,7 @@
     }
 }
 
-- (BOOL)upgrade_GPS_from_rough_to_smooth
+- (BOOL)change_GPSMode_toLong
 {
     if ( [self.shipFit_ref currently_sailing_straight] )
     {
