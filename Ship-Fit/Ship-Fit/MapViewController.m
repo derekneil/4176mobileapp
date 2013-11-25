@@ -15,7 +15,7 @@
 
 @implementation MapViewController {
     NSMutableArray* pathTraveled;
-    MKPolyline* path;
+//    MKPolyline* path;
     BOOL drawPathisOn;
     NSDictionary* weatherJSON;
 }
@@ -177,20 +177,20 @@
 }
 
 //MKMapView protocol----------
-- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
-{
-    
-//    //update pathTraveled to draw on screen
-//    CLLocation *location = [[CLLocation alloc] initWithLatitude: userLocation.coordinate.latitude
-//                                                      longitude: userLocation.coordinate.longitude];
-//    if(pathTraveled==Nil){
-//        pathTraveled = [[NSMutableArray alloc] initWithObjects:location, nil];
-//    }
-//    [pathTraveled addObject:location];
-//
-//    [self updatePathOverlay];
-    
-}
+//- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
+//{
+//    
+////    //update pathTraveled to draw on screen
+////    CLLocation *location = [[CLLocation alloc] initWithLatitude: userLocation.coordinate.latitude
+////                                                      longitude: userLocation.coordinate.longitude];
+////    if(pathTraveled==Nil){
+////        pathTraveled = [[NSMutableArray alloc] initWithObjects:location, nil];
+////    }
+////    [pathTraveled addObject:location];
+////
+////    [self updatePathOverlay];
+//    
+//}
 
 //- (MKOverlayView *) mapView:(MKMapView*)delMapView viewForOverlay:(id)overlay{
 //    MKPolylineView* polyLineView = [[MKPolylineView alloc] initWithOverlay:overlay];

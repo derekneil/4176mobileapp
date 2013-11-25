@@ -712,8 +712,7 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/derekneil/Google\\ Drive/Dropbox/4176\\ Mobile/project/mapAppOffline",
-					"/Users/derekneil/Google\\ Drive/Dropbox/4176\\ Mobile/project/Ship-Fit",
+					"$(SRCROOT)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ship-Fit/Ship-Fit-Prefix.pch";
@@ -727,7 +726,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/derekneil/Google\\ Drive/Dropbox/4176\\ Mobile/project/Ship-Fit/mapbox-ios-sdk/Proj4",
+					"$(SRCROOT)/**",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -741,8 +740,7 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/derekneil/Google\\ Drive/Dropbox/4176\\ Mobile/project/mapAppOffline",
-					"/Users/derekneil/Google\\ Drive/Dropbox/4176\\ Mobile/project/Ship-Fit",
+					"$(SRCROOT)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ship-Fit/Ship-Fit-Prefix.pch";
@@ -754,7 +752,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/derekneil/Google\\ Drive/Dropbox/4176\\ Mobile/project/Ship-Fit/mapbox-ios-sdk/Proj4",
+					"$(SRCROOT)/**",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
