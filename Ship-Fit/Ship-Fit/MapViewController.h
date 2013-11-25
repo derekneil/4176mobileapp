@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "ShipFit.h"
+#import <MapBox/MapBox.h>
 
-@interface MapViewController : UIViewController <MKMapViewDelegate>
+@interface MapViewController : UIViewController <RMMapViewDelegate>
 
-@property (weak, nonatomic) IBOutlet MKMapView *mapView;
-
+@property (strong, nonatomic) IBOutlet RMMapView *mapView;
 @property (weak, nonatomic) IBOutlet UILabel *latLabel;
 @property (weak, nonatomic) IBOutlet UILabel *longLabel;
 @property (weak, nonatomic) IBOutlet UILabel *speedLabel;

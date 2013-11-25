@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="4514" systemVersion="13A3017" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" initialViewController="4">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <development version="4600" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
         <!--View Controller - Settings-->
@@ -29,9 +29,6 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="499"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" id="q59-KX-QPi">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="499"/>
-                            </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="rsA-Gc-ZMi">
                                 <rect key="frame" x="75" y="399" width="74" height="44"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -169,7 +166,6 @@
                         <outlet property="compDirLabel" destination="H2G-7K-1hC" id="Jvv-AL-YGt"/>
                         <outlet property="latLabel" destination="R7I-Mo-Ua1" id="ZBt-Da-aLA"/>
                         <outlet property="longLabel" destination="ak1-fR-8eO" id="nA6-x0-YPY"/>
-                        <outlet property="mapView" destination="q59-KX-QPi" id="R2J-gA-fQn"/>
                         <outlet property="speedLabel" destination="Gp5-zY-g1n" id="xMi-uj-Hsp"/>
                         <outlet property="sunLabel" destination="ex7-1Z-3RE" id="lvu-rZ-QQd"/>
                         <outlet property="tempHighLabel" destination="56C-xh-xvh" id="u2J-ne-wn3"/>

@@ -37,18 +37,33 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    //source http://www.appcoda.com/ios-programming-101-drop-a-pin-on-map-with-mapkit-api/
-    self.mapView.delegate = self;
-    
+
     //TODO: restore previous state
     drawPathisOn = FALSE;
     
     //check for bottom layout guide and adjust up the bottom alignment
     
-    //outlet collections, or just name them the samef
+    RMMapBoxSource *interactiveSource = [[RMMapBoxSource alloc] initWithMapID:@"krazyderek.g8dkgmh4"];
     
-    //use AFNetworking APHTTPequestOperationManager to get navionics (serverside api calls) instead of using NSURL directly
+    mapView = [[RMMapView alloc] initWithFrame:self.view.bounds andTilesource:interactiveSource];
     
+    RMMBTilesSource *offlineSource = [[RMMBTilesSource alloc] initWithTileSetResource:@"Ship-Fit0-8" ofType:@"mbtiles"];
+    
+    [mapView addTileSource:offlineSource];
+    
+    mapView.delegate = self;
+    
+    mapView.zoom = 4;
+    
+    mapView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    
+    mapView.adjustTilesForRetinaDisplay = YES; // these tiles aren't designed specifically for retina, so make them legible
+    
+    //allow lower resolution tiles to be used when zooming in
+    mapView.missingTilesDepth = 6;
+    
+    //insert map below everything else on the storyboard
+    [self.view insertSubview:mapView atIndex:0];
     
 }
 
@@ -189,32 +204,29 @@
 
 
 - (IBAction)zoomToMe:(id)sender {
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(mapView.userLocation.coordinate, 1000, 1000);
-    [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
+//    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(_shipfit.latitude, _shipfit.longitude);
+    [self.mapView setCenterCoordinate:*(_shipfit.gps_head) animated:YES];
 }
 
 - (IBAction)zoomChange:(id)sender {
     
-    //starting source https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/LocationAwarenessPG/MapKit/MapKit.html#//apple_ref/doc/uid/TP40009497-CH3-SW1
-    MKCoordinateRegion theRegion = mapView.region;
+    CGPoint point = CGPointMake(self.shipfit.latitude, self.shipfit.longitude);
     
     //get user change
-    double change = 1.5; //assume zooming out
     if(sender == _zoomInButton){
-        change = 0.5;
+        [self.mapView zoomInToNextNativeZoomAt:point animated:YES];
     }
-    //change region view on map
-    theRegion.span.longitudeDelta *= change;
-    theRegion.span.latitudeDelta *= change;
-    [mapView setRegion:theRegion animated:YES];
+    else if(sender == _zoomOutButton){
+        [self.mapView zoomOutToNextNativeZoomAt:point animated:YES];
+    }
 
 }
 
 -(void) updatePathOverlay{
     
     if ( drawPathisOn &&  _shipfit.gps_count != 0 ){
-        path = [MKPolyline polylineWithCoordinates:self.shipfit.gps_head count:self.shipfit.gps_count];
-        [self.mapView addOverlay:path];
+//        path = [MKPolyline polylineWithCoordinates:self.shipfit.gps_head count:self.shipfit.gps_count];
+//        [self.mapView addOverlay:path];
         NSLog(@"mapView Path updated shipfit.gps_count->%d",_shipfit.gps_count);
     }
     
@@ -232,7 +244,7 @@
 }
 
 - (void) removePathOverlay{
-    [self.mapView removeOverlay:path];
+//    [self.mapView removeOverlay:path];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
