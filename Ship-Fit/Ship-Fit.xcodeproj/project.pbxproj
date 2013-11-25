@@ -18,7 +18,7 @@
 		3566D59A1842C2E8007B1E98 /* MapBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3566D5991842C2E8007B1E98 /* MapBox.framework */; };
 		3566D59E1842C322007B1E98 /* MapBox.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3566D59D1842C322007B1E98 /* MapBox.bundle */; };
 		3566D5A21842C45E007B1E98 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3566D5A11842C45E007B1E98 /* libsqlite3.dylib */; };
-		3566D5A41842C8A7007B1E98 /* Ship-Fit0-8.mbtiles in Resources */ = {isa = PBXBuildFile; fileRef = 3566D5A31842C8A7007B1E98 /* Ship-Fit0-8.mbtiles */; };
+		3566D5A41842C8A7007B1E98 /* Ship-Fit.mbtiles in Resources */ = {isa = PBXBuildFile; fileRef = 3566D5A31842C8A7007B1E98 /* Ship-Fit.mbtiles */; };
 		35CFA5031842CFA9001E53CA /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3566D59F1842C44B007B1E98 /* libz.dylib */; };
 		655D9D0718340F750004CD21 /* DatabaseMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9CF718340F750004CD21 /* DatabaseMainViewController.m */; };
 		655D9D0918340F750004CD21 /* shipfit_Index.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 655D9CFA18340F750004CD21 /* shipfit_Index.sqlite */; };
@@ -105,7 +105,7 @@
 		3566D59D1842C322007B1E98 /* MapBox.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MapBox.bundle; path = MapBox.framework/Resources/MapBox.bundle; sourceTree = "<group>"; };
 		3566D59F1842C44B007B1E98 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		3566D5A11842C45E007B1E98 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		3566D5A31842C8A7007B1E98 /* Ship-Fit0-8.mbtiles */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ship-Fit0-8.mbtiles"; sourceTree = "<group>"; };
+		3566D5A31842C8A7007B1E98 /* Ship-Fit.mbtiles */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ship-Fit.mbtiles"; sourceTree = "<group>"; };
 		655D9CF618340F750004CD21 /* DataBaseMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DataBaseMainViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		655D9CF718340F750004CD21 /* DatabaseMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DatabaseMainViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		655D9CFA18340F750004CD21 /* shipfit_Index.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = shipfit_Index.sqlite; sourceTree = "<group>"; };
@@ -354,7 +354,7 @@
 		658DA5DA1832D88D003B6952 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				3566D5A31842C8A7007B1E98 /* Ship-Fit0-8.mbtiles */,
+				3566D5A31842C8A7007B1E98 /* Ship-Fit.mbtiles */,
 				658DA5A91832D818003B6952 /* MainStoryboard_iPhone.storyboard */,
 				658DA5AC1832D818003B6952 /* MainStoryboard_iPad.storyboard */,
 				655D9D2E183434B90004CD21 /* TabBarIcons */,
@@ -523,7 +523,7 @@
 				D56337A71838101A00A9EDE8 /* Status-weather-snow-rain-icon.png in Resources */,
 				D56337A81838101A00A9EDE8 /* Status-weather-snow-icon.png in Resources */,
 				D56337A91838101A00A9EDE8 /* Status-weather-many-clouds-icon.png in Resources */,
-				3566D5A41842C8A7007B1E98 /* Ship-Fit0-8.mbtiles in Resources */,
+				3566D5A41842C8A7007B1E98 /* Ship-Fit.mbtiles in Resources */,
 				03D99467183ACD2F0061382E /* erd.png in Resources */,
 				3566D59E1842C322007B1E98 /* MapBox.bundle in Resources */,
 				D56337AA1838101A00A9EDE8 /* Status-weather-clouds-night-icon.png in Resources */,

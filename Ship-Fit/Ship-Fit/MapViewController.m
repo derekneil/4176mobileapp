@@ -47,7 +47,7 @@
     
     mapView = [[RMMapView alloc] initWithFrame:self.view.bounds andTilesource:interactiveSource];
     
-    RMMBTilesSource *offlineSource = [[RMMBTilesSource alloc] initWithTileSetResource:@"Ship-Fit0-8" ofType:@"mbtiles"];
+    RMMBTilesSource *offlineSource = [[RMMBTilesSource alloc] initWithTileSetResource:@"Ship-Fit" ofType:@"mbtiles"];
     
     [mapView addTileSource:offlineSource];
     
