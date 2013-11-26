@@ -60,6 +60,10 @@
 {
     [super viewDidLoad];
     
+    //[self createDatabase];
+    //[self fillDatabaseFromXMLFile];
+    
+    
     NSError *error = nil;
     if (![[self fetchedResultsController]performFetch:&error]) {
         NSLog(@"errorrr! %@", error);
@@ -119,6 +123,8 @@
     }
     [self.tableView reloadData];
     
+
+    
 }
 - (void)viewWillDisappear:(BOOL)animated{
     self.navigationController.navigationBar.hidden = NO;
@@ -168,25 +174,27 @@
 }
 
 
-/*
+
 //Asks the data source for the title of the header of the specified section of the table view.
 //source: https://developer.apple.com/library/ios/documentation/uikit/reference/UITableViewDataSource_Protocol/Reference/Reference.html#//apple_ref/occ/intfm/UITableViewDataSource/tableView:titleForHeaderInSection:
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     return [[[self.fetchedResultsController sections]objectAtIndex:section]name];
 }
-*/
+
 
 
 #pragma mark NSFetchedResultsController methods
 
 //------ custome accessor method -----------------
 -(NSFetchedResultsController *) fetchedResultsController{
-    _query = @"";
+    
     if(_fetchedResultsController !=nil){
         return _fetchedResultsController;
     }
     
     //create a fetch request
+    _query = @"";
+    
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"ARTICLE"
                                               inManagedObjectContext:[self myManageObjectContext]];
@@ -207,6 +215,11 @@
                                                                      sectionNameKeyPath:@"title" cacheName:Nil];
     
     _fetchedResultsController.delegate = self;
+    
+    //dismiss keyboard
+    [_databaseSearchBar resignFirstResponder];
+    _databaseSearchBar.text=@"";
+    _query=@"";
     
     return _fetchedResultsController;
 }
@@ -473,7 +486,7 @@
                     NSString *styleTag = @"<head><link rel='stylesheet' type='text/css' href='mystyle.css'></head>";
                     
                     
-                    NSString *imgTag = [NSString stringWithFormat:@"<img src='%@%@", str, @"'>"];
+                    NSString *imgTag = [NSString stringWithFormat:@"<img src='DB_images/%@%@", str, @"'>"];
                     //newArticle.mainText = [newArticle.mainText stringByAppendingString:(imgTag)]; //cancatinate
                     
                     newArticle.mainText = [[styleTag stringByAppendingString:(newArticle.mainText)]

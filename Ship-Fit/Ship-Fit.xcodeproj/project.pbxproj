@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0347D89818445524003F4C6F /* sample4.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0347D89718445524003F4C6F /* sample4.xml */; };
 		037B17FE1835C73100D80AAD /* shipfitGPS.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 037B17FD1835C73100D80AAD /* shipfitGPS.sqlite */; };
 		037B17FF1835C73100D80AAD /* shipfitGPS.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 037B17FD1835C73100D80AAD /* shipfitGPS.sqlite */; };
 		037B18021835C7F200D80AAD /* DatabaseAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 037B18011835C7F200D80AAD /* DatabaseAccess.m */; };
@@ -89,6 +90,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0347D89718445524003F4C6F /* sample4.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = sample4.xml; path = ../sample4.xml; sourceTree = "<group>"; };
 		037B17FD1835C73100D80AAD /* shipfitGPS.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = shipfitGPS.sqlite; sourceTree = "<group>"; };
 		037B18001835C7F200D80AAD /* DatabaseAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseAccess.h; sourceTree = "<group>"; };
 		037B18011835C7F200D80AAD /* DatabaseAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseAccess.m; sourceTree = "<group>"; };
@@ -375,6 +377,7 @@
 		658DA5EC1832DD6A003B6952 /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				0347D89718445524003F4C6F /* sample4.xml */,
 				03D99466183ACD2F0061382E /* erd.png */,
 				655D9D2A183434730004CD21 /* DB_Images */,
 				655D9D29183430420004CD21 /* sqlite */,
@@ -494,6 +497,7 @@
 				658DA5B51832D818003B6952 /* first@2x.png in Resources */,
 				658DA5BA1832D818003B6952 /* second.png in Resources */,
 				658DA5BC1832D818003B6952 /* second@2x.png in Resources */,
+				0347D89818445524003F4C6F /* sample4.xml in Resources */,
 				655D9D0918340F750004CD21 /* shipfit_Index.sqlite in Resources */,
 				655D9D2718342F7C0004CD21 /* shipfitMainDatabasev1.sqlite in Resources */,
 				655D9D2B183434730004CD21 /* DB_Images in Resources */,

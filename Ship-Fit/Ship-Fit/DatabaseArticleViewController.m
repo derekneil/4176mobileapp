@@ -47,8 +47,10 @@
     replaceStr = [replaceStr stringByAppendingString:(@"</span>")];
     
     
-    str = [str stringByReplacingOccurrencesOfString:_query
-                                         withString:replaceStr options:NSCaseInsensitiveSearch range:NSMakeRange(0, [str length])];
+    //turn query to lower case first
+    str = [str stringByReplacingOccurrencesOfString:_query 
+                                         withString:replaceStr
+                                            options:NSCaseInsensitiveSearch range:NSMakeRange(0, [str length])];
     
     NSString *path = [[NSBundle mainBundle] bundlePath];
     NSURL *baseURL = [NSURL fileURLWithPath:path];
