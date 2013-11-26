@@ -174,6 +174,7 @@
 }
 
 
+/*
 
 //Asks the data source for the title of the header of the specified section of the table view.
 //source: https://developer.apple.com/library/ios/documentation/uikit/reference/UITableViewDataSource_Protocol/Reference/Reference.html#//apple_ref/occ/intfm/UITableViewDataSource/tableView:titleForHeaderInSection:
@@ -181,7 +182,7 @@
     return [[[self.fetchedResultsController sections]objectAtIndex:section]name];
 }
 
-
+*/
 
 #pragma mark NSFetchedResultsController methods
 
