@@ -4,32 +4,27 @@
 
 @interface WeatherViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
+// Ref to the mothership
 @property (weak, nonatomic) ShipFit* shipfit_ref;
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+// Ref to labels
+@property (weak, nonatomic) IBOutlet UILabel *windSpeed;
+@property (weak, nonatomic) IBOutlet UILabel *windDirection;
+@property (weak, nonatomic) IBOutlet UILabel *time;
+@property (weak, nonatomic) IBOutlet UILabel *temperatureCurrent;
+@property (weak, nonatomic) IBOutlet UILabel *pressure;
+@property (weak, nonatomic) IBOutlet UILabel *cloudCover;
+@property (weak, nonatomic) IBOutlet UILabel *precipitation;
+@property (weak, nonatomic) IBOutlet UILabel *rainType;
 
-//@property (retain, nonatomic) IBOutlet UIImageView *conditionImage;
-//@property (weak, nonatomic) IBOutlet UITableViewCell *tableCell;
-//
-//@property (retain, nonatomic) IBOutlet UILabel *temperatureCurrent;
-//@property (retain, nonatomic) IBOutlet UILabel *temperatureMax;
-//@property (retain, nonatomic) IBOutlet UILabel *temperatureMin;
-//@property (retain, nonatomic) IBOutlet UILabel *conditionLabel;
-//
-//@property (weak, nonatomic) IBOutlet UILabel *windSpeed;
-//@property (weak, nonatomic) IBOutlet UILabel *windDirection;
-//@property UIImage *wind;
-//@property UIImage *condition;
-//@property (retain, nonatomic) IBOutlet UIImageView *windIcon;
-//@property (strong, nonatomic) IBOutlet UIView *viewController;
-//@property (weak, nonatomic) IBOutlet UIImageView *maxTemp;
-//@property (weak, nonatomic) IBOutlet UIImageView *minTemp;
-//@property (weak, nonatomic) IBOutlet UILabel *cloudCover;
-//@property (weak, nonatomic) IBOutlet UILabel *precipitation;
-//@property (weak, nonatomic) IBOutlet UILabel *time;
-//@property (weak, nonatomic) IBOutlet UILabel *pressure;
-//
-//@property NSMutableArray *daysStored;
-//@property NSMutableArray *hoursStored;
+
+//images
+@property UIImageView *wind;
+@property UIImageView *condition;
+@property UIImageView *pressure;
+@property UIImageView *tempImage;
+
+
+
 
 @end
