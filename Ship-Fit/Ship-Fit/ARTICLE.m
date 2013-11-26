@@ -16,7 +16,6 @@
 @dynamic mainText;
 @dynamic title;
 
-
 - (void)prepareForDeletion
 {
     [super prepareForDeletion];

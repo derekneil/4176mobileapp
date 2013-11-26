@@ -14,10 +14,25 @@
 #import "SMXMLDocument.h"
 
 
+@protocol setSearchQueryWordProtocol
+
+- (void)setSearchQueryWord:(NSString *)word;
+
+@end
+
+
 @interface DatabaseMainViewController : UITableViewController <UISearchBarDelegate>
 
 @property(nonatomic, strong) NSManagedObjectContext *myManageObjectContext;
 @property(nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (weak, nonatomic) IBOutlet UISearchBar *databaseSearchBar;
+
+
+@property (nonatomic, retain) NSString * query;
+
+@property (nonatomic,strong) id <setSearchQueryWordProtocol> delegateSetSearchQueryWord;
+
+
+
 
 @end

@@ -10,6 +10,8 @@
 #import "ARTICLE.h"
 #import "DatabaseAccess.h"
 
+
+
 @interface DatabaseMainViewController ()
 
 @end
@@ -47,6 +49,8 @@
 @synthesize fetchedResultsController = _fetchedResultsController;
 
 
+
+
 - (void)viewDidUnload {
     [self setDatabaseSearchBar:nil];
     [super viewDidUnload];
@@ -77,6 +81,17 @@
         //fetech the article object
         ARTICLE *newArticle = (ARTICLE *)[self.fetchedResultsController objectAtIndexPath:indexPath];
         
+        
+        //DatabaseArticleViewController *VC = [[DatabaseArticleViewController alloc] initWithNibName:nil bundle:nil];
+        
+        
+        //make DatabaseArticleViewController your delegate
+        //self.delegateSetSearchQueryWord = VC;
+        
+        
+        dest.query = _query;
+        
+        [self.delegateSetSearchQueryWord setSearchQueryWord:(_query)];
         
         dest.currentArticle = newArticle;
     }
@@ -265,6 +280,8 @@
 #pragma mark search
 
 -(void)displayArticles:(NSMutableArray *)arrayOfIndexids term:(NSString *)term{
+    
+    _query = term;
     
     if ([term isEqualToString:@""]) {
         _fetchedResultsController =nil;
