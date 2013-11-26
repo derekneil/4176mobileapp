@@ -46,14 +46,10 @@
         }
         
         [ self set_bearing ];
+        [self logHeading:newHeading];
         
-        if ( [ self.shipFit_ref get_gps_mode ] != GPS_ALL ){
-            [self logHeading:newHeading];
-        }
-
-        // DEBUG        
-        //[self print_logs_to_console];
-        [ self straight_travel ];
+        // see what we got
+        [self print_logs_to_console];
     }
     else{
         NSLog(@"Time stamp for the compass is stale. Take the according action");
@@ -63,13 +59,11 @@
 // Run the compass with heading filter 5
 - (void)run_compass
 {
-    if ( [ CLLocationManager headingAvailable ] )
-    {
+    if ( [ CLLocationManager headingAvailable ] ){
         _locationManager.headingFilter = 5;
         [ _locationManager startUpdatingHeading ];
     }
-    else
-    {
+    else{
         NSLog(@"Compass Not Available");
     }
 }
@@ -116,6 +110,7 @@
 // If the std_deviation is within X degrees then return YES!
 - (BOOL)straight_travel
 {
+    unsigned short int X = 15;
     int l, o;
     double mean=0, std_deviation=0;
     CLHeading *runner;
@@ -137,10 +132,9 @@
     }
     std_deviation = sqrt( (std_deviation/l) );
     
-    //NSLog(@"Std_Deviation: %f" , std_deviation);
+    NSLog(@"Std_Deviation: %f" , std_deviation);
     
-    //JUST A GUESS. 
-    if ( std_deviation < 25.0000000 ){
+    if ( std_deviation < X ){
         return YES;
     }
     else{

@@ -46,8 +46,6 @@ NSString *const ERROR = @"ERROR";
 {
     /* Set Defaults for Application Start-up */
     self.isTrueNorth = YES;
-    //(__bridge struct objc_class *)(self).isTrueNorth = YES;
-    printf("setting application defaults\n");
 }
 
 - (void)setUpObservers
@@ -79,7 +77,6 @@ NSString *const ERROR = @"ERROR";
     _DB = [[DatabaseAccess alloc] init];
     _tripID = [_DB getLatestTripID];
     return 1;
-    
 }
 
 - (short int)inandr_weather

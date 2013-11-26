@@ -50,28 +50,7 @@ NSString *const baseURL = @"https://api.forecast.io/forecast/";
                 self.shipFit_ref.weatherJSON = (NSDictionary *)json;
              }
              
-             /*
-             int i;
-             for ( i = 0; i < 48 ; i++ )
-             {
-                NSLog( @"%@",theweather.hourly.data[i].time );
-                NSLog( @"%@",theweather.hourly.data[i].icon );
-                NSLog( @"%@",theweather.hourly.data[i].temperature );
-                NSLog( @"%@",theweather.hourly.data[i].windBearing );
-                NSLog( @"%@",theweather.hourly.data[i].windSpeed );
-                NSLog( @"%@",theweather.hourly.data[i].cloudCover);
-                NSLog( @"%@",theweather.hourly.data[i].precipProbability );
-                NSLog( @"%@",theweather.hourly.data[i].humidity );
-                NSLog( @"%@",theweather.hourly.data[i].pressure );
-             }
-              
-              */
-
-
-            
-             // How do you parse the json? 
-             // What do we do with the weather ???
-             // Something amazing perhaps..!
+           
          }
      } 
      ]; 
@@ -101,8 +80,4 @@ NSString *const baseURL = @"https://api.forecast.io/forecast/";
 // How often to update weather??
 
 //handle timeouts
-//if you hit the timeout then you have no weather available and you will have to use the cached weather. 
-
-
-
-
+//if you hit the timeout then you have no weather available and you will have to use the cached weather.
