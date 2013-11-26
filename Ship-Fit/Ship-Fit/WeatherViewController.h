@@ -2,7 +2,7 @@
 #import <UIKit/UIKit.h>
 #import "ShipFit.h"
 
-@interface WeatherViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface WeatherViewController : UIViewController
 
 // Ref to the mothership
 @property (weak, nonatomic) ShipFit* shipfit_ref;
@@ -15,15 +15,17 @@
 @property (weak, nonatomic) IBOutlet UILabel *pressure;
 @property (weak, nonatomic) IBOutlet UILabel *cloudCover;
 @property (weak, nonatomic) IBOutlet UILabel *precipitation;
-@property (weak, nonatomic) IBOutlet UILabel *rainType;
+@property (weak, nonatomic) IBOutlet UILabel *additionalInfo;
+@property (weak, nonatomic) IBOutlet UILabel *visibility;
 
 
 //images
-@property UIImageView *wind;
-@property UIImageView *condition;
-@property UIImageView *pressure;
-@property UIImageView *tempImage;
-
+@property (weak, nonatomic) IBOutlet UIImageView *windImage;
+@property (weak, nonatomic) IBOutlet UIImageView *conditionImage;
+@property (weak, nonatomic) IBOutlet UIImageView *pressureImage;
+@property (weak, nonatomic) IBOutlet UIImageView *tempImage;
+@property (weak, nonatomic) IBOutlet UIImageView *popImage;
+@property (weak, nonatomic) IBOutlet UIImageView *cloudcoverImage;
 
 
 
