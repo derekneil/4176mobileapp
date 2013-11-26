@@ -91,8 +91,6 @@
         
         dest.query = _query;
         
-        [self.delegateSetSearchQueryWord setSearchQueryWord:(_query)];
-        
         dest.currentArticle = newArticle;
     }
 }
@@ -169,18 +167,21 @@
     return cell;
 }
 
+
+/*
 //Asks the data source for the title of the header of the specified section of the table view.
 //source: https://developer.apple.com/library/ios/documentation/uikit/reference/UITableViewDataSource_Protocol/Reference/Reference.html#//apple_ref/occ/intfm/UITableViewDataSource/tableView:titleForHeaderInSection:
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     return [[[self.fetchedResultsController sections]objectAtIndex:section]name];
 }
-
+*/
 
 
 #pragma mark NSFetchedResultsController methods
 
 //------ custome accessor method -----------------
 -(NSFetchedResultsController *) fetchedResultsController{
+    _query = @"";
     if(_fetchedResultsController !=nil){
         return _fetchedResultsController;
     }
