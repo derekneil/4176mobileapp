@@ -21,13 +21,8 @@
 	// If we already have weather
     if ( [self.shipfit_ref get_weather_status] )
     {
-        NSLog(@"weather is ready");
         hourly_weather = [ [ self.shipfit_ref.weatherJSON objectForKey:@"hourly" ] objectForKey:@"data" ];
         [self set_timer_and_run_weather];
-    }
-    else
-    {
-        NSLog(@"waiting for the weather");
     }
     
     // observe the JSON object for the changes
