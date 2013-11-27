@@ -251,7 +251,7 @@
 {
     [_theWeatherTimer invalidate];
     _theWeatherTimer = nil;
-    [self.shipfit_ref removeObserver:self forKeyPath:@"WeatherJSON"];
+    [self.shipfit_ref removeObserver:self forKeyPath:@"weatherJSON"];
 }
 
 - (void)didReceiveMemoryWarning
