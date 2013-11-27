@@ -20,6 +20,7 @@
     BOOL drawPathisOn;
     NSDictionary* weatherJSON;
     Reachability* reach;
+    RMMBTilesSource* offlineSource;
 }
 
 @synthesize mapView;
@@ -37,92 +38,63 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    
+	// Do any additional setup after loading the view the first time
 
     //TODO: restore previous state
     drawPathisOn = FALSE;
     
     //check for bottom layout guide and adjust up the bottom alignment
     
-    RMMBTilesSource *offlineSource = [[RMMBTilesSource alloc] initWithTileSetResource:@"Ship-Fit" ofType:@"mbtiles"];
-    
+    //only load offline map until internet connection is detected
+    offlineSource = [[RMMBTilesSource alloc] initWithTileSetResource:@"Ship-Fit" ofType:@"mbtiles"];
     mapView = [[RMMapView alloc] initWithFrame:self.view.bounds andTilesource:offlineSource];
-    
     mapView.delegate = self;
-    
     mapView.zoom = 4;
-    
     mapView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    
-    mapView.adjustTilesForRetinaDisplay = YES; // these tiles aren't designed specifically for retina, so make them legible
+    mapView.adjustTilesForRetinaDisplay = YES; // since tiles aren't designed for retina
     
     //allow lower resolution tiles to be used when zooming in
-    mapView.missingTilesDepth = 6;
+    mapView.missingTilesDepth = 2;
     
     //insert map below everything else on the storyboard
     [self.view insertSubview:mapView atIndex:0];
     
+    //online map will crash app, so it can only be added after internet is detected
     //https://github.com/tonymillion/Reachability
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reachabilityChanged:)
                                                  name:kReachabilityChangedNotification
                                                object:nil];
-    
     reach = [Reachability reachabilityWithHostname:@"www.mapbox.com"];
-    
-    reach.reachableBlock = ^(Reachability * reachability)
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"Reachability Says Reachable");
-            [self LoadOnlineMap];
-        });
-    };
-    
-//    reach.unreachableBlock = ^(Reachability * reachability)
-//    {
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            NSLog(@"Reachability Says Unreachable");
-//        });
-//    };
-//    
     [reach startNotifier];
+    NSLog(@"mapVC Reachability Notifications started");
     
 }
 
--(void)reachabilityChanged:(NSNotification*)note
-{
-    Reachability * reach = [note object];
-    
+//reachability notification method
+-(void)reachabilityChanged:(NSNotification*)note{
+    reach = [note object];
     if([reach isReachable])
     {
-        NSLog(@"Notification Says Reachable");
-    }
-    else
-    {
-        NSLog(@"Notification Says Unreachable");
+        NSLog(@"mapVC Notification Says Reachable");
+        [self LoadOnlineMap];
     }
 }
 
 - (void)LoadOnlineMap{
-    RMMapBoxSource *interactiveSource = [[RMMapBoxSource alloc] initWithMapID:@"krazyderek.g8dkgmh4"];
     
-    mapView = [[RMMapView alloc] initWithFrame:self.view.bounds andTilesource:interactiveSource];
-    
-    RMMBTilesSource *offlineSource = [[RMMBTilesSource alloc] initWithTileSetResource:@"Ship-Fit" ofType:@"mbtiles"];
-    
+    RMMapBoxSource *onlineSource = [[RMMapBoxSource alloc] initWithMapID:@"krazyderek.g8dkgmh4"];
+    [mapView removeTileSource:offlineSource];
+    [mapView addTileSource:onlineSource];
     [mapView addTileSource:offlineSource];
     
-    [self.view insertSubview:mapView atIndex:1];
-    
-    [reach stopNotifier]; //since online map will rely on it's cache
+    [reach stopNotifier]; //since online map will rely on it's cache once initialized
+    NSLog(@"mapVC Reachability Notifications stopped");
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-    
-    
-    // set up your observers
-    
+
+    // set up observers
     [_shipfit addObserver:self
                forKeyPath:@"latitude"
                   options:NSKeyValueObservingOptionNew
