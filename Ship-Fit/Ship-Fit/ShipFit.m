@@ -42,6 +42,11 @@ NSString *const ERROR = @"ERROR";
     return [_direction straight_travel];
 }
 
+- (BOOL)get_weather_status
+{
+    return _weather.weatherHasArrived;
+}
+
 - (void)setApplicationDefaults
 {
     /* Set Defaults for Application Start-up */

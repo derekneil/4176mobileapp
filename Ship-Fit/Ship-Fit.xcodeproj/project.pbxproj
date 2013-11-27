@@ -78,6 +78,17 @@
 		D56337AB1838101A00A9EDE8 /* Status-weather-clouds-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D56337A01838101A00A9EDE8 /* Status-weather-clouds-icon.png */; };
 		D56337AC1838101A00A9EDE8 /* Fog-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D56337A11838101A00A9EDE8 /* Fog-icon.png */; };
 		D56337AD1838101A00A9EDE8 /* Wind-Flag-Storm-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D56337A21838101A00A9EDE8 /* Wind-Flag-Storm-icon.png */; };
+		D58ABC8518463EAA001DE3D0 /* blue-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D58ABC8418463EAA001DE3D0 /* blue-background.jpg */; };
+		D58ABC8718463EB7001DE3D0 /* sun-glasses-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D58ABC8618463EB7001DE3D0 /* sun-glasses-icon.png */; };
+		D58ABC8918463EC3001DE3D0 /* Thermometer.png in Resources */ = {isa = PBXBuildFile; fileRef = D58ABC8818463EC3001DE3D0 /* Thermometer.png */; };
+		D58ABC8B18463ECA001DE3D0 /* tornado-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D58ABC8A18463ECA001DE3D0 /* tornado-icon.png */; };
+		D58ABC8D18463F8B001DE3D0 /* Hail-Heavy-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D58ABC8C18463F8B001DE3D0 /* Hail-Heavy-icon.png */; };
+		D58ABC8F18464360001DE3D0 /* barometer2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D58ABC8E18464360001DE3D0 /* barometer2.jpg */; };
+		D58ABC911846436B001DE3D0 /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = D58ABC901846436B001DE3D0 /* calendar.png */; };
+		D58ABC9318464371001DE3D0 /* thunderstorm.png in Resources */ = {isa = PBXBuildFile; fileRef = D58ABC9218464371001DE3D0 /* thunderstorm.png */; };
+		D58ABC95184649E2001DE3D0 /* barometer4.png in Resources */ = {isa = PBXBuildFile; fileRef = D58ABC94184649E2001DE3D0 /* barometer4.png */; };
+		D58ABC97184649ED001DE3D0 /* button_black_pause.png in Resources */ = {isa = PBXBuildFile; fileRef = D58ABC96184649ED001DE3D0 /* button_black_pause.png */; };
+		D58ABC99184649F5001DE3D0 /* button_black_play.png in Resources */ = {isa = PBXBuildFile; fileRef = D58ABC98184649F5001DE3D0 /* button_black_play.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -190,6 +201,17 @@
 		D56337A01838101A00A9EDE8 /* Status-weather-clouds-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Status-weather-clouds-icon.png"; sourceTree = "<group>"; };
 		D56337A11838101A00A9EDE8 /* Fog-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fog-icon.png"; sourceTree = "<group>"; };
 		D56337A21838101A00A9EDE8 /* Wind-Flag-Storm-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Wind-Flag-Storm-icon.png"; sourceTree = "<group>"; };
+		D58ABC8418463EAA001DE3D0 /* blue-background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "blue-background.jpg"; sourceTree = "<group>"; };
+		D58ABC8618463EB7001DE3D0 /* sun-glasses-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sun-glasses-icon.png"; sourceTree = "<group>"; };
+		D58ABC8818463EC3001DE3D0 /* Thermometer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Thermometer.png; sourceTree = "<group>"; };
+		D58ABC8A18463ECA001DE3D0 /* tornado-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tornado-icon.png"; sourceTree = "<group>"; };
+		D58ABC8C18463F8B001DE3D0 /* Hail-Heavy-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Hail-Heavy-icon.png"; sourceTree = "<group>"; };
+		D58ABC8E18464360001DE3D0 /* barometer2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = barometer2.jpg; sourceTree = "<group>"; };
+		D58ABC901846436B001DE3D0 /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar.png; sourceTree = "<group>"; };
+		D58ABC9218464371001DE3D0 /* thunderstorm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thunderstorm.png; sourceTree = "<group>"; };
+		D58ABC94184649E2001DE3D0 /* barometer4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = barometer4.png; sourceTree = "<group>"; };
+		D58ABC96184649ED001DE3D0 /* button_black_pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_black_pause.png; sourceTree = "<group>"; };
+		D58ABC98184649F5001DE3D0 /* button_black_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_black_play.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -416,6 +438,17 @@
 		D56337971838101A00A9EDE8 /* WeatherIcons */ = {
 			isa = PBXGroup;
 			children = (
+				D58ABC98184649F5001DE3D0 /* button_black_play.png */,
+				D58ABC96184649ED001DE3D0 /* button_black_pause.png */,
+				D58ABC94184649E2001DE3D0 /* barometer4.png */,
+				D58ABC9218464371001DE3D0 /* thunderstorm.png */,
+				D58ABC901846436B001DE3D0 /* calendar.png */,
+				D58ABC8E18464360001DE3D0 /* barometer2.jpg */,
+				D58ABC8C18463F8B001DE3D0 /* Hail-Heavy-icon.png */,
+				D58ABC8A18463ECA001DE3D0 /* tornado-icon.png */,
+				D58ABC8818463EC3001DE3D0 /* Thermometer.png */,
+				D58ABC8618463EB7001DE3D0 /* sun-glasses-icon.png */,
+				D58ABC8418463EAA001DE3D0 /* blue-background.jpg */,
 				D5256F4C183D6EE900DDE933 /* pressure.jpeg */,
 				D56337981838101A00A9EDE8 /* Status-weather-clear-icon.png */,
 				D56337991838101A00A9EDE8 /* Status-weather-clear-night-icon.png */,
@@ -542,6 +575,17 @@
 				D56337AC1838101A00A9EDE8 /* Fog-icon.png in Resources */,
 				D56337AD1838101A00A9EDE8 /* Wind-Flag-Storm-icon.png in Resources */,
 				D5256F4D183D6EE900DDE933 /* pressure.jpeg in Resources */,
+				D58ABC8518463EAA001DE3D0 /* blue-background.jpg in Resources */,
+				D58ABC8718463EB7001DE3D0 /* sun-glasses-icon.png in Resources */,
+				D58ABC8918463EC3001DE3D0 /* Thermometer.png in Resources */,
+				D58ABC8B18463ECA001DE3D0 /* tornado-icon.png in Resources */,
+				D58ABC8D18463F8B001DE3D0 /* Hail-Heavy-icon.png in Resources */,
+				D58ABC8F18464360001DE3D0 /* barometer2.jpg in Resources */,
+				D58ABC911846436B001DE3D0 /* calendar.png in Resources */,
+				D58ABC9318464371001DE3D0 /* thunderstorm.png in Resources */,
+				D58ABC95184649E2001DE3D0 /* barometer4.png in Resources */,
+				D58ABC97184649ED001DE3D0 /* button_black_pause.png in Resources */,
+				D58ABC99184649F5001DE3D0 /* button_black_play.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
