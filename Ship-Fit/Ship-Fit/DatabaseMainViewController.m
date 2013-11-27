@@ -10,6 +10,8 @@
 #import "ARTICLE.h"
 #import "DatabaseAccess.h"
 
+
+
 @interface DatabaseMainViewController ()
 
 @end
@@ -47,6 +49,8 @@
 @synthesize fetchedResultsController = _fetchedResultsController;
 
 
+
+
 - (void)viewDidUnload {
     [self setDatabaseSearchBar:nil];
     [super viewDidUnload];
@@ -55,6 +59,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //[self createDatabase];
+    //[self fillDatabaseFromXMLFile];
+    
     
     NSError *error = nil;
     if (![[self fetchedResultsController]performFetch:&error]) {
@@ -77,6 +85,15 @@
         //fetech the article object
         ARTICLE *newArticle = (ARTICLE *)[self.fetchedResultsController objectAtIndexPath:indexPath];
         
+        
+        //DatabaseArticleViewController *VC = [[DatabaseArticleViewController alloc] initWithNibName:nil bundle:nil];
+        
+        
+        //make DatabaseArticleViewController your delegate
+        //self.delegateSetSearchQueryWord = VC;
+        
+        
+        dest.query = _query;
         
         dest.currentArticle = newArticle;
     }
@@ -105,6 +122,8 @@
         abort();
     }
     [self.tableView reloadData];
+    
+
     
 }
 - (void)viewWillDisappear:(BOOL)animated{
@@ -154,23 +173,29 @@
     return cell;
 }
 
+
+/*
+
 //Asks the data source for the title of the header of the specified section of the table view.
 //source: https://developer.apple.com/library/ios/documentation/uikit/reference/UITableViewDataSource_Protocol/Reference/Reference.html#//apple_ref/occ/intfm/UITableViewDataSource/tableView:titleForHeaderInSection:
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     return [[[self.fetchedResultsController sections]objectAtIndex:section]name];
 }
 
-
+*/
 
 #pragma mark NSFetchedResultsController methods
 
 //------ custome accessor method -----------------
 -(NSFetchedResultsController *) fetchedResultsController{
+    
     if(_fetchedResultsController !=nil){
         return _fetchedResultsController;
     }
     
     //create a fetch request
+    _query = @"";
+    
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"ARTICLE"
                                               inManagedObjectContext:[self myManageObjectContext]];
@@ -191,6 +216,11 @@
                                                                      sectionNameKeyPath:@"title" cacheName:Nil];
     
     _fetchedResultsController.delegate = self;
+    
+    //dismiss keyboard
+    [_databaseSearchBar resignFirstResponder];
+    _databaseSearchBar.text=@"";
+    _query=@"";
     
     return _fetchedResultsController;
 }
@@ -265,6 +295,8 @@
 #pragma mark search
 
 -(void)displayArticles:(NSMutableArray *)arrayOfIndexids term:(NSString *)term{
+    
+    _query = term;
     
     if ([term isEqualToString:@""]) {
         _fetchedResultsController =nil;
@@ -455,7 +487,7 @@
                     NSString *styleTag = @"<head><link rel='stylesheet' type='text/css' href='mystyle.css'></head>";
                     
                     
-                    NSString *imgTag = [NSString stringWithFormat:@"<img src='%@%@", str, @"'>"];
+                    NSString *imgTag = [NSString stringWithFormat:@"<img src='DB_images/%@%@", str, @"'>"];
                     //newArticle.mainText = [newArticle.mainText stringByAppendingString:(imgTag)]; //cancatinate
                     
                     newArticle.mainText = [[styleTag stringByAppendingString:(newArticle.mainText)]

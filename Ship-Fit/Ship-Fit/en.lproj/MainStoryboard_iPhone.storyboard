@@ -280,8 +280,11 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
+                                            <outlet property="condition" destination="e4x-15-p2J" id="ad9-0v-qa5"/>
                                             <outlet property="conditionImage" destination="vVT-2T-qL8" id="WRF-US-SdL"/>
                                             <outlet property="curTemp" destination="015-wa-Wf5" id="3hq-rb-217"/>
+                                            <outlet property="maxTemp" destination="o2g-GT-BpD" id="m3H-dS-b8Z"/>
+                                            <outlet property="minTemp" destination="CgA-Pc-CUi" id="tBz-ew-R0C"/>
                                             <outlet property="pressure" destination="KTR-Lq-iT7" id="Syz-Sl-3iQ"/>
                                             <outlet property="tempImage" destination="KIp-A5-ueJ" id="Dc6-Za-XdQ"/>
                                             <outlet property="timeLabel" destination="QsR-w7-q89" id="0Ap-C9-i5C"/>
