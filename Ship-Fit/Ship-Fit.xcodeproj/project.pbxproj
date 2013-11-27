@@ -20,6 +20,8 @@
 		354E9A3F1843C29000DB7867 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 354E9A3E1843C29000DB7867 /* QuartzCore.framework */; };
 		3566D5A21842C45E007B1E98 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3566D5A11842C45E007B1E98 /* libsqlite3.dylib */; };
 		3566D5A41842C8A7007B1E98 /* Ship-Fit.mbtiles in Resources */ = {isa = PBXBuildFile; fileRef = 3566D5A31842C8A7007B1E98 /* Ship-Fit.mbtiles */; };
+		35AB36A618467308005BFD56 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35AB36A518467308005BFD56 /* SystemConfiguration.framework */; };
+		35AB36A918467351005BFD56 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 35AB36A818467351005BFD56 /* Reachability.m */; };
 		35CFA5031842CFA9001E53CA /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3566D59F1842C44B007B1E98 /* libz.dylib */; };
 		655D9D0718340F750004CD21 /* DatabaseMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9CF718340F750004CD21 /* DatabaseMainViewController.m */; };
 		655D9D0918340F750004CD21 /* shipfit_Index.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 655D9CFA18340F750004CD21 /* shipfit_Index.sqlite */; };
@@ -103,6 +105,9 @@
 		3566D59F1842C44B007B1E98 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		3566D5A11842C45E007B1E98 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		3566D5A31842C8A7007B1E98 /* Ship-Fit.mbtiles */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ship-Fit.mbtiles"; sourceTree = "<group>"; };
+		35AB36A518467308005BFD56 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		35AB36A718467351005BFD56 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		35AB36A818467351005BFD56 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		655D9CF618340F750004CD21 /* DataBaseMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DataBaseMainViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		655D9CF718340F750004CD21 /* DatabaseMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DatabaseMainViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		655D9CFA18340F750004CD21 /* shipfit_Index.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = shipfit_Index.sqlite; sourceTree = "<group>"; };
@@ -192,6 +197,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35AB36A618467308005BFD56 /* SystemConfiguration.framework in Frameworks */,
 				3507C2ED184650750025B51A /* MapBox.framework in Frameworks */,
 				354E9A3F1843C29000DB7867 /* QuartzCore.framework in Frameworks */,
 				35CFA5031842CFA9001E53CA /* libz.dylib in Frameworks */,
@@ -280,6 +286,7 @@
 		658DA5901832D817003B6952 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				35AB36A518467308005BFD56 /* SystemConfiguration.framework */,
 				3507C2EC184650750025B51A /* MapBox.framework */,
 				354E9A3E1843C29000DB7867 /* QuartzCore.framework */,
 				3566D5A11842C45E007B1E98 /* libsqlite3.dylib */,
@@ -372,6 +379,8 @@
 		658DA5DB1832D8B9003B6952 /* BackendLogic */ = {
 			isa = PBXGroup;
 			children = (
+				35AB36A718467351005BFD56 /* Reachability.h */,
+				35AB36A818467351005BFD56 /* Reachability.m */,
 				658DA5E21832DC17003B6952 /* Direction.h */,
 				658DA5E31832DC17003B6952 /* Direction.m */,
 				658DA5E41832DC17003B6952 /* Location.h */,
@@ -578,6 +587,7 @@
 				037B18061835D46F00D80AAD /* GPS.m in Sources */,
 				658DA5E71832DC17003B6952 /* Location.m in Sources */,
 				655D9D0718340F750004CD21 /* DatabaseMainViewController.m in Sources */,
+				35AB36A918467351005BFD56 /* Reachability.m in Sources */,
 				655D9D0B18340F750004CD21 /* SMXMLDocument.m in Sources */,
 				655D9D0C18340F750004CD21 /* sqlite3.c in Sources */,
 				655D9D0D18340F750004CD21 /* DatabaseArticleViewController.m in Sources */,

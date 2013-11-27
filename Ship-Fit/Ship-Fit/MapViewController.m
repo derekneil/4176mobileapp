@@ -8,6 +8,7 @@
 
 #import "MapViewController.h"
 #import "Direction.h"
+#import "Reachability.h"
 
 @interface MapViewController ()
 
@@ -61,6 +62,45 @@
     //insert map below everything else on the storyboard
     [self.view insertSubview:mapView atIndex:0];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reachabilityChanged:)
+                                                 name:kReachabilityChangedNotification
+                                               object:nil];
+    
+    Reachability * reach = [Reachability reachabilityWithHostname:@"www.mapbox.com"];
+    
+    reach.reachableBlock = ^(Reachability * reachability)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"Reachability Says Reachable");
+            [self LoadOnlineMap];
+        });
+//        [reach stopNotifier]; //since online map will rely on it's cache
+    };
+    
+    reach.unreachableBlock = ^(Reachability * reachability)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"Reachability Says Unreachable");
+        });
+    };
+    
+    [reach startNotifier];
+    
+}
+
+-(void)reachabilityChanged:(NSNotification*)note
+{
+    Reachability * reach = [note object];
+    
+    if([reach isReachable])
+    {
+        NSLog(@"Notification Says Reachable");
+    }
+    else
+    {
+        NSLog(@"Notification Says Unreachable");
+    }
 }
 
 - (void)LoadOnlineMap{
