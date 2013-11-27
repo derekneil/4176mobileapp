@@ -19,6 +19,7 @@
 //    MKPolyline* path;
     BOOL drawPathisOn;
     NSDictionary* weatherJSON;
+    Reachability* reach;
 }
 
 @synthesize mapView;
@@ -62,12 +63,13 @@
     //insert map below everything else on the storyboard
     [self.view insertSubview:mapView atIndex:0];
     
+    //https://github.com/tonymillion/Reachability
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reachabilityChanged:)
                                                  name:kReachabilityChangedNotification
                                                object:nil];
     
-    Reachability * reach = [Reachability reachabilityWithHostname:@"www.mapbox.com"];
+    reach = [Reachability reachabilityWithHostname:@"www.mapbox.com"];
     
     reach.reachableBlock = ^(Reachability * reachability)
     {
@@ -75,16 +77,15 @@
             NSLog(@"Reachability Says Reachable");
             [self LoadOnlineMap];
         });
-//        [reach stopNotifier]; //since online map will rely on it's cache
     };
     
-    reach.unreachableBlock = ^(Reachability * reachability)
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"Reachability Says Unreachable");
-        });
-    };
-    
+//    reach.unreachableBlock = ^(Reachability * reachability)
+//    {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            NSLog(@"Reachability Says Unreachable");
+//        });
+//    };
+//    
     [reach startNotifier];
     
 }
@@ -111,6 +112,10 @@
     RMMBTilesSource *offlineSource = [[RMMBTilesSource alloc] initWithTileSetResource:@"Ship-Fit" ofType:@"mbtiles"];
     
     [mapView addTileSource:offlineSource];
+    
+    [self.view insertSubview:mapView atIndex:1];
+    
+    [reach stopNotifier]; //since online map will rely on it's cache
 }
 
 - (void)viewWillAppear:(BOOL)animated{
