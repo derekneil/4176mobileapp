@@ -224,10 +224,10 @@
 - (void)updateShipFitLocation: (CLLocation*) current_location
 {
      // Set the speed
-    if ( _count > 5 && ( ( [ [ NSDate date ]  timeIntervalSince1970 ] - [current_location.timestamp timeIntervalSince1970 ] ) < 3 ) )    
+    if ( _count > 5 && ( [ [ NSDate date ]  timeIntervalSince1970 ] - [current_location.timestamp timeIntervalSince1970 ] ) < 60  )
     {
-        self.shipFit_ref.knots = [ self calculateSpeed];
-        //self.shipFit_ref.knots = current_location.speed * 1.94384;
+        NSLog(@"bens function: %f km/h", [self calculateSpeed]);
+        self.shipFit_ref.knots = (0.539957) * ([ self calculateSpeed ]);
     }
 
     // Set the latitude and longitude 
@@ -276,8 +276,6 @@
     {
         coordinate2 = [ [CLLocation alloc] initWithLatitude:locationRunner->latitude longitude:locationRunner->longitude];
         double d = [ coordinate1 distanceFromLocation:coordinate2];
-        //double distance = [self haversine_km_withLat1:locationHead->latitude Lon1:locationHead->longitude Lat2:locationRunner->latitude Lon2:locationRunner->longitude];
-        NSLog(@"distance travelled: %f", d);
         double t = *timeHead - *timeRunner;
         double velocity = d / t;
 
@@ -285,27 +283,18 @@
             velocity *= -1;
         }
         speed += (weight)*(velocity);
+        weight /= 2;
     }
-    return speed * 1.94384;
+    return speed * 3.6;
 }
 
-//- (double) haversine_km_withLat1: (double) lat1 Lon1: (double) lon1 Lat2: (double) lat2 Lon2: (double) lon2
-//{
-//    double R = 6371;
-//    double RAD = ( M_PI * 180.0 );
-//    double dlon = (lon1 - lon2) * RAD;  // convert from degrees to radians
-//    double dlat = (lat1 - lat2 ) * RAD; // convert from degrees to radian
-//    double a = pow(sin(dlat/2.0) , 2) * cos(lat1*RAD) * cos(lat2*RAD) * pow(sin(dlon/2.0),2);
-//    double c = 2 * atan2( sqrt(a), sqrt(1-a) );
-//    return c * R * 1000;
-//}
 
 - (void)evaluate_GPS_MODE
 {
     switch (self.GPS_MODE)
     {
         case GPS_ALL:
-          if ( [self upgrade_GPS_from_startup_to_rough] ){
+          if ( [self change_GPSMode_toShort] ){
             self.GPS_MODE = GPS_SHORT;
           }
           break;  
@@ -316,7 +305,7 @@
                                                        selector:@selector(run_GPS:)
                                                        userInfo:nil
                                                         repeats:NO ];
-            if ( [self upgrade_GPS_from_rough_to_smooth] ){
+            if ( [ self change_GPSMode_toLong ] ){
                 self.GPS_MODE = GPS_LONG;
             }
             break;
@@ -328,17 +317,16 @@
                                                        selector:@selector(run_GPS:)
                                                        userInfo:nil
                                                         repeats:NO ];
-            if ( [self upgrade_GPS_from_rough_to_smooth] == NO ){
+            if ( [self change_GPSMode_toLong] == NO){
                 self.GPS_MODE = GPS_SHORT;
             }
             break;
     }
 }
 
-- (BOOL)upgrade_GPS_from_startup_to_rough
+- (BOOL)change_GPSMode_toShort
 {
     int l, o;
-
     if ( self.shipFit_ref.gps_count < 15 ){
         return NO;
     }
@@ -350,8 +338,6 @@
                 break;
             }
         }
-
-        // GPS_ALL TO GPS_SHORT TRANSITION
         if (o){
             return YES;
         }
@@ -361,7 +347,7 @@
     }
 }
 
-- (BOOL)upgrade_GPS_from_rough_to_smooth
+- (BOOL)change_GPSMode_toLong
 {
     if ( [self.shipFit_ref currently_sailing_straight] )
     {

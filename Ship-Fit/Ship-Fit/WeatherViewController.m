@@ -2,221 +2,236 @@
 #import "TableCell.h"
 #import "Direction.h"
 
-@interface WeatherViewController ()
-
-@end
-
 @implementation WeatherViewController
 {
-    NSArray *hourly_weather;
+	NSArray *hourly_weather;
+	int _count;
+	NSTimer *_theWeatherTimer;
 }
 
 - (void)viewDidLoad
 {
-    
-    [super viewDidLoad];
-    [self setLabels];
-    [self setImages];
-
-    _tableView.dataSource = self;
-    _tableView.delegate = self;
-    
+	[super viewDidLoad];
 }
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    hourly_weather = [ [self.shipfit_ref.weatherJSON objectForKey:@"hourly"] objectForKey:@"data"];
-    //NSLog(@"%@",hourly_weather[0]);
+	_count = 0;
+	hourly_weather = [ [ self.shipfit_ref.weatherJSON objectForKey:@"hourly" ] objectForKey:@"data" ];
+
+    // set the base images
+	self.windImage.image = [UIImage imageNamed:@"Wind-Flag-Storm-icon.png"];
+	self.tempImage.image =  [UIImage imageNamed:@"thermometer.jpeg"];
+	self.pressureImage.image = [UIImage imageNamed:@"pressure.jpeg"];
+    self.popImage.image = [ UIImage imageNamed:@"Status-weather-showers-icon.png"];
+    self.cloudcoverImage.image = [ UIImage imageNamed:@"Status-weather-many-clouds-icon.png"];
+    
+	_theWeatherTimer = [NSTimer scheduledTimerWithTimeInterval:1.5
+                                                        target:self
+                                                      selector:@selector(weather_explosion:) userInfo:nil repeats:YES];
 }
 
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)weather_explosion: (NSTimer*)theWeatherTimer
 {
-    //NSLog(@"%i",indexPath.row);
-    // Set up the default layout of the cell
-    static NSString * cellIdentifier = @"cell";
-    TableCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if(!cell)
-    {
-        cell = [[TableCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
-    }
-    cell.windImage.image = [UIImage imageNamed:@"Wind-Flag-Storm-icon.png"];
-    cell.tempImage.image =  [UIImage imageNamed:@"thermometer.jpeg"];
-    cell.pressureImage.image = [UIImage imageNamed:@"pressure.jpeg"];
-    
-    // Populate With JSON Data
-    // Get the Dictionary for the entry
-    NSDictionary *weather_data = hourly_weather[indexPath.row];
-    
-    // Temperature Related
-    cell.curTemp.text = [NSString stringWithFormat:@"Temperature: %.1f \u00B0 C", [self set_temp: [weather_data valueForKey:@"temperature"] ] ];
-    
-    // Wind Related
-    cell.windSpeed.text = [NSString stringWithFormat:@"%@",[weather_data valueForKey:@"windSpeed"]];
-    cell.windDirection.text = [ Direction bearing_String:[[ weather_data valueForKey:@"windBearing"] doubleValue] ];
+    if (_count >= 48 && _theWeatherTimer!= nil)
+	{
+		[_theWeatherTimer invalidate];
+		_theWeatherTimer = nil;
+	}
+	else{
+		NSDictionary *weather_data = hourly_weather[_count];
 
-    // Icon
-    cell.conditionImage.image = [UIImage imageNamed:[self imageNameForWeatherIconType:[NSString stringWithFormat:@"%@",[weather_data valueForKey:@"icon"] ] ] ];
-    
-    // Time
-    double Time = [[ weather_data valueForKey:@"time"] doubleValue] ;
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:Time];
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *components = [gregorian components:(NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit ) fromDate:date];
-    cell.timeLabel.text = [ NSString stringWithFormat:@"%i:%i" ,components.hour, components.minute ];
-    
-    //pressure
-    cell.pressure.text = [ NSString stringWithFormat:@"%@" , [weather_data valueForKey:@"pressure"]];
-    
-    
-    return cell;
+        // Condition Icon
+		self.conditionImage.image = [UIImage imageNamed:[self imageNameForWeatherIconType:[NSString stringWithFormat:@"%@",[weather_data valueForKey:@"icon"] ] ] ];
+
+        //Wind Related
+		self.windSpeed.text = [NSString stringWithFormat:@"%.f KM/H",[ [weather_data valueForKey:@"windSpeed"] doubleValue ] * 1.609344 ];
+		self.windDirection.text = [ Direction bearing_String:[[ weather_data valueForKey:@"windBearing"] doubleValue] ];
+
+        // Temperature Related
+		self.temperatureCurrent.text = [NSString stringWithFormat:@"%.1f \u00B0 C", [self set_temp: [weather_data valueForKey:@"temperature"] ] ];
+
+        // Time
+		[self set_time:[[ weather_data valueForKey:@"time"] doubleValue]];
+
+		
+        //pressure
+		self.pressure.text = [ NSString stringWithFormat:@"%@ mbar" , [weather_data valueForKey:@"pressure"] ];
+
+      	//precipitation && clouds
+		self.precipitation.text = [ NSString stringWithFormat:@"%.0f %% POP" , 100 * [ [weather_data valueForKey:@"precipProbability"] doubleValue ] ];
+		self.cloudCover.text =  [ NSString stringWithFormat:@"%.0f %% Cloud Cover" , 100 * [ [ weather_data valueForKey:@"cloudCover"] doubleValue ] ];
+
+		//visibility 
+		self.visibility.text = [ NSString stringWithFormat:@"%@" , [ weather_data valueForKey:@"visibility"] ];
+
+        //additional info
+        self.additionalInfo.text = [ NSString stringWithFormat:@"%@" , [ weather_data valueForKey:@"precipType"] ];
+
+		_count++;
+	}   
 }
-                           
-- (NSString *)set_day_of_week: (NSInteger)dayOfWeek
+
+- (void)pause_explosion: (id)sender
 {
-    if (dayOfWeek == 1){  return @"Sunday"; }
-    else if (dayOfWeek == 2){ return @"Monday"; }
-    else if (dayOfWeek == 3){ return @"Tuesday";}
-    else if (dayOfWeek == 4){return @"Wednesday";}
-    else if (dayOfWeek == 5){ return @"Thursday"; }
-    else if (dayOfWeek == 6){ return @"Friday"; }
-    else if (dayOfWeek == 7){ return @"Saturday"; }
-    else { return @"Error"; }
+	[ _theWeatherTimer invalidate ];
+	_theWeatherTimer = nil;
 }
-                        
 
-- (double)set_temp: (NSString *)input
+
+- (void)restart_explosion: (id)sender
 {
-    double x;
-    x = [input doubleValue];
-    x = (x - 32) / 1.8;
-    return x;
+	_count = 0;
+	[self weather_explosion:nil];
+	_theWeatherTimer = [ NSTimer timerWithTimeInterval:1.5
+		target:self
+		selector:@selector(weather_explosion:)
+		userInfo:nil
+		repeats:YES];
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (void)go_back_one
 {
-    return 1;
-    //need to make a count of how many days were saved
+	_count--;
+	[self weather_explosion:nil];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-
+- (void)go_forward_one
 {
-    return 48;
+	_count++;
+	[self weather_explosion:nil];
 }
-
 
 - (NSString *)imageNameForWeatherIconType:(NSString *)iconDescription
 {
+	NSLog(@"%@",iconDescription);
+    
     if ([iconDescription isEqualToString:@"clear-day" ]) { return @"Status-weather-clear-icon.png"; }
-    else if ([iconDescription isEqualToString:@"clear-night"]) { return @"Status-weather-clear-night-icon.png"; }
-    else if ([iconDescription isEqualToString:@"rain"]) { return @"Status-weather-showers-icon.png"; }
-    else if ([iconDescription isEqualToString:@"snow"]) { return @"Status-weather-snow-icon.png"; }
-    else if ([iconDescription isEqualToString:@"sleet"]) { return @"Status-weather-snow-rain-icon.png"; }
-    else if ([iconDescription isEqualToString:@"wind"]) { return @"Wind-Flag-Storm-icon.png"; }
-    else if ([iconDescription isEqualToString:@"fog"]) { return @"Fog-icon.png"; }
-    else if ([iconDescription isEqualToString:@"cloudy"]) { return @"Status-weather-many-clouds.png"; }
-    else if ([iconDescription isEqualToString:@"partly-cloudy-day"]) { return @"Status-weather-clouds-icon.png"; }
-    else if ([iconDescription isEqualToString:@"partly-cloudy-night"]) { return @"Status-weather-clouds-night-icon.png"; }
-    //else if ([iconDescription isEqualToString:]) { return @"hail.png"; }
-    //else if ([iconDescription isEqualToString:]) { return @"thunderstorm.png"; }
-    //else if ([iconDescription isEqualToString:]) { return @"tornado.png"; }
-    //else if ([iconDescription isEqualToString:]) { return @"hurricane.png"; }
+	else if ([iconDescription isEqualToString:@"clear-night"]) { return @"Status-weather-clear-night-icon.png"; }
+	else if ([iconDescription isEqualToString:@"rain"]) { return @"Status-weather-showers-icon.png"; }
+	else if ([iconDescription isEqualToString:@"snow"]) { return @"Status-weather-snow-icon.png"; }
+	else if ([iconDescription isEqualToString:@"sleet"]) { return @"Status-weather-snow-rain-icon.png"; }
+	else if ([iconDescription isEqualToString:@"wind"]) { return @"Wind-Flag-Storm-icon.png"; }
+	else if ([iconDescription isEqualToString:@"fog"]) { return @"Fog-icon.png"; }
+	else if ([iconDescription isEqualToString:@"cloudy"]) { return @"Status-weather-many-clouds-icon.png"; }
+	else if ([iconDescription isEqualToString:@"partly-cloudy-day"]) { return @"Status-weather-clouds-icon.png"; }
+	else if ([iconDescription isEqualToString:@"partly-cloudy-night"]) { return @"Status-weather-clouds-night-icon.png"; }
+	//else if ([iconDescription isEqualToString:]) { return @"hail.png"; }
+	//else if ([iconDescription isEqualToString:]) { return @"thunderstorm.png"; }
+	//else if ([iconDescription isEqualToString:]) { return @"tornado.png"; }
+	//else if ([iconDescription isEqualToString:]) { return @"hurricane.png"; }
     else return @"Status-weather-clouds-icon.png"; // Default in case nothing matched
 }
 
 
-//
-//cell.minTemp.text = [NSString stringWithFormat:@"%@",[weather_data valueForKey:@"temperatureMin"]];
-//NSDictionary* currently = [weatherJSON objectForKey:@"currently"];
-//self.tempLabel.text = [NSString stringWithFormat:@"%@",[currently valueForKey:@"temperature"]];
-//self.windLabel.text = [NSString stringWithFormat:@"%@",[currently valueForKey:@"windSpeed"]];
-//self.windDirLabel.text = ;
-//
-//NSArray* temp = [[weatherJSON objectForKey:@"daily"] objectForKey:@"data"];
-//NSDictionary* today = temp[0];
-//self.tempHighLabel.text = [NSString stringWithFormat:@"%@",[today valueForKey:@"temperatureMax"]];
-//self.tempLoLabel.text = [NSString stringWithFormat:@"%@",[today valueForKey:@"temperatureMin"]];
-//self.sunLabel.text = [NSString stringWithFormat:@"%@",[today valueForKey:@"sunsetTime"]];
-//
 
+// SET THE TIME 
+-(void)set_time: (double)Time
+{	
+	NSDate *date = [NSDate dateWithTimeIntervalSince1970:Time];
+   
+    NSDateComponents *date_components = [[NSCalendar currentCalendar] components:kCFCalendarUnitHour | kCFCalendarUnitDay | kCFCalendarUnitMonth | kCFCalendarUnitYear | kCFCalendarUnitWeekday fromDate:date ];
+    
+    NSMutableString *result= [ [NSMutableString alloc] init];
+    
+    [result appendString:[ self set_day_of_week:[date_components weekday]]];
+    [result appendString:@", "];
+    [result appendString:[self set_month_of_year:[date_components month]]];
+    [result appendString:[NSString stringWithFormat:@"%i ",[date_components day]]];
+    [result appendString:[self set_hour_of_day:[date_components hour]]];
+    
+    self.time.text = result;
+    
+//    NSLog(@"%i",[date_components weekday]);
+//    NSLog(@"%i",[date_components day]);
+//    NSLog(@"%i",[date_components month]);
+//    NSLog(@"%i",[date_components year]);
+//    NSLog(@"%i",[date_components hour]);
+    
+}
 
+- (NSString *)set_day_of_week: (NSInteger)dayOfWeek
+{
+	if (dayOfWeek == 1){  return @"Sunday"; }
+	else if (dayOfWeek == 2){ return @"Monday"; }
+	else if (dayOfWeek == 3){ return @"Tuesday";}
+	else if (dayOfWeek == 4){return @"Wednesday";}
+	else if (dayOfWeek == 5){ return @"Thursday"; }
+	else if (dayOfWeek == 6){ return @"Friday"; }
+	else if (dayOfWeek == 7){ return @"Saturday"; }
+	else { return @"Error"; }
+}
 
-//apparentTemperature = "55.99";
-//cloudCover = "0.99";
-//dewPoint = "54.6";
-//humidity = "0.95";
-//icon = cloudy;
-//ozone = "277.74";
-//precipIntensity = "0.0025";
-//precipProbability = "0.06";
-//precipType = rain;
-//pressure = "1012.74";
-//summary = Overcast;
-//temperature = "55.99";
-//time = 1384963200;
-//visibility = "7.57";
-//windBearing = 176;
-//windSpeed = "4.45";
+- (NSString *)set_month_of_year: (NSInteger)month
+{
+	if (month == 1){  return @"January "; }
+	else if (month == 2){ return @"February "; }
+	else if (month == 3){ return @"March ";}
+	else if (month == 4){return @"April ";}
+	else if (month == 5){ return @"May "; }
+	else if (month == 6){ return @"June "; }
+	else if (month == 7){ return @"July "; }
+    else if (month == 8){ return @"August "; }
+	else if (month == 9){ return @"September ";}
+	else if (month == 10){return @"October ";}
+	else if (month == 11){ return @"November "; }
+	else if (month == 12){ return @"December "; }
+	else { return @"Error"; }
+}
 
+- (NSString*)set_hour_of_day: (NSInteger)hours
+{
+    if (hours==0)
+    {
+        hours+=12;
+        return [NSString stringWithFormat:@"%i AM",hours];
+    }
+    else if (hours < 12)
+    {
+        return [NSString stringWithFormat:@"%i AM",hours];
+    }
+    else if (hours == 12 )
+    {
+        return [NSString stringWithFormat:@"%i PM",hours];
+    }
+    else{
+        hours -=12;
+        return [NSString stringWithFormat:@"%i PM",hours];
+    }
+}
+    
 
-
+- (double)set_temp: (NSString *)input
+{
+	double x;
+	x = [input doubleValue];
+	x = (x - 32) / 1.8;
+	return x;
+}
 
 - (void)viewDidUnload
 {
-    //[self setTemperatureImage:nil];
-#if 0
-    [self setTemperatureCurrent:nil];
-    [self setTemperatureMax:nil];
-    [self setTemperatureMin:nil];
-
-    [self setConditionImage:nil];
-    [self setWindSpeed:nil];
-    [self setWindIcon:nil];
-    [self setViewController:nil];
-    [self setMaxTemp:nil];
-    [self setMinTemp:nil];
-    [self setWindDirection:nil];
-    [self setCloudCover:nil];
-    [self setPrecipitation:nil];
-    [self setTime:nil];
-    [self setPressure:nil];
-    [super viewDidUnload];
-#endif
-}
-
-
-- (void) setLabels
-{
-#if 0
-    [_conditionLabel setText:@"clear"];
-    [_temperatureCurrent setText:@"5C"];
-    [_temperatureMax setText:@"Max: 10C"];
-    [_temperatureMin setText:@"Min: 2C"];
-    [_windSpeed setText: @"Wind Speed: 5KH"];
-    [_cloudCover setText:@"2"];
-    [_pressure setText:@"1020"];
-    [_precipitation setText:@"2%"];
-#endif
-}
-
-- (void) setImages
-{
-#if 0
-    
-    //condition image
-    [_viewController addSubview:_conditionImage];
-    _windIcon.image = [UIImage imageNamed:@"Wind-Flag-Storm-icon.png"];//windspeed icon
-    [_viewController addSubview:_windIcon];
-    _maxTemp.image = [UIImage imageNamed:@"thermometer.jpeg"];
-    _minTemp.image = [UIImage imageNamed:@"thermometer.jpeg"];
-#endif
+    //TO DO
 }
 
 - (void)didReceiveMemoryWarning
 {
-    [super didReceiveMemoryWarning];
+	[super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 @end
+
+// play button 
+// stop button
+// from the beginning
+// do you think that a visualization of the weather would be good? 
+// or do you think that the old way with the table views was better?
+// need background
+//humidity = "0.95";
+//ozone = "277.74";
+
+
+
+
