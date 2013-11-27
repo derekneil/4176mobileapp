@@ -14,6 +14,7 @@ NSString *const baseURL = @"https://api.forecast.io/forecast/";
     self = [super init];
     if ( self ){
         _shipFit_ref = reference;
+        _weatherHasArrived = NO;
     }
     return self;
 }
@@ -48,9 +49,8 @@ NSString *const baseURL = @"https://api.forecast.io/forecast/";
              if ( [ json isKindOfClass:[NSDictionary class ] ] )
              {
                 self.shipFit_ref.weatherJSON = (NSDictionary *)json;
+                self.weatherHasArrived = YES;
              }
-             
-           
          }
      } 
      ]; 

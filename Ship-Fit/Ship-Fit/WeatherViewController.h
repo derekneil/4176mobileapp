@@ -29,10 +29,15 @@
 @property (weak, nonatomic) IBOutlet UIImageView *visImage;
 @property (weak, nonatomic) IBOutlet UIImageView *calendarImage;
 
+@property (weak, nonatomic) IBOutlet UIButton *pause_button;
+@property (weak, nonatomic) IBOutlet UIButton *play_button;
+
+@property (weak, nonatomic) IBOutlet UISlider *slider;
+
+
 - (IBAction)pause_explosion: (id)sender;
-- (IBAction)restart_explosion: (id)sender;
-- (IBAction)go_back_one: (id)sender;
-- (IBAction)go_forward_one: (id)sender;
+- (IBAction)play_explosion: (id)sender;
+
 
 
 

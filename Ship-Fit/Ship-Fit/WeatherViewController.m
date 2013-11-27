@@ -2,6 +2,7 @@
 #import "TableCell.h"
 #import "Direction.h"
 
+
 @implementation WeatherViewController
 {
 	NSArray *hourly_weather;
@@ -12,29 +13,77 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"blue-background.jpg"]];
+    self.view.backgroundColor = [ UIColor colorWithPatternImage:[UIImage imageNamed:@"blue-background.jpg"] ];
 }
-
 
 - (void)viewWillAppear:(BOOL)animated
 {
-	_count = 0;
-	hourly_weather = [ [ self.shipfit_ref.weatherJSON objectForKey:@"hourly" ] objectForKey:@"data" ];
+	// If we already have weather
+    if ( [self.shipfit_ref get_weather_status] )
+    {
+        NSLog(@"weather is ready");
+        hourly_weather = [ [ self.shipfit_ref.weatherJSON objectForKey:@"hourly" ] objectForKey:@"data" ];
+        [self set_timer_and_run_weather];
+    }
+    else
+    {
+        NSLog(@"waiting for the weather");
+    }
+    
+    // observe the JSON object for the changes
+    [self.shipfit_ref addObserver:self
+                       forKeyPath:@"weatherJSON"
+                          options:NSKeyValueObservingOptionNew
+                          context:nil ];
 
     // set the base images
 	self.windImage.image = [UIImage imageNamed:@"Wind-Flag-Storm-icon.png"];
 	self.tempImage.image =  [UIImage imageNamed:@"Thermometer.png"];
-	self.pressureImage.image = [UIImage imageNamed:@"barometer2.jpg"];
+	self.pressureImage.image = [UIImage imageNamed:@"barometer4.png"];
     self.popImage.image = [ UIImage imageNamed:@"Status-weather-showers-icon.png"];
     self.cloudcoverImage.image = [ UIImage imageNamed:@"Status-weather-many-clouds-icon.png"];
     self.visImage.image = [ UIImage imageNamed:@"sun-glasses-icon.png"];
     self.calendarImage.image = [UIImage imageNamed:@"calendar.png"];
     
+    //set the additional information
+}
+
+// observe the changes in the weatherJSON pointer
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+    if ( [keyPath isEqualToString:@"weatherJSON" ] )
+    {
+        hourly_weather = [ [ [change objectForKey:NSKeyValueChangeNewKey] objectForKey:@"hourly" ] objectForKey:@"data" ];
+        [self performSelectorOnMainThread:@selector(set_timer_and_run_weather) withObject:nil waitUntilDone:NO];
+    }
+}
+
+// start the weather visualization from the beginnning
+- (void)set_timer_and_run_weather
+{
+    _count = 0;
     [self weather_explosion:nil];
 	_theWeatherTimer = [NSTimer scheduledTimerWithTimeInterval:1.5
                                                         target:self
-                                                      selector:@selector(weather_explosion:) userInfo:nil repeats:YES];
+                                                      selector:@selector(weather_explosion:)
+                                                      userInfo:nil
+                                                       repeats:YES];
+    
+    //set up the slider
+    [self.slider addTarget:self action:@selector(slider_control:) forControlEvents:UIControlEventValueChanged];
+    self.slider.minimumValue = 0;
+    self.slider.maximumValue = 47;
 }
+
+- (void)slider_control: (id)sender
+{
+    _count = self.slider.value;
+    [self weather_explosion:nil];
+}
+
 
 - (void)weather_explosion: (NSTimer*)theWeatherTimer
 {
@@ -73,35 +122,32 @@
         //additional info
         self.additionalInfo.text = [ NSString stringWithFormat:@"%@" , [ weather_data valueForKey:@"precipType"] ];
 
+        [self.slider setValue:_count animated:YES];
 		_count++;
 	}   
 }
 
 - (IBAction)pause_explosion: (id)sender
 {
-	[ _theWeatherTimer invalidate ];
-	_theWeatherTimer = nil;
+	if (_theWeatherTimer != nil)
+    {
+        [ _theWeatherTimer invalidate ];
+        _theWeatherTimer = nil;
+    }
+    self.pause_button.hidden = YES;
 }
 
 
-- (IBAction)restart_explosion: (id)sender
-{
-	_count = 0;
-	[self weather_explosion:nil];
-	_theWeatherTimer = [ NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(weather_explosion:) userInfo:nil repeats:YES];
-    
-}
-
-- (IBAction)go_back_one: (id)sender
-{
-	_count -= 2;
-	[self weather_explosion:nil];
-}
-
-- (IBAction)go_forward_one: (id)sender
+- (IBAction)play_explosion: (id)sender
 {
 	[self weather_explosion:nil];
+	_theWeatherTimer = [ NSTimer scheduledTimerWithTimeInterval:1.5
+                                                         target:self
+                                                       selector:@selector(weather_explosion:)
+                                                       userInfo:nil repeats:YES];
+    self.pause_button.hidden = NO;
 }
+
 
 - (NSString *)imageNameForWeatherIconType:(NSString *)iconDescription
 {
@@ -140,13 +186,6 @@
     [result appendString:[self set_hour_of_day:[date_components hour]]];
     
     self.time.text = result;
-    
-//    NSLog(@"%i",[date_components weekday]);
-//    NSLog(@"%i",[date_components day]);
-//    NSLog(@"%i",[date_components month]);
-//    NSLog(@"%i",[date_components year]);
-//    NSLog(@"%i",[date_components hour]);
-    
 }
 
 - (NSString *)set_day_of_week: (NSInteger)dayOfWeek
@@ -217,6 +256,7 @@
 {
     [_theWeatherTimer invalidate];
     _theWeatherTimer = nil;
+    [self.shipfit_ref removeObserver:self forKeyPath:@"WeatherJSON"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -226,15 +266,6 @@
 }
 
 @end
-
-// play button 
-// stop button
-// from the beginning
-// do you think that a visualization of the weather would be good? 
-// or do you think that the old way with the table views was better?
-// need background
-//humidity = "0.95";
-//ozone = "277.74";
 
 
 

@@ -84,6 +84,9 @@
 		D58ABC8F18464360001DE3D0 /* barometer2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D58ABC8E18464360001DE3D0 /* barometer2.jpg */; };
 		D58ABC911846436B001DE3D0 /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = D58ABC901846436B001DE3D0 /* calendar.png */; };
 		D58ABC9318464371001DE3D0 /* thunderstorm.png in Resources */ = {isa = PBXBuildFile; fileRef = D58ABC9218464371001DE3D0 /* thunderstorm.png */; };
+		D58ABC95184649E2001DE3D0 /* barometer4.png in Resources */ = {isa = PBXBuildFile; fileRef = D58ABC94184649E2001DE3D0 /* barometer4.png */; };
+		D58ABC97184649ED001DE3D0 /* button_black_pause.png in Resources */ = {isa = PBXBuildFile; fileRef = D58ABC96184649ED001DE3D0 /* button_black_pause.png */; };
+		D58ABC99184649F5001DE3D0 /* button_black_play.png in Resources */ = {isa = PBXBuildFile; fileRef = D58ABC98184649F5001DE3D0 /* button_black_play.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -196,6 +199,9 @@
 		D58ABC8E18464360001DE3D0 /* barometer2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = barometer2.jpg; sourceTree = "<group>"; };
 		D58ABC901846436B001DE3D0 /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar.png; sourceTree = "<group>"; };
 		D58ABC9218464371001DE3D0 /* thunderstorm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thunderstorm.png; sourceTree = "<group>"; };
+		D58ABC94184649E2001DE3D0 /* barometer4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = barometer4.png; sourceTree = "<group>"; };
+		D58ABC96184649ED001DE3D0 /* button_black_pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_black_pause.png; sourceTree = "<group>"; };
+		D58ABC98184649F5001DE3D0 /* button_black_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_black_play.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -410,6 +416,9 @@
 		D56337971838101A00A9EDE8 /* WeatherIcons */ = {
 			isa = PBXGroup;
 			children = (
+				D58ABC98184649F5001DE3D0 /* button_black_play.png */,
+				D58ABC96184649ED001DE3D0 /* button_black_pause.png */,
+				D58ABC94184649E2001DE3D0 /* barometer4.png */,
 				D58ABC9218464371001DE3D0 /* thunderstorm.png */,
 				D58ABC901846436B001DE3D0 /* calendar.png */,
 				D58ABC8E18464360001DE3D0 /* barometer2.jpg */,
@@ -545,6 +554,9 @@
 				D58ABC8F18464360001DE3D0 /* barometer2.jpg in Resources */,
 				D58ABC911846436B001DE3D0 /* calendar.png in Resources */,
 				D58ABC9318464371001DE3D0 /* thunderstorm.png in Resources */,
+				D58ABC95184649E2001DE3D0 /* barometer4.png in Resources */,
+				D58ABC97184649ED001DE3D0 /* button_black_pause.png in Resources */,
+				D58ABC99184649F5001DE3D0 /* button_black_play.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
