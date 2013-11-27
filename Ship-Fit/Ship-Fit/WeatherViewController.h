@@ -26,6 +26,13 @@
 @property (weak, nonatomic) IBOutlet UIImageView *tempImage;
 @property (weak, nonatomic) IBOutlet UIImageView *popImage;
 @property (weak, nonatomic) IBOutlet UIImageView *cloudcoverImage;
+@property (weak, nonatomic) IBOutlet UIImageView *visImage;
+@property (weak, nonatomic) IBOutlet UIImageView *calendarImage;
+
+- (IBAction)pause_explosion: (id)sender;
+- (IBAction)restart_explosion: (id)sender;
+- (IBAction)go_back_one: (id)sender;
+- (IBAction)go_forward_one: (id)sender;
 
 
 

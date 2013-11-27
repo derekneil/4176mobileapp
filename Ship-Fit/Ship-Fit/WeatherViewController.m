@@ -12,6 +12,7 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"blue-background.jpg"]];
 }
 
 
@@ -22,11 +23,14 @@
 
     // set the base images
 	self.windImage.image = [UIImage imageNamed:@"Wind-Flag-Storm-icon.png"];
-	self.tempImage.image =  [UIImage imageNamed:@"thermometer.jpeg"];
-	self.pressureImage.image = [UIImage imageNamed:@"pressure.jpeg"];
+	self.tempImage.image =  [UIImage imageNamed:@"Thermometer.png"];
+	self.pressureImage.image = [UIImage imageNamed:@"barometer2.jpg"];
     self.popImage.image = [ UIImage imageNamed:@"Status-weather-showers-icon.png"];
     self.cloudcoverImage.image = [ UIImage imageNamed:@"Status-weather-many-clouds-icon.png"];
+    self.visImage.image = [ UIImage imageNamed:@"sun-glasses-icon.png"];
+    self.calendarImage.image = [UIImage imageNamed:@"calendar.png"];
     
+    [self weather_explosion:nil];
 	_theWeatherTimer = [NSTimer scheduledTimerWithTimeInterval:1.5
                                                         target:self
                                                       selector:@selector(weather_explosion:) userInfo:nil repeats:YES];
@@ -73,40 +77,35 @@
 	}   
 }
 
-- (void)pause_explosion: (id)sender
+- (IBAction)pause_explosion: (id)sender
 {
 	[ _theWeatherTimer invalidate ];
 	_theWeatherTimer = nil;
 }
 
 
-- (void)restart_explosion: (id)sender
+- (IBAction)restart_explosion: (id)sender
 {
 	_count = 0;
 	[self weather_explosion:nil];
-	_theWeatherTimer = [ NSTimer timerWithTimeInterval:1.5
-		target:self
-		selector:@selector(weather_explosion:)
-		userInfo:nil
-		repeats:YES];
+	_theWeatherTimer = [ NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(weather_explosion:) userInfo:nil repeats:YES];
+    
 }
 
-- (void)go_back_one
+- (IBAction)go_back_one: (id)sender
 {
-	_count--;
+	_count -= 2;
 	[self weather_explosion:nil];
 }
 
-- (void)go_forward_one
+- (IBAction)go_forward_one: (id)sender
 {
-	_count++;
 	[self weather_explosion:nil];
 }
 
 - (NSString *)imageNameForWeatherIconType:(NSString *)iconDescription
 {
-	NSLog(@"%@",iconDescription);
-    
+	//NSLog(@"%@",iconDescription);
     if ([iconDescription isEqualToString:@"clear-day" ]) { return @"Status-weather-clear-icon.png"; }
 	else if ([iconDescription isEqualToString:@"clear-night"]) { return @"Status-weather-clear-night-icon.png"; }
 	else if ([iconDescription isEqualToString:@"rain"]) { return @"Status-weather-showers-icon.png"; }
@@ -117,10 +116,9 @@
 	else if ([iconDescription isEqualToString:@"cloudy"]) { return @"Status-weather-many-clouds-icon.png"; }
 	else if ([iconDescription isEqualToString:@"partly-cloudy-day"]) { return @"Status-weather-clouds-icon.png"; }
 	else if ([iconDescription isEqualToString:@"partly-cloudy-night"]) { return @"Status-weather-clouds-night-icon.png"; }
-	//else if ([iconDescription isEqualToString:]) { return @"hail.png"; }
-	//else if ([iconDescription isEqualToString:]) { return @"thunderstorm.png"; }
-	//else if ([iconDescription isEqualToString:]) { return @"tornado.png"; }
-	//else if ([iconDescription isEqualToString:]) { return @"hurricane.png"; }
+	else if ([iconDescription isEqualToString:@"hail"]) { return @"Hail-Heavy-icon.png"; }
+	else if ([iconDescription isEqualToString:@"thunderstorm"]) { return @"thunderstorm.png"; }
+	else if ([iconDescription isEqualToString:@"tornado"]) { return @"tornado-icon.png"; }
     else return @"Status-weather-clouds-icon.png"; // Default in case nothing matched
 }
 
@@ -213,6 +211,12 @@
 - (void)viewDidUnload
 {
     //TO DO
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [_theWeatherTimer invalidate];
+    _theWeatherTimer = nil;
 }
 
 - (void)didReceiveMemoryWarning
