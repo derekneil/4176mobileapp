@@ -43,13 +43,9 @@
     
     //check for bottom layout guide and adjust up the bottom alignment
     
-    RMMapBoxSource *interactiveSource = [[RMMapBoxSource alloc] initWithMapID:@"krazyderek.g8dkgmh4"];
-    
-    mapView = [[RMMapView alloc] initWithFrame:self.view.bounds andTilesource:interactiveSource];
-    
     RMMBTilesSource *offlineSource = [[RMMBTilesSource alloc] initWithTileSetResource:@"Ship-Fit" ofType:@"mbtiles"];
     
-    [mapView addTileSource:offlineSource];
+    mapView = [[RMMapView alloc] initWithFrame:self.view.bounds andTilesource:offlineSource];
     
     mapView.delegate = self;
     
@@ -60,11 +56,21 @@
     mapView.adjustTilesForRetinaDisplay = YES; // these tiles aren't designed specifically for retina, so make them legible
     
     //allow lower resolution tiles to be used when zooming in
-//    mapView.missingTilesDepth = 6;
+    mapView.missingTilesDepth = 6;
     
     //insert map below everything else on the storyboard
     [self.view insertSubview:mapView atIndex:0];
     
+}
+
+- (void)LoadOnlineMap{
+    RMMapBoxSource *interactiveSource = [[RMMapBoxSource alloc] initWithMapID:@"krazyderek.g8dkgmh4"];
+    
+    mapView = [[RMMapView alloc] initWithFrame:self.view.bounds andTilesource:interactiveSource];
+    
+    RMMBTilesSource *offlineSource = [[RMMBTilesSource alloc] initWithTileSetResource:@"Ship-Fit" ofType:@"mbtiles"];
+    
+    [mapView addTileSource:offlineSource];
 }
 
 - (void)viewWillAppear:(BOOL)animated{

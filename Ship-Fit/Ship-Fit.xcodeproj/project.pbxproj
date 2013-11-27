@@ -15,9 +15,8 @@
 		037B18071835D46F00D80AAD /* GPS.m in Sources */ = {isa = PBXBuildFile; fileRef = 037B18051835D46F00D80AAD /* GPS.m */; };
 		03D99465183ABE1A0061382E /* WeatherClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D99464183ABE1A0061382E /* WeatherClass.m */; };
 		03D99467183ACD2F0061382E /* erd.png in Resources */ = {isa = PBXBuildFile; fileRef = 03D99466183ACD2F0061382E /* erd.png */; };
+		3507C2EB184640600025B51A /* MapBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3507C2EA184640600025B51A /* MapBox.framework */; };
 		354E9A3F1843C29000DB7867 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 354E9A3E1843C29000DB7867 /* QuartzCore.framework */; };
-		3566D59A1842C2E8007B1E98 /* MapBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3566D5991842C2E8007B1E98 /* MapBox.framework */; };
-		3566D59E1842C322007B1E98 /* MapBox.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3566D59D1842C322007B1E98 /* MapBox.bundle */; };
 		3566D5A21842C45E007B1E98 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3566D5A11842C45E007B1E98 /* libsqlite3.dylib */; };
 		3566D5A41842C8A7007B1E98 /* Ship-Fit.mbtiles in Resources */ = {isa = PBXBuildFile; fileRef = 3566D5A31842C8A7007B1E98 /* Ship-Fit.mbtiles */; };
 		35CFA5031842CFA9001E53CA /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3566D59F1842C44B007B1E98 /* libz.dylib */; };
@@ -97,9 +96,8 @@
 		03D99463183ABE1A0061382E /* WeatherClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherClass.h; sourceTree = "<group>"; };
 		03D99464183ABE1A0061382E /* WeatherClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherClass.m; sourceTree = "<group>"; };
 		03D99466183ACD2F0061382E /* erd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = erd.png; sourceTree = "<group>"; };
+		3507C2EA184640600025B51A /* MapBox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MapBox.framework; sourceTree = "<group>"; };
 		354E9A3E1843C29000DB7867 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		3566D5991842C2E8007B1E98 /* MapBox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MapBox.framework; sourceTree = "<group>"; };
-		3566D59D1842C322007B1E98 /* MapBox.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MapBox.bundle; path = MapBox.framework/Resources/MapBox.bundle; sourceTree = "<group>"; };
 		3566D59F1842C44B007B1E98 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		3566D5A11842C45E007B1E98 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		3566D5A31842C8A7007B1E98 /* Ship-Fit.mbtiles */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ship-Fit.mbtiles"; sourceTree = "<group>"; };
@@ -160,7 +158,6 @@
 		658DA5E31832DC17003B6952 /* Direction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Direction.m; sourceTree = "<group>"; };
 		658DA5E41832DC17003B6952 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		658DA5E51832DC17003B6952 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
-		658DA5E81832DC91003B6952 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		658DA5EA1832DC9A003B6952 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		65C392DB183470E10042FA81 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		65C392DC183470E10042FA81 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
@@ -193,13 +190,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3507C2EB184640600025B51A /* MapBox.framework in Frameworks */,
 				354E9A3F1843C29000DB7867 /* QuartzCore.framework in Frameworks */,
 				35CFA5031842CFA9001E53CA /* libz.dylib in Frameworks */,
 				3566D5A21842C45E007B1E98 /* libsqlite3.dylib in Frameworks */,
 				655D9D0F183413E00004CD21 /* CoreData.framework in Frameworks */,
 				658DA5EB1832DC9A003B6952 /* CoreLocation.framework in Frameworks */,
 				658DA5921832D817003B6952 /* UIKit.framework in Frameworks */,
-				3566D59A1842C2E8007B1E98 /* MapBox.framework in Frameworks */,
 				658DA5941832D817003B6952 /* Foundation.framework in Frameworks */,
 				658DA5961832D817003B6952 /* CoreGraphics.framework in Frameworks */,
 			);
@@ -281,14 +278,12 @@
 		658DA5901832D817003B6952 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3507C2EA184640600025B51A /* MapBox.framework */,
 				354E9A3E1843C29000DB7867 /* QuartzCore.framework */,
 				3566D5A11842C45E007B1E98 /* libsqlite3.dylib */,
 				3566D59F1842C44B007B1E98 /* libz.dylib */,
-				3566D59D1842C322007B1E98 /* MapBox.bundle */,
-				3566D5991842C2E8007B1E98 /* MapBox.framework */,
 				655D9D0E183413E00004CD21 /* CoreData.framework */,
 				658DA5EA1832DC9A003B6952 /* CoreLocation.framework */,
-				658DA5E81832DC91003B6952 /* MapKit.framework */,
 				658DA5911832D817003B6952 /* UIKit.framework */,
 				658DA5931832D817003B6952 /* Foundation.framework */,
 				658DA5951832D817003B6952 /* CoreGraphics.framework */,
@@ -472,6 +467,11 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "ship-fit";
+				TargetAttributes = {
+					658DA58D1832D817003B6952 = {
+						DevelopmentTeam = HQKPLQT856;
+					};
+				};
 			};
 			buildConfigurationList = 658DA5891832D817003B6952 /* Build configuration list for PBXProject "Ship-Fit" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -524,7 +524,6 @@
 				D56337A91838101A00A9EDE8 /* Status-weather-many-clouds-icon.png in Resources */,
 				3566D5A41842C8A7007B1E98 /* Ship-Fit.mbtiles in Resources */,
 				03D99467183ACD2F0061382E /* erd.png in Resources */,
-				3566D59E1842C322007B1E98 /* MapBox.bundle in Resources */,
 				D56337AA1838101A00A9EDE8 /* Status-weather-clouds-night-icon.png in Resources */,
 				D56337AB1838101A00A9EDE8 /* Status-weather-clouds-icon.png in Resources */,
 				D56337AC1838101A00A9EDE8 /* Fog-icon.png in Resources */,
@@ -704,9 +703,12 @@
 		658DA5D51832D818003B6952 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
+					"/Users/derekneil/Google\\ Drive/Dropbox/4176\\ Mobile/project/Ship-Fit",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ship-Fit/Ship-Fit-Prefix.pch";
@@ -724,6 +726,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
 			};
@@ -732,9 +735,12 @@
 		658DA5D61832D818003B6952 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
+					"/Users/derekneil/Google\\ Drive/Dropbox/4176\\ Mobile/project/Ship-Fit",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ship-Fit/Ship-Fit-Prefix.pch";
@@ -750,6 +756,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
 			};
