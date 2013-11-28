@@ -50,8 +50,6 @@
 		658DA5AE1832D818003B6952 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 658DA5AC1832D818003B6952 /* MainStoryboard_iPad.storyboard */; };
 		658DA5B31832D818003B6952 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 658DA5B21832D818003B6952 /* first.png */; };
 		658DA5B51832D818003B6952 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 658DA5B41832D818003B6952 /* first@2x.png */; };
-		658DA5BA1832D818003B6952 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 658DA5B91832D818003B6952 /* second.png */; };
-		658DA5BC1832D818003B6952 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 658DA5BB1832D818003B6952 /* second@2x.png */; };
 		658DA5C41832D818003B6952 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658DA5C31832D818003B6952 /* SenTestingKit.framework */; };
 		658DA5C51832D818003B6952 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658DA5911832D817003B6952 /* UIKit.framework */; };
 		658DA5C61832D818003B6952 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658DA5931832D817003B6952 /* Foundation.framework */; };
@@ -168,8 +166,6 @@
 		658DA5AD1832D818003B6952 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		658DA5B21832D818003B6952 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		658DA5B41832D818003B6952 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
-		658DA5B91832D818003B6952 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
-		658DA5BB1832D818003B6952 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		658DA5C21832D818003B6952 /* Ship-FitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Ship-FitTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		658DA5C31832D818003B6952 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		658DA5CB1832D818003B6952 /* Ship-FitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Ship-FitTests-Info.plist"; sourceTree = "<group>"; };
@@ -290,8 +286,6 @@
 				35AB36AF1847A0CD005BFD56 /* map@2x.png */,
 				658DA5B21832D818003B6952 /* first.png */,
 				658DA5B41832D818003B6952 /* first@2x.png */,
-				658DA5B91832D818003B6952 /* second.png */,
-				658DA5BB1832D818003B6952 /* second@2x.png */,
 			);
 			name = TabBarIcons;
 			sourceTree = "<group>";
@@ -562,8 +556,6 @@
 				658DA5AE1832D818003B6952 /* MainStoryboard_iPad.storyboard in Resources */,
 				658DA5B31832D818003B6952 /* first.png in Resources */,
 				658DA5B51832D818003B6952 /* first@2x.png in Resources */,
-				658DA5BA1832D818003B6952 /* second.png in Resources */,
-				658DA5BC1832D818003B6952 /* second@2x.png in Resources */,
 				0347D89818445524003F4C6F /* sample4.xml in Resources */,
 				655D9D0918340F750004CD21 /* shipfit_Index.sqlite in Resources */,
 				655D9D2718342F7C0004CD21 /* shipfitMainDatabasev1.sqlite in Resources */,
