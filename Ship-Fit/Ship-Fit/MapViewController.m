@@ -74,6 +74,10 @@
     //allow lower resolution tiles to be used when zooming in
     mapView.missingTilesDepth = 2;
     
+    mapView.showsUserLocation=TRUE;
+    
+    [self.mapView zoomingInPivotsAroundCenter];
+    
     //insert map below everything else on the storyboard
     [self.view insertSubview:mapView atIndex:0];
 }
@@ -219,12 +223,13 @@
 }
     
 - (IBAction)zoomToMe:(id)sender {
-    [self.mapView setCenterCoordinate:*(_shipfit.gps_head) animated:YES];
+    
+    [self.mapView setZoom:15 atCoordinate:*(_shipfit.gps_head) animated:YES];
 }
 
 - (IBAction)zoomChange:(id)sender {
     
-    CGPoint point = CGPointMake(self.shipfit.latitude, self.shipfit.longitude);
+    CGPoint point = [mapView coordinateToPixel:mapView.centerCoordinate];
     
     //get user change
     if(sender == _zoomInButton){
@@ -233,7 +238,7 @@
     else if(sender == _zoomOutButton){
         [self.mapView zoomOutToNextNativeZoomAt:point animated:YES];
     }
-
+    
 }
 
 -(void) updatePathOverlay{
