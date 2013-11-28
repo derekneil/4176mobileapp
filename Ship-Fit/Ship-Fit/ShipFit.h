@@ -15,6 +15,9 @@ extern NSString *const ERROR;
 
 @interface ShipFit : NSObject
 
+//general
+@property (nonatomic, readwrite, assign) BOOL internetAvail;
+
 // For DATABASE
 @property ( nonatomic, readonly, strong) DatabaseAccess* DB;
 @property (nonatomic, readwrite, assign) int tripID;
