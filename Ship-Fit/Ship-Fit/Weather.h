@@ -9,6 +9,7 @@ extern NSString *const baseURL;
 @interface Weather : NSObject
 
 @property (nonatomic, readwrite, strong) ShipFit *shipFit_ref;
+@property (nonatomic, readwrite, assign) BOOL weatherHasArrived;
 
 - (id) initWithReference: (ShipFit *)reference;
 

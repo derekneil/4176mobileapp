@@ -3,18 +3,19 @@
 
 @class ShipFit;
 
+// Enumeration for modes of GPS
 enum GPS_OPERATION_MODE
 {
-    SAILING_STARTUP,
-    SAILING_ROUGH,
-    SAILING_SMOOTH
+    GPS_ALL,    // Captures all location events
+    GPS_SHORT,  // Polls the GPS every 15 seconds
+    GPS_LONG    // Polls the GPS every 60 seconds (uses predictive GPS in between pollings)
 };
 
 @interface Location : NSObject <CLLocationManagerDelegate>
 
 @property (nonatomic, readwrite, strong) ShipFit *shipFit_ref;
 
-@property (nonatomic, readwrite, assign) BOOL GPSisValid; // IS THE GPS VALID?
+@property (nonatomic, readwrite, assign) BOOL GPSisValid; 
 
 @property (nonatomic, readwrite, assign) enum GPS_OPERATION_MODE GPS_MODE;
 

@@ -8,6 +8,7 @@
 
 #import "MapViewController.h"
 #import "Direction.h"
+#import "Reachability.h"
 
 @interface MapViewController ()
 
@@ -15,9 +16,11 @@
 
 @implementation MapViewController {
     NSMutableArray* pathTraveled;
-    MKPolyline* path;
+//    MKPolyline* path;
     BOOL drawPathisOn;
     NSDictionary* weatherJSON;
+    Reachability* reach;
+    RMMBTilesSource* offlineSource;
 }
 
 @synthesize mapView;
@@ -35,28 +38,63 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    
-    //source http://www.appcoda.com/ios-programming-101-drop-a-pin-on-map-with-mapkit-api/
-    self.mapView.delegate = self;
-    
+	// Do any additional setup after loading the view the first time
+
     //TODO: restore previous state
     drawPathisOn = FALSE;
     
     //check for bottom layout guide and adjust up the bottom alignment
     
-    //outlet collections, or just name them the samef
+    //only load offline map until internet connection is detected
+    offlineSource = [[RMMBTilesSource alloc] initWithTileSetResource:@"Ship-Fit" ofType:@"mbtiles"];
+    mapView = [[RMMapView alloc] initWithFrame:self.view.bounds andTilesource:offlineSource];
+    mapView.delegate = self;
+    mapView.zoom = 4;
+    mapView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    mapView.adjustTilesForRetinaDisplay = YES; // since tiles aren't designed for retina
     
-    //use AFNetworking APHTTPequestOperationManager to get navionics (serverside api calls) instead of using NSURL directly
+    //allow lower resolution tiles to be used when zooming in
+    mapView.missingTilesDepth = 2;
     
+    //insert map below everything else on the storyboard
+    [self.view insertSubview:mapView atIndex:0];
+    
+    //online map will crash app, so it can only be added after internet is detected
+    //https://github.com/tonymillion/Reachability
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reachabilityChanged:)
+                                                 name:kReachabilityChangedNotification
+                                               object:nil];
+    reach = [Reachability reachabilityWithHostname:@"www.mapbox.com"];
+    [reach startNotifier];
+    NSLog(@"mapVC Reachability Notifications started");
     
 }
 
+//reachability notification method
+-(void)reachabilityChanged:(NSNotification*)note{
+    reach = [note object];
+    if([reach isReachable])
+    {
+        NSLog(@"mapVC Notification Says Reachable");
+        [self LoadOnlineMap];
+    }
+}
+
+- (void)LoadOnlineMap{
+    
+    RMMapBoxSource *onlineSource = [[RMMapBoxSource alloc] initWithMapID:@"krazyderek.g8dkgmh4"];
+    [mapView removeTileSource:offlineSource];
+    [mapView addTileSource:onlineSource];
+    [mapView addTileSource:offlineSource];
+    
+    [reach stopNotifier]; //since online map will rely on it's cache once initialized
+    NSLog(@"mapVC Reachability Notifications stopped");
+}
+
 - (void)viewWillAppear:(BOOL)animated{
-    
-    
-    // set up your observers
-    
+
+    // set up observers
     [_shipfit addObserver:self
                forKeyPath:@"latitude"
                   options:NSKeyValueObservingOptionNew
@@ -161,60 +199,29 @@
     }];
 }
 
-//MKMapView protocol----------
-- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
-{
-    
-//    //update pathTraveled to draw on screen
-//    CLLocation *location = [[CLLocation alloc] initWithLatitude: userLocation.coordinate.latitude
-//                                                      longitude: userLocation.coordinate.longitude];
-//    if(pathTraveled==Nil){
-//        pathTraveled = [[NSMutableArray alloc] initWithObjects:location, nil];
-//    }
-//    [pathTraveled addObject:location];
-//
-//    [self updatePathOverlay];
-    
-}
-
-- (MKOverlayView *) mapView:(MKMapView*)delMapView viewForOverlay:(id)overlay{
-    MKPolylineView* polyLineView = [[MKPolylineView alloc] initWithOverlay:overlay];
-    polyLineView.strokeColor = [UIColor blueColor];
-    polyLineView.lineWidth = 3.0;
-    NSLog(@"mapView polylineView configured");
-    return polyLineView;
-}
-
-//END MKMapView protocol-------
-
-
 - (IBAction)zoomToMe:(id)sender {
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(mapView.userLocation.coordinate, 1000, 1000);
-    [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
+    [self.mapView setCenterCoordinate:*(_shipfit.gps_head) animated:YES];
 }
 
 - (IBAction)zoomChange:(id)sender {
     
-    //starting source https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/LocationAwarenessPG/MapKit/MapKit.html#//apple_ref/doc/uid/TP40009497-CH3-SW1
-    MKCoordinateRegion theRegion = mapView.region;
+    CGPoint point = CGPointMake(self.shipfit.latitude, self.shipfit.longitude);
     
     //get user change
-    double change = 1.5; //assume zooming out
     if(sender == _zoomInButton){
-        change = 0.5;
+        [self.mapView zoomInToNextNativeZoomAt:point animated:YES];
     }
-    //change region view on map
-    theRegion.span.longitudeDelta *= change;
-    theRegion.span.latitudeDelta *= change;
-    [mapView setRegion:theRegion animated:YES];
+    else if(sender == _zoomOutButton){
+        [self.mapView zoomOutToNextNativeZoomAt:point animated:YES];
+    }
 
 }
 
 -(void) updatePathOverlay{
     
     if ( drawPathisOn &&  _shipfit.gps_count != 0 ){
-        path = [MKPolyline polylineWithCoordinates:self.shipfit.gps_head count:self.shipfit.gps_count];
-        [self.mapView addOverlay:path];
+//        path = [MKPolyline polylineWithCoordinates:self.shipfit.gps_head count:self.shipfit.gps_count];
+//        [self.mapView addOverlay:path];
         NSLog(@"mapView Path updated shipfit.gps_count->%d",_shipfit.gps_count);
     }
     
@@ -223,16 +230,16 @@
 - (IBAction)togglePathAction:(id)sender {
     if( drawPathisOn ){
         drawPathisOn = FALSE;
-        [self removePathOverlay];
+//        [self removePathOverlay];
     }
     else{
         drawPathisOn = TRUE;
-        [self updatePathOverlay];
+//        [self updatePathOverlay];
     }
 }
 
 - (void) removePathOverlay{
-    [self.mapView removeOverlay:path];
+//    [self.mapView removeOverlay:path];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{

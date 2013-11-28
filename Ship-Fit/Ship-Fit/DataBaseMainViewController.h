@@ -21,4 +21,8 @@
 @property(nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (weak, nonatomic) IBOutlet UISearchBar *databaseSearchBar;
 
+
+@property (nonatomic, retain) NSString * query;
+
+
 @end

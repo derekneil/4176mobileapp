@@ -143,13 +143,15 @@
         return _persistentStoreCoordinator;
     }
     
+    
     //added---------------------------
-    //check if the two databases exists on the device, if not it means its the first time the app is running
+    //check if the databases exists on the device, if not it means its the first time the app is running
     //copy the databases preloaded with data from the resources to the device
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"shipfitMainDatabasev1.sqlite"];
     NSURL *storeURL2 = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"shipfit_Index.sqlite"];
     NSURL *storeURL3 = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"shipfitGPS.sqlite"];
     
+
     //does the file exists
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if (![fileManager fileExistsAtPath:[storeURL path]]) {

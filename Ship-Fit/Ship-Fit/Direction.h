@@ -8,7 +8,6 @@
 
 @property (nonatomic, readwrite, strong) ShipFit *shipFit_ref;
 
-@property (nonatomic, readwrite, strong) NSMutableArray *compass_readings;
 
 /* Class Inititializer */
 - (id) initWithReference: (ShipFit *)reference;

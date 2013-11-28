@@ -14,6 +14,12 @@
 
 @implementation DatabaseArticleViewController
 
+
+- (void)setSearchQueryWord:(NSString *)word{
+    _query = word;
+}
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -22,6 +28,7 @@
     }
     return self;
 }
+
 
 - (void)viewDidLoad
 {
@@ -32,11 +39,24 @@
     _txtTitle.text = _currentArticle.title;
     //_txtMainArticle.text = _currentArticle.mainText;
     
+    
+    //highlight the found query text
+    NSString *str = _currentArticle.mainText;
+    NSString *q = _query;
+    NSString * replaceStr = [@"<span style='color:blue'>" stringByAppendingString:(q)];
+    replaceStr = [replaceStr stringByAppendingString:(@"</span>")];
+    
+    
+    //turn query to lower case first
+    str = [str stringByReplacingOccurrencesOfString:_query 
+                                         withString:replaceStr
+                                            options:NSCaseInsensitiveSearch range:NSMakeRange(0, [str length])];
+    
     NSString *path = [[NSBundle mainBundle] bundlePath];
     NSURL *baseURL = [NSURL fileURLWithPath:path];
-    [_wvMainText loadHTMLString:_currentArticle.mainText baseURL:baseURL];
-    
+    [_wvMainText loadHTMLString:str baseURL:baseURL];
 }
+
 
 - (void)didReceiveMemoryWarning
 {

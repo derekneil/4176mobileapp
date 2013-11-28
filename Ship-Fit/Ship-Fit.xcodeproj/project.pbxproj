@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0347D89818445524003F4C6F /* sample4.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0347D89718445524003F4C6F /* sample4.xml */; };
 		037B17FE1835C73100D80AAD /* shipfitGPS.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 037B17FD1835C73100D80AAD /* shipfitGPS.sqlite */; };
 		037B17FF1835C73100D80AAD /* shipfitGPS.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 037B17FD1835C73100D80AAD /* shipfitGPS.sqlite */; };
 		037B18021835C7F200D80AAD /* DatabaseAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 037B18011835C7F200D80AAD /* DatabaseAccess.m */; };
@@ -15,17 +16,19 @@
 		037B18071835D46F00D80AAD /* GPS.m in Sources */ = {isa = PBXBuildFile; fileRef = 037B18051835D46F00D80AAD /* GPS.m */; };
 		03D99465183ABE1A0061382E /* WeatherClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D99464183ABE1A0061382E /* WeatherClass.m */; };
 		03D99467183ACD2F0061382E /* erd.png in Resources */ = {isa = PBXBuildFile; fileRef = 03D99466183ACD2F0061382E /* erd.png */; };
+		3507C2ED184650750025B51A /* MapBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3507C2EC184650750025B51A /* MapBox.framework */; };
+		354E9A3F1843C29000DB7867 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 354E9A3E1843C29000DB7867 /* QuartzCore.framework */; };
+		3566D5A21842C45E007B1E98 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3566D5A11842C45E007B1E98 /* libsqlite3.dylib */; };
+		3566D5A41842C8A7007B1E98 /* Ship-Fit.mbtiles in Resources */ = {isa = PBXBuildFile; fileRef = 3566D5A31842C8A7007B1E98 /* Ship-Fit.mbtiles */; };
+		35AB36A618467308005BFD56 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35AB36A518467308005BFD56 /* SystemConfiguration.framework */; };
+		35AB36A918467351005BFD56 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 35AB36A818467351005BFD56 /* Reachability.m */; };
+		35CFA5031842CFA9001E53CA /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3566D59F1842C44B007B1E98 /* libz.dylib */; };
 		655D9D0718340F750004CD21 /* DatabaseMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9CF718340F750004CD21 /* DatabaseMainViewController.m */; };
 		655D9D0918340F750004CD21 /* shipfit_Index.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 655D9CFA18340F750004CD21 /* shipfit_Index.sqlite */; };
 		655D9D0B18340F750004CD21 /* SMXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9D0018340F750004CD21 /* SMXMLDocument.m */; };
 		655D9D0C18340F750004CD21 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 655D9D0118340F750004CD21 /* sqlite3.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		655D9D0D18340F750004CD21 /* DatabaseArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9D0418340F750004CD21 /* DatabaseArticleViewController.m */; };
 		655D9D0F183413E00004CD21 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 655D9D0E183413E00004CD21 /* CoreData.framework */; };
-		655D9D1C183414CF0004CD21 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9D13183414CE0004CD21 /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-w"; }; };
-		655D9D1D183414CF0004CD21 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9D15183414CE0004CD21 /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-w"; }; };
-		655D9D1E183414CF0004CD21 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9D17183414CF0004CD21 /* FMDatabasePool.m */; };
-		655D9D1F183414CF0004CD21 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9D19183414CF0004CD21 /* FMDatabaseQueue.m */; };
-		655D9D20183414CF0004CD21 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9D1B183414CF0004CD21 /* FMResultSet.m */; };
 		655D9D23183418320004CD21 /* shipfitCRUD.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 655D9D21183418320004CD21 /* shipfitCRUD.xcdatamodeld */; };
 		655D9D2718342F7C0004CD21 /* shipfitMainDatabasev1.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 655D9D2618342F7C0004CD21 /* shipfitMainDatabasev1.sqlite */; };
 		655D9D2B183434730004CD21 /* DB_Images in Resources */ = {isa = PBXBuildFile; fileRef = 655D9D2A183434730004CD21 /* DB_Images */; };
@@ -54,7 +57,6 @@
 		658DA5E11832DBF9003B6952 /* ShipFit.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DA5E01832DBF9003B6952 /* ShipFit.m */; };
 		658DA5E61832DC17003B6952 /* Direction.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DA5E31832DC17003B6952 /* Direction.m */; };
 		658DA5E71832DC17003B6952 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DA5E51832DC17003B6952 /* Location.m */; };
-		658DA5E91832DC91003B6952 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658DA5E81832DC91003B6952 /* MapKit.framework */; };
 		658DA5EB1832DC9A003B6952 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658DA5EA1832DC9A003B6952 /* CoreLocation.framework */; };
 		65C392DD183470E10042FA81 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 65C392DB183470E10042FA81 /* icon.png */; };
 		65C392DE183470E10042FA81 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65C392DC183470E10042FA81 /* icon@2x.png */; };
@@ -76,6 +78,17 @@
 		D56337AB1838101A00A9EDE8 /* Status-weather-clouds-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D56337A01838101A00A9EDE8 /* Status-weather-clouds-icon.png */; };
 		D56337AC1838101A00A9EDE8 /* Fog-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D56337A11838101A00A9EDE8 /* Fog-icon.png */; };
 		D56337AD1838101A00A9EDE8 /* Wind-Flag-Storm-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D56337A21838101A00A9EDE8 /* Wind-Flag-Storm-icon.png */; };
+		D58ABC8518463EAA001DE3D0 /* blue-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D58ABC8418463EAA001DE3D0 /* blue-background.jpg */; };
+		D58ABC8718463EB7001DE3D0 /* sun-glasses-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D58ABC8618463EB7001DE3D0 /* sun-glasses-icon.png */; };
+		D58ABC8918463EC3001DE3D0 /* Thermometer.png in Resources */ = {isa = PBXBuildFile; fileRef = D58ABC8818463EC3001DE3D0 /* Thermometer.png */; };
+		D58ABC8B18463ECA001DE3D0 /* tornado-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D58ABC8A18463ECA001DE3D0 /* tornado-icon.png */; };
+		D58ABC8D18463F8B001DE3D0 /* Hail-Heavy-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D58ABC8C18463F8B001DE3D0 /* Hail-Heavy-icon.png */; };
+		D58ABC8F18464360001DE3D0 /* barometer2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D58ABC8E18464360001DE3D0 /* barometer2.jpg */; };
+		D58ABC911846436B001DE3D0 /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = D58ABC901846436B001DE3D0 /* calendar.png */; };
+		D58ABC9318464371001DE3D0 /* thunderstorm.png in Resources */ = {isa = PBXBuildFile; fileRef = D58ABC9218464371001DE3D0 /* thunderstorm.png */; };
+		D58ABC95184649E2001DE3D0 /* barometer4.png in Resources */ = {isa = PBXBuildFile; fileRef = D58ABC94184649E2001DE3D0 /* barometer4.png */; };
+		D58ABC97184649ED001DE3D0 /* button_black_pause.png in Resources */ = {isa = PBXBuildFile; fileRef = D58ABC96184649ED001DE3D0 /* button_black_pause.png */; };
+		D58ABC99184649F5001DE3D0 /* button_black_play.png in Resources */ = {isa = PBXBuildFile; fileRef = D58ABC98184649F5001DE3D0 /* button_black_play.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +102,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0347D89718445524003F4C6F /* sample4.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = sample4.xml; path = ../sample4.xml; sourceTree = "<group>"; };
 		037B17FD1835C73100D80AAD /* shipfitGPS.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = shipfitGPS.sqlite; sourceTree = "<group>"; };
 		037B18001835C7F200D80AAD /* DatabaseAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseAccess.h; sourceTree = "<group>"; };
 		037B18011835C7F200D80AAD /* DatabaseAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseAccess.m; sourceTree = "<group>"; };
@@ -97,6 +111,14 @@
 		03D99463183ABE1A0061382E /* WeatherClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherClass.h; sourceTree = "<group>"; };
 		03D99464183ABE1A0061382E /* WeatherClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherClass.m; sourceTree = "<group>"; };
 		03D99466183ACD2F0061382E /* erd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = erd.png; sourceTree = "<group>"; };
+		3507C2EC184650750025B51A /* MapBox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapBox.framework; path = ../mapAppOffline/MapBox.framework; sourceTree = "<group>"; };
+		354E9A3E1843C29000DB7867 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		3566D59F1842C44B007B1E98 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		3566D5A11842C45E007B1E98 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		3566D5A31842C8A7007B1E98 /* Ship-Fit.mbtiles */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ship-Fit.mbtiles"; sourceTree = "<group>"; };
+		35AB36A518467308005BFD56 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		35AB36A718467351005BFD56 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		35AB36A818467351005BFD56 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		655D9CF618340F750004CD21 /* DataBaseMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DataBaseMainViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		655D9CF718340F750004CD21 /* DatabaseMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DatabaseMainViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		655D9CFA18340F750004CD21 /* shipfit_Index.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = shipfit_Index.sqlite; sourceTree = "<group>"; };
@@ -154,7 +176,6 @@
 		658DA5E31832DC17003B6952 /* Direction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Direction.m; sourceTree = "<group>"; };
 		658DA5E41832DC17003B6952 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		658DA5E51832DC17003B6952 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
-		658DA5E81832DC91003B6952 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		658DA5EA1832DC9A003B6952 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		65C392DB183470E10042FA81 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		65C392DC183470E10042FA81 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
@@ -180,6 +201,17 @@
 		D56337A01838101A00A9EDE8 /* Status-weather-clouds-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Status-weather-clouds-icon.png"; sourceTree = "<group>"; };
 		D56337A11838101A00A9EDE8 /* Fog-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fog-icon.png"; sourceTree = "<group>"; };
 		D56337A21838101A00A9EDE8 /* Wind-Flag-Storm-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Wind-Flag-Storm-icon.png"; sourceTree = "<group>"; };
+		D58ABC8418463EAA001DE3D0 /* blue-background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "blue-background.jpg"; sourceTree = "<group>"; };
+		D58ABC8618463EB7001DE3D0 /* sun-glasses-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sun-glasses-icon.png"; sourceTree = "<group>"; };
+		D58ABC8818463EC3001DE3D0 /* Thermometer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Thermometer.png; sourceTree = "<group>"; };
+		D58ABC8A18463ECA001DE3D0 /* tornado-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tornado-icon.png"; sourceTree = "<group>"; };
+		D58ABC8C18463F8B001DE3D0 /* Hail-Heavy-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Hail-Heavy-icon.png"; sourceTree = "<group>"; };
+		D58ABC8E18464360001DE3D0 /* barometer2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = barometer2.jpg; sourceTree = "<group>"; };
+		D58ABC901846436B001DE3D0 /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar.png; sourceTree = "<group>"; };
+		D58ABC9218464371001DE3D0 /* thunderstorm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thunderstorm.png; sourceTree = "<group>"; };
+		D58ABC94184649E2001DE3D0 /* barometer4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = barometer4.png; sourceTree = "<group>"; };
+		D58ABC96184649ED001DE3D0 /* button_black_pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_black_pause.png; sourceTree = "<group>"; };
+		D58ABC98184649F5001DE3D0 /* button_black_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_black_play.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,9 +219,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35AB36A618467308005BFD56 /* SystemConfiguration.framework in Frameworks */,
+				3507C2ED184650750025B51A /* MapBox.framework in Frameworks */,
+				354E9A3F1843C29000DB7867 /* QuartzCore.framework in Frameworks */,
+				35CFA5031842CFA9001E53CA /* libz.dylib in Frameworks */,
+				3566D5A21842C45E007B1E98 /* libsqlite3.dylib in Frameworks */,
 				655D9D0F183413E00004CD21 /* CoreData.framework in Frameworks */,
 				658DA5EB1832DC9A003B6952 /* CoreLocation.framework in Frameworks */,
-				658DA5E91832DC91003B6952 /* MapKit.framework in Frameworks */,
 				658DA5921832D817003B6952 /* UIKit.framework in Frameworks */,
 				658DA5941832D817003B6952 /* Foundation.framework in Frameworks */,
 				658DA5961832D817003B6952 /* CoreGraphics.framework in Frameworks */,
@@ -272,9 +308,13 @@
 		658DA5901832D817003B6952 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				35AB36A518467308005BFD56 /* SystemConfiguration.framework */,
+				3507C2EC184650750025B51A /* MapBox.framework */,
+				354E9A3E1843C29000DB7867 /* QuartzCore.framework */,
+				3566D5A11842C45E007B1E98 /* libsqlite3.dylib */,
+				3566D59F1842C44B007B1E98 /* libz.dylib */,
 				655D9D0E183413E00004CD21 /* CoreData.framework */,
 				658DA5EA1832DC9A003B6952 /* CoreLocation.framework */,
-				658DA5E81832DC91003B6952 /* MapKit.framework */,
 				658DA5911832D817003B6952 /* UIKit.framework */,
 				658DA5931832D817003B6952 /* Foundation.framework */,
 				658DA5951832D817003B6952 /* CoreGraphics.framework */,
@@ -339,6 +379,7 @@
 		658DA5DA1832D88D003B6952 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				3566D5A31842C8A7007B1E98 /* Ship-Fit.mbtiles */,
 				658DA5A91832D818003B6952 /* MainStoryboard_iPhone.storyboard */,
 				658DA5AC1832D818003B6952 /* MainStoryboard_iPad.storyboard */,
 				655D9D2E183434B90004CD21 /* TabBarIcons */,
@@ -360,6 +401,8 @@
 		658DA5DB1832D8B9003B6952 /* BackendLogic */ = {
 			isa = PBXGroup;
 			children = (
+				35AB36A718467351005BFD56 /* Reachability.h */,
+				35AB36A818467351005BFD56 /* Reachability.m */,
 				658DA5E21832DC17003B6952 /* Direction.h */,
 				658DA5E31832DC17003B6952 /* Direction.m */,
 				658DA5E41832DC17003B6952 /* Location.h */,
@@ -373,6 +416,7 @@
 		658DA5EC1832DD6A003B6952 /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				0347D89718445524003F4C6F /* sample4.xml */,
 				03D99466183ACD2F0061382E /* erd.png */,
 				655D9D2A183434730004CD21 /* DB_Images */,
 				655D9D29183430420004CD21 /* sqlite */,
@@ -394,6 +438,17 @@
 		D56337971838101A00A9EDE8 /* WeatherIcons */ = {
 			isa = PBXGroup;
 			children = (
+				D58ABC98184649F5001DE3D0 /* button_black_play.png */,
+				D58ABC96184649ED001DE3D0 /* button_black_pause.png */,
+				D58ABC94184649E2001DE3D0 /* barometer4.png */,
+				D58ABC9218464371001DE3D0 /* thunderstorm.png */,
+				D58ABC901846436B001DE3D0 /* calendar.png */,
+				D58ABC8E18464360001DE3D0 /* barometer2.jpg */,
+				D58ABC8C18463F8B001DE3D0 /* Hail-Heavy-icon.png */,
+				D58ABC8A18463ECA001DE3D0 /* tornado-icon.png */,
+				D58ABC8818463EC3001DE3D0 /* Thermometer.png */,
+				D58ABC8618463EB7001DE3D0 /* sun-glasses-icon.png */,
+				D58ABC8418463EAA001DE3D0 /* blue-background.jpg */,
 				D5256F4C183D6EE900DDE933 /* pressure.jpeg */,
 				D56337981838101A00A9EDE8 /* Status-weather-clear-icon.png */,
 				D56337991838101A00A9EDE8 /* Status-weather-clear-night-icon.png */,
@@ -457,6 +512,11 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "ship-fit";
+				TargetAttributes = {
+					658DA58D1832D817003B6952 = {
+						DevelopmentTeam = HQKPLQT856;
+					};
+				};
 			};
 			buildConfigurationList = 658DA5891832D817003B6952 /* Build configuration list for PBXProject "Ship-Fit" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -492,6 +552,7 @@
 				658DA5B51832D818003B6952 /* first@2x.png in Resources */,
 				658DA5BA1832D818003B6952 /* second.png in Resources */,
 				658DA5BC1832D818003B6952 /* second@2x.png in Resources */,
+				0347D89818445524003F4C6F /* sample4.xml in Resources */,
 				655D9D0918340F750004CD21 /* shipfit_Index.sqlite in Resources */,
 				655D9D2718342F7C0004CD21 /* shipfitMainDatabasev1.sqlite in Resources */,
 				655D9D2B183434730004CD21 /* DB_Images in Resources */,
@@ -507,12 +568,24 @@
 				D56337A71838101A00A9EDE8 /* Status-weather-snow-rain-icon.png in Resources */,
 				D56337A81838101A00A9EDE8 /* Status-weather-snow-icon.png in Resources */,
 				D56337A91838101A00A9EDE8 /* Status-weather-many-clouds-icon.png in Resources */,
+				3566D5A41842C8A7007B1E98 /* Ship-Fit.mbtiles in Resources */,
 				03D99467183ACD2F0061382E /* erd.png in Resources */,
 				D56337AA1838101A00A9EDE8 /* Status-weather-clouds-night-icon.png in Resources */,
 				D56337AB1838101A00A9EDE8 /* Status-weather-clouds-icon.png in Resources */,
 				D56337AC1838101A00A9EDE8 /* Fog-icon.png in Resources */,
 				D56337AD1838101A00A9EDE8 /* Wind-Flag-Storm-icon.png in Resources */,
 				D5256F4D183D6EE900DDE933 /* pressure.jpeg in Resources */,
+				D58ABC8518463EAA001DE3D0 /* blue-background.jpg in Resources */,
+				D58ABC8718463EB7001DE3D0 /* sun-glasses-icon.png in Resources */,
+				D58ABC8918463EC3001DE3D0 /* Thermometer.png in Resources */,
+				D58ABC8B18463ECA001DE3D0 /* tornado-icon.png in Resources */,
+				D58ABC8D18463F8B001DE3D0 /* Hail-Heavy-icon.png in Resources */,
+				D58ABC8F18464360001DE3D0 /* barometer2.jpg in Resources */,
+				D58ABC911846436B001DE3D0 /* calendar.png in Resources */,
+				D58ABC9318464371001DE3D0 /* thunderstorm.png in Resources */,
+				D58ABC95184649E2001DE3D0 /* barometer4.png in Resources */,
+				D58ABC97184649ED001DE3D0 /* button_black_pause.png in Resources */,
+				D58ABC99184649F5001DE3D0 /* button_black_play.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,15 +631,11 @@
 				037B18061835D46F00D80AAD /* GPS.m in Sources */,
 				658DA5E71832DC17003B6952 /* Location.m in Sources */,
 				655D9D0718340F750004CD21 /* DatabaseMainViewController.m in Sources */,
+				35AB36A918467351005BFD56 /* Reachability.m in Sources */,
 				655D9D0B18340F750004CD21 /* SMXMLDocument.m in Sources */,
 				655D9D0C18340F750004CD21 /* sqlite3.c in Sources */,
 				655D9D0D18340F750004CD21 /* DatabaseArticleViewController.m in Sources */,
 				037B18021835C7F200D80AAD /* DatabaseAccess.m in Sources */,
-				655D9D1C183414CF0004CD21 /* FMDatabase.m in Sources */,
-				655D9D1D183414CF0004CD21 /* FMDatabaseAdditions.m in Sources */,
-				655D9D1E183414CF0004CD21 /* FMDatabasePool.m in Sources */,
-				655D9D1F183414CF0004CD21 /* FMDatabaseQueue.m in Sources */,
-				655D9D20183414CF0004CD21 /* FMResultSet.m in Sources */,
 				655D9D23183418320004CD21 /* shipfitCRUD.xcdatamodeld in Sources */,
 				D51118621835592F009D722B /* Weather.m in Sources */,
 				D5237F12183C320900A77423 /* WeatherViewController.m in Sources */,
@@ -692,6 +761,14 @@
 		658DA5D51832D818003B6952 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)",
+					"/Users/derekneil/Google\\ Drive/Dropbox/4176\\ Mobile/project/Ship-Fit",
+					"/Users/derekneil/Google\\ Drive/Dropbox/4176\\ Mobile/project/mapAppOffline",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ship-Fit/Ship-Fit-Prefix.pch";
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
@@ -702,7 +779,14 @@
 				);
 				INFOPLIST_FILE = "Ship-Fit/Ship-Fit-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/**",
+				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				STRIP_INSTALLED_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -710,6 +794,14 @@
 		658DA5D61832D818003B6952 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)",
+					"/Users/derekneil/Google\\ Drive/Dropbox/4176\\ Mobile/project/Ship-Fit",
+					"/Users/derekneil/Google\\ Drive/Dropbox/4176\\ Mobile/project/mapAppOffline",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ship-Fit/Ship-Fit-Prefix.pch";
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
@@ -718,7 +810,14 @@
 				);
 				INFOPLIST_FILE = "Ship-Fit/Ship-Fit-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/**",
+				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				STRIP_INSTALLED_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
