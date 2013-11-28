@@ -194,7 +194,7 @@
         
         NSDictionary* currently = [weatherJSON objectForKey:@"currently"];
         self.tempLabel.text = [NSString stringWithFormat:@"%.f\u00B0C",[WeatherViewController degFtoDegC:[currently valueForKey:@"temperature"]] ];
-        self.windLabel.text = [NSString stringWithFormat:@"%.1f",[[currently valueForKey:@"windSpeed"] floatValue]];
+        self.windLabel.text = [NSString stringWithFormat:@"%.1f KM/H",([[currently valueForKey:@"windSpeed"]floatValue] * 1.609344)];
         self.windDirLabel.text = [Direction bearing_String:[[currently valueForKey:@"windBearing"] floatValue]];
         
         NSArray* temp = [[weatherJSON objectForKey:@"daily"] objectForKey:@"data"];
@@ -214,7 +214,7 @@
         else if (hour == 12 ){
             ampm =@"PM";
         }
-        else{
+        else if (hour > 12) {
             hour -=12;
             ampm =@"PM";
         }
