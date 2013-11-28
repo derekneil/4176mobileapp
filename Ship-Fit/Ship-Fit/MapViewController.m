@@ -19,7 +19,6 @@
 //    MKPolyline* path;
     BOOL drawPathisOn;
     NSDictionary* weatherJSON;
-    Reachability* reach;
     RMMBTilesSource* offlineSource;
 }
 
@@ -45,9 +44,29 @@
     
     //check for bottom layout guide and adjust up the bottom alignment
     
-    //only load offline map until internet connection is detected
     offlineSource = [[RMMBTilesSource alloc] initWithTileSetResource:@"Ship-Fit" ofType:@"mbtiles"];
-    mapView = [[RMMapView alloc] initWithFrame:self.view.bounds andTilesource:offlineSource];
+    
+    NSLog(@"mapVC checking shipfit.internetAvail");
+    
+    if (_shipfit.internetAvail==FALSE) {
+        
+        //only load offline map until internet connection is detected
+        mapView = [[RMMapView alloc] initWithFrame:self.view.bounds andTilesource:offlineSource];
+        
+        // set up internet observer for online map, otherwise it will crash the app when it first loads
+        [_shipfit addObserver:self
+                   forKeyPath:@"internetAvail"
+                      options:NSKeyValueObservingOptionNew
+                      context:nil ];
+    }
+    else{ //internet is available so we can load the online map
+        RMMapBoxSource *onlineSource = [[RMMapBoxSource alloc] initWithMapID:@"krazyderek.g8dkgmh4"];
+        mapView = [[RMMapView alloc] initWithFrame:self.view.bounds andTilesource:onlineSource];
+        
+        //then add oceans offline map overlay
+        [mapView addTileSource:offlineSource];
+    }
+    
     mapView.delegate = self;
     mapView.zoom = 4;
     mapView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
@@ -58,38 +77,17 @@
     
     //insert map below everything else on the storyboard
     [self.view insertSubview:mapView atIndex:0];
-    
-    //online map will crash app, so it can only be added after internet is detected
-    //https://github.com/tonymillion/Reachability
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(reachabilityChanged:)
-                                                 name:kReachabilityChangedNotification
-                                               object:nil];
-    reach = [Reachability reachabilityWithHostname:@"www.mapbox.com"];
-    [reach startNotifier];
-    NSLog(@"mapVC Reachability Notifications started");
-    
 }
 
-//reachability notification method
--(void)reachabilityChanged:(NSNotification*)note{
-    reach = [note object];
-    if([reach isReachable])
-    {
-        NSLog(@"mapVC Notification Says Reachable");
-        [self LoadOnlineMap];
-    }
-}
-
-- (void)LoadOnlineMap{
+- (void)loadOnlineMap{
     
     RMMapBoxSource *onlineSource = [[RMMapBoxSource alloc] initWithMapID:@"krazyderek.g8dkgmh4"];
+    
+    //if i just insert, the oceans overlay doesn't dissappear below it's zoom level
     [mapView removeTileSource:offlineSource];
+    
     [mapView addTileSource:onlineSource];
     [mapView addTileSource:offlineSource];
-    
-    [reach stopNotifier]; //since online map will rely on it's cache once initialized
-    NSLog(@"mapVC Reachability Notifications stopped");
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -170,8 +168,14 @@
     {
         //keep these on the value changing thread since it could be a big update
         weatherJSON = [change objectForKey:NSKeyValueChangeNewKey];
-//        NSLog(@"%@",weatherJSON);
         [self updateWeatherLabels];
+    }
+    else if ( [keyPath isEqualToString:@"internetAvail" ] )
+    {
+        //this should only fire once, when internet is first avail to app
+        [self loadOnlineMap];
+        //remove cause online map will work from cache once initialized
+        [_shipfit removeObserver:self forKeyPath:@"internetAvail"];
     }
     
 }
