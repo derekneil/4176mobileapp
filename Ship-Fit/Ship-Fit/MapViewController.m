@@ -43,7 +43,7 @@
 
     //TODO: restore previous state
     drawPathisOn = FALSE;
-    pannedMapAway = FALSE;
+    pannedMapAway = TRUE;
     
     //check for bottom layout guide and adjust up the bottom alignment
     
@@ -76,7 +76,7 @@
     //allow lower resolution tiles to be used when zooming in
     mapView.missingTilesDepth = 2;
     
-    mapView.showsUserLocation=TRUE;
+//    mapView.showsUserLocation=TRUE;
     
     [self.mapView zoomingInPivotsAroundCenter];
     

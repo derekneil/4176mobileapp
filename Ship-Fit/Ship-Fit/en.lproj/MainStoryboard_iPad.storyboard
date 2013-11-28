@@ -464,7 +464,7 @@
     <resources>
         <image name="button_black_pause.png" width="128" height="128"/>
         <image name="button_black_play.png" width="128" height="128"/>
-        <image name="first" width="16" height="16"/>
+        <image name="first" width="255" height="256"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
