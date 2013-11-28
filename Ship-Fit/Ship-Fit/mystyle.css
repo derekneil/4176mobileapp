@@ -1,7 +1,6 @@
 img{
-width:300px;
-}
-
-span{
-    color:blue;
+position: absolute;
+left: 15%;
+margin-top: 10%;
+width: 65%;
 }
