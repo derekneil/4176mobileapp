@@ -43,15 +43,10 @@
                                     <action selector="togglePathAction:" destination="2" eventType="touchUpInside" id="AhX-4J-Ati"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="HlY-Eu-jn2">
-                                <rect key="frame" x="20" y="413" width="47" height="44"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="ME">
-                                    <color key="titleColor" red="0.19607843137254902" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="HlY-Eu-jn2">
+                                <rect key="frame" x="20" y="413" width="46" height="49"/>
+                                <state key="normal" title="ME" image="locationinactive.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="zoomToMe:" destination="2" eventType="touchUpInside" id="JOZ-q7-y1G"/>
@@ -70,7 +65,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="deg" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DkJ-4m-rnd">
-                                <rect key="frame" x="139" y="239" width="42" height="21"/>
+                                <rect key="frame" x="139" y="107" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="turn off soon" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pD7-tm-nvS">
+                                <rect key="frame" x="209" y="390" width="110" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -169,7 +170,9 @@
                         <outlet property="compDegLabel" destination="DkJ-4m-rnd" id="gdT-jX-4Cw"/>
                         <outlet property="compDirLabel" destination="H2G-7K-1hC" id="Jvv-AL-YGt"/>
                         <outlet property="latLabel" destination="R7I-Mo-Ua1" id="ZBt-Da-aLA"/>
+                        <outlet property="locationButton" destination="HlY-Eu-jn2" id="UIP-oC-hR6"/>
                         <outlet property="longLabel" destination="ak1-fR-8eO" id="nA6-x0-YPY"/>
+                        <outlet property="pathButton" destination="rsA-Gc-ZMi" id="2Ip-m4-6gV"/>
                         <outlet property="speedLabel" destination="Gp5-zY-g1n" id="xMi-uj-Hsp"/>
                         <outlet property="sunLabel" destination="ex7-1Z-3RE" id="lvu-rZ-QQd"/>
                         <outlet property="tempHighLabel" destination="56C-xh-xvh" id="u2J-ne-wn3"/>
@@ -455,6 +458,7 @@
         <image name="button_black_pause.png" width="128" height="128"/>
         <image name="button_black_play.png" width="128" height="128"/>
         <image name="first" width="16" height="16"/>
+        <image name="locationinactive.png" width="255" height="256"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

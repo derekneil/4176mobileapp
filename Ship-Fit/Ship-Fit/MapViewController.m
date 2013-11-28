@@ -221,9 +221,20 @@
         self.sunLabel.text = [NSString stringWithFormat:@"%d:%ld %@",hour, (long)[date_components minute],ampm ];
     }];
 }
-    
+
+- (void)beforeMapMove:(RMMapView *)map byUser:(BOOL)wasUserAction{
+    //change location icon
+    if(wasUserAction){
+        [self.locationButton setImage:[UIImage imageNamed:@"locationinactive.png"] forState:UIControlStateNormal];
+    }
+}
+
 - (IBAction)zoomToMe:(id)sender {
     
+    //change location icon
+    [self.locationButton setImage:[UIImage imageNamed:@"location.png"] forState: UIControlStateNormal];
+    
+    //move map
     [self.mapView setZoom:15 atCoordinate:*(_shipfit.gps_head) animated:YES];
 }
 
