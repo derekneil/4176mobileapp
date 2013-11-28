@@ -138,9 +138,9 @@
     {
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             self.latLabel.text = [NSString stringWithFormat:@"%.4f" , _shipfit.latitude ];
-            [self zoomToMe:nil];
-            if(! pannedMapAway){
-                [self updatePathOverlay];
+            [self updatePathOverlay];
+            if(pannedMapAway==FALSE){
+                [self zoomToMe:nil];
             }
         }];
     }
