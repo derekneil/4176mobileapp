@@ -38,6 +38,10 @@
 - (IBAction)pause_explosion: (id)sender;
 - (IBAction)play_explosion: (id)sender;
 
++ (NSString *)getDayOfWeekStr: (NSInteger)dayOfWeek;
++ (NSString*)getHourOfDayStr: (NSInteger)hour;
++ (NSString *)getMonthOfYearStr: (NSInteger)month;
++ (double)degFtoDegC: (NSString *)input;
 
 
 

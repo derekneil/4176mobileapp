@@ -98,14 +98,14 @@
 		self.windDirection.text = [ Direction bearing_String:[[ weather_data valueForKey:@"windBearing"] doubleValue] ];
 
         // Temperature Related
-		self.temperatureCurrent.text = [NSString stringWithFormat:@"%.1f \u00B0 C", [self set_temp: [weather_data valueForKey:@"temperature"] ] ];
+		self.temperatureCurrent.text = [NSString stringWithFormat:@"%.f\u00B0C", [WeatherViewController degFtoDegC: [weather_data valueForKey:@"temperature"] ] ];
 
         // Time
 		[self set_time:[[ weather_data valueForKey:@"time"] doubleValue]];
 
 		
         //pressure
-		self.pressure.text = [ NSString stringWithFormat:@"%@ mbar" , [weather_data valueForKey:@"pressure"] ];
+		self.pressure.text = [ NSString stringWithFormat:@"%.d mbar" , [[weather_data valueForKey:@"pressure"] intValue]];
 
       	//precipitation && clouds
 		self.precipitation.text = [ NSString stringWithFormat:@"%.0f %% POP" , 100 * [ [weather_data valueForKey:@"precipProbability"] doubleValue ] ];
@@ -170,20 +170,20 @@
 {	
 	NSDate *date = [NSDate dateWithTimeIntervalSince1970:Time];
    
-    NSDateComponents *date_components = [[NSCalendar currentCalendar] components:kCFCalendarUnitHour | kCFCalendarUnitDay | kCFCalendarUnitMonth | kCFCalendarUnitYear | kCFCalendarUnitWeekday fromDate:date ];
+    NSDateComponents *date_components = [[NSCalendar currentCalendar] components: kCFCalendarUnitHour | kCFCalendarUnitDay | kCFCalendarUnitMonth | kCFCalendarUnitYear | kCFCalendarUnitWeekday fromDate:date ];
     
     NSMutableString *result= [ [NSMutableString alloc] init];
     
-    [result appendString:[ self set_day_of_week:[date_components weekday]]];
+    [result appendString:[WeatherViewController getDayOfWeekStr:[date_components weekday]]];
     [result appendString:@", "];
-    [result appendString:[self set_month_of_year:[date_components month]]];
+    [result appendString:[WeatherViewController getMonthOfYearStr:[date_components month]]];
     [result appendString:[NSString stringWithFormat:@"%i ",[date_components day]]];
-    [result appendString:[self set_hour_of_day:[date_components hour]]];
+    [result appendString:[WeatherViewController getHourOfDayStr:[date_components hour]]];
     
     self.time.text = result;
 }
 
-- (NSString *)set_day_of_week: (NSInteger)dayOfWeek
++ (NSString *)getDayOfWeekStr: (NSInteger)dayOfWeek
 {
 	if (dayOfWeek == 1){  return @"Sunday"; }
 	else if (dayOfWeek == 2){ return @"Monday"; }
@@ -195,7 +195,7 @@
 	else { return @"Error"; }
 }
 
-- (NSString *)set_month_of_year: (NSInteger)month
++ (NSString *)getMonthOfYearStr: (NSInteger)month
 {
 	if (month == 1){  return @"January "; }
 	else if (month == 2){ return @"February "; }
@@ -212,19 +212,16 @@
 	else { return @"Error"; }
 }
 
-- (NSString*)set_hour_of_day: (NSInteger)hours
++ (NSString*)getHourOfDayStr: (NSInteger)hours
 {
-    if (hours==0)
-    {
+    if (hours==0){
         hours+=12;
         return [NSString stringWithFormat:@"%i AM",hours];
     }
-    else if (hours < 12)
-    {
+    else if (hours < 12){
         return [NSString stringWithFormat:@"%i AM",hours];
     }
-    else if (hours == 12 )
-    {
+    else if (hours == 12 ){
         return [NSString stringWithFormat:@"%i PM",hours];
     }
     else{
@@ -234,7 +231,7 @@
 }
     
 
-- (double)set_temp: (NSString *)input
++ (double)degFtoDegC: (NSString *)input
 {
 	double x;
 	x = [input doubleValue];

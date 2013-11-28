@@ -9,6 +9,7 @@
 #import "MapViewController.h"
 #import "Direction.h"
 #import "Reachability.h"
+#import "WeatherViewController.h"
 
 @interface MapViewController ()
 
@@ -188,19 +189,35 @@
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         
         NSDictionary* currently = [weatherJSON objectForKey:@"currently"];
-        self.tempLabel.text = [NSString stringWithFormat:@"%@",[currently valueForKey:@"temperature"]];
-        self.windLabel.text = [NSString stringWithFormat:@"%@",[currently valueForKey:@"windSpeed"]];
+        self.tempLabel.text = [NSString stringWithFormat:@"%.f\u00B0C",[WeatherViewController degFtoDegC:[currently valueForKey:@"temperature"]] ];
+        self.windLabel.text = [NSString stringWithFormat:@"%.1f",[[currently valueForKey:@"windSpeed"] floatValue]];
         self.windDirLabel.text = [Direction bearing_String:[[currently valueForKey:@"windBearing"] floatValue]];
         
         NSArray* temp = [[weatherJSON objectForKey:@"daily"] objectForKey:@"data"];
         NSDictionary* today = temp[0];
-        self.tempHighLabel.text = [NSString stringWithFormat:@"%@",[today valueForKey:@"temperatureMax"]];
-        self.tempLoLabel.text = [NSString stringWithFormat:@"%@",[today valueForKey:@"temperatureMin"]];
-        self.sunLabel.text = [NSString stringWithFormat:@"%@",[today valueForKey:@"sunsetTime"]];
+        self.tempHighLabel.text = [NSString stringWithFormat:@"%.f\u00B0C",[WeatherViewController degFtoDegC:[today valueForKey:@"temperatureMax"]]];
+        self.tempLoLabel.text = [NSString stringWithFormat:@"%.f\u00B0C",[WeatherViewController degFtoDegC:[today valueForKey:@"temperatureMin"]]];
         
+        //parse date
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:[[today valueForKey:@"sunsetTime"] doubleValue] ];
+        NSDateComponents *date_components = [[NSCalendar currentCalendar] components: kCFCalendarUnitMinute | kCFCalendarUnitHour fromDate:date ];;
+        int hour = [date_components hour];
+        NSString* ampm = @"AM";
+        
+        if (hour==0){
+            hour+=12;
+        }
+        else if (hour == 12 ){
+            ampm =@"PM";
+        }
+        else{
+            hour -=12;
+            ampm =@"PM";
+        }
+        self.sunLabel.text = [NSString stringWithFormat:@"%d:%ld %@",hour, (long)[date_components minute],ampm ];
     }];
 }
-
+    
 - (IBAction)zoomToMe:(id)sender {
     [self.mapView setCenterCoordinate:*(_shipfit.gps_head) animated:YES];
 }
