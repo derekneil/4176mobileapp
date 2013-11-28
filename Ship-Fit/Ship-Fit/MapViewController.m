@@ -46,8 +46,6 @@
     
     offlineSource = [[RMMBTilesSource alloc] initWithTileSetResource:@"Ship-Fit" ofType:@"mbtiles"];
     
-    NSLog(@"mapVC checking shipfit.internetAvail");
-    
     if (_shipfit.internetAvail==FALSE) {
         
         //only load offline map until internet connection is detected
@@ -147,7 +145,7 @@
     else if ( [keyPath isEqualToString:@"knots" ] )
     {
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            self.speedLabel.text = [NSString stringWithFormat:@"%.4f knots" , _shipfit.knots ];
+            self.speedLabel.text = [NSString stringWithFormat:@"%.1f knots" , _shipfit.knots ];
         }];
     }
     
