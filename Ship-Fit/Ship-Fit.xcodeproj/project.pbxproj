@@ -22,6 +22,8 @@
 		3566D5A41842C8A7007B1E98 /* Ship-Fit.mbtiles in Resources */ = {isa = PBXBuildFile; fileRef = 3566D5A31842C8A7007B1E98 /* Ship-Fit.mbtiles */; };
 		35AB36A618467308005BFD56 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35AB36A518467308005BFD56 /* SystemConfiguration.framework */; };
 		35AB36A918467351005BFD56 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 35AB36A818467351005BFD56 /* Reachability.m */; };
+		35AB36AB1846F606005BFD56 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 35AB36AA1846F606005BFD56 /* location.png */; };
+		35AB36AD1846F7B1005BFD56 /* locationinactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 35AB36AC1846F7B1005BFD56 /* locationinactive.png */; };
 		35CFA5031842CFA9001E53CA /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3566D59F1842C44B007B1E98 /* libz.dylib */; };
 		655D9D0718340F750004CD21 /* DatabaseMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9CF718340F750004CD21 /* DatabaseMainViewController.m */; };
 		655D9D0918340F750004CD21 /* shipfit_Index.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 655D9CFA18340F750004CD21 /* shipfit_Index.sqlite */; };
@@ -119,6 +121,8 @@
 		35AB36A518467308005BFD56 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		35AB36A718467351005BFD56 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		35AB36A818467351005BFD56 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		35AB36AA1846F606005BFD56 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
+		35AB36AC1846F7B1005BFD56 /* locationinactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locationinactive.png; sourceTree = "<group>"; };
 		655D9CF618340F750004CD21 /* DataBaseMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DataBaseMainViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		655D9CF718340F750004CD21 /* DatabaseMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DatabaseMainViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		655D9CFA18340F750004CD21 /* shipfit_Index.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = shipfit_Index.sqlite; sourceTree = "<group>"; };
@@ -341,6 +345,8 @@
 		658DA5981832D817003B6952 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				35AB36AC1846F7B1005BFD56 /* locationinactive.png */,
+				35AB36AA1846F606005BFD56 /* location.png */,
 				D56337971838101A00A9EDE8 /* WeatherIcons */,
 				65C392E11834737C0042FA81 /* icon144.png */,
 				65C392DF183473740042FA81 /* icon72.png */,
@@ -558,6 +564,7 @@
 				655D9D2B183434730004CD21 /* DB_Images in Resources */,
 				655D9D2D183434900004CD21 /* mystyle.css in Resources */,
 				65C392DD183470E10042FA81 /* icon.png in Resources */,
+				35AB36AD1846F7B1005BFD56 /* locationinactive.png in Resources */,
 				65C392DE183470E10042FA81 /* icon@2x.png in Resources */,
 				65C392E0183473740042FA81 /* icon72.png in Resources */,
 				65C392E21834737C0042FA81 /* icon144.png in Resources */,
@@ -565,6 +572,7 @@
 				D56337A41838101A00A9EDE8 /* Status-weather-clear-night-icon.png in Resources */,
 				D56337A51838101A00A9EDE8 /* thermometer.jpeg in Resources */,
 				D56337A61838101A00A9EDE8 /* Status-weather-showers-icon.png in Resources */,
+				35AB36AB1846F606005BFD56 /* location.png in Resources */,
 				D56337A71838101A00A9EDE8 /* Status-weather-snow-rain-icon.png in Resources */,
 				D56337A81838101A00A9EDE8 /* Status-weather-snow-icon.png in Resources */,
 				D56337A91838101A00A9EDE8 /* Status-weather-many-clouds-icon.png in Resources */,

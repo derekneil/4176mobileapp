@@ -25,6 +25,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *windDirLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sunLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *locationButton;
+@property (weak, nonatomic) IBOutlet UIButton *pathButton;
+
 - (IBAction)togglePathAction:(id)sender;
 - (IBAction)zoomToMe:(id)sender;
 
