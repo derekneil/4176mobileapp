@@ -21,6 +21,7 @@
     BOOL drawPathisOn;
     NSDictionary* weatherJSON;
     RMMBTilesSource* offlineSource;
+    BOOL pannedMapAway;
 }
 
 @synthesize mapView;
@@ -42,6 +43,7 @@
 
     //TODO: restore previous state
     drawPathisOn = FALSE;
+    pannedMapAway = FALSE;
     
     //check for bottom layout guide and adjust up the bottom alignment
     
@@ -136,7 +138,10 @@
     {
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             self.latLabel.text = [NSString stringWithFormat:@"%.4f" , _shipfit.latitude ];
-            [self updatePathOverlay];
+            [self zoomToMe:nil];
+            if(! pannedMapAway){
+                [self updatePathOverlay];
+            }
         }];
     }
     
@@ -226,6 +231,7 @@
     //change location icon
     if(wasUserAction){
         [self.locationButton setImage:[UIImage imageNamed:@"locationinactive.png"] forState:UIControlStateNormal];
+        pannedMapAway = TRUE;
     }
 }
 
@@ -236,6 +242,8 @@
     
     //move map
     [self.mapView setZoom:15 atCoordinate:*(_shipfit.gps_head) animated:YES];
+    
+    pannedMapAway = false;
 }
 
 - (IBAction)zoomChange:(id)sender {
