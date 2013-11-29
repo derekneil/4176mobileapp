@@ -26,6 +26,8 @@
 		35AB36AD1846F7B1005BFD56 /* locationinactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 35AB36AC1846F7B1005BFD56 /* locationinactive.png */; };
 		35AB36B01847A0CD005BFD56 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 35AB36AE1847A0CD005BFD56 /* map.png */; };
 		35AB36B11847A0CD005BFD56 /* map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 35AB36AF1847A0CD005BFD56 /* map@2x.png */; };
+		35AB36B61847A96B005BFD56 /* path.png in Resources */ = {isa = PBXBuildFile; fileRef = 35AB36B41847A96B005BFD56 /* path.png */; };
+		35AB36B71847A96B005BFD56 /* pathinactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 35AB36B51847A96B005BFD56 /* pathinactive.png */; };
 		35CFA5031842CFA9001E53CA /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3566D59F1842C44B007B1E98 /* libz.dylib */; };
 		655D9D0718340F750004CD21 /* DatabaseMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9CF718340F750004CD21 /* DatabaseMainViewController.m */; };
 		655D9D0918340F750004CD21 /* shipfit_Index.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 655D9CFA18340F750004CD21 /* shipfit_Index.sqlite */; };
@@ -48,8 +50,6 @@
 		658DA5A81832D818003B6952 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 658DA5A71832D817003B6952 /* Default-568h@2x.png */; };
 		658DA5AB1832D818003B6952 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 658DA5A91832D818003B6952 /* MainStoryboard_iPhone.storyboard */; };
 		658DA5AE1832D818003B6952 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 658DA5AC1832D818003B6952 /* MainStoryboard_iPad.storyboard */; };
-		658DA5B31832D818003B6952 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 658DA5B21832D818003B6952 /* first.png */; };
-		658DA5B51832D818003B6952 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 658DA5B41832D818003B6952 /* first@2x.png */; };
 		658DA5C41832D818003B6952 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658DA5C31832D818003B6952 /* SenTestingKit.framework */; };
 		658DA5C51832D818003B6952 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658DA5911832D817003B6952 /* UIKit.framework */; };
 		658DA5C61832D818003B6952 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658DA5931832D817003B6952 /* Foundation.framework */; };
@@ -125,6 +125,8 @@
 		35AB36AC1846F7B1005BFD56 /* locationinactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locationinactive.png; sourceTree = "<group>"; };
 		35AB36AE1847A0CD005BFD56 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
 		35AB36AF1847A0CD005BFD56 /* map@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map@2x.png"; sourceTree = "<group>"; };
+		35AB36B41847A96B005BFD56 /* path.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = path.png; sourceTree = "<group>"; };
+		35AB36B51847A96B005BFD56 /* pathinactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pathinactive.png; sourceTree = "<group>"; };
 		655D9CF618340F750004CD21 /* DataBaseMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DataBaseMainViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		655D9CF718340F750004CD21 /* DatabaseMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DatabaseMainViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		655D9CFA18340F750004CD21 /* shipfit_Index.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = shipfit_Index.sqlite; sourceTree = "<group>"; };
@@ -164,8 +166,6 @@
 		658DA5A71832D817003B6952 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		658DA5AA1832D818003B6952 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		658DA5AD1832D818003B6952 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		658DA5B21832D818003B6952 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
-		658DA5B41832D818003B6952 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
 		658DA5C21832D818003B6952 /* Ship-FitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Ship-FitTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		658DA5C31832D818003B6952 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		658DA5CB1832D818003B6952 /* Ship-FitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Ship-FitTests-Info.plist"; sourceTree = "<group>"; };
@@ -183,8 +183,8 @@
 		658DA5EA1832DC9A003B6952 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		65C392DB183470E10042FA81 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		65C392DC183470E10042FA81 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
-		65C392DF183473740042FA81 /* icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon72.png; path = ../icon72.png; sourceTree = "<group>"; };
-		65C392E11834737C0042FA81 /* icon144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon144.png; path = ../icon144.png; sourceTree = "<group>"; };
+		65C392DF183473740042FA81 /* icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon72.png; sourceTree = "<group>"; };
+		65C392E11834737C0042FA81 /* icon144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon144.png; sourceTree = "<group>"; };
 		65CE3DE3183419B900ECA91C /* ARTICLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARTICLE.h; sourceTree = "<group>"; };
 		65CE3DE4183419B900ECA91C /* ARTICLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARTICLE.m; sourceTree = "<group>"; };
 		D51118601835592F009D722B /* Weather.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Weather.h; sourceTree = "<group>"; };
@@ -284,8 +284,6 @@
 			children = (
 				35AB36AE1847A0CD005BFD56 /* map.png */,
 				35AB36AF1847A0CD005BFD56 /* map@2x.png */,
-				658DA5B21832D818003B6952 /* first.png */,
-				658DA5B41832D818003B6952 /* first@2x.png */,
 			);
 			name = TabBarIcons;
 			sourceTree = "<group>";
@@ -345,6 +343,8 @@
 		658DA5981832D817003B6952 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				35AB36B41847A96B005BFD56 /* path.png */,
+				35AB36B51847A96B005BFD56 /* pathinactive.png */,
 				35AB36AC1846F7B1005BFD56 /* locationinactive.png */,
 				35AB36AA1846F606005BFD56 /* location.png */,
 				D56337971838101A00A9EDE8 /* WeatherIcons */,
@@ -550,17 +550,17 @@
 				658DA59C1832D817003B6952 /* InfoPlist.strings in Resources */,
 				658DA5A41832D817003B6952 /* Default.png in Resources */,
 				658DA5A61832D817003B6952 /* Default@2x.png in Resources */,
+				35AB36B71847A96B005BFD56 /* pathinactive.png in Resources */,
 				658DA5A81832D818003B6952 /* Default-568h@2x.png in Resources */,
 				037B17FE1835C73100D80AAD /* shipfitGPS.sqlite in Resources */,
 				658DA5AB1832D818003B6952 /* MainStoryboard_iPhone.storyboard in Resources */,
 				658DA5AE1832D818003B6952 /* MainStoryboard_iPad.storyboard in Resources */,
-				658DA5B31832D818003B6952 /* first.png in Resources */,
-				658DA5B51832D818003B6952 /* first@2x.png in Resources */,
 				0347D89818445524003F4C6F /* sample4.xml in Resources */,
 				655D9D0918340F750004CD21 /* shipfit_Index.sqlite in Resources */,
 				655D9D2718342F7C0004CD21 /* shipfitMainDatabasev1.sqlite in Resources */,
 				655D9D2B183434730004CD21 /* DB_Images in Resources */,
 				655D9D2D183434900004CD21 /* mystyle.css in Resources */,
+				35AB36B61847A96B005BFD56 /* path.png in Resources */,
 				65C392DD183470E10042FA81 /* icon.png in Resources */,
 				35AB36AD1846F7B1005BFD56 /* locationinactive.png in Resources */,
 				65C392DE183470E10042FA81 /* icon@2x.png in Resources */,

@@ -271,12 +271,16 @@
 }
 
 - (IBAction)togglePathAction:(id)sender {
-    if( drawPathisOn ){
+    if( drawPathisOn == TRUE ){
         drawPathisOn = FALSE;
+        //change path button icon
+        [self.pathButton setImage:[UIImage imageNamed:@"pathinactive.png"] forState: UIControlStateNormal];
 //        [self removePathOverlay];
     }
-    else{
+    else if (drawPathisOn == FALSE){
         drawPathisOn = TRUE;
+        //change path button icon
+        [self.pathButton setImage:[UIImage imageNamed:@"path.png"] forState: UIControlStateNormal];
 //        [self updatePathOverlay];
     }
 }
