@@ -10,6 +10,7 @@
 #import "Direction.h"
 #import "Reachability.h"
 #import "WeatherViewController.h"
+#import <MapKit/MapKit.h>
 
 @interface MapViewController ()
 
@@ -17,7 +18,7 @@
 
 @implementation MapViewController {
     NSMutableArray* pathTraveled;
-//    MKPolyline* path;
+    RMAnnotation *annotation;
     BOOL drawPathisOn;
     NSDictionary* weatherJSON;
     RMMBTilesSource* offlineSource;
@@ -76,7 +77,7 @@
     //allow lower resolution tiles to be used when zooming in
     mapView.missingTilesDepth = 2;
     
-//    mapView.showsUserLocation=TRUE;
+    mapView.showsUserLocation=TRUE;
     
     [self.mapView zoomingInPivotsAroundCenter];
     
@@ -263,11 +264,38 @@
 -(void) updatePathOverlay{
     
     if ( drawPathisOn &&  _shipfit.gps_count != 0 ){
-//        path = [MKPolyline polylineWithCoordinates:self.shipfit.gps_head count:self.shipfit.gps_count];
-//        [self.mapView addOverlay:path];
+        
+//        if( annotation==nil ){
+        //create annotation layer for map path to be shown on
+            annotation = [[RMAnnotation alloc] initWithMapView:self.mapView
+                                                                  coordinate:*(self.shipfit.gps_head)
+                                                                    andTitle:nil];
+            [self.mapView addAnnotation:annotation];
+//        }
+        
         NSLog(@"mapView Path updated shipfit.gps_count->%d",_shipfit.gps_count);
     }
     
+}
+
+- (RMMapLayer *)mapView:(RMMapView *)mapView layerForAnnotation:(RMAnnotation *)thisannotation
+{
+    if (thisannotation.isUserLocationAnnotation)
+        return nil;
+    
+    RMShape *line = [[RMShape alloc] initWithView:self.mapView];
+    
+    line.lineWidth = 5.0;
+    
+    line.lineColor = [UIColor greenColor];
+    
+    [line moveToCoordinate:*(self.shipfit.gps_head)];
+    
+    [line addLineToCoordinate:*(self.shipfit.gps_head+1)];
+    
+    NSLog(@"mapView Path returning line to draw");
+    
+    return line;
 }
 
 - (IBAction)togglePathAction:(id)sender {
