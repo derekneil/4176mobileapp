@@ -244,6 +244,9 @@
     [self.locationButton setImage:[UIImage imageNamed:@"location.png"] forState: UIControlStateNormal];
     
     //move map
+    if(self.shipfit.zoom==0){
+        self.shipfit.zoom = 12;
+    }
     [self.mapView setZoom:self.shipfit.zoom atCoordinate:*(_shipfit.gps_head) animated:YES];
     NSLog(@"zoom %d",self.shipfit.zoom);
     
