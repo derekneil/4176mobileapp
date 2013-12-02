@@ -33,6 +33,8 @@
 		35B85046184CBCE400147BD3 /* sunset.png in Resources */ = {isa = PBXBuildFile; fileRef = 35B85044184CBCE400147BD3 /* sunset.png */; };
 		35B85048184CC27200147BD3 /* round_plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 35B85047184CC27200147BD3 /* round_plus.png */; };
 		35B8504A184CC29D00147BD3 /* round_minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 35B85049184CC29D00147BD3 /* round_minus.png */; };
+		35B8504D184CC7F100147BD3 /* TrackingDot.png in Resources */ = {isa = PBXBuildFile; fileRef = 35B8504B184CC7F100147BD3 /* TrackingDot.png */; };
+		35B8504E184CC7F100147BD3 /* TrackingDot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 35B8504C184CC7F100147BD3 /* TrackingDot@2x.png */; };
 		35CFA5031842CFA9001E53CA /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3566D59F1842C44B007B1E98 /* libz.dylib */; };
 		655D9D0718340F750004CD21 /* DatabaseMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9CF718340F750004CD21 /* DatabaseMainViewController.m */; };
 		655D9D0918340F750004CD21 /* shipfit_Index.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 655D9CFA18340F750004CD21 /* shipfit_Index.sqlite */; };
@@ -137,6 +139,8 @@
 		35B85044184CBCE400147BD3 /* sunset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sunset.png; sourceTree = "<group>"; };
 		35B85047184CC27200147BD3 /* round_plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round_plus.png; sourceTree = "<group>"; };
 		35B85049184CC29D00147BD3 /* round_minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round_minus.png; sourceTree = "<group>"; };
+		35B8504B184CC7F100147BD3 /* TrackingDot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TrackingDot.png; sourceTree = "<group>"; };
+		35B8504C184CC7F100147BD3 /* TrackingDot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TrackingDot@2x.png"; sourceTree = "<group>"; };
 		655D9CF618340F750004CD21 /* DataBaseMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DataBaseMainViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		655D9CF718340F750004CD21 /* DatabaseMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DatabaseMainViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		655D9CFA18340F750004CD21 /* shipfit_Index.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = shipfit_Index.sqlite; sourceTree = "<group>"; };
@@ -355,6 +359,8 @@
 		658DA5981832D817003B6952 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				35B8504B184CC7F100147BD3 /* TrackingDot.png */,
+				35B8504C184CC7F100147BD3 /* TrackingDot@2x.png */,
 				35B85049184CC29D00147BD3 /* round_minus.png */,
 				35B85047184CC27200147BD3 /* round_plus.png */,
 				35B85043184CBCE400147BD3 /* sunrise.png */,
@@ -581,6 +587,7 @@
 				65C392DD183470E10042FA81 /* icon.png in Resources */,
 				35AB36AD1846F7B1005BFD56 /* locationinactive.png in Resources */,
 				65C392DE183470E10042FA81 /* icon@2x.png in Resources */,
+				35B8504E184CC7F100147BD3 /* TrackingDot@2x.png in Resources */,
 				65C392E0183473740042FA81 /* icon72.png in Resources */,
 				65C392E21834737C0042FA81 /* icon144.png in Resources */,
 				D56337A31838101A00A9EDE8 /* Status-weather-clear-icon.png in Resources */,
@@ -611,6 +618,7 @@
 				D58ABC911846436B001DE3D0 /* calendar.png in Resources */,
 				D58ABC9318464371001DE3D0 /* thunderstorm.png in Resources */,
 				35B85046184CBCE400147BD3 /* sunset.png in Resources */,
+				35B8504D184CC7F100147BD3 /* TrackingDot.png in Resources */,
 				D58ABC95184649E2001DE3D0 /* barometer4.png in Resources */,
 				D58ABC97184649ED001DE3D0 /* button_black_pause.png in Resources */,
 				D58ABC99184649F5001DE3D0 /* button_black_play.png in Resources */,
