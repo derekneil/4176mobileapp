@@ -31,6 +31,8 @@
 		35AB36B71847A96B005BFD56 /* pathinactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 35AB36B51847A96B005BFD56 /* pathinactive.png */; };
 		35B85045184CBCE400147BD3 /* sunrise.png in Resources */ = {isa = PBXBuildFile; fileRef = 35B85043184CBCE400147BD3 /* sunrise.png */; };
 		35B85046184CBCE400147BD3 /* sunset.png in Resources */ = {isa = PBXBuildFile; fileRef = 35B85044184CBCE400147BD3 /* sunset.png */; };
+		35B85048184CC27200147BD3 /* round_plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 35B85047184CC27200147BD3 /* round_plus.png */; };
+		35B8504A184CC29D00147BD3 /* round_minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 35B85049184CC29D00147BD3 /* round_minus.png */; };
 		35CFA5031842CFA9001E53CA /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3566D59F1842C44B007B1E98 /* libz.dylib */; };
 		655D9D0718340F750004CD21 /* DatabaseMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9CF718340F750004CD21 /* DatabaseMainViewController.m */; };
 		655D9D0918340F750004CD21 /* shipfit_Index.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 655D9CFA18340F750004CD21 /* shipfit_Index.sqlite */; };
@@ -133,6 +135,8 @@
 		35AB36B51847A96B005BFD56 /* pathinactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pathinactive.png; sourceTree = "<group>"; };
 		35B85043184CBCE400147BD3 /* sunrise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sunrise.png; sourceTree = "<group>"; };
 		35B85044184CBCE400147BD3 /* sunset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sunset.png; sourceTree = "<group>"; };
+		35B85047184CC27200147BD3 /* round_plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round_plus.png; sourceTree = "<group>"; };
+		35B85049184CC29D00147BD3 /* round_minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round_minus.png; sourceTree = "<group>"; };
 		655D9CF618340F750004CD21 /* DataBaseMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DataBaseMainViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		655D9CF718340F750004CD21 /* DatabaseMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DatabaseMainViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		655D9CFA18340F750004CD21 /* shipfit_Index.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = shipfit_Index.sqlite; sourceTree = "<group>"; };
@@ -351,6 +355,8 @@
 		658DA5981832D817003B6952 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				35B85049184CC29D00147BD3 /* round_minus.png */,
+				35B85047184CC27200147BD3 /* round_plus.png */,
 				35B85043184CBCE400147BD3 /* sunrise.png */,
 				35B85044184CBCE400147BD3 /* sunset.png */,
 				35AB36B41847A96B005BFD56 /* path.png */,
@@ -561,6 +567,7 @@
 				658DA5A41832D817003B6952 /* Default.png in Resources */,
 				658DA5A61832D817003B6952 /* Default@2x.png in Resources */,
 				35AB36B71847A96B005BFD56 /* pathinactive.png in Resources */,
+				35B85048184CC27200147BD3 /* round_plus.png in Resources */,
 				658DA5A81832D818003B6952 /* Default-568h@2x.png in Resources */,
 				037B17FE1835C73100D80AAD /* shipfitGPS.sqlite in Resources */,
 				658DA5AB1832D818003B6952 /* MainStoryboard_iPhone.storyboard in Resources */,
@@ -583,6 +590,7 @@
 				35B85045184CBCE400147BD3 /* sunrise.png in Resources */,
 				35AB36B01847A0CD005BFD56 /* map.png in Resources */,
 				D56337A61838101A00A9EDE8 /* Status-weather-showers-icon.png in Resources */,
+				35B8504A184CC29D00147BD3 /* round_minus.png in Resources */,
 				35AB36AB1846F606005BFD56 /* location.png in Resources */,
 				D56337A71838101A00A9EDE8 /* Status-weather-snow-rain-icon.png in Resources */,
 				D56337A81838101A00A9EDE8 /* Status-weather-snow-icon.png in Resources */,
