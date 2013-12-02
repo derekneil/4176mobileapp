@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *windLabel;
 @property (weak, nonatomic) IBOutlet UILabel *windDirLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sunLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *sunImage;
 
 @property (weak, nonatomic) IBOutlet UIButton *locationButton;
 @property (weak, nonatomic) IBOutlet UIButton *pathButton;

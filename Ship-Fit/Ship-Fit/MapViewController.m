@@ -10,6 +10,7 @@
 #import "Direction.h"
 #import "Reachability.h"
 #import "WeatherViewController.h"
+#import <MapKit/MapKit.h>
 
 @interface MapViewController ()
 
@@ -17,7 +18,9 @@
 
 @implementation MapViewController {
     NSMutableArray* pathTraveled;
-//    MKPolyline* path;
+    RMAnnotation *path;
+    RMPointAnnotation *locationMarker;
+//    RMMarker* marker;
     BOOL drawPathisOn;
     NSDictionary* weatherJSON;
     RMMBTilesSource* offlineSource;
@@ -43,7 +46,7 @@
 
     //TODO: restore previous state
     drawPathisOn = FALSE;
-    pannedMapAway = FALSE;
+    pannedMapAway = TRUE;
     
     //check for bottom layout guide and adjust up the bottom alignment
     
@@ -76,9 +79,13 @@
     //allow lower resolution tiles to be used when zooming in
     mapView.missingTilesDepth = 2;
     
-    mapView.showsUserLocation=TRUE;
+    locationMarker = [[RMPointAnnotation alloc] initWithMapView:mapView
+                                                coordinate:*(self.shipfit.gps_head)
+                                                  andTitle:@"location"];
     
-    [self.mapView zoomingInPivotsAroundCenter];
+    [mapView addAnnotation:locationMarker];
+    
+    [mapView zoomingInPivotsAroundCenter];
     
     //insert map below everything else on the storyboard
     [self.view insertSubview:mapView atIndex:0];
@@ -89,10 +96,13 @@
     RMMapBoxSource *onlineSource = [[RMMapBoxSource alloc] initWithMapID:@"krazyderek.g8dkgmh4"];
     
     //if i just insert, the oceans overlay doesn't dissappear below it's zoom level
+    [mapView removeAnnotation:locationMarker];
     [mapView removeTileSource:offlineSource];
+    
     
     [mapView addTileSource:onlineSource];
     [mapView addTileSource:offlineSource];
+    [mapView addAnnotation:locationMarker];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -142,6 +152,7 @@
             if(pannedMapAway==FALSE){
                 [self zoomToMe:nil];
             }
+            [locationMarker setCoordinate:*(self.shipfit.gps_head)];
         }];
     }
     
@@ -212,16 +223,18 @@
         NSDateComponents *date_components = [[NSCalendar currentCalendar] components: kCFCalendarUnitMinute | kCFCalendarUnitHour fromDate:date ];;
         int hour = [date_components hour];
         NSString* ampm = @"AM";
-        
+        self.sunImage.image = [UIImage imageNamed:@"sunrise.png"];
         if (hour==0){
             hour+=12;
         }
         else if (hour == 12 ){
             ampm =@"PM";
+            self.sunImage.image = [UIImage imageNamed:@"sunset.png"];
         }
         else if (hour > 12) {
             hour -=12;
             ampm =@"PM";
+            self.sunImage.image = [UIImage imageNamed:@"sunset.png"];
         }
         self.sunLabel.text = [NSString stringWithFormat:@"%d:%ld %@",hour, (long)[date_components minute],ampm ];
     }];
@@ -241,7 +254,11 @@
     [self.locationButton setImage:[UIImage imageNamed:@"location.png"] forState: UIControlStateNormal];
     
     //move map
-    [self.mapView setZoom:15 atCoordinate:*(_shipfit.gps_head) animated:YES];
+    if(self.shipfit.zoom==0){
+        self.shipfit.zoom = 12;
+    }
+    [self.mapView setZoom:self.shipfit.zoom atCoordinate:*(_shipfit.gps_head) animated:YES];
+    NSLog(@"zoom %d",self.shipfit.zoom);
     
     pannedMapAway = false;
 }
@@ -253,36 +270,63 @@
     //get user change
     if(sender == _zoomInButton){
         [self.mapView zoomInToNextNativeZoomAt:point animated:YES];
+        if(self.shipfit.zoom <25)
+            self.shipfit.zoom++;
+        NSLog(@"zoom %d",self.shipfit.zoom);
     }
     else if(sender == _zoomOutButton){
         [self.mapView zoomOutToNextNativeZoomAt:point animated:YES];
+        if(self.shipfit.zoom >1)
+            self.shipfit.zoom--;
+        NSLog(@"zoom %d",self.shipfit.zoom);
     }
     
 }
 
 -(void) updatePathOverlay{
-    
     if ( drawPathisOn &&  _shipfit.gps_count != 0 ){
-//        path = [MKPolyline polylineWithCoordinates:self.shipfit.gps_head count:self.shipfit.gps_count];
-//        [self.mapView addOverlay:path];
+            path = [[RMAnnotation alloc] initWithMapView:self.mapView
+                                                                  coordinate:*(self.shipfit.gps_head)
+                                                                    andTitle:nil];
+            [self.mapView addAnnotation:path];
         NSLog(@"mapView Path updated shipfit.gps_count->%d",_shipfit.gps_count);
     }
     
 }
 
-- (IBAction)togglePathAction:(id)sender {
-    if( drawPathisOn ){
-        drawPathisOn = FALSE;
-//        [self removePathOverlay];
-    }
+- (RMMapLayer *)mapView:(RMMapView *)mapView layerForAnnotation:(RMAnnotation *)thisannotation
+{
+    if (thisannotation.isUserLocationAnnotation)
+        return nil;
+    
     else{
+        RMShape *line = [[RMShape alloc] initWithView:self.mapView];
+        line.lineWidth = 6.0;
+        line.lineColor = [UIColor orangeColor];
+        [line moveToCoordinate:*(self.shipfit.gps_head)];
+        [line addLineToCoordinate:*(self.shipfit.gps_head+1)];
+        NSLog(@"mapView Path returning line to draw");
+        return line;
+    }
+}
+
+- (IBAction)togglePathAction:(id)sender {
+    if( drawPathisOn == TRUE ){
+        drawPathisOn = FALSE;
+        //change path button icon
+        [self.pathButton setImage:[UIImage imageNamed:@"pathinactive.png"] forState: UIControlStateNormal];
+        [self removePathOverlay];
+    }
+    else if (drawPathisOn == FALSE){
         drawPathisOn = TRUE;
-//        [self updatePathOverlay];
+        //change path button icon
+        [self.pathButton setImage:[UIImage imageNamed:@"path.png"] forState: UIControlStateNormal];
+        [self updatePathOverlay];
     }
 }
 
 - (void) removePathOverlay{
-//    [self.mapView removeOverlay:path];
+    [self.mapView removeAnnotation:path];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
