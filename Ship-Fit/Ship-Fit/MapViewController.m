@@ -18,7 +18,7 @@
 
 @implementation MapViewController {
     NSMutableArray* pathTraveled;
-    RMAnnotation *annotation;
+    RMAnnotation *path;
     RMPointAnnotation *locationMarker;
 //    RMMarker* marker;
     BOOL drawPathisOn;
@@ -79,17 +79,10 @@
     //allow lower resolution tiles to be used when zooming in
     mapView.missingTilesDepth = 2;
     
-//    mapView.showsUserLocation=TRUE;
-    
     locationMarker = [[RMPointAnnotation alloc] initWithMapView:mapView
                                                 coordinate:*(self.shipfit.gps_head)
                                                   andTitle:@"location"];
     
-    locationMarker.annotationIcon = [UIImage imageNamed:@"TrackingDot.png"];
-//    locationMarker.userInfo = @"location";
-//    marker = [[RMMarker alloc] initWithUIImage:[UIImage imageNamed:@"TrackingDot.png"]];
-//    marker.canShowCallout = NO;
-//    locationMarker.layer = marker;
     [mapView addAnnotation:locationMarker];
     
     [mapView zoomingInPivotsAroundCenter];
@@ -291,17 +284,11 @@
 }
 
 -(void) updatePathOverlay{
-    
     if ( drawPathisOn &&  _shipfit.gps_count != 0 ){
-        
-//        if( annotation==nil ){
-        //create annotation layer for map path to be shown on
-            annotation = [[RMAnnotation alloc] initWithMapView:self.mapView
+            path = [[RMAnnotation alloc] initWithMapView:self.mapView
                                                                   coordinate:*(self.shipfit.gps_head)
                                                                     andTitle:nil];
-            [self.mapView addAnnotation:annotation];
-//        }
-        
+            [self.mapView addAnnotation:path];
         NSLog(@"mapView Path updated shipfit.gps_count->%d",_shipfit.gps_count);
     }
     
@@ -312,13 +299,6 @@
     if (thisannotation.isUserLocationAnnotation)
         return nil;
     
-//    if ([thisannotation.userInfo isEqualToString:@"location"]){
-//        if(marker==nil){
-//            marker = [[RMMarker alloc] initWithUIImage:[UIImage imageNamed:@"TrackingDot.png"]];
-//            marker.canShowCallout = NO;
-//        }
-//        return marker;
-//    }
     else{
         RMShape *line = [[RMShape alloc] initWithView:self.mapView];
         line.lineWidth = 6.0;
@@ -346,7 +326,7 @@
 }
 
 - (void) removePathOverlay{
-    [self.mapView removeAnnotation:annotation];
+    [self.mapView removeAnnotation:path];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
