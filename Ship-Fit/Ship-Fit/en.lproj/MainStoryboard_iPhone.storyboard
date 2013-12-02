@@ -60,7 +60,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="deg" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" id="DkJ-4m-rnd">
-                                <rect key="frame" x="139" y="107" width="42" height="21"/>
+                                <rect key="frame" x="139" y="177" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -145,6 +145,10 @@
                                 <rect key="frame" x="257" y="127" width="43" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" alpha="0.85000002384185791" contentMode="scaleToFill" image="Thermometer.png" id="HjX-VG-tXk">
+                                <rect key="frame" x="210" y="29" width="58" height="67"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -160,6 +164,7 @@
                         <outlet property="sunImage" destination="dAB-qT-yeH" id="HGP-np-fJj"/>
                         <outlet property="sunLabel" destination="ex7-1Z-3RE" id="lvu-rZ-QQd"/>
                         <outlet property="tempHighLabel" destination="56C-xh-xvh" id="u2J-ne-wn3"/>
+                        <outlet property="tempImage" destination="HjX-VG-tXk" id="nkM-IC-N1t"/>
                         <outlet property="tempLabel" destination="iec-qp-ptj" id="afA-EV-JX3"/>
                         <outlet property="tempLoLabel" destination="OPa-5h-JIj" id="psj-IV-e48"/>
                         <outlet property="windDirLabel" destination="9kK-pT-eTS" id="SI1-qc-clR"/>
@@ -438,6 +443,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Thermometer.png" width="128" height="128"/>
         <image name="Wind-Flag-Storm-icon.png" width="256" height="256"/>
         <image name="button_black_pause.png" width="128" height="128"/>
         <image name="button_black_play.png" width="128" height="128"/>
