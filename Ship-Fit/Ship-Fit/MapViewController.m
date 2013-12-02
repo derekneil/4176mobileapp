@@ -213,16 +213,18 @@
         NSDateComponents *date_components = [[NSCalendar currentCalendar] components: kCFCalendarUnitMinute | kCFCalendarUnitHour fromDate:date ];;
         int hour = [date_components hour];
         NSString* ampm = @"AM";
-        
+        self.sunImage.image = [UIImage imageNamed:@"sunrise.png"];
         if (hour==0){
             hour+=12;
         }
         else if (hour == 12 ){
             ampm =@"PM";
+            self.sunImage.image = [UIImage imageNamed:@"sunset.png"];
         }
         else if (hour > 12) {
             hour -=12;
             ampm =@"PM";
+            self.sunImage.image = [UIImage imageNamed:@"sunset.png"];
         }
         self.sunLabel.text = [NSString stringWithFormat:@"%d:%ld %@",hour, (long)[date_components minute],ampm ];
     }];
