@@ -242,7 +242,8 @@
     [self.locationButton setImage:[UIImage imageNamed:@"location.png"] forState: UIControlStateNormal];
     
     //move map
-    [self.mapView setZoom:15 atCoordinate:*(_shipfit.gps_head) animated:YES];
+    [self.mapView setZoom:self.shipfit.zoom atCoordinate:*(_shipfit.gps_head) animated:YES];
+    NSLog(@"zoom %d",self.shipfit.zoom);
     
     pannedMapAway = false;
 }
@@ -254,9 +255,15 @@
     //get user change
     if(sender == _zoomInButton){
         [self.mapView zoomInToNextNativeZoomAt:point animated:YES];
+        if(self.shipfit.zoom <25)
+            self.shipfit.zoom++;
+        NSLog(@"zoom %d",self.shipfit.zoom);
     }
     else if(sender == _zoomOutButton){
         [self.mapView zoomOutToNextNativeZoomAt:point animated:YES];
+        if(self.shipfit.zoom >1)
+            self.shipfit.zoom--;
+        NSLog(@"zoom %d",self.shipfit.zoom);
     }
     
 }
@@ -285,9 +292,9 @@
     
     RMShape *line = [[RMShape alloc] initWithView:self.mapView];
     
-    line.lineWidth = 5.0;
+    line.lineWidth = 6.0;
     
-    line.lineColor = [UIColor greenColor];
+    line.lineColor = [UIColor orangeColor];
     
     [line moveToCoordinate:*(self.shipfit.gps_head)];
     
