@@ -19,6 +19,8 @@
 @implementation MapViewController {
     NSMutableArray* pathTraveled;
     RMAnnotation *annotation;
+    RMPointAnnotation *locationMarker;
+//    RMMarker* marker;
     BOOL drawPathisOn;
     NSDictionary* weatherJSON;
     RMMBTilesSource* offlineSource;
@@ -77,9 +79,20 @@
     //allow lower resolution tiles to be used when zooming in
     mapView.missingTilesDepth = 2;
     
-    mapView.showsUserLocation=TRUE;
+//    mapView.showsUserLocation=TRUE;
     
-    [self.mapView zoomingInPivotsAroundCenter];
+    locationMarker = [[RMPointAnnotation alloc] initWithMapView:mapView
+                                                coordinate:*(self.shipfit.gps_head)
+                                                  andTitle:@"location"];
+    
+    locationMarker.annotationIcon = [UIImage imageNamed:@"TrackingDot.png"];
+//    locationMarker.userInfo = @"location";
+//    marker = [[RMMarker alloc] initWithUIImage:[UIImage imageNamed:@"TrackingDot.png"]];
+//    marker.canShowCallout = NO;
+//    locationMarker.layer = marker;
+    [mapView addAnnotation:locationMarker];
+    
+    [mapView zoomingInPivotsAroundCenter];
     
     //insert map below everything else on the storyboard
     [self.view insertSubview:mapView atIndex:0];
@@ -90,10 +103,13 @@
     RMMapBoxSource *onlineSource = [[RMMapBoxSource alloc] initWithMapID:@"krazyderek.g8dkgmh4"];
     
     //if i just insert, the oceans overlay doesn't dissappear below it's zoom level
+    [mapView removeAnnotation:locationMarker];
     [mapView removeTileSource:offlineSource];
+    
     
     [mapView addTileSource:onlineSource];
     [mapView addTileSource:offlineSource];
+    [mapView addAnnotation:locationMarker];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -143,6 +159,7 @@
             if(pannedMapAway==FALSE){
                 [self zoomToMe:nil];
             }
+            [locationMarker setCoordinate:*(self.shipfit.gps_head)];
         }];
     }
     
@@ -295,19 +312,22 @@
     if (thisannotation.isUserLocationAnnotation)
         return nil;
     
-    RMShape *line = [[RMShape alloc] initWithView:self.mapView];
-    
-    line.lineWidth = 6.0;
-    
-    line.lineColor = [UIColor orangeColor];
-    
-    [line moveToCoordinate:*(self.shipfit.gps_head)];
-    
-    [line addLineToCoordinate:*(self.shipfit.gps_head+1)];
-    
-    NSLog(@"mapView Path returning line to draw");
-    
-    return line;
+//    if ([thisannotation.userInfo isEqualToString:@"location"]){
+//        if(marker==nil){
+//            marker = [[RMMarker alloc] initWithUIImage:[UIImage imageNamed:@"TrackingDot.png"]];
+//            marker.canShowCallout = NO;
+//        }
+//        return marker;
+//    }
+    else{
+        RMShape *line = [[RMShape alloc] initWithView:self.mapView];
+        line.lineWidth = 6.0;
+        line.lineColor = [UIColor orangeColor];
+        [line moveToCoordinate:*(self.shipfit.gps_head)];
+        [line addLineToCoordinate:*(self.shipfit.gps_head+1)];
+        NSLog(@"mapView Path returning line to draw");
+        return line;
+    }
 }
 
 - (IBAction)togglePathAction:(id)sender {
@@ -321,7 +341,7 @@
         drawPathisOn = TRUE;
         //change path button icon
         [self.pathButton setImage:[UIImage imageNamed:@"path.png"] forState: UIControlStateNormal];
-//        [self updatePathOverlay];
+        [self updatePathOverlay];
     }
 }
 
