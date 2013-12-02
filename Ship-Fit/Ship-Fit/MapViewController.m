@@ -315,7 +315,7 @@
         drawPathisOn = FALSE;
         //change path button icon
         [self.pathButton setImage:[UIImage imageNamed:@"pathinactive.png"] forState: UIControlStateNormal];
-//        [self removePathOverlay];
+        [self removePathOverlay];
     }
     else if (drawPathisOn == FALSE){
         drawPathisOn = TRUE;
@@ -326,7 +326,7 @@
 }
 
 - (void) removePathOverlay{
-//    [self.mapView removeOverlay:path];
+    [self.mapView removeAnnotation:annotation];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
