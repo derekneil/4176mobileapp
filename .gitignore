@@ -1,0 +1,7 @@
+*.xcodeproj/project.xcworkspace/
+*.xcodeproj/xcuserdata/
+
+**/*.xcodeproj/project.xcworkspace/
+**/*.xcodeproj/xcuserdata/
+
+ne_*
